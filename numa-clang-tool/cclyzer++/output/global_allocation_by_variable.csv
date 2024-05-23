@@ -1,0 +1,8 @@
+</home/kidus/NUMATyping/clang-tool/cclyzer++/input/numaed_vector.bc>:@_ZStL8__ioinit	*global_alloc@_ZStL8__ioinit
+</home/kidus/NUMATyping/clang-tool/cclyzer++/input/numaed_vector.bc>:@__dso_handle	*global_alloc@__dso_handle
+</home/kidus/NUMATyping/clang-tool/cclyzer++/input/numaed_vector.bc>:@.str	*global_alloc@.str
+</home/kidus/NUMATyping/clang-tool/cclyzer++/input/numaed_vector.bc>:@_ZTISt13runtime_error	*global_alloc@_ZTISt13runtime_error
+</home/kidus/NUMATyping/clang-tool/cclyzer++/input/numaed_vector.bc>:@_ZTISt9bad_alloc	*global_alloc@_ZTISt9bad_alloc
+</home/kidus/NUMATyping/clang-tool/cclyzer++/input/numaed_vector.bc>:@_ZTVSt9bad_alloc	*global_alloc@_ZTVSt9bad_alloc
+</home/kidus/NUMATyping/clang-tool/cclyzer++/input/numaed_vector.bc>:@_ZTVSt9exception	*global_alloc@_ZTVSt9exception
+</home/kidus/NUMATyping/clang-tool/cclyzer++/input/numaed_vector.bc>:@llvm.global_ctors	*global_alloc@llvm.global_ctors

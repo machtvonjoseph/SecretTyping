@@ -1,0 +1,5 @@
+/home/kidus/NUMATyping/numa-clang-tool/build/CMakeFiles/edit_cache.dir
+/home/kidus/NUMATyping/numa-clang-tool/build/CMakeFiles/rebuild_cache.dir
+/home/kidus/NUMATyping/numa-clang-tool/build/src/CMakeFiles/clang-tool.dir
+/home/kidus/NUMATyping/numa-clang-tool/build/src/CMakeFiles/edit_cache.dir
+/home/kidus/NUMATyping/numa-clang-tool/build/src/CMakeFiles/rebuild_cache.dir

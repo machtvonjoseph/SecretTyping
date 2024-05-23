@@ -1,0 +1,178 @@
+nil	*argv-alloc	*argv-alloc
+nil	*argv-alloc	*argv-alloc[0]
+nil	*global_alloc@__cxx_global_var_init	*global_alloc@__cxx_global_var_init
+nil	*global_alloc@_ZN4numaIiLi3E13NumaAllocatorvEnwEm	*global_alloc@_ZN4numaIiLi3E13NumaAllocatorvEnwEm
+nil	*global_alloc@_ZN4numaIiLi3E13NumaAllocatorvEC2Ev	*global_alloc@_ZN4numaIiLi3E13NumaAllocatorvEC2Ev
+nil	*global_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEnwEm	*global_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEnwEm
+nil	*global_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEC2Eii	*global_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEC2Eii
+nil	*global_alloc@_ZN8MyVectorC2Eii	*global_alloc@_ZN8MyVectorC2Eii
+nil	*global_alloc@_ZN13NumaAllocatorIiLi3EEC2Ev	*global_alloc@_ZN13NumaAllocatorIiLi3EEC2Ev
+nil	*global_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm	*global_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm
+nil	*global_alloc@_ZNSt9bad_allocC2Ev	*global_alloc@_ZNSt9bad_allocC2Ev
+nil	*global_alloc@_ZNSt9exceptionC2Ev	*global_alloc@_ZNSt9exceptionC2Ev
+nil	*global_alloc@_ZN4numaIPiLi3E13NumaAllocatorvEC2Ev	*global_alloc@_ZN4numaIPiLi3E13NumaAllocatorvEC2Ev
+nil	*global_alloc@_ZN4numaIPiLi3E13NumaAllocatorvEcvRS0_Ev	*global_alloc@_ZN4numaIPiLi3E13NumaAllocatorvEcvRS0_Ev
+nil	*global_alloc@_ZN13NumaAllocatorI8MyVectorLi3EEC2Ev	*global_alloc@_ZN13NumaAllocatorI8MyVectorLi3EEC2Ev
+nil	*global_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm	*global_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm
+nil	*global_alloc@_GLOBAL__sub_I_numaed_vector.cpp	*global_alloc@_GLOBAL__sub_I_numaed_vector.cpp
+nil	*global_alloc@_ZNSt8ios_base4InitC1Ev	*global_alloc@_ZNSt8ios_base4InitC1Ev
+nil	*global_alloc@_ZNSt8ios_base4InitD1Ev	*global_alloc@_ZNSt8ios_base4InitD1Ev
+nil	*global_alloc@__cxa_atexit	*global_alloc@__cxa_atexit
+nil	*global_alloc@__cxa_allocate_exception	*global_alloc@__cxa_allocate_exception
+nil	*global_alloc@__gxx_personality_v0	*global_alloc@__gxx_personality_v0
+nil	*global_alloc@__cxa_throw	*global_alloc@__cxa_throw
+nil	*global_alloc@_ZdlPv	*global_alloc@_ZdlPv
+nil	*global_alloc@_Znwm	*global_alloc@_Znwm
+nil	*global_alloc@llvm.umul.with.overflow.i64	*global_alloc@llvm.umul.with.overflow.i64
+nil	*global_alloc@_Znam	*global_alloc@_Znam
+nil	*global_alloc@numa_alloc_onnode	*global_alloc@numa_alloc_onnode
+nil	*global_alloc@_ZNSt9bad_allocD1Ev	*global_alloc@_ZNSt9bad_allocD1Ev
+nil	*global_alloc@_ZStL8__ioinit	*global_alloc@_ZStL8__ioinit
+nil	*global_alloc@_ZStL8__ioinit	*global_alloc@_ZStL8__ioinit[0].?/0
+nil	*global_alloc@__dso_handle	*global_alloc@__dso_handle
+nil	*global_alloc@_ZTISt9bad_alloc	*global_alloc@_ZTISt9bad_alloc
+nil	*global_alloc@_ZTVSt9bad_alloc	*global_alloc@_ZTVSt9bad_alloc
+nil	*global_alloc@_ZTVSt9bad_alloc	*global_alloc@_ZTVSt9bad_alloc[0].?/0[2]
+nil	*global_alloc@_ZTVSt9exception	*global_alloc@_ZTVSt9exception
+nil	*global_alloc@_ZTVSt9exception	*global_alloc@_ZTVSt9exception[0].?/0[2]
+nil	*argv-alloc[0]	*argv-alloc[0]
+nil	*argv[0]-alloc	*argv[0]-alloc
+nil	*argv[0]-alloc	*argv[0]-alloc[0]
+nil	*global_alloc@_ZStL8__ioinit[0].?/0	*global_alloc@_ZStL8__ioinit[0].?/0
+nil	*argv[0]-alloc[0]	*argv[0]-alloc[0]
+nil	*global_alloc@_ZTVSt9bad_alloc[0].?/0[2]	*global_alloc@_ZTVSt9bad_alloc[0].?/0[2]
+nil	*global_alloc@_ZTVSt9exception[0].?/0[2]	*global_alloc@_ZTVSt9exception[0].?/0[2]
+nil	*global_alloc@llvm.global_ctors[0][0].?/1	*global_alloc@llvm.global_ctors[0][0].?/1
+nil	*global_alloc@llvm.global_ctors[0][0].?/2	*global_alloc@llvm.global_ctors[0][0].?/2
+[<<main-context>>, nil]	*stack_alloc@main[%class.numa** %v2]	*stack_alloc@main[%class.numa** %v2]
+[<<main-context>>, nil]	*stack_alloc@main[i8** %exn.slot]	*stack_alloc@main[i8** %exn.slot]
+[<<main-context>>, nil]	*stack_alloc@main[i32* %ehselector.slot]	*stack_alloc@main[i32* %ehselector.slot]
+[<<main-context>>, nil]	*stack_alloc@main[%class.numa.0** %v]	*stack_alloc@main[%class.numa.0** %v]
+[<<main-context>>, nil]	*stack_alloc@main[%class.MyVector** %v3]	*stack_alloc@main[%class.MyVector** %v3]
+[<<main-context>>, nil]	*stack_alloc@main[%class.MyVector** %v3]	*stack_alloc@main[%class.MyVector** %v3][0]
+[<<main-context>>, nil]	*heap_alloc@main[i8* %call4]	*heap_alloc@main[i8* %call4]
+[<<main-context>>, nil]	*heap_alloc@main[i8* %call4]	*heap_alloc@main[i8* %call4][0]
+[<<main-context>>, nil]	*stack_alloc@_ZN4numaIiLi3E13NumaAllocatorvEnwEm[i64* %sz.addr]	*stack_alloc@_ZN4numaIiLi3E13NumaAllocatorvEnwEm[i64* %sz.addr]
+[<<main-context>>, nil]	*stack_alloc@_ZN4numaIiLi3E13NumaAllocatorvEnwEm[%class.NumaAllocator* %alloc]	*stack_alloc@_ZN4numaIiLi3E13NumaAllocatorvEnwEm[%class.NumaAllocator* %alloc]
+[<<main-context>>, nil]	*stack_alloc@_ZN4numaIiLi3E13NumaAllocatorvEnwEm[%class.NumaAllocator* %alloc]	*stack_alloc@_ZN4numaIiLi3E13NumaAllocatorvEnwEm[%class.NumaAllocator* %alloc][0]
+[<<main-context>>, nil]	*stack_alloc@_ZN4numaIiLi3E13NumaAllocatorvEnwEm[%class.NumaAllocator* %alloc]	*stack_alloc@_ZN4numaIiLi3E13NumaAllocatorvEnwEm[%class.NumaAllocator* %alloc][0].?/0
+[<<main-context>>, nil]	*stack_alloc@_ZN4numaIiLi3E13NumaAllocatorvEC2Ev[%class.numa** %this.addr.i]	*stack_alloc@_ZN4numaIiLi3E13NumaAllocatorvEC2Ev[%class.numa** %this.addr.i]
+[<<main-context>>, nil]	*stack_alloc@_ZN4numaIiLi3E13NumaAllocatorvEC2Ev[i32* %data.addr.i]	*stack_alloc@_ZN4numaIiLi3E13NumaAllocatorvEC2Ev[i32* %data.addr.i]
+[<<main-context>>, nil]	*stack_alloc@_ZN4numaIiLi3E13NumaAllocatorvEC2Ev[%class.numa** %this.addr]	*stack_alloc@_ZN4numaIiLi3E13NumaAllocatorvEC2Ev[%class.numa** %this.addr]
+[<<main-context>>, nil]	*stack_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEnwEm[i64* %count.addr]	*stack_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEnwEm[i64* %count.addr]
+[<<main-context>>, nil]	*stack_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEnwEm[%class.NumaAllocator.2* %alloc]	*stack_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEnwEm[%class.NumaAllocator.2* %alloc]
+[<<main-context>>, nil]	*stack_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEnwEm[%class.NumaAllocator.2* %alloc]	*stack_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEnwEm[%class.NumaAllocator.2* %alloc][0]
+[<<main-context>>, nil]	*stack_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEnwEm[%class.NumaAllocator.2* %alloc]	*stack_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEnwEm[%class.NumaAllocator.2* %alloc][0].?/0
+[<<main-context>>, nil]	*stack_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEC2Eii[%class.numa.0** %this.addr]	*stack_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEC2Eii[%class.numa.0** %this.addr]
+[<<main-context>>, nil]	*stack_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEC2Eii[i32* %sz.addr]	*stack_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEC2Eii[i32* %sz.addr]
+[<<main-context>>, nil]	*stack_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEC2Eii[i32* %val.addr]	*stack_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEC2Eii[i32* %val.addr]
+[<<main-context>>, nil]	*stack_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEC2Eii[i32** %alias]	*stack_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEC2Eii[i32** %alias]
+[<<main-context>>, nil]	*stack_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEC2Eii[i32** %alias2]	*stack_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEC2Eii[i32** %alias2]
+[<<main-context>>, nil]	*stack_alloc@_ZN8MyVectorC2Eii[%class.MyVector** %this.addr]	*stack_alloc@_ZN8MyVectorC2Eii[%class.MyVector** %this.addr]
+[<<main-context>>, nil]	*stack_alloc@_ZN8MyVectorC2Eii[%class.MyVector** %this.addr]	*stack_alloc@_ZN8MyVectorC2Eii[%class.MyVector** %this.addr][0]
+[<<main-context>>, nil]	*stack_alloc@_ZN8MyVectorC2Eii[i32* %sz.addr]	*stack_alloc@_ZN8MyVectorC2Eii[i32* %sz.addr]
+[<<main-context>>, nil]	*stack_alloc@_ZN8MyVectorC2Eii[i32* %val.addr]	*stack_alloc@_ZN8MyVectorC2Eii[i32* %val.addr]
+[<<main-context>>, nil]	*stack_alloc@_ZN8MyVectorC2Eii[i32** %alias]	*stack_alloc@_ZN8MyVectorC2Eii[i32** %alias]
+[<<main-context>>, nil]	*stack_alloc@_ZN8MyVectorC2Eii[i32** %alias]	*stack_alloc@_ZN8MyVectorC2Eii[i32** %alias][0]
+[<<main-context>>, nil]	*stack_alloc@_ZN8MyVectorC2Eii[i32** %alias2]	*stack_alloc@_ZN8MyVectorC2Eii[i32** %alias2]
+[<<main-context>>, nil]	*stack_alloc@_ZN8MyVectorC2Eii[i32** %alias2]	*stack_alloc@_ZN8MyVectorC2Eii[i32** %alias2][0]
+[<<main-context>>, nil]	*heap_alloc@_ZN8MyVectorC2Eii[i8* %call]	*heap_alloc@_ZN8MyVectorC2Eii[i8* %call]
+[<<main-context>>, nil]	*heap_alloc@_ZN8MyVectorC2Eii[i8* %call]	*heap_alloc@_ZN8MyVectorC2Eii[i8* %call][0]
+[<<main-context>>, nil]	*stack_alloc@main[%class.MyVector** %v3][0]	*stack_alloc@main[%class.MyVector** %v3][0]
+[<<main-context>>, nil]	*heap_alloc@main[i8* %call4][0]	*heap_alloc@main[i8* %call4][0]
+[<<main-context>>, nil]	*typed_heap_alloc@main[%class.MyVector* %call4]	*typed_heap_alloc@main[%class.MyVector* %call4]
+[<<main-context>>, nil]	*typed_heap_alloc@main[%class.MyVector* %call4]	*typed_heap_alloc@main[%class.MyVector* %call4][0]
+[<<main-context>>, nil]	*typed_heap_alloc@main[%class.MyVector* %call4]	*typed_heap_alloc@main[%class.MyVector* %call4][0].?/0
+[<<main-context>>, nil]	*stack_alloc@_ZN13NumaAllocatorIiLi3EEC2Ev[%class.NumaAllocator** %this.addr]	*stack_alloc@_ZN13NumaAllocatorIiLi3EEC2Ev[%class.NumaAllocator** %this.addr]
+[<<main-context>>, nil]	*stack_alloc@_ZN13NumaAllocatorIiLi3EEC2Ev[%class.NumaAllocator** %this.addr]	*stack_alloc@_ZN13NumaAllocatorIiLi3EEC2Ev[%class.NumaAllocator** %this.addr][0]
+[<<main-context>>, nil]	*stack_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%class.NumaAllocator** %this.addr]	*stack_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%class.NumaAllocator** %this.addr]
+[<<main-context>>, nil]	*stack_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%class.NumaAllocator** %this.addr]	*stack_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%class.NumaAllocator** %this.addr][0]
+[<<main-context>>, nil]	*stack_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[i64* %n.addr]	*stack_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[i64* %n.addr]
+[<<main-context>>, nil]	*stack_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[i8** %p]	*stack_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[i8** %p]
+[<<main-context>>, nil]	*stack_alloc@_ZN4numaIPiLi3E13NumaAllocatorvEC2Ev[%class.numa.1** %this.addr.i]	*stack_alloc@_ZN4numaIPiLi3E13NumaAllocatorvEC2Ev[%class.numa.1** %this.addr.i]
+[<<main-context>>, nil]	*stack_alloc@_ZN4numaIPiLi3E13NumaAllocatorvEC2Ev[i32** %data.addr.i]	*stack_alloc@_ZN4numaIPiLi3E13NumaAllocatorvEC2Ev[i32** %data.addr.i]
+[<<main-context>>, nil]	*stack_alloc@_ZN4numaIPiLi3E13NumaAllocatorvEC2Ev[i32** %data.addr.i]	*stack_alloc@_ZN4numaIPiLi3E13NumaAllocatorvEC2Ev[i32** %data.addr.i][0]
+[<<main-context>>, nil]	*stack_alloc@_ZN4numaIPiLi3E13NumaAllocatorvEC2Ev[%class.numa.1** %this.addr]	*stack_alloc@_ZN4numaIPiLi3E13NumaAllocatorvEC2Ev[%class.numa.1** %this.addr]
+[<<main-context>>, nil]	*stack_alloc@_ZN13NumaAllocatorI8MyVectorLi3EEC2Ev[%class.NumaAllocator.2** %this.addr]	*stack_alloc@_ZN13NumaAllocatorI8MyVectorLi3EEC2Ev[%class.NumaAllocator.2** %this.addr]
+[<<main-context>>, nil]	*stack_alloc@_ZN13NumaAllocatorI8MyVectorLi3EEC2Ev[%class.NumaAllocator.2** %this.addr]	*stack_alloc@_ZN13NumaAllocatorI8MyVectorLi3EEC2Ev[%class.NumaAllocator.2** %this.addr][0]
+[<<main-context>>, nil]	*stack_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%class.NumaAllocator.2** %this.addr]	*stack_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%class.NumaAllocator.2** %this.addr]
+[<<main-context>>, nil]	*stack_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%class.NumaAllocator.2** %this.addr]	*stack_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%class.NumaAllocator.2** %this.addr][0]
+[<<main-context>>, nil]	*stack_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[i64* %n.addr]	*stack_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[i64* %n.addr]
+[<<main-context>>, nil]	*stack_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[i8** %p]	*stack_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[i8** %p]
+[<<main-context>>, nil]	*heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[i8* %exception]	*heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[i8* %exception]
+[<<main-context>>, nil]	*heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[i8* %exception]	*heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[i8* %exception][0]
+[<<main-context>>, nil]	*heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[i8* %exception]	*heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[i8* %exception]
+[<<main-context>>, nil]	*heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[i8* %exception]	*heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[i8* %exception][0]
+[<<main-context>>, nil]	*stack_alloc@_ZN4numaIiLi3E13NumaAllocatorvEnwEm[%class.NumaAllocator* %alloc][0]	*stack_alloc@_ZN4numaIiLi3E13NumaAllocatorvEnwEm[%class.NumaAllocator* %alloc][0]
+[<<main-context>>, nil]	*stack_alloc@_ZN4numaIiLi3E13NumaAllocatorvEnwEm[%class.NumaAllocator* %alloc][0]	*stack_alloc@_ZN4numaIiLi3E13NumaAllocatorvEnwEm[%class.NumaAllocator* %alloc][0].?/0
+[<<main-context>>, nil]	*stack_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEnwEm[%class.NumaAllocator.2* %alloc][0]	*stack_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEnwEm[%class.NumaAllocator.2* %alloc][0]
+[<<main-context>>, nil]	*stack_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEnwEm[%class.NumaAllocator.2* %alloc][0]	*stack_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEnwEm[%class.NumaAllocator.2* %alloc][0].?/0
+[<<main-context>>, nil]	*stack_alloc@_ZN8MyVectorC2Eii[%class.MyVector** %this.addr][0]	*stack_alloc@_ZN8MyVectorC2Eii[%class.MyVector** %this.addr][0]
+[<<main-context>>, nil]	*stack_alloc@_ZN8MyVectorC2Eii[i32** %alias][0]	*stack_alloc@_ZN8MyVectorC2Eii[i32** %alias][0]
+[<<main-context>>, nil]	*stack_alloc@_ZN8MyVectorC2Eii[i32** %alias2][0]	*stack_alloc@_ZN8MyVectorC2Eii[i32** %alias2][0]
+[<<main-context>>, nil]	*heap_alloc@_ZN8MyVectorC2Eii[i8* %call][0]	*heap_alloc@_ZN8MyVectorC2Eii[i8* %call][0]
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN8MyVectorC2Eii[i32* %call]	*typed_heap_alloc@_ZN8MyVectorC2Eii[i32* %call]
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN8MyVectorC2Eii[i32* %call]	*typed_heap_alloc@_ZN8MyVectorC2Eii[i32* %call][0]
+[<<main-context>>, nil]	*typed_heap_alloc@main[%class.MyVector* %call4][0]	*typed_heap_alloc@main[%class.MyVector* %call4][0]
+[<<main-context>>, nil]	*typed_heap_alloc@main[%class.MyVector* %call4][0]	*typed_heap_alloc@main[%class.MyVector* %call4][0].?/0
+[<<main-context>>, nil]	*stack_alloc@_ZN4numaIiLi3E13NumaAllocatorvEnwEm[%class.NumaAllocator* %alloc][0].?/0	*stack_alloc@_ZN4numaIiLi3E13NumaAllocatorvEnwEm[%class.NumaAllocator* %alloc][0].?/0
+[<<main-context>>, nil]	*stack_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEnwEm[%class.NumaAllocator.2* %alloc][0].?/0	*stack_alloc@_ZN4numaI8MyVectorLi3E13NumaAllocatorvEnwEm[%class.NumaAllocator.2* %alloc][0].?/0
+[<<main-context>>, nil]	*typed_heap_alloc@main[%class.MyVector* %call4][0].?/0	*typed_heap_alloc@main[%class.MyVector* %call4][0].?/0
+[<<main-context>>, nil]	*stack_alloc@_ZN13NumaAllocatorIiLi3EEC2Ev[%class.NumaAllocator** %this.addr][0]	*stack_alloc@_ZN13NumaAllocatorIiLi3EEC2Ev[%class.NumaAllocator** %this.addr][0]
+[<<main-context>>, nil]	*stack_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%class.NumaAllocator** %this.addr][0]	*stack_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%class.NumaAllocator** %this.addr][0]
+[<<main-context>>, nil]	*stack_alloc@_ZN4numaIPiLi3E13NumaAllocatorvEC2Ev[i32** %data.addr.i][0]	*stack_alloc@_ZN4numaIPiLi3E13NumaAllocatorvEC2Ev[i32** %data.addr.i][0]
+[<<main-context>>, nil]	*stack_alloc@_ZN13NumaAllocatorI8MyVectorLi3EEC2Ev[%class.NumaAllocator.2** %this.addr][0]	*stack_alloc@_ZN13NumaAllocatorI8MyVectorLi3EEC2Ev[%class.NumaAllocator.2** %this.addr][0]
+[<<main-context>>, nil]	*stack_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%class.NumaAllocator.2** %this.addr][0]	*stack_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%class.NumaAllocator.2** %this.addr][0]
+[<<main-context>>, nil]	*heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[i8* %exception][0]	*heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[i8* %exception][0]
+[<<main-context>>, nil]	*heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[i8* %exception][0]	*heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[i8* %exception][0]
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::bad_alloc"* %exception]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::bad_alloc"* %exception]
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::bad_alloc"* %exception]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::bad_alloc"* %exception][0]
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::bad_alloc"* %exception]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::bad_alloc"* %exception][0].?/0
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::bad_alloc"* %exception]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::bad_alloc"* %exception][0].?/0.?/0
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::bad_alloc"* %exception]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::bad_alloc"* %exception]
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::bad_alloc"* %exception]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::bad_alloc"* %exception][0]
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::bad_alloc"* %exception]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::bad_alloc"* %exception][0].?/0
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::bad_alloc"* %exception]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::bad_alloc"* %exception][0].?/0.?/0
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN8MyVectorC2Eii[i32* %call][0]	*typed_heap_alloc@_ZN8MyVectorC2Eii[i32* %call][0]
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::bad_alloc"* %exception][0]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::bad_alloc"* %exception][0]
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::bad_alloc"* %exception][0]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::bad_alloc"* %exception][0].?/0
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::bad_alloc"* %exception][0]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::bad_alloc"* %exception][0]
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::bad_alloc"* %exception][0]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::bad_alloc"* %exception][0].?/0
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::bad_alloc"* %exception][0].?/0	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::bad_alloc"* %exception][0].?/0
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::bad_alloc"* %exception][0].?/0	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::bad_alloc"* %exception][0].?/0.?/0
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::bad_alloc"* %exception][0].?/0	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::bad_alloc"* %exception][0].?/0
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::bad_alloc"* %exception][0].?/0	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::bad_alloc"* %exception][0].?/0.?/0
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[i32 (...)*** %exception]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[i32 (...)*** %exception]
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[i32 (...)*** %exception]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[i32 (...)*** %exception][0]
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::exception"* %exception]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::exception"* %exception]
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::exception"* %exception]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::exception"* %exception][0]
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::exception"* %exception]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::exception"* %exception][0].?/0
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[i32 (...)*** %exception]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[i32 (...)*** %exception]
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[i32 (...)*** %exception]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[i32 (...)*** %exception][0]
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::exception"* %exception]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::exception"* %exception]
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::exception"* %exception]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::exception"* %exception][0]
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::exception"* %exception]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::exception"* %exception][0].?/0
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::bad_alloc"* %exception][0].?/0.?/0	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::bad_alloc"* %exception][0].?/0.?/0
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::bad_alloc"* %exception][0].?/0.?/0	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::bad_alloc"* %exception][0].?/0.?/0
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[i32 (...)*** %exception][0]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[i32 (...)*** %exception][0]
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::exception"* %exception][0]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::exception"* %exception][0]
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::exception"* %exception][0]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::exception"* %exception][0].?/0
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[i32 (...)*** %exception][0]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[i32 (...)*** %exception][0]
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::exception"* %exception][0]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::exception"* %exception][0]
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::exception"* %exception][0]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::exception"* %exception][0].?/0
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::exception"* %exception][0].?/0	*typed_heap_alloc@_ZN13NumaAllocatorIiLi3EE8allocateEm[%"class.std::exception"* %exception][0].?/0
+[<<main-context>>, nil]	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::exception"* %exception][0].?/0	*typed_heap_alloc@_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm[%"class.std::exception"* %exception][0].?/0
+[</home/kidus/NUMATyping/clang-tool/cclyzer++/input/numaed_vector.bc>:_ZN4numaI8MyVectorLi3E13NumaAllocatorvEC2Eii:14, [<<main-context>>, nil]]	*stack_alloc@_ZN4numaIPiLi3E13NumaAllocatorvEcvRS0_Ev[%class.numa.1** %this.addr]	*stack_alloc@_ZN4numaIPiLi3E13NumaAllocatorvEcvRS0_Ev[%class.numa.1** %this.addr]
+[</home/kidus/NUMATyping/clang-tool/cclyzer++/input/numaed_vector.bc>:_ZN4numaI8MyVectorLi3E13NumaAllocatorvEC2Eii:18, [<<main-context>>, nil]]	*stack_alloc@_ZN4numaIPiLi3E13NumaAllocatorvEcvRS0_Ev[%class.numa.1** %this.addr]	*stack_alloc@_ZN4numaIPiLi3E13NumaAllocatorvEcvRS0_Ev[%class.numa.1** %this.addr]
+[</home/kidus/NUMATyping/clang-tool/cclyzer++/input/numaed_vector.bc>:_ZN13NumaAllocatorIiLi3EE8allocateEm:15, [<<main-context>>, nil]]	*stack_alloc@_ZNSt9bad_allocC2Ev[%"class.std::bad_alloc"** %this.addr]	*stack_alloc@_ZNSt9bad_allocC2Ev[%"class.std::bad_alloc"** %this.addr]
+[</home/kidus/NUMATyping/clang-tool/cclyzer++/input/numaed_vector.bc>:_ZN13NumaAllocatorIiLi3EE8allocateEm:15, [<<main-context>>, nil]]	*stack_alloc@_ZNSt9bad_allocC2Ev[%"class.std::bad_alloc"** %this.addr]	*stack_alloc@_ZNSt9bad_allocC2Ev[%"class.std::bad_alloc"** %this.addr][0]
+[</home/kidus/NUMATyping/clang-tool/cclyzer++/input/numaed_vector.bc>:_ZN13NumaAllocatorIiLi3EE8allocateEm:15, [<<main-context>>, nil]]	*stack_alloc@_ZNSt9exceptionC2Ev[%"class.std::exception"** %this.addr]	*stack_alloc@_ZNSt9exceptionC2Ev[%"class.std::exception"** %this.addr]
+[</home/kidus/NUMATyping/clang-tool/cclyzer++/input/numaed_vector.bc>:_ZN13NumaAllocatorIiLi3EE8allocateEm:15, [<<main-context>>, nil]]	*stack_alloc@_ZNSt9exceptionC2Ev[%"class.std::exception"** %this.addr]	*stack_alloc@_ZNSt9exceptionC2Ev[%"class.std::exception"** %this.addr][0]
+[</home/kidus/NUMATyping/clang-tool/cclyzer++/input/numaed_vector.bc>:_ZN13NumaAllocatorIiLi3EE8allocateEm:15, [<<main-context>>, nil]]	*stack_alloc@_ZNSt9bad_allocC2Ev[%"class.std::bad_alloc"** %this.addr][0]	*stack_alloc@_ZNSt9bad_allocC2Ev[%"class.std::bad_alloc"** %this.addr][0]
+[</home/kidus/NUMATyping/clang-tool/cclyzer++/input/numaed_vector.bc>:_ZN13NumaAllocatorIiLi3EE8allocateEm:15, [<<main-context>>, nil]]	*stack_alloc@_ZNSt9exceptionC2Ev[%"class.std::exception"** %this.addr][0]	*stack_alloc@_ZNSt9exceptionC2Ev[%"class.std::exception"** %this.addr][0]
+[</home/kidus/NUMATyping/clang-tool/cclyzer++/input/numaed_vector.bc>:_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm:15, [<<main-context>>, nil]]	*stack_alloc@_ZNSt9bad_allocC2Ev[%"class.std::bad_alloc"** %this.addr]	*stack_alloc@_ZNSt9bad_allocC2Ev[%"class.std::bad_alloc"** %this.addr]
+[</home/kidus/NUMATyping/clang-tool/cclyzer++/input/numaed_vector.bc>:_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm:15, [<<main-context>>, nil]]	*stack_alloc@_ZNSt9bad_allocC2Ev[%"class.std::bad_alloc"** %this.addr]	*stack_alloc@_ZNSt9bad_allocC2Ev[%"class.std::bad_alloc"** %this.addr][0]
+[</home/kidus/NUMATyping/clang-tool/cclyzer++/input/numaed_vector.bc>:_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm:15, [<<main-context>>, nil]]	*stack_alloc@_ZNSt9exceptionC2Ev[%"class.std::exception"** %this.addr]	*stack_alloc@_ZNSt9exceptionC2Ev[%"class.std::exception"** %this.addr]
+[</home/kidus/NUMATyping/clang-tool/cclyzer++/input/numaed_vector.bc>:_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm:15, [<<main-context>>, nil]]	*stack_alloc@_ZNSt9exceptionC2Ev[%"class.std::exception"** %this.addr]	*stack_alloc@_ZNSt9exceptionC2Ev[%"class.std::exception"** %this.addr][0]
+[</home/kidus/NUMATyping/clang-tool/cclyzer++/input/numaed_vector.bc>:_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm:15, [<<main-context>>, nil]]	*stack_alloc@_ZNSt9bad_allocC2Ev[%"class.std::bad_alloc"** %this.addr][0]	*stack_alloc@_ZNSt9bad_allocC2Ev[%"class.std::bad_alloc"** %this.addr][0]
+[</home/kidus/NUMATyping/clang-tool/cclyzer++/input/numaed_vector.bc>:_ZN13NumaAllocatorI8MyVectorLi3EE8allocateEm:15, [<<main-context>>, nil]]	*stack_alloc@_ZNSt9exceptionC2Ev[%"class.std::exception"** %this.addr][0]	*stack_alloc@_ZNSt9exceptionC2Ev[%"class.std::exception"** %this.addr][0]

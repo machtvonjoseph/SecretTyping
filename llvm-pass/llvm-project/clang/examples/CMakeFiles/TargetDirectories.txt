@@ -1,0 +1,2 @@
+/home/kidus/llvm-project/clang/examples/CMakeFiles/edit_cache.dir
+/home/kidus/llvm-project/clang/examples/CMakeFiles/rebuild_cache.dir

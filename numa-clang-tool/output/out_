@@ -1,0 +1,28 @@
+#include "out_dummyheader.h"
+#include "out_anotherdummyheader.h"
+#include "numatype.hpp"
+//template<class T, int N>
+// class numa{
+//     public:
+//     void my_func(){
+        
+//     }
+//     void ur_func(){
+        
+//     }
+// };
+
+class SomeClass{
+    public:
+    SomeClass();
+    int a;
+};
+
+int main(){
+    // numa<MyVector, 3>* v2 = new numa<MyVector, 3>();
+    // numa<SomeClass, 3>* v3 = new numa<SomeClass, 3>();
+    //MyVector* v = new MyVector(10);
+    dummyFunction();
+    anotherdummyFunction();
+    return 0;
+}
