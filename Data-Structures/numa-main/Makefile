@@ -1,5 +1,5 @@
 CC=g++
-DIRS=Node Stack Examples
+DIRS= Examples
 
 # all:
 # 	cd Node; make

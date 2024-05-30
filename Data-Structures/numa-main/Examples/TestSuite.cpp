@@ -9,17 +9,12 @@
 #include "Node.hpp"
 #include "Stack.hpp"
 #include "numatype.hpp"
-#include "../src/Stack.cpp"
-#include "../src/Node.cpp"
-
-#include <iostream>
-
 
 void StackTest()
 {
 	Stack a;
-	Stack *b = new Stack();
-	//numa<Stack,1> *b = new numa<Stack,1>();
+	//Stack *b = new Stack();
+	numa<Stack,1> *b = new numa<Stack,1>();
 	a.push(1);
 	std::cout << "----------------------------------" << std::endl;
 	std::cout << "Display Stack after adding 1 node." << std::endl;

@@ -9,7 +9,7 @@
 #define _STACK_HPP_
 
 #include "Node.hpp"
-
+#include <iostream>
 
 /*!
  * \class Stack
@@ -22,6 +22,19 @@
  *
  */
 
+
+// class Stack;
+// template<>
+// class numa<Stack, 1>{
+// private:
+//     numa<Stack, 1> *top;
+// public:
+// 	numa(){
+// 		top = nullptr;
+// 	}
+
+// };
+
 class Stack
 {
 
@@ -30,58 +43,94 @@ private:
 
 
 public:
-	/*!
-	 * \brief Default Stack Constructor
-	 *
-	 */
+
 	Stack();
 
-	/*!
-	 * \brief Stack Destructor
-	 *
-	 * Need to remove each element one by one. The only pointer maintained
-	 * is the top Node. Must delete top variable, while keeping track of
-	 * next node so that we don't lose our stack.  
-	 * This can be done by calling our pop function in a while loop.
-	 *
-	 * \sa Stack::pop()
-	 */
 	~Stack();
-
-	/*!
-	 * \brief Function for removing a single stack node
-	 *
-	 * The Stack::pop() function removes the most recently
-	 * added node on the stack. It also simultaneously updates the pointer
-	 * to the top of the stack.
-	 *
-	 * \return The data from the removed node.
-	 */
+	
 	int pop();
 
-	/*!
-	 * \brief Push function for adding stack variables
-	 *
-	 * The push function adds a new stack node to the top of the stack. 
-	 *
-	 * \param[in] data Data to be added to top of stack. This data is wrapped by a Node.
-	 * 
-	 * \note To avoid Memory Allocation issues, if allocation fails (i.e. overflow)
-	 	Stack::push() is returned from immediately.
-	 */
 	void push(int);
 
-
-	/*!
-	 * \brief A function to display the contents of the stack.
-	 * 
-	 * This function iterates over and prints each node in the stack.
-	 * The first node printed is the top Node.
-	 */
 	void display();
 
 
 };
 
+Stack::Stack()
+{
+	top = nullptr;
+}
 
+
+Stack::~Stack()
+{
+	
+	if(top == nullptr)
+	{
+		return;
+	}
+	Node *temp;
+	while(top != nullptr)
+	{
+		temp = top;
+		top = top->getLink();
+		delete temp;
+	}
+
+}
+
+
+int Stack::pop()
+{
+	if(top == nullptr)
+	{
+		return -1;
+	}
+	Node *retN = top;
+	top = top->getLink();
+	int data = retN->getData();
+	delete retN;
+	retN = nullptr;
+
+	return data;
+}
+
+
+void Stack::push(int data)
+{
+	Node *newN = new Node(data);
+	if(newN == nullptr)
+	{
+		std::cerr << "Stack full" << std::endl;
+		return;
+	}
+
+	//Node *newNext = newN->getLink();
+	newN->setLink(top);
+	top = newN;
+}
+
+void Stack::display()
+{
+	if(top == nullptr)
+	{
+		std::cout << "Stack Empty!!" << std::endl;
+		return;
+	}
+
+	int i = 0;
+	
+	Node *temp = top;
+	while (temp != nullptr)
+	{
+		
+		if(i == 0)
+			std::cout << "TOP ";
+
+		std::cout << temp->getData() << std::endl;
+		temp = temp->getLink();
+		i++;
+	}
+}
 #endif //_STACK_HPP_

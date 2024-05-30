@@ -23,5 +23,22 @@ public:
 
 };
 
+Node::Node(int initData)
+{
+	data = initData;
+}
+
+Node::~Node()
+{
+	link = nullptr;
+}
+
+Node::Node(int initData, Node *node)
+{
+	data = initData;
+	link = node;
+}
+
+
 
 #endif //_NODE_HPP_
