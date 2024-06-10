@@ -1,6 +1,32 @@
 #ifndef _NODE_HPP_
 #define _NODE_HPP_
 
+
+#include "numatype.hpp"
+
+
+
+class Node;
+template<>
+class numa<Node, 1>{
+private:
+	numa<int,1> data;
+	numa<Node*,1> link;
+public:
+	numa(){
+		link = nullptr;
+	}
+	numa(int initData){
+		data = initData;
+	}
+	Node *getLink(){ return link; }
+	~numa(){
+	link = NULL;
+	}
+
+};
+
+
 class Node
 {
 private:
@@ -19,8 +45,6 @@ public:
 	void setData(int n){ data = n; }
 
 	virtual ~Node();
-	
-
 };
 
 Node::Node(int initData)
@@ -38,7 +62,5 @@ Node::Node(int initData, Node *node)
 	data = initData;
 	link = node;
 }
-
-
 
 #endif //_NODE_HPP_

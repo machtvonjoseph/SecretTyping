@@ -10,7 +10,7 @@
 
 #include "Node.hpp"
 #include <iostream>
-
+#include "numatype.hpp"
 /*!
  * \class Stack
  *
@@ -23,17 +23,79 @@
  */
 
 
-// class Stack;
-// template<>
-// class numa<Stack, 1>{
-// private:
-//     numa<Stack, 1> *top;
-// public:
-// 	numa(){
-// 		top = nullptr;
-// 	}
+class Stack;
+template<>
+class numa<Stack, 1>{
+private:
+    numa<Node*, 1> top;
+	
+public:
+	numa(){
+		top = nullptr;
+	}
+	 
+	~numa(){
+		if(top == nullptr)
+		{
+			return;
+		}
+		numa<Node*,1> temp;
+		while(top != nullptr)
+		{
+			temp = top;
+			top = top->getLink();
+			delete temp;
+		}
+	}
+	int pop(){
+		if(top == nullptr)
+		{
+			return -1;
+		}
+		Node* retN = top;
+		top = top->getLink();
+		int data = retN->getData();
+		delete retN;
+		retN = nullptr;
 
-// };
+		return data;
+	}
+	void push(int data){
+		numa<Node*,1> newN = new numa<Node,1>(data);
+		std::cerr << "Pushing " << data << std::endl;
+		if(newN == nullptr)
+		{
+			std::cerr << "Stack full" << std::endl;
+			return;
+		}
+
+		Node *newNext = newN->getLink();
+		newN->setLink(top);
+		top = newN;
+	}
+	void display(){
+		if(top == nullptr)
+		{
+			std::cout << "Stack Empty!!" << std::endl;
+			return;
+		}
+
+		int i = 0;
+		
+		Node* temp = top;
+		while (temp != nullptr)
+		{
+			
+			if(i == 0)
+				std::cout << "TOP ";
+
+			std::cout << temp->getData() << std::endl;
+			temp = temp->getLink();
+			i++;
+		}
+}
+
+};
 
 class Stack
 {

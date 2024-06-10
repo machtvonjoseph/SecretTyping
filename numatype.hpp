@@ -113,6 +113,7 @@ public:
 	// 	static_assert(std::is_pointer<T>::value,"-> operator is only valid for pointer types");
 	// 	return load();
 	// }
+
 	
     static void* operator new(std::size_t sz){
 		allocator_type alloc;

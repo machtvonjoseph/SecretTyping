@@ -10,37 +10,42 @@
 #include "Stack.hpp"
 #include "numatype.hpp"
 
+
+//#include <iostream>
+
+
+
 void StackTest()
 {
 	Stack a;
 	//Stack *b = new Stack();
-	numa<Stack,1> *b = new numa<Stack,1>();
-	a.push(1);
-	std::cout << "----------------------------------" << std::endl;
-	std::cout << "Display Stack after adding 1 node." << std::endl;
-	std::cout << "----------------------------------" << std::endl;
-	a.display();
+	numa<Stack*,1> b = new numa<Stack,1>();
+	// a.push(1);
+	// std::cout << "----------------------------------" << std::endl;
+	// std::cout << "Display Stack after adding 1 node." << std::endl;
+	// std::cout << "----------------------------------" << std::endl;
+	// a.display();
 	
 
-	a.push(5);
-	a.push(30);
-	std::cout << "----------------------------------" << std::endl;
-	std::cout << "Display Stack after adding 2 nodes." << std::endl;
-	std::cout << "----------------------------------" << std::endl;
-	a.display();
+	// a.push(5);
+	// a.push(30);
+	// std::cout << "----------------------------------" << std::endl;
+	// std::cout << "Display Stack after adding 2 nodes." << std::endl;
+	// std::cout << "----------------------------------" << std::endl;
+	// a.display();
 
-	a.pop();
-	std::cout << "----------------------------------" << std::endl;
-	std::cout << "Display Stack after removing 1 node" << std::endl;
-	std::cout << "----------------------------------" << std::endl;
-	a.display();
+	// a.pop();
+	// std::cout << "----------------------------------" << std::endl;
+	// std::cout << "Display Stack after removing 1 node" << std::endl;
+	// std::cout << "----------------------------------" << std::endl;
+	// a.display();
 
-	std::cout << "----------------------------------" << std::endl;
-	std::cout << "Display empty stack." << std::endl;
-	std::cout << "----------------------------------" << std::endl;
+	// std::cout << "----------------------------------" << std::endl;
+	// std::cout << "Display empty stack." << std::endl;
+	// std::cout << "----------------------------------" << std::endl;
 	b->display();
 
-	for(int i = 0; i < 5; i++)
+	for(int i = 1; i < 6; i++)
 	{
 		b->push(i);
 	}
@@ -49,7 +54,7 @@ void StackTest()
 	std::cout << "----------------------------------" << std::endl;
 	b->display();
 
-	for(int i = 0; i < 3; i++)
+	for(int i = 0; i < 3; i++) 
 	{	
 		b->pop();
 	}

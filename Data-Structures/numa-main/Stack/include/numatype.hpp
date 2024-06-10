@@ -79,7 +79,7 @@ class numa; // declaration of full numa type
 
 // primitive numa
 template<typename T, int NodeID, template <typename, int> class Alloc>
-class numa<T,NodeID, Alloc, typename std::enable_if<(std::is_fundamental<T>::value || std::is_pointer<T>::value)>::type>{
+class numa<T,NodeID, Alloc, typename std::enable_if<(std::is_fundamental<T>::value)|| std::is_pointer<T>::value>::type>{
 public:
 	T contents;
 
@@ -109,10 +109,11 @@ public:
 	// inline operator T() {return load();}
     inline operator T&(){return contents;}
     
-	// inline T operator-> (){
-	// 	static_assert(std::is_pointer<T>::value,"-> operator is only valid for pointer types");
-	// 	return load();
-	// }
+	inline T operator-> (){
+        // std::cout<<"operator -> called"<<std::endl;
+		static_assert(std::is_pointer<T>::value,"-> operator is only valid for pointer types");
+		return load();
+	}
 	
     static void* operator new(std::size_t sz){
 		allocator_type alloc;
@@ -124,11 +125,18 @@ public:
         return alloc.allocate(sz);
     }
 
+    //overload = operator
+    numa& operator=(const T& data){
+        store(data);
+        return *this;
+    }
+
 };
 
 template<typename T, int NodeID, template <typename, int> class Alloc>
 class numa<T,NodeID, Alloc, typename std::enable_if<!(std::is_fundamental<T>::value || std::is_pointer<T>::value)>::type>: public T{
 public:
+
     using allocator_type = Alloc<T, NodeID>;
     static void* operator new(std::size_t sz){
 		allocator_type alloc;
@@ -142,6 +150,7 @@ public:
 
 //TODO : Implement delete operator
     static void operator delete(void* ptr){
+        std::cout<<"delete operator called"<<std::endl;
         allocator_type alloc;
         alloc.deallocate(static_cast<T*>(ptr), 1);
     }

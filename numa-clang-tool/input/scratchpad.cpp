@@ -153,6 +153,7 @@ public:
 int main(){    
     numa<int, 3>* v2 = new numa<int, 3>();        
     numa<MyVector,3>* v = new numa<MyVector,3>();   
+    int* n = v2;
     //v->data = new numa<int,3>();                      //Idk what the problem is here
 //must support v= new MyVector(10)        AST handling is different
 }
