@@ -502,4 +502,6 @@ src/CMakeFiles/clang-tool.dir/actions/frontendaction.cc.o: \
  /usr/local/include/llvm/Option/Option.h \
  /usr/local/include/llvm/Option/OptTable.h \
  /home/kidus/NUMATyping/numa-clang-tool/src/actions/../consumer/consumer.h \
- /home/kidus/NUMATyping/numa-clang-tool/src/actions/../inclusiondirective/inclusiondirective.h
+ /home/kidus/NUMATyping/numa-clang-tool/src/actions/../inclusiondirective/inclusiondirective.h \
+ /home/kidus/NUMATyping/numa-clang-tool/src/actions/../inclusiondirective/Excludeheader.h \
+ /usr/local/include/clang/Frontend/FrontendPluginRegistry.h

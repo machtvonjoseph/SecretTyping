@@ -6,7 +6,7 @@
 #include "clang/Lex/Preprocessor.h"
 #include "../consumer/consumer.h"
 #include "../inclusiondirective/inclusiondirective.h"
-
+#include "../inclusiondirective/Excludeheader.h"
 
 std::unique_ptr<clang::ASTConsumer> PPFrontendAction::CreateASTConsumer(clang::CompilerInstance &compiler, llvm::StringRef inFile)
 {
@@ -27,6 +27,7 @@ std::unique_ptr<clang::ASTConsumer> PPFrontendAction::CreateASTConsumer(clang::C
 std::unique_ptr<clang::ASTConsumer> NumaFrontendAction::CreateASTConsumer(clang::CompilerInstance &compiler, llvm::StringRef inFile)
 {
     TheRewriter.setSourceMgr(compiler.getSourceManager(), compiler.getLangOpts());
+    compiler.getPreprocessor().addPPCallbacks(std::make_unique<ExcludeHeaderCallback>(compiler.getPreprocessor()));
     return std::make_unique<NumaConsumer>(TheRewriter, &compiler.getASTContext());
 }
 

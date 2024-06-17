@@ -1,18 +1,18 @@
-//#include "numatype.hpp"
-//#include <iostream>
+#include "numatype.hpp"
+#include <iostream>
 using namespace std;
 
 
-template<class T, int N>
-class numa{
-    public:
-    void my_func(){
+// template<class T, int N>
+// class numa{
+//     public:
+//     void my_func(){
         
-    }
-    void ur_func(){
+//     }
+//     void ur_func(){
         
-    }
-};
+//     }
+// };
 
 class SomeClass{
     public:
@@ -40,10 +40,8 @@ public:
 };
 
 int main(){    
-    //numa<int, 3>* v2 = new numa<int, 3>();        
+    numa<int, 3>* v2 = new numa<int, 3>();        
     numa<MyVector,3>* v = new numa<MyVector,3>();   
-    //v->data = new numa<int,3>();                      //Idk what the problem is here
-//must support v= new MyVector(10)        AST handling is different
 }
 
 

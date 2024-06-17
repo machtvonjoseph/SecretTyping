@@ -79,7 +79,7 @@ class numa; // declaration of full numa type
 
 // primitive numa
 template<typename T, int NodeID, template <typename, int> class Alloc>
-class numa<T,NodeID, Alloc, typename std::enable_if<(std::is_fundamental<T>::value || std::is_pointer<T>::value)>::type>{
+class numa<T,NodeID, Alloc, typename std::enable_if<(std::is_fundamental<T>::value)|| std::is_pointer<T>::value>::type>{
 public:
 	T contents;
 
@@ -109,10 +109,11 @@ public:
 	// inline operator T() {return load();}
     inline operator T&(){return contents;}
     
-	// inline T operator-> (){
-	// 	static_assert(std::is_pointer<T>::value,"-> operator is only valid for pointer types");
-	// 	return load();
-	// }
+	inline T operator-> (){
+        // std::cout<<"operator -> called"<<std::endl;
+		static_assert(std::is_pointer<T>::value,"-> operator is only valid for pointer types");
+		return load();
+	}
 	
     static void* operator new(std::size_t sz){
 		allocator_type alloc;
@@ -124,74 +125,38 @@ public:
         return alloc.allocate(sz);
     }
 
+    //overload = operator
+    numa& operator=(const T& data){
+        store(data);
+        return *this;
+    }
+
 };
 
+template<typename T, int NodeID, template <typename, int> class Alloc>
+class numa<T,NodeID, Alloc, typename std::enable_if<!(std::is_fundamental<T>::value || std::is_pointer<T>::value)>::type>: public T{
+public:
 
-// // complex numa
-// template<typename T, int NodeID, template <typename, int> class Alloc>
-// class numa<T,NodeID, Alloc, typename std::enable_if<!(std::is_fundamental<T>::value || std::is_pointer<T>::value)>::type>: public T{
-// public:
-//     using allocator_type = Alloc<T, NodeID>;
-//     //using pointer_alloc_type =Alloc<T*, NodeID>;
-//     // numa() {
-//     //     allocator_type alloc;
-//     //     T* p = alloc.allocate(1);
-//     //     alloc.construct(p, T());                //If possible, construct an object of type T in allocated unititialized storage pointed to by p
-//     //                                             //but in our case we are only handling objects with no member functions(??)
-//     //     this->swap(*p); // point to the allocated memory
-//     // }
-//     // numa(size_t size){                          //This is to allocate a custom size. Like in a vector
-//     //     allocator_type alloc;
-//     //     T* p = alloc.allocate(size);
-//     //     alloc.construct(p, T());                
-//     //     this->swap(*p); // point to the allocated memory
-//     // }
-//     // explicit numa(const allocator_type& alloc) noexcept : T(alloc) {}
-//     // explicit numa(const T& t, const allocator_type& alloc = allocator_type()) : T(t, alloc) {}
-//     // explicit numa(T&& t, const allocator_type& alloc = allocator_type()) : T(std::move(t), alloc) {}    
-    
-//     numa(T t) : T(t) {}
-//     // inline operator T() {return *this;}
-//     inline operator T&(){return *this;}
-// 	// inline T operator-> (){
-// 	// 	static_assert(std::is_pointer<T>::value,"-> operator is only valid for pointer types");
-// 	// 	return this;
-// 	// }
+    using allocator_type = Alloc<T, NodeID>;
+    static void* operator new(std::size_t sz){
+		allocator_type alloc;
+        return alloc.allocate(sz);
+    }
 
-//     static void* operator new(std::size_t count)
-//     {
-//         allocator_type alloc;
-//         return alloc.allocate(count);
-//     }
- 
-//     static void* operator new[](std::size_t count)
-//     {
-//         //todo: disable placement new for numa.
-//         allocator_type alloc;
-//         return alloc.allocate(count);
-//     }
-	
-//     // assignment operators, use NumaAllocator
-//     // numa& operator=(const T& t) {
-//     //     allocator_type alloc;
-//     //     T* p = alloc.allocate(1);       //1 * sizeof(T) bytes allocated
-//     //     alloc.construct(p, t);      //construct then swap
-//     //     this->swap(*p);
-//     //     return *this;
-//     // }
+    static void* operator new[](std::size_t sz){
+		allocator_type alloc;
+        return alloc.allocate(sz);
+    }
 
-//     // numa& operator[](std::size_t index) {
-//     //     static_assert(std::is_pointer<T>::value,"[] operator is only valid for pointer types");
-//     //     return this[index];
-//     // }
+//TODO : Implement delete operator
+    static void operator delete(void* ptr){
+        std::cout<<"delete operator called"<<std::endl;
+        allocator_type alloc;
+        alloc.deallocate(static_cast<T*>(ptr), 1);
+    }
 
-//     // // Const version of the [] operator
-//     // const T& operator[](std::size_t index) const {
-//     //     static_assert(std::is_pointer<T>::value,"[] operator is only valid for pointer types");
-//     //     return this[index];
-//     // }
-
-//     int node_id = NodeID;
-//     constexpr operator int() const { return NodeID; }
-// };
-
+    static void operator delete[](void* ptr){
+        allocator_type alloc;
+        alloc.deallocate(static_cast<T*>(ptr), 1);
+    }
+};

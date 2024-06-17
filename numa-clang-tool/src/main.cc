@@ -74,7 +74,7 @@ int main(int argc, const char **argv)
 
         //int PreProcessorRun = preProcessorTool.run(newFrontendActionFactory<PPFrontendAction>().get());
         //int XRun = preProcessorTool.run(newFrontendActionFactory<NumaFrontendAction>().get());
-        //clang::tooling::runToolOnCode(std::make_unique<PPFrontendAction>(),sourcetxt,sourceFile);
+        clang::tooling::runToolOnCode(std::make_unique<PPFrontendAction>(),sourcetxt,sourceFile);
 
         clang::tooling::runToolOnCode(std::make_unique<NumaFrontendAction>(),sourcetxt,sourceFile);
         cout<<"\n";

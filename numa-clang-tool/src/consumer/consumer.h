@@ -18,6 +18,7 @@ class NumaConsumer : public clang::ASTConsumer
 
     public:
         explicit NumaConsumer(clang::Rewriter& TheReWriter, clang::ASTContext* context);
+        
         virtual void HandleTranslationUnit( clang::ASTContext &context) override;
 };
 
