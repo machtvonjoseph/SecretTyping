@@ -105,6 +105,8 @@
         "hash_set": "cpp",
         "ranges": "cpp",
         "stop_token": "cpp",
-        "thread": "cpp"
-    }
+        "thread": "cpp",
+        "*.def": "cpp"
+    },
+    "cmake.sourceDirectory": "/home/kidus/NUMATyping/llvm-pass/llvm-project/libcxxabi"
 }

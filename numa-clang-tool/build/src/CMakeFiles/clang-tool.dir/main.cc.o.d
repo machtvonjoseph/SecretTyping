@@ -510,6 +510,7 @@ src/CMakeFiles/clang-tool.dir/main.cc.o: \
  /usr/local/include/llvm/Option/Option.h \
  /usr/local/include/llvm/Option/OptTable.h \
  /home/kidus/NUMATyping/numa-clang-tool/src/actions/../consumer/consumer.h \
+ /home/kidus/NUMATyping/numa-clang-tool/src/actions/../inclusiondirective/inclusiondirective.h \
  /home/kidus/NUMATyping/numa-clang-tool/src/utils/utils.h \
  /usr/include/c++/11/fstream /usr/include/c++/11/bits/codecvt.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \

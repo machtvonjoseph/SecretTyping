@@ -2,6 +2,7 @@
 #include "../transformer/templateargtransformer.h"
 #include <fstream>
 #include <string>
+#include "llvm/Support/WithColor.h"
 NumaConsumer::NumaConsumer(clang::Rewriter& TheReWriter, clang::ASTContext* context)
 {
     rewriter = TheReWriter;
@@ -22,44 +23,46 @@ PPConsumer::PPConsumer(clang::Rewriter TheReWriter, clang::ASTContext* context)
 
 void NumaConsumer::HandleTranslationUnit(clang::ASTContext &context)
 {
-    //print ast
+
     //context.getTranslationUnitDecl()->dump();
-
-    //rewriter.setSourceMgr(context.getSourceManager(), context.getLangOpts());
-    std::ofstream outputHeader("../output/output.h");
-    std::ofstream outputImpl("../output/output.cpp");
-
     //FunctionCallTransformer fntransformer(context, rewriter);
     llvm::outs() <<"Calling template arg transformer\n";
+    //print rewrite buffer
+    //llvm::outs() << "Rewrite buffer as it starts from consumer\n";
+    //rewriter.getEditBuffer(rewriter.getSourceMgr().getMainFileID()).write(llvm::outs());
     TemplateArgTransformer tempArgTransformer(context, rewriter);
     // // //fntransformer.start();
     tempArgTransformer.start();
     //fntransformer.print(llvm::outs());   
+    llvm::outs() << "Get all the file names in rewriter source manager\n";
+    for(auto it = rewriter.getSourceMgr().fileinfo_begin(); it != rewriter.getSourceMgr().fileinfo_end(); it++){
+        rewriterFileNames.push_back( it->first->getName());
+    }
 
-    llvm::outs() <<"Something\n";
-    auto buffer = rewriter.getRewriteBufferFor(context.getSourceManager().getMainFileID());
+    //rewrite to a file
 
-    //iterate through buffer using loop
+
+    // //iterate through buffer using loop
     // for(auto it = buffer->begin(); it != buffer->end(); it++){
     //     // llvm::outs()<< "ITERATION\n";
         
     //     llvm::outs() << *it;
     // }
     // rewriter.buffer_begin()->second.write(llvm::outs());
-    // print the buffer
+    // //print the buffer
     // if (buffer) {
     //     llvm::outs() << std::string(buffer->begin(), buffer->end());
     // }
-    //print rewriter
-    //rewriter.getEditBuffer(rewriter.getSourceMgr().getMainFileID());//.write(llvm::outs());
-    //for each source location rewrite on the two files
-    //if (buffer) {
+    // //print rewriter
+    // rewriter.getEditBuffer(rewriter.getSourceMgr().getMainFileID());//.write(llvm::outs());
+    // //for each source location rewrite on the two files
+    // if (buffer) {
     //     //Rewrite into header if the location is a header file
         
     // outputImpl.close();
     // outputHeader.close();
-    //cast outputImpl to raw_ostream
-    //outputImpl.write(llvm::outs());
+    // //cast outputImpl to raw_ostream
+    // // outputImpl.write(llvm::outs());
     // std::error_code error_code;
     // llvm::raw_fd_ostream outFile("../output/output.cpp", error_code);
     // const clang::RewriteBuffer *RewriteBuf = rewriter.getRewriteBufferFor(rewriter.getSourceMgr().getMainFileID());

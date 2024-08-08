@@ -6,6 +6,7 @@
  */
 
 #include "TestSuite.hpp"
+
 #include <iostream>
 
 
@@ -16,7 +17,7 @@ int main(int argc, char *argv[])
 
 	
 	StackTest();
-	BinarySearchTest();
+	//BinarySearchTest();
 
 
 	return 0;

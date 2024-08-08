@@ -1053,7 +1053,78 @@ src/CMakeFiles/clang-tool.dir/consumer/consumer.cc.o: ../src/consumer/consumer.c
   /usr/local/include/clang/Basic/SourceManager.h \
   /usr/local/include/llvm/ADT/StringExtras.h \
   /usr/local/include/llvm/Support/Timer.h \
-  /usr/include/c++/11/fstream \
+  ../src/transformer/templateargtransformer.h \
+  /usr/local/include/clang/AST/RecursiveASTVisitor.h \
+  /usr/local/include/clang/AST/DeclOpenMP.h \
+  /usr/local/include/clang/AST/ExprConcepts.h \
+  /usr/local/include/clang/AST/ExprOpenMP.h \
+  /usr/local/include/clang/AST/AttrVisitor.inc \
+  /usr/local/include/clang/Tooling/Tooling.h \
+  /usr/local/include/clang/Frontend/FrontendAction.h \
+  /usr/local/include/clang/Frontend/ASTUnit.h \
+  /usr/local/include/clang-c/Index.h \
+  /usr/local/include/clang-c/BuildSystem.h \
+  /usr/local/include/clang-c/CXErrorCode.h \
+  /usr/local/include/clang-c/ExternC.h \
+  /usr/local/include/clang-c/Platform.h \
+  /usr/local/include/clang-c/CXString.h \
+  /usr/local/include/clang-c/CXDiagnostic.h \
+  /usr/local/include/clang-c/CXSourceLocation.h \
+  /usr/local/include/clang-c/CXFile.h \
+  /usr/local/include/clang/Basic/TargetOptions.h \
+  /usr/local/include/clang/Basic/OpenCLOptions.h \
+  /usr/local/include/clang/Lex/HeaderSearchOptions.h \
+  /usr/local/include/llvm/ADT/CachedHashString.h \
+  /usr/local/include/llvm/ADT/SetVector.h \
+  /usr/local/include/clang/Lex/ModuleLoader.h \
+  /usr/local/include/clang/Basic/Module.h \
+  /usr/local/include/clang/Lex/PreprocessingRecord.h \
+  /usr/local/include/clang/Lex/PPCallbacks.h \
+  /usr/local/include/clang/Lex/Pragma.h \
+  /usr/local/include/clang/Sema/CodeCompleteConsumer.h \
+  /usr/local/include/clang/Lex/MacroInfo.h \
+  /usr/local/include/clang/Lex/Token.h \
+  /usr/local/include/clang/Sema/CodeCompleteOptions.h \
+  /usr/local/include/clang/Sema/DeclSpec.h \
+  /usr/local/include/clang/Sema/Ownership.h \
+  /usr/local/include/clang/Sema/ParsedAttr.h \
+  /usr/local/include/clang/Basic/AttrSubjectMatchRules.h \
+  /usr/local/include/clang/Basic/AttrSubMatchRulesList.inc \
+  /usr/local/include/clang/Basic/ParsedAttrInfo.h \
+  /usr/local/include/llvm/Support/Registry.h \
+  /usr/local/include/llvm/Support/DynamicLibrary.h \
+  /usr/include/c++/11/bitset \
+  /usr/local/include/clang/Serialization/ASTBitCodes.h \
+  /usr/local/include/llvm/Bitstream/BitCodes.h \
+  /usr/local/include/llvm/Bitstream/BitCodeEnums.h \
+  /usr/local/include/clang/Serialization/TypeBitCodes.def \
+  /usr/local/include/clang/Frontend/PrecompiledPreamble.h \
+  /usr/local/include/clang/Lex/Lexer.h \
+  /usr/local/include/clang/Lex/DependencyDirectivesScanner.h \
+  /usr/local/include/clang/Lex/PreprocessorLexer.h \
+  /usr/local/include/clang/Lex/MultipleIncludeOpt.h \
+  /usr/local/include/clang/Lex/Preprocessor.h \
+  /usr/local/include/clang/Lex/HeaderSearch.h \
+  /usr/local/include/clang/Lex/DirectoryLookup.h \
+  /usr/local/include/clang/Lex/ModuleMap.h \
+  /usr/local/include/llvm/ADT/StringSet.h \
+  /usr/local/include/clang/Lex/HeaderMap.h \
+  /usr/local/include/clang/Lex/HeaderMapTypes.h \
+  /usr/local/include/clang/Lex/TokenLexer.h \
+  /usr/local/include/llvm/ADT/FunctionExtras.h \
+  /usr/local/include/clang/Frontend/FrontendOptions.h \
+  /usr/local/include/clang/Frontend/CommandLineSourceLoc.h \
+  /usr/local/include/llvm/Support/CommandLine.h \
+  /usr/local/include/llvm/Support/StringSaver.h \
+  /usr/local/include/clang/Serialization/ModuleFileExtension.h \
+  /usr/local/include/llvm/Support/ExtensibleRTTI.h \
+  /usr/local/include/clang/Frontend/PCHContainerOperations.h \
+  /usr/local/include/clang/Serialization/PCHContainerOperations.h \
+  /usr/local/include/clang/Tooling/ArgumentsAdjusters.h \
+  /usr/local/include/llvm/Option/Option.h \
+  /usr/local/include/llvm/Option/OptSpecifier.h \
+  /usr/local/include/llvm/Option/OptTable.h \
+  /usr/include/c++/11/sstream \
   /usr/include/c++/11/istream \
   /usr/include/c++/11/ios \
   /usr/include/c++/11/bits/basic_ios.h \
@@ -1068,10 +1139,13 @@ src/CMakeFiles/clang-tool.dir/consumer/consumer.cc.o: ../src/consumer/consumer.c
   /usr/include/c++/11/ostream \
   /usr/include/c++/11/bits/ostream.tcc \
   /usr/include/c++/11/bits/istream.tcc \
+  /usr/include/c++/11/bits/sstream.tcc \
+  /usr/include/c++/11/fstream \
   /usr/include/c++/11/bits/codecvt.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
-  /usr/include/c++/11/bits/fstream.tcc
+  /usr/include/c++/11/bits/fstream.tcc \
+  /usr/local/include/llvm/Support/WithColor.h
 
 src/CMakeFiles/clang-tool.dir/inclusiondirective/inclusiondirective.cc.o: ../src/inclusiondirective/inclusiondirective.cc \
   /usr/include/stdc-predef.h \
@@ -2170,6 +2244,7 @@ src/CMakeFiles/clang-tool.dir/main.cc.o: ../src/main.cc \
   /usr/local/include/llvm/Option/Option.h \
   /usr/local/include/llvm/Option/OptTable.h \
   ../src/consumer/consumer.h \
+  ../src/inclusiondirective/inclusiondirective.h \
   ../src/utils/utils.h \
   /usr/include/c++/11/fstream \
   /usr/include/c++/11/bits/codecvt.h \
@@ -3787,15 +3862,7 @@ src/CMakeFiles/clang-tool.dir/utils/utils.cc.o: ../src/utils/utils.cc \
 
 ../src/utils/utils.cc:
 
-/usr/local/include/clang/AST/ExprConcepts.h:
-
-/usr/local/include/clang/AST/RecursiveASTVisitor.h:
-
 ../src/transformer/templateargtransformer.cc:
-
-/usr/include/c++/11/bits/sstream.tcc:
-
-/usr/include/c++/11/sstream:
 
 /usr/local/include/llvm/Support/InitLLVM.h:
 
@@ -3817,11 +3884,15 @@ src/CMakeFiles/clang-tool.dir/utils/utils.cc.o: ../src/utils/utils.cc \
 
 ../src/inclusiondirective/inclusiondirective.cc:
 
+/usr/local/include/llvm/Support/WithColor.h:
+
 /usr/include/c++/11/bits/fstream.tcc:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h:
 
 /usr/include/c++/11/bits/codecvt.h:
+
+/usr/include/c++/11/bits/sstream.tcc:
 
 /usr/include/c++/11/bits/istream.tcc:
 
@@ -3843,9 +3914,15 @@ src/CMakeFiles/clang-tool.dir/utils/utils.cc.o: ../src/utils/utils.cc \
 
 /usr/include/c++/11/ios:
 
-/usr/local/include/clang/AST/AttrVisitor.inc:
+/usr/include/c++/11/sstream:
 
 /usr/include/c++/11/istream:
+
+/usr/local/include/clang/AST/AttrVisitor.inc:
+
+/usr/local/include/clang/AST/ExprConcepts.h:
+
+/usr/local/include/clang/AST/RecursiveASTVisitor.h:
 
 /usr/local/include/llvm/Support/Timer.h:
 

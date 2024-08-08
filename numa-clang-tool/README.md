@@ -72,4 +72,8 @@ Go to build directory.
   ```cmake --build .```
 
 ## To Run
-  ```./bin/clang-tool
+  ```./bin/clang-tool $file name```
+
+### To run data structures
+  ``` ./bin/clang-tool ../input/Data-Structures/numaed-DS/Examples/TestSuite.cpp -- -I ../input/Data-Structures/numaed-DS/Node/include/ -I ../input/Data-Structures/numaed-DS/Stack/include/ -I/usr/local/lib/clang/18/include/```
+

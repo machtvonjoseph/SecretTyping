@@ -13,9 +13,9 @@
 
 using namespace clang;
 
-class IncludeChangePPCallbacks : public clang::PPCallbacks {
+class IncludeTracker : public clang::PPCallbacks {
 public:
-    IncludeChangePPCallbacks(clang::SourceManager &SM, clang::Rewriter &R)
+    IncludeTracker(clang::SourceManager &SM, clang::Rewriter &R)
         : SM(SM), TheRewriter(R) {}
 
     void InclusionDirective(SourceLocation HashLoc,
@@ -26,11 +26,15 @@ public:
                                   const Module *Imported,
                                   SrcMgr::CharacteristicKind FileType) override;
 
+    std::vector<llvm::StringRef> getIncludedFiles(){ return includedFilesSet; }
+
 private:
     clang::SourceManager &SM;
     clang::Rewriter &TheRewriter;
     clang::SourceLocation rewriteLoc;
     std::vector<std::string> exceptionIncludes = {"numatype.hpp", "numa.h"};
+    //std::vector<llvm::StringRef> includedFiles;
+    std::vector<llvm::StringRef> includedFilesSet;
 };
 
 

@@ -18,7 +18,7 @@
 #include "llvm/Support/CommandLine.h"
 #include "llvm/Support/raw_ostream.h"
 #include "../consumer/consumer.h"
-
+#include "../inclusiondirective/inclusiondirective.h"
 #include <memory>
 #include <vector>
 #include <string>
@@ -31,9 +31,10 @@ namespace clang
 class NumaFrontendAction : public clang::ASTFrontendAction {
 public:
   virtual std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(clang::CompilerInstance &compiler, llvm::StringRef inFile) override;
-  //void EndSourceFileAction() override;
+  void EndSourceFileAction() override;
 private:
   clang::Rewriter TheRewriter;
+  IncludeTracker* TheIncludeTracker;
 };
 
 class PPFrontendAction : public clang::ASTFrontendAction {
@@ -43,6 +44,8 @@ public:
 private:
   clang::Rewriter TheRewriter;
 };
+
+
 
 
 #endif

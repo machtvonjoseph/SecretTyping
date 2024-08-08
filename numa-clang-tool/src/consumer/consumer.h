@@ -13,8 +13,10 @@ namespace clang
 class NumaConsumer : public clang::ASTConsumer 
 {
     private:
-    
+        //The rewriter object we use to write the changes in source code
         clang::Rewriter rewriter;
+        //The container for the file IDs in the rewriters source manager
+        std::vector<llvm::StringRef> rewriterFileNames;
 
     public:
         explicit NumaConsumer(clang::Rewriter& TheReWriter, clang::ASTContext* context);

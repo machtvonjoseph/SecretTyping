@@ -1,0 +1,37 @@
+[
+{
+  "directory": "/home/kidus/NUMATyping/numa-clang-tool/build/src",
+  "command": "/usr/bin/c++   -Wall -lnuma  -g3 -O0 -fno-rtti  -o CMakeFiles/clang-tool.dir/main.cc.o -c /home/kidus/NUMATyping/numa-clang-tool/src/main.cc",
+  "file": "/home/kidus/NUMATyping/numa-clang-tool/src/main.cc"
+},
+{
+  "directory": "/home/kidus/NUMATyping/numa-clang-tool/build/src",
+  "command": "/usr/bin/c++   -Wall -lnuma  -g3 -O0 -fno-rtti  -o CMakeFiles/clang-tool.dir/actions/frontendaction.cc.o -c /home/kidus/NUMATyping/numa-clang-tool/src/actions/frontendaction.cc",
+  "file": "/home/kidus/NUMATyping/numa-clang-tool/src/actions/frontendaction.cc"
+},
+{
+  "directory": "/home/kidus/NUMATyping/numa-clang-tool/build/src",
+  "command": "/usr/bin/c++   -Wall -lnuma  -g3 -O0 -fno-rtti  -o CMakeFiles/clang-tool.dir/consumer/consumer.cc.o -c /home/kidus/NUMATyping/numa-clang-tool/src/consumer/consumer.cc",
+  "file": "/home/kidus/NUMATyping/numa-clang-tool/src/consumer/consumer.cc"
+},
+{
+  "directory": "/home/kidus/NUMATyping/numa-clang-tool/build/src",
+  "command": "/usr/bin/c++   -Wall -lnuma  -g3 -O0 -fno-rtti  -o CMakeFiles/clang-tool.dir/inclusiondirective/inclusiondirective.cc.o -c /home/kidus/NUMATyping/numa-clang-tool/src/inclusiondirective/inclusiondirective.cc",
+  "file": "/home/kidus/NUMATyping/numa-clang-tool/src/inclusiondirective/inclusiondirective.cc"
+},
+{
+  "directory": "/home/kidus/NUMATyping/numa-clang-tool/build/src",
+  "command": "/usr/bin/c++   -Wall -lnuma  -g3 -O0 -fno-rtti  -o CMakeFiles/clang-tool.dir/utils/utils.cc.o -c /home/kidus/NUMATyping/numa-clang-tool/src/utils/utils.cc",
+  "file": "/home/kidus/NUMATyping/numa-clang-tool/src/utils/utils.cc"
+},
+{
+  "directory": "/home/kidus/NUMATyping/numa-clang-tool/build/src",
+  "command": "/usr/bin/c++   -Wall -lnuma  -g3 -O0 -fno-rtti  -o CMakeFiles/clang-tool.dir/transformer/transformer.cc.o -c /home/kidus/NUMATyping/numa-clang-tool/src/transformer/transformer.cc",
+  "file": "/home/kidus/NUMATyping/numa-clang-tool/src/transformer/transformer.cc"
+},
+{
+  "directory": "/home/kidus/NUMATyping/numa-clang-tool/build/src",
+  "command": "/usr/bin/c++   -Wall -lnuma  -g3 -O0 -fno-rtti  -o CMakeFiles/clang-tool.dir/transformer/templateargtransformer.cc.o -c /home/kidus/NUMATyping/numa-clang-tool/src/transformer/templateargtransformer.cc",
+  "file": "/home/kidus/NUMATyping/numa-clang-tool/src/transformer/templateargtransformer.cc"
+}
+]

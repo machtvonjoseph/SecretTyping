@@ -1,7 +1,10 @@
 #include "dummyheader.h"
 #include "anotherdummyheader.h"
-#include "numatype.hpp"
+//#include "numatype.hpp"
+template <typename T, int N>
+class numa{
 
+};
 class SomeClass;
 template<typename T, int NodeID>
 class numa<T , NodeID, NumaAllocator, typename std::enable_if<std::is_same<T, SomeClass>::value>::type>{
@@ -46,16 +49,10 @@ public:
        numa<int, 3> a;
 public:
 numa();
-void my_func(){
-        
-    }
-void ur_func(){
-        
-    }
 };
 class SomeClass{
     public:
-    SomeClass();
+    SomeClass(){};
     int a;
 };
 

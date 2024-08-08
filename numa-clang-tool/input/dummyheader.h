@@ -4,7 +4,10 @@
 void dummyFunction(){
     return;
 }
+template <typename T, int N>
+class numa{
 
+};
 
 
 class MyVector{  
@@ -13,6 +16,7 @@ class MyVector{
 public:
     MyVector():MyVector(10,0){};
     MyVector(int sz, int val = 0){
+        int assignment = val;
         data = new int[sz];
     }
     int getData(int idx){
@@ -22,5 +26,19 @@ public:
         data[idx] = value;
     }
 };
+
+
+template<>
+class numa<MyVector, 3>:public MyVector{
+    public:
+    MyVector* data;
+    numa(){
+        data = new MyVector[3];
+    }
+    ~numa(){
+        delete[] data;
+    }                                               
+};
+
 
 #endif

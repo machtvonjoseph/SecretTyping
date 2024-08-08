@@ -13,6 +13,8 @@
 #include "clang/Tooling/Tooling.h"
 #include <sstream>
 #include <string>
+#include <unordered_map>
+#include <map>
 
 std::string allocator_funcs = R"(using allocator_type = NumaAllocator<T,NodeID>;// Alloc<T, NodeID>;
 using pointer_alloc_type =NumaAllocator<T*,NodeID>; //Alloc<T*, NodeID>;
@@ -62,34 +64,42 @@ using namespace clang;
 void TemplateArgTransformer::start()
 {
     using namespace clang::ast_matchers;
-   
-    MatchFinder templateSpcializationFinder;
-    MatchFinder templateFinder;
+
     MatchFinder functionFinder;
-    MatchFinder variableFinder;
     MatchFinder classFinder;
+    // MatchFinder variableFinder;
+    // MatchFinder classFinder;
+    // MatchFinder methodDeclFinder;      
+    // MatchFinder templateSpcializationFinder;
+    // MatchFinder templateFinder;
 
-    auto callExprMatcher = callExpr().bind("callExpr");
-    auto varDeclMatcher = varDecl().bind("varDecl");
-    auto classMatcher = cxxRecordDecl().bind("class");
-    auto templateSpecializationMatcher = classTemplateSpecializationDecl().bind("templateSpecialization");
-    auto templateMatcher = classTemplateDecl().bind("template");
-    auto CXXNewExprMatcher = cxxNewExpr().bind("newExpr");
+    // auto callExprMatcher = callExpr().bind("callExpr");
+    // auto varDeclMatcher = varDecl().bind("varDecl");
+    // auto classMatcher = cxxRecordDecl().bind("class");
+    // auto templateSpecializationMatcher = classTemplateSpecializationDecl().bind("templateSpecialization");
+    // auto templateMatcher = classTemplateDecl().bind("template");
+    // auto CXXNewExprMatcher = cxxNewExpr().bind("newExpr");
+    // auto MethodDeclMatcher = cxxMethodDecl().bind("methodDecl");
+    auto functionDeclMatcher = functionDecl().bind("functionDecl");
 
-    functionFinder.addMatcher(callExprMatcher, this);
-    variableFinder.addMatcher(varDeclMatcher, this);
-    templateFinder.addMatcher(templateMatcher, this);
-    templateSpcializationFinder.addMatcher(templateSpecializationMatcher, this);
-    classFinder.addMatcher(classMatcher, this);
-    classFinder.addMatcher(CXXNewExprMatcher, this);
 
+    //functionFinder.addMatcher(callExprMatcher, this);
+    // variableFinder.addMatcher(varDeclMatcher, this);
+    // templateFinder.addMatcher(templateMatcher, this);
+    // templateSpcializationFinder.addMatcher(templateSpecializationMatcher, this);
+    // classFinder.addMatcher(classMatcher, this);
+    // classFinder.addMatcher(CXXNewExprMatcher, this);
+    // methodDeclFinder.addMatcher(MethodDeclMatcher, this);
+    functionFinder.addMatcher(functionDeclMatcher, this);
 
     functionFinder.matchAST(context);
-    classFinder.matchAST(context);
-    variableFinder.matchAST(context);
-    templateFinder.matchAST(context);
-    templateSpcializationFinder.matchAST(context);
-
+    // printNumaDeclTable();
+    // clearNumaDeclTable();
+    // methodDeclFinder.matchAST(context);
+    // classFinder.matchAST(context);
+    // variableFinder.matchAST(context);
+    // templateFinder.matchAST(context);
+    // templateSpcializationFinder.matchAST(context);
 
 }
 
@@ -556,27 +566,162 @@ void TemplateArgTransformer::myTemplateTransformer(clang::VarDecl* varDecl){
     }           
 }
 
+void TemplateArgTransformer::findNumaExpr(CompoundStmt* compoundStmt, ASTContext *Context){
+    //check if the type of the new expression starts with numa
+    //newExpr->dump();
+    CXXNewExprVisitor CXXNewExprVisitor(Context);
+    if(CXXNewExprVisitor.TraverseStmt(compoundStmt)){
+        for(auto newExpr : CXXNewExprVisitor.getCompoundStmts()){
+            if(newExpr){
+                auto newType = newExpr->getType().getAsString();
+                if(newType.substr(0,4).compare("numa") == 0){
+                    newExpr->dump();
+                }
+            }
+        }
+    }     
+}
+    
+void TemplateArgTransformer::startRecursiveTyping(std::map<clang::VarDecl*, const clang::CXXNewExpr*> numaDeclTable, clang::ASTContext *Context){
 
+}
+
+
+
+
+void TemplateArgTransformer::extractNumaDecls(clang::Stmt* fnBody, ASTContext *Context){
+    CompoundStmtVisitor CompoundStmtVisitor(Context);
+    DeclStmtVisitor DeclStmtVisitor(Context);
+    CXXNewExprVisitor CXXNewExprVisitor(Context);
+    VarDeclVisitor VarDeclVisitor(Context);
+    if(DeclStmtVisitor.TraverseStmt(fnBody)){
+        for(auto declStmt : DeclStmtVisitor.getDeclStmts()){
+            if(CXXNewExprVisitor.TraverseStmt(declStmt)){
+                //add the vardecl name, the type and the newExpr to the numaTable
+                for(auto newExpr : CXXNewExprVisitor.getCompoundStmts()){
+                    if(newExpr){
+                        auto newType = newExpr->getType().getAsString();
+                        for (auto decl : declStmt->decls()){
+                            if(newType.substr(0,4).compare("numa") == 0){
+                                if(VarDecl *varDecl = dyn_cast<VarDecl>(decl)){
+                                    llvm::outs() << "Gonna add variable "<< varDecl->getNameAsString() << " to the numa table\n";
+                                    setNumaDeclTable(varDecl, newExpr);
+                                }
+                            }
+                        }
+                    }
+                CXXNewExprVisitor.clearCXXNewExprs();
+                }
+            }
+             
+            // findNumaExpr(compoundStmt, result.Context); 
+        }
+    }
+    DeclStmtVisitor.clearDeclStmts();
+    
+}
+
+
+bool TemplateArgTransformer::NumaDeclExists(clang::ASTContext *Context, QualType FirstTempArg, int64_t SecondTempArg){
+    clang::TranslationUnitDecl *TU = Context->getTranslationUnitDecl();
+    for (const auto *Decl : TU->decls()) {
+        if (const auto *SpecDecl = clang::dyn_cast<clang::ClassTemplateSpecializationDecl>(Decl)) {
+            const auto *TemplateDecl = SpecDecl->getSpecializedTemplate();
+            //check if its numa
+            if(TemplateDecl->getNameAsString().compare("numa") == 0){
+                clang::QualType FoundType;
+                llvm::APSInt FoundInt;
+                //get arguments : You have to go through this because in the entire context, it might not be the case that the first parameter is always a type and the second is always an integral
+                for (const auto &Arg : SpecDecl->getTemplateArgs().asArray()) {
+                    if (Arg.getKind() == clang::TemplateArgument::ArgKind::Type) {
+                        FoundType = Arg.getAsType();
+                    }
+                    if (Arg.getKind() == clang::TemplateArgument::ArgKind::Integral) {
+                        FoundInt = Arg.getAsIntegral();
+                    }
+                    if(FoundType ==FirstTempArg && FoundInt == SecondTempArg){
+                        return true;
+                    }
+                }
+            }
+                
+                // if(FoundType == tsd->getTemplateArgs().asArray()[0].getAsType() && FoundInt == tsd->getTemplateArgs().asArray()[1].getAsIntegral()){
+                //     return true;
+                // }
+        }
+    }   
+    return false;     
+}
+
+void TemplateArgTransformer::makeVirtual(CXXRecordDecl * classDecl){
+    for(auto method : classDecl->methods()){
+        if(method->isUserProvided()){
+            //check if it is not a constructor
+            if(method->getNameAsString() != classDecl->getNameAsString()){
+                method->setVirtualAsWritten(true);
+                // print reconstructed function
+                method->dump();
+            }
+        }
+    }
+}
 
 
 void TemplateArgTransformer::run(const clang::ast_matchers::MatchFinder::MatchResult &result){
-    //Rewrite varaible definitions
-    //get the location of all #includes in the source file
+    if(result.SourceManager->isInSystemHeader(result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getSourceRange().getBegin()))
+        return;
+    if(result.SourceManager->getFilename(result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getLocation()).find("../numaLib/numatype.hpp") != std::string::npos)
+        return;
+    if(result.SourceManager->getFilename(result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getLocation()).empty())
+        return;
+    if(result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->isImplicit())
+        return;
+    if(result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getNameAsString().empty())
+        return;
 
+    if(result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->isThisDeclarationADefinition()){   
+        if(!result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getBody()->children().empty()){
+            auto fnBody = result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getBody();
+            llvm::outs() << "Processing Function : "<< result.Nodes.getNodeAs<FunctionDecl>("functionDecl")
+            ->getNameAsString() << "\n";   
+            // SourceRange SrcRange = result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getSourceRange();
+            // SourceManager &SM = result.Context->getSourceManager();
+            // LangOptions LO = result.Context->getLangOpts();
 
+            // // Get the source code text from the source range
+            // std::string FuncText = Lexer::getSourceText(CharSourceRange::getTokenRange(SrcRange), SM, LO).str();
 
-    if(const VarDecl *varDecl = result.Nodes.getNodeAs<VarDecl>("varDecl"))
-    {
-        if(result.SourceManager->isInSystemHeader(varDecl->getSourceRange().getBegin()))
-            return;
-        auto varName = varDecl->getNameAsString();
-        if (varName.empty())
-            return;
-        myTemplateTransformer(const_cast<VarDecl*>(varDecl));
+            // llvm::outs()  << FuncText << "\n";
+            extractNumaDecls(fnBody, result.Context);
+            } 
     
-    }
+        }
+        printNumaDeclTable(); 
 
-} 
+        for(auto &UserNumaDecl : numaDeclTable){
+            QualType FirstTempArg;
+            int64_t SecondTempArg;
+            auto CXXRecordNumaType = UserNumaDecl.second->getType()->getPointeeType()->getAsCXXRecordDecl();
+            auto TemplateNumaType = dyn_cast<ClassTemplateSpecializationDecl>(CXXRecordNumaType);
+            llvm::ArrayRef<TemplateArgument> TemplateArgs = TemplateNumaType->getTemplateArgs().asArray();
+            FirstTempArg = TemplateArgs[0].getAsType();
+            SecondTempArg = TemplateArgs[1].getAsIntegral().getExtValue();
+
+            bool exists = NumaDeclExists(result.Context, FirstTempArg, SecondTempArg);
+            if(exists){
+                llvm::outs() << "The numa template "<< FirstTempArg.getAsString() << " is already specialized according as numa\n";
+            }
+            else{
+                llvm::outs() << "About to specialize "<< FirstTempArg.getAsString() << " as numa\n";
+                llvm::outs() << "Making the methods of "<<FirstTempArg->getAsCXXRecordDecl()->getNameAsString() << " virtual\n";
+                makeVirtual(FirstTempArg->getAsCXXRecordDecl());
+            }
+        }  
+    return;
+}
+
+    //print numaTable
+
 
 void TemplateArgTransformer::print(clang::raw_ostream &stream)
 {

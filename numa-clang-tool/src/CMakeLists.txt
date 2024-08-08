@@ -3,11 +3,15 @@ cmake_minimum_required(VERSION 2.8)
 find_package(LLVM REQUIRED)
 find_package(Clang REQUIRED)
 
-set(CMAKE_CXX_FLAGS "-Wall -g3 -O0 -fno-rtti ${LLVM_COMPILE_FLAGS}")
+
+#NUMA_LLVM_COMPILE_FLAGS is just ${LLVM_COMPILE_FLAGS} without the -fno-exceptions flag
+set(NUMA_LLVM_COMPILE_FLAGS ""-I/usr/local/include -std=c++17 -I/usr/local/lib/clang/18/include/-fno-exceptions -funwind-tables -fno-rtti -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS"")
+#
+set(CMAKE_CXX_FLAGS "-Wall -lnuma  -g3 -O0 -fno-rtti ${NUMA__LLVM_COMPILE_FLAGS}")
 
 include_directories(${LLVM_INCLUDE_DIRS})
 include_directories(${CLANG_INCLUDE_DIRS})
-
+message(LLVM_COMPILE_FLAGS="${LLVM_COMPILE_FLAGS}")
 
 set(CLANG_TOOL_SRC
 

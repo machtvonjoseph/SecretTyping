@@ -1,18 +1,18 @@
-#include "numatype.hpp"
-#include <iostream>
-using namespace std;
+//#include "numatype.hpp"
+//#include <iostream>
+// using namespace std;
 
 
-// template<class T, int N>
-// class numa{
-//     public:
-//     void my_func(){
+template<class T, int N>
+class numa{
+    public:
+    void my_func(){
         
-//     }
-//     void ur_func(){
+    }
+    void ur_func(){
         
-//     }
-// };
+    }
+};
 
 class SomeClass{
     public:
