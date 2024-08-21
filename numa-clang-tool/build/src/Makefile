@@ -178,30 +178,6 @@ consumer/consumer.cc.s:
 	cd /home/kidus/NUMATyping/numa-clang-tool/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/clang-tool.dir/build.make src/CMakeFiles/clang-tool.dir/consumer/consumer.cc.s
 .PHONY : consumer/consumer.cc.s
 
-inclusiondirective/inclusiondirective.o: inclusiondirective/inclusiondirective.cc.o
-.PHONY : inclusiondirective/inclusiondirective.o
-
-# target to build an object file
-inclusiondirective/inclusiondirective.cc.o:
-	cd /home/kidus/NUMATyping/numa-clang-tool/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/clang-tool.dir/build.make src/CMakeFiles/clang-tool.dir/inclusiondirective/inclusiondirective.cc.o
-.PHONY : inclusiondirective/inclusiondirective.cc.o
-
-inclusiondirective/inclusiondirective.i: inclusiondirective/inclusiondirective.cc.i
-.PHONY : inclusiondirective/inclusiondirective.i
-
-# target to preprocess a source file
-inclusiondirective/inclusiondirective.cc.i:
-	cd /home/kidus/NUMATyping/numa-clang-tool/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/clang-tool.dir/build.make src/CMakeFiles/clang-tool.dir/inclusiondirective/inclusiondirective.cc.i
-.PHONY : inclusiondirective/inclusiondirective.cc.i
-
-inclusiondirective/inclusiondirective.s: inclusiondirective/inclusiondirective.cc.s
-.PHONY : inclusiondirective/inclusiondirective.s
-
-# target to generate assembly for a file
-inclusiondirective/inclusiondirective.cc.s:
-	cd /home/kidus/NUMATyping/numa-clang-tool/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/clang-tool.dir/build.make src/CMakeFiles/clang-tool.dir/inclusiondirective/inclusiondirective.cc.s
-.PHONY : inclusiondirective/inclusiondirective.cc.s
-
 main.o: main.cc.o
 .PHONY : main.o
 
@@ -313,9 +289,6 @@ help:
 	@echo "... consumer/consumer.o"
 	@echo "... consumer/consumer.i"
 	@echo "... consumer/consumer.s"
-	@echo "... inclusiondirective/inclusiondirective.o"
-	@echo "... inclusiondirective/inclusiondirective.i"
-	@echo "... inclusiondirective/inclusiondirective.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

@@ -5,8 +5,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/clang-tool.dir/actions/frontendaction.cc.o.d"
   "CMakeFiles/clang-tool.dir/consumer/consumer.cc.o"
   "CMakeFiles/clang-tool.dir/consumer/consumer.cc.o.d"
-  "CMakeFiles/clang-tool.dir/inclusiondirective/inclusiondirective.cc.o"
-  "CMakeFiles/clang-tool.dir/inclusiondirective/inclusiondirective.cc.o.d"
   "CMakeFiles/clang-tool.dir/main.cc.o"
   "CMakeFiles/clang-tool.dir/main.cc.o.d"
   "CMakeFiles/clang-tool.dir/transformer/templateargtransformer.cc.o"

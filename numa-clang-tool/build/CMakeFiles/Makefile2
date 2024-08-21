@@ -96,12 +96,12 @@ src/clean: src/CMakeFiles/clang-tool.dir/clean
 src/CMakeFiles/clang-tool.dir/all:
 	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/clang-tool.dir/build.make src/CMakeFiles/clang-tool.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/clang-tool.dir/build.make src/CMakeFiles/clang-tool.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/kidus/NUMATyping/numa-clang-tool/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target clang-tool"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/kidus/NUMATyping/numa-clang-tool/build/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target clang-tool"
 .PHONY : src/CMakeFiles/clang-tool.dir/all
 
 # Build rule for subdir invocation for target.
 src/CMakeFiles/clang-tool.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kidus/NUMATyping/numa-clang-tool/build/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kidus/NUMATyping/numa-clang-tool/build/CMakeFiles 7
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/clang-tool.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/kidus/NUMATyping/numa-clang-tool/build/CMakeFiles 0
 .PHONY : src/CMakeFiles/clang-tool.dir/rule

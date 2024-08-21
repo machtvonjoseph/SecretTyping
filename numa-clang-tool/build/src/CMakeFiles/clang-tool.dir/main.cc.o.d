@@ -3,6 +3,7 @@ src/CMakeFiles/clang-tool.dir/main.cc.o: \
  /usr/include/stdc-predef.h /usr/local/include/llvm/Support/CommandLine.h \
  /usr/local/include/llvm/ADT/ArrayRef.h \
  /usr/local/include/llvm/ADT/Hashing.h \
+ /usr/local/include/llvm/Config/abi-breaking.h \
  /usr/local/include/llvm/Support/DataTypes.h \
  /usr/local/include/llvm-c/DataTypes.h /usr/include/inttypes.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -46,26 +47,35 @@ src/CMakeFiles/clang-tool.dir/main.cc.o: \
  /usr/local/include/llvm/Support/Compiler.h \
  /usr/local/include/llvm/Config/llvm-config.h \
  /usr/local/include/llvm/Support/SwapByteOrder.h \
- /usr/local/include/llvm/ADT/bit.h /usr/include/c++/11/cstdint \
+ /usr/local/include/llvm/ADT/STLForwardCompat.h \
+ /usr/include/c++/11/optional /usr/include/c++/11/utility \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/cpu_defines.h \
- /usr/include/c++/11/pstl/pstl_config.h /usr/include/c++/11/limits \
- /usr/include/c++/11/type_traits /usr/include/c++/11/cstddef \
- /usr/local/include/llvm/Support/type_traits.h \
- /usr/include/c++/11/utility /usr/include/c++/11/bits/stl_relops.h \
+ /usr/include/c++/11/pstl/pstl_config.h \
+ /usr/include/c++/11/bits/stl_relops.h \
  /usr/include/c++/11/bits/stl_pair.h /usr/include/c++/11/bits/move.h \
- /usr/include/c++/11/initializer_list /usr/include/c++/11/algorithm \
- /usr/include/c++/11/bits/stl_algobase.h \
- /usr/include/c++/11/bits/functexcept.h \
+ /usr/include/c++/11/type_traits /usr/include/c++/11/initializer_list \
+ /usr/include/c++/11/exception /usr/include/c++/11/bits/exception.h \
+ /usr/include/c++/11/bits/exception_ptr.h \
  /usr/include/c++/11/bits/exception_defines.h \
- /usr/include/c++/11/bits/cpp_type_traits.h \
- /usr/include/c++/11/ext/type_traits.h \
- /usr/include/c++/11/ext/numeric_traits.h \
+ /usr/include/c++/11/bits/cxxabi_init_exception.h \
+ /usr/include/c++/11/typeinfo /usr/include/c++/11/bits/hash_bytes.h \
+ /usr/include/c++/11/new /usr/include/c++/11/bits/nested_exception.h \
+ /usr/include/c++/11/bits/enable_special_members.h \
+ /usr/include/c++/11/bits/functional_hash.h \
+ /usr/include/c++/11/bits/stl_construct.h \
  /usr/include/c++/11/bits/stl_iterator_base_types.h \
  /usr/include/c++/11/bits/stl_iterator_base_funcs.h \
  /usr/include/c++/11/bits/concept_check.h \
- /usr/include/c++/11/debug/assertions.h \
+ /usr/include/c++/11/debug/assertions.h /usr/local/include/llvm/ADT/bit.h \
+ /usr/include/c++/11/cstdint /usr/include/c++/11/limits \
+ /usr/local/include/llvm/Support/type_traits.h \
+ /usr/include/c++/11/algorithm /usr/include/c++/11/bits/stl_algobase.h \
+ /usr/include/c++/11/bits/functexcept.h \
+ /usr/include/c++/11/bits/cpp_type_traits.h \
+ /usr/include/c++/11/ext/type_traits.h \
+ /usr/include/c++/11/ext/numeric_traits.h \
  /usr/include/c++/11/bits/stl_iterator.h \
  /usr/include/c++/11/bits/ptr_traits.h /usr/include/c++/11/debug/debug.h \
  /usr/include/c++/11/bits/predefined_ops.h \
@@ -81,18 +91,14 @@ src/CMakeFiles/clang-tool.dir/main.cc.o: \
  /usr/include/c++/11/bits/algorithmfwd.h \
  /usr/include/c++/11/bits/stl_heap.h \
  /usr/include/c++/11/bits/stl_tempbuf.h \
- /usr/include/c++/11/bits/stl_construct.h /usr/include/c++/11/new \
- /usr/include/c++/11/bits/exception.h \
  /usr/include/c++/11/bits/uniform_int_dist.h \
  /usr/include/c++/11/pstl/glue_algorithm_defs.h \
  /usr/include/c++/11/functional /usr/include/c++/11/bits/stl_function.h \
  /usr/include/c++/11/backward/binders.h /usr/include/c++/11/tuple \
  /usr/include/c++/11/array /usr/include/c++/11/bits/range_access.h \
  /usr/include/c++/11/bits/uses_allocator.h \
- /usr/include/c++/11/bits/invoke.h \
- /usr/include/c++/11/bits/functional_hash.h \
- /usr/include/c++/11/bits/hash_bytes.h /usr/include/c++/11/bits/refwrap.h \
- /usr/include/c++/11/bits/std_function.h /usr/include/c++/11/typeinfo \
+ /usr/include/c++/11/bits/invoke.h /usr/include/c++/11/bits/refwrap.h \
+ /usr/include/c++/11/bits/std_function.h \
  /usr/include/c++/11/unordered_map /usr/include/c++/11/bits/allocator.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++allocator.h \
  /usr/include/c++/11/ext/new_allocator.h \
@@ -102,7 +108,6 @@ src/CMakeFiles/clang-tool.dir/main.cc.o: \
  /usr/include/c++/11/ext/aligned_buffer.h \
  /usr/include/c++/11/bits/hashtable.h \
  /usr/include/c++/11/bits/hashtable_policy.h \
- /usr/include/c++/11/bits/enable_special_members.h \
  /usr/include/c++/11/bits/node_handle.h \
  /usr/include/c++/11/bits/unordered_map.h \
  /usr/include/c++/11/bits/erase_if.h /usr/include/c++/11/vector \
@@ -112,10 +117,7 @@ src/CMakeFiles/clang-tool.dir/main.cc.o: \
  /usr/include/c++/11/bits/vector.tcc \
  /usr/include/c++/11/pstl/execution_defs.h /usr/include/c++/11/cassert \
  /usr/include/assert.h /usr/include/c++/11/cstring /usr/include/string.h \
- /usr/include/strings.h /usr/include/c++/11/optional \
- /usr/include/c++/11/exception /usr/include/c++/11/bits/exception_ptr.h \
- /usr/include/c++/11/bits/cxxabi_init_exception.h \
- /usr/include/c++/11/bits/nested_exception.h /usr/include/c++/11/string \
+ /usr/include/strings.h /usr/include/c++/11/string \
  /usr/include/c++/11/bits/stringfwd.h \
  /usr/include/c++/11/bits/char_traits.h \
  /usr/include/c++/11/bits/postypes.h /usr/include/c++/11/cwchar \
@@ -163,8 +165,8 @@ src/CMakeFiles/clang-tool.dir/main.cc.o: \
  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
  /usr/include/c++/11/bits/charconv.h \
  /usr/include/c++/11/bits/basic_string.tcc \
- /usr/local/include/llvm/ADT/SmallVector.h /usr/include/c++/11/iterator \
- /usr/include/c++/11/bits/stream_iterator.h \
+ /usr/local/include/llvm/ADT/SmallVector.h /usr/include/c++/11/cstddef \
+ /usr/include/c++/11/iterator /usr/include/c++/11/bits/stream_iterator.h \
  /usr/include/c++/11/bits/streambuf_iterator.h \
  /usr/include/c++/11/streambuf /usr/include/c++/11/bits/ios_base.h \
  /usr/include/c++/11/bits/locale_classes.h \
@@ -187,28 +189,11 @@ src/CMakeFiles/clang-tool.dir/main.cc.o: \
  /usr/include/c++/11/pstl/glue_memory_defs.h \
  /usr/local/include/llvm/ADT/STLExtras.h \
  /usr/local/include/llvm/ADT/ADL.h \
- /usr/local/include/llvm/ADT/STLForwardCompat.h \
  /usr/local/include/llvm/ADT/STLFunctionalExtras.h \
- /usr/local/include/llvm/ADT/identity.h \
  /usr/local/include/llvm/ADT/iterator.h \
  /usr/local/include/llvm/ADT/iterator_range.h \
- /usr/local/include/llvm/Config/abi-breaking.h \
  /usr/local/include/llvm/ADT/SmallPtrSet.h \
  /usr/local/include/llvm/ADT/EpochTracker.h \
- /usr/local/include/llvm/Support/ReverseIteration.h \
- /usr/local/include/llvm/Support/PointerLikeTypeTraits.h \
- /usr/local/include/llvm/ADT/StringMap.h \
- /usr/local/include/llvm/ADT/StringMapEntry.h \
- /usr/local/include/llvm/ADT/StringRef.h \
- /usr/local/include/llvm/ADT/DenseMapInfo.h \
- /usr/local/include/llvm/Support/AllocatorBase.h \
- /usr/local/include/llvm/Support/MemAlloc.h \
- /usr/local/include/llvm/ADT/Twine.h \
- /usr/local/include/llvm/Support/ManagedStatic.h \
- /usr/include/c++/11/atomic /usr/local/include/llvm/Support/StringSaver.h \
- /usr/local/include/llvm/ADT/DenseSet.h \
- /usr/local/include/llvm/ADT/DenseMap.h \
- /usr/local/include/llvm/Support/AlignOf.h \
  /usr/local/include/llvm/Support/MathExtras.h /usr/include/c++/11/climits \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h \
@@ -218,6 +203,19 @@ src/CMakeFiles/clang-tool.dir/main.cc.o: \
  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
  /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
  /usr/include/x86_64-linux-gnu/bits/uio_lim.h \
+ /usr/local/include/llvm/Support/ReverseIteration.h \
+ /usr/local/include/llvm/Support/PointerLikeTypeTraits.h \
+ /usr/local/include/llvm/ADT/StringMap.h \
+ /usr/local/include/llvm/ADT/StringMapEntry.h \
+ /usr/local/include/llvm/ADT/StringRef.h \
+ /usr/local/include/llvm/ADT/DenseMapInfo.h \
+ /usr/local/include/llvm/Support/AllocatorBase.h \
+ /usr/local/include/llvm/Support/MemAlloc.h \
+ /usr/local/include/llvm/ADT/Twine.h \
+ /usr/local/include/llvm/Support/StringSaver.h \
+ /usr/local/include/llvm/ADT/DenseSet.h \
+ /usr/local/include/llvm/ADT/DenseMap.h \
+ /usr/local/include/llvm/Support/AlignOf.h \
  /usr/local/include/llvm/Support/Allocator.h \
  /usr/local/include/llvm/Support/Alignment.h \
  /usr/local/include/llvm/Support/raw_ostream.h \
@@ -228,26 +226,25 @@ src/CMakeFiles/clang-tool.dir/main.cc.o: \
  /usr/local/include/clang/Tooling/CompilationDatabase.h \
  /usr/local/include/llvm/Support/VirtualFileSystem.h \
  /usr/local/include/llvm/ADT/IntrusiveRefCntPtr.h \
- /usr/local/include/llvm/Support/Chrono.h \
+ /usr/include/c++/11/atomic /usr/local/include/llvm/Support/Chrono.h \
  /usr/local/include/llvm/Support/FormatProviders.h \
  /usr/local/include/llvm/ADT/StringSwitch.h \
  /usr/local/include/llvm/Support/FormatVariadicDetails.h \
  /usr/local/include/llvm/Support/NativeFormatting.h \
  /usr/include/c++/11/chrono /usr/include/c++/11/ratio \
  /usr/include/c++/11/ctime /usr/include/c++/11/bits/parse_numbers.h \
- /usr/local/include/llvm/Support/ErrorOr.h \
  /usr/local/include/llvm/Support/Errc.h \
- /usr/local/include/llvm/Support/FileSystem.h \
- /usr/local/include/llvm/ADT/SmallString.h \
  /usr/local/include/llvm/Support/Error.h \
  /usr/local/include/llvm-c/Error.h /usr/local/include/llvm-c/ExternC.h \
  /usr/local/include/llvm/Support/Debug.h \
+ /usr/local/include/llvm/Support/ErrorOr.h \
  /usr/local/include/llvm/Support/Format.h \
+ /usr/local/include/llvm/Support/ExtensibleRTTI.h \
+ /usr/local/include/llvm/Support/FileSystem.h \
+ /usr/local/include/llvm/ADT/SmallString.h \
  /usr/local/include/llvm/Support/FileSystem/UniqueID.h \
  /usr/local/include/llvm/Support/MD5.h \
- /usr/local/include/llvm/Support/Endian.h /usr/include/c++/11/stack \
- /usr/include/c++/11/deque /usr/include/c++/11/bits/stl_deque.h \
- /usr/include/c++/11/bits/deque.tcc /usr/include/c++/11/bits/stl_stack.h \
+ /usr/local/include/llvm/Support/Endian.h \
  /usr/local/include/llvm/Support/Path.h \
  /usr/local/include/llvm/Support/SourceMgr.h \
  /usr/local/include/llvm/Support/MemoryBuffer.h \
@@ -318,46 +315,64 @@ src/CMakeFiles/clang-tool.dir/main.cc.o: \
  /usr/local/include/clang/Basic/DiagnosticOptions.h \
  /usr/local/include/clang/Basic/DiagnosticOptions.def \
  /usr/local/include/clang/Basic/SourceLocation.h \
+ /usr/local/include/clang/Basic/FileEntry.h \
+ /usr/local/include/clang/Basic/CustomizableOptional.h \
+ /usr/local/include/clang/Basic/DirectoryEntry.h \
+ /usr/local/include/llvm/ADT/PointerUnion.h \
+ /usr/local/include/llvm/ADT/PointerIntPair.h \
  /usr/local/include/clang/Basic/Specifiers.h \
  /usr/local/include/clang/Basic/TransformTypeTraits.def \
  /usr/local/include/clang/Basic/OpenCLImageTypes.def \
+ /usr/local/include/clang/Basic/HLSLIntangibleTypes.def \
  /usr/include/c++/11/list /usr/include/c++/11/bits/stl_list.h \
  /usr/include/c++/11/bits/list.tcc \
  /usr/local/include/llvm/ADT/FoldingSet.h \
- /usr/local/include/llvm/ADT/PointerIntPair.h \
+ /usr/local/include/llvm/Support/xxhash.h \
  /usr/local/include/clang/AST/TemplateName.h \
- /usr/local/include/llvm/ADT/PointerUnion.h \
  /usr/local/include/clang/Basic/AddressSpaces.h \
  /usr/local/include/clang/Basic/AttrKinds.h \
  /usr/local/include/clang/Basic/ExceptionSpecificationType.h \
  /usr/local/include/clang/Basic/PartialDiagnostic.h \
- /usr/local/include/llvm/ADT/APInt.h /usr/local/include/llvm/ADT/APSInt.h \
+ /usr/local/include/clang/Basic/PointerAuthOptions.h \
+ /usr/local/include/llvm/Target/TargetOptions.h \
+ /usr/local/include/llvm/MC/MCTargetOptions.h \
+ /usr/local/include/llvm/Support/Compression.h \
+ /usr/local/include/llvm/ADT/APInt.h \
+ /usr/local/include/llvm/Support/float128.h \
+ /usr/local/include/llvm/ADT/APSInt.h \
  /usr/local/include/llvm/Support/TrailingObjects.h \
  /usr/local/include/clang/Basic/OpenCLExtensionTypes.def \
  /usr/local/include/clang/Basic/AArch64SVEACLETypes.def \
  /usr/local/include/clang/Basic/PPCTypes.def \
  /usr/local/include/clang/Basic/RISCVVTypes.def \
  /usr/local/include/clang/Basic/WebAssemblyReferenceTypes.def \
+ /usr/local/include/clang/Basic/AMDGPUTypes.def \
  /usr/local/include/clang/AST/BuiltinTypes.def \
  /usr/local/include/clang/AST/CommentCommandTraits.h \
  /usr/local/include/clang/AST/CommentCommandList.inc \
  /usr/local/include/clang/AST/ComparisonCategories.h \
  /usr/local/include/clang/AST/Decl.h \
+ /usr/local/include/clang/AST/APNumericStorage.h \
+ /usr/local/include/llvm/ADT/APFloat.h \
  /usr/local/include/clang/AST/APValue.h \
  /usr/local/include/llvm/ADT/APFixedPoint.h \
- /usr/local/include/llvm/ADT/APFloat.h \
  /usr/local/include/clang/AST/ASTContextAllocate.h \
  /usr/local/include/clang/AST/DeclAccessPair.h \
  /usr/local/include/clang/AST/DeclBase.h \
  /usr/local/include/clang/AST/ASTDumperUtils.h \
  /usr/local/include/clang/AST/AttrIterator.h \
+ /usr/local/include/clang/AST/DeclID.h \
  /usr/local/include/clang/AST/DeclarationName.h \
  /usr/local/include/clang/Basic/IdentifierTable.h \
+ /usr/local/include/clang/Basic/Builtins.h \
+ /usr/local/include/clang/Basic/BuiltinHeaders.def \
+ /usr/local/include/clang/Basic/Builtins.inc \
  /usr/local/include/clang/Basic/TokenKinds.h \
  /usr/local/include/clang/Basic/TokenKinds.def \
- /usr/local/include/clang/Basic/AttrTokenKinds.inc \
+ /usr/local/include/clang/Basic/RegularKeywordAttrInfo.inc \
  /usr/local/include/clang/Basic/OperatorKinds.h \
  /usr/local/include/clang/Basic/OperatorKinds.def \
+ /usr/local/include/clang/AST/SelectorLocationsKind.h \
  /usr/local/include/llvm/Support/PrettyStackTrace.h \
  /usr/local/include/clang/AST/ExternalASTSource.h \
  /usr/local/include/clang/AST/CharUnits.h \
@@ -365,35 +380,22 @@ src/CMakeFiles/clang-tool.dir/main.cc.o: \
  /usr/local/include/clang/Basic/PragmaKinds.h \
  /usr/local/include/clang/AST/PrettyPrinter.h \
  /usr/local/include/clang/AST/RawCommentList.h \
- /usr/local/include/clang/Basic/NoSanitizeList.h \
- /usr/local/include/clang/Basic/ProfileList.h \
- /usr/local/include/clang/Basic/CodeGenOptions.h \
- /usr/local/include/clang/Basic/XRayInstr.h \
- /usr/local/include/llvm/Frontend/Debug/Options.h \
- /usr/local/include/llvm/Support/CodeGen.h \
- /usr/local/include/llvm/Support/Regex.h \
- /usr/local/include/llvm/Target/TargetOptions.h \
- /usr/local/include/llvm/MC/MCTargetOptions.h \
- /usr/local/include/llvm/Support/Compression.h \
- /usr/local/include/clang/Basic/CodeGenOptions.def \
- /usr/local/include/clang/Basic/XRayLists.h \
  /usr/local/include/llvm/ADT/MapVector.h \
+ /usr/local/include/llvm/ADT/SetVector.h \
+ /usr/local/include/llvm/ADT/StringSet.h \
  /usr/local/include/llvm/ADT/TinyPtrVector.h \
  /usr/local/include/llvm/Support/TypeSize.h \
  /usr/local/include/clang/Basic/FileSystemOptions.h \
  /usr/local/include/clang/Basic/SourceManager.h \
- /usr/local/include/clang/Basic/FileEntry.h \
- /usr/local/include/clang/Basic/CustomizableOptional.h \
- /usr/local/include/clang/Basic/DirectoryEntry.h \
  /usr/local/include/clang/Basic/FileManager.h \
  /usr/local/include/llvm/ADT/BitVector.h \
+ /usr/local/include/llvm/ADT/PagedVector.h \
  /usr/local/include/clang/Basic/TargetOptions.h \
  /usr/local/include/clang/Basic/OpenCLOptions.h \
  /usr/local/include/clang/Lex/HeaderSearchOptions.h \
  /usr/local/include/llvm/ADT/CachedHashString.h \
- /usr/local/include/llvm/ADT/SetVector.h \
  /usr/local/include/clang/Lex/ModuleLoader.h \
- /usr/local/include/clang/Basic/Module.h \
+ /usr/local/include/clang/Basic/Module.h /usr/include/c++/11/variant \
  /usr/local/include/clang/Lex/PreprocessingRecord.h \
  /usr/local/include/clang/Lex/PPCallbacks.h \
  /usr/local/include/clang/Lex/Pragma.h \
@@ -414,15 +416,15 @@ src/CMakeFiles/clang-tool.dir/main.cc.o: \
  /usr/local/include/clang/AST/DeclGroup.h \
  /usr/local/include/clang/AST/StmtIterator.h \
  /usr/local/include/clang/Basic/CapturedStmt.h \
+ /usr/local/include/clang/Basic/Lambda.h \
+ /usr/local/include/clang/Basic/TypeTraits.h \
  /usr/local/include/clang/AST/TemplateBase.h \
  /usr/local/include/clang/Basic/CharInfo.h \
  /usr/local/include/clang/Basic/SyncScope.h \
- /usr/local/include/clang/Basic/TypeTraits.h \
  /usr/local/include/llvm/Support/AtomicOrdering.h \
- /usr/local/include/clang/Basic/Builtins.def \
  /usr/local/include/clang/AST/LambdaCapture.h \
- /usr/local/include/clang/Basic/Lambda.h \
  /usr/local/include/clang/AST/TypeLoc.h \
+ /usr/local/include/clang/AST/ASTConcept.h \
  /usr/local/include/clang/AST/TypeLocNodes.def \
  /usr/local/include/clang/AST/CXXRecordDeclDefinitionBits.def \
  /usr/local/include/clang/AST/DeclObjCCommon.h \
@@ -437,6 +439,7 @@ src/CMakeFiles/clang-tool.dir/main.cc.o: \
  /usr/local/include/llvm/Support/DynamicLibrary.h \
  /usr/include/c++/11/bitset \
  /usr/local/include/clang/Serialization/ASTBitCodes.h \
+ /usr/local/include/clang/Serialization/SourceLocationEncoding.h \
  /usr/local/include/llvm/Bitstream/BitCodes.h \
  /usr/local/include/llvm/ADT/StringExtras.h \
  /usr/local/include/llvm/Bitstream/BitCodeEnums.h \
@@ -450,17 +453,26 @@ src/CMakeFiles/clang-tool.dir/main.cc.o: \
  /usr/local/include/clang/Lex/HeaderSearch.h \
  /usr/local/include/clang/Lex/DirectoryLookup.h \
  /usr/local/include/clang/Lex/ModuleMap.h \
- /usr/local/include/llvm/ADT/StringSet.h \
+ /usr/local/include/clang/Lex/ExternalPreprocessorSource.h \
  /usr/local/include/clang/Lex/HeaderMap.h \
  /usr/local/include/clang/Lex/HeaderMapTypes.h \
+ /usr/local/include/clang/Lex/PPEmbedParameters.h \
+ /usr/local/include/clang/Lex/PPDirectiveParameter.h \
  /usr/local/include/clang/Lex/TokenLexer.h \
  /usr/local/include/llvm/ADT/FunctionExtras.h \
  /usr/local/include/clang/Frontend/FrontendOptions.h \
  /usr/local/include/clang/Frontend/CommandLineSourceLoc.h \
  /usr/local/include/clang/Serialization/ModuleFileExtension.h \
- /usr/local/include/llvm/Support/ExtensibleRTTI.h \
  /usr/local/include/clang/Frontend/CompilerInstance.h \
  /usr/local/include/clang/Basic/TargetInfo.h \
+ /usr/local/include/clang/Basic/CodeGenOptions.h \
+ /usr/local/include/clang/Basic/XRayInstr.h \
+ /usr/local/include/llvm/Frontend/Debug/Options.h \
+ /usr/local/include/llvm/Frontend/Driver/CodeGenOptions.h \
+ /usr/local/include/llvm/Support/CodeGen.h \
+ /usr/local/include/llvm/Support/Regex.h \
+ /usr/local/include/clang/Basic/CodeGenOptions.def \
+ /usr/local/include/clang/Basic/DebugOptions.def \
  /usr/local/include/llvm/ADT/SmallSet.h /usr/include/c++/11/set \
  /usr/include/c++/11/bits/stl_set.h \
  /usr/include/c++/11/bits/stl_multiset.h \
@@ -469,6 +481,7 @@ src/CMakeFiles/clang-tool.dir/main.cc.o: \
  /usr/local/include/llvm/IR/Type.h \
  /usr/local/include/clang/Basic/OpenCLExtensions.def \
  /usr/local/include/clang/Frontend/CompilerInvocation.h \
+ /usr/local/include/clang/APINotes/APINotesOptions.h \
  /usr/local/include/clang/Frontend/DependencyOutputOptions.h \
  /usr/local/include/clang/Basic/HeaderInclude.h \
  /usr/local/include/clang/Frontend/MigratorOptions.h \
@@ -478,18 +491,29 @@ src/CMakeFiles/clang-tool.dir/main.cc.o: \
  /usr/local/include/clang/Analysis/AnalysisDeclContext.h \
  /usr/local/include/clang/Analysis/BodyFarm.h \
  /usr/local/include/clang/Analysis/CFG.h \
- /usr/local/include/clang/Analysis/Support/BumpVector.h \
- /usr/local/include/clang/Analysis/ConstructionContext.h \
+ /usr/local/include/clang/AST/Attr.h \
+ /usr/local/include/clang/Basic/OpenMPKinds.h \
+ /usr/local/include/llvm/Frontend/OpenMP/OMPConstants.h \
+ /usr/local/include/llvm/Frontend/OpenMP/OMP.h \
+ /usr/local/include/llvm/Frontend/OpenMP/OMP.h.inc \
+ /usr/local/include/llvm/Frontend/OpenMP/OMPKinds.def \
+ /usr/local/include/llvm/Frontend/OpenMP/OMPDeviceConstants.h \
+ /usr/local/include/clang/Basic/OpenMPKinds.def \
+ /usr/local/include/llvm/Frontend/HLSL/HLSLResource.h \
+ /usr/local/include/llvm/Support/DXILABI.h \
+ /usr/local/include/clang/AST/Attrs.inc \
  /usr/local/include/clang/AST/ExprCXX.h \
- /usr/local/include/clang/AST/ASTConcept.h \
  /usr/local/include/clang/AST/DeclTemplate.h \
  /usr/local/include/clang/AST/StmtCXX.h \
  /usr/local/include/clang/Basic/ExpressionTraits.h \
  /usr/local/include/clang/AST/ExprObjC.h \
  /usr/local/include/clang/AST/DeclObjC.h \
- /usr/local/include/clang/AST/SelectorLocationsKind.h \
+ /usr/local/include/clang/Analysis/ConstructionContext.h \
+ /usr/local/include/clang/Analysis/Support/BumpVector.h \
  /usr/local/include/llvm/ADT/GraphTraits.h \
  /usr/local/include/clang/Analysis/CodeInjector.h \
+ /usr/include/c++/11/deque /usr/include/c++/11/bits/stl_deque.h \
+ /usr/include/c++/11/bits/deque.tcc \
  /usr/local/include/clang/StaticAnalyzer/Core/Analyses.def \
  /usr/local/include/clang/StaticAnalyzer/Core/AnalyzerOptions.def \
  /usr/local/include/clang/StaticAnalyzer/Checkers/Checkers.inc \
@@ -503,9 +527,9 @@ src/CMakeFiles/clang-tool.dir/main.cc.o: \
  /usr/include/c++/11/bits/unique_lock.h \
  /usr/local/include/llvm/Support/BuryPointer.h \
  /usr/local/include/clang/Rewrite/Core/Rewriter.h \
- /usr/local/include/clang/Rewrite/Core/RewriteBuffer.h \
- /usr/local/include/clang/Rewrite/Core/DeltaTree.h \
- /usr/local/include/clang/Rewrite/Core/RewriteRope.h \
+ /usr/local/include/llvm/ADT/RewriteBuffer.h \
+ /usr/local/include/llvm/ADT/DeltaTree.h \
+ /usr/local/include/llvm/ADT/RewriteRope.h \
  /usr/local/include/clang/Tooling/Tooling.h \
  /usr/local/include/llvm/Option/Option.h \
  /usr/local/include/llvm/Option/OptTable.h \
@@ -518,7 +542,6 @@ src/CMakeFiles/clang-tool.dir/main.cc.o: \
  /usr/include/c++/11/bits/fstream.tcc \
  /usr/local/include/clang/CodeGen/ModuleBuilder.h \
  /usr/local/include/clang/Parse/ParseAST.h \
- /usr/local/include/llvm/Support/Host.h \
  /usr/local/include/llvm/TargetParser/Host.h \
  /usr/local/include/llvm/Support/TargetSelect.h \
  /usr/local/include/llvm/Config/Targets.def \

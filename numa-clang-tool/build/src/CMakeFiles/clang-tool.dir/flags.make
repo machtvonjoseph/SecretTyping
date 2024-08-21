@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = 
 
-CXX_FLAGS = -Wall -lnuma  -g3 -O0 -fno-rtti 
+CXX_FLAGS = -Wall -lnuma -g3 -O0 -fno-rtti 
 

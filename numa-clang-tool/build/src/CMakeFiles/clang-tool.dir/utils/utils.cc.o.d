@@ -189,8 +189,7 @@ src/CMakeFiles/clang-tool.dir/utils/utils.cc.o: \
  /usr/include/c++/11/pstl/execution_defs.h /usr/include/c++/11/cstring \
  /usr/include/string.h /usr/include/strings.h /usr/include/c++/11/limits \
  /usr/local/include/llvm/ADT/Twine.h \
- /usr/local/include/llvm/ADT/SmallVector.h \
- /usr/local/include/llvm/Support/type_traits.h /usr/include/c++/11/memory \
+ /usr/local/include/llvm/ADT/SmallVector.h /usr/include/c++/11/memory \
  /usr/include/c++/11/bits/stl_raw_storage_iter.h \
  /usr/include/c++/11/bits/align.h /usr/include/c++/11/bit \
  /usr/include/c++/11/bits/unique_ptr.h \
@@ -210,15 +209,16 @@ src/CMakeFiles/clang-tool.dir/utils/utils.cc.o: \
  /usr/local/include/clang/Basic/DirectoryEntry.h \
  /usr/local/include/clang/Basic/CustomizableOptional.h \
  /usr/local/include/llvm/ADT/Hashing.h \
+ /usr/local/include/llvm/Config/abi-breaking.h \
  /usr/local/include/llvm/Support/DataTypes.h \
  /usr/local/include/llvm-c/DataTypes.h /usr/include/inttypes.h \
  /usr/local/include/llvm/Support/SwapByteOrder.h \
- /usr/local/include/llvm/ADT/bit.h /usr/local/include/clang/Basic/LLVM.h \
+ /usr/local/include/llvm/ADT/bit.h \
+ /usr/local/include/llvm/Support/type_traits.h \
+ /usr/local/include/clang/Basic/LLVM.h \
  /usr/local/include/llvm/Support/Casting.h \
  /usr/local/include/llvm/ADT/STLExtras.h \
- /usr/local/include/llvm/ADT/identity.h \
  /usr/local/include/llvm/ADT/iterator.h \
- /usr/local/include/llvm/Config/abi-breaking.h \
  /usr/local/include/llvm/ADT/StringMap.h \
  /usr/local/include/llvm/ADT/StringMapEntry.h \
  /usr/local/include/llvm/Support/AllocatorBase.h \
@@ -262,11 +262,10 @@ src/CMakeFiles/clang-tool.dir/utils/utils.cc.o: \
  /usr/local/include/llvm/Support/Format.h \
  /usr/local/include/llvm/ADT/ArrayRef.h \
  /usr/local/include/llvm/Support/MD5.h \
- /usr/local/include/llvm/Support/Endian.h /usr/include/c++/11/stack \
- /usr/include/c++/11/deque /usr/include/c++/11/bits/stl_deque.h \
- /usr/include/c++/11/bits/deque.tcc /usr/include/c++/11/bits/stl_stack.h \
+ /usr/local/include/llvm/Support/Endian.h \
  /usr/local/include/llvm/Support/VirtualFileSystem.h \
  /usr/local/include/llvm/Support/Errc.h \
+ /usr/local/include/llvm/Support/ExtensibleRTTI.h \
  /usr/local/include/llvm/Support/Path.h \
  /usr/local/include/llvm/Support/SourceMgr.h \
  /usr/local/include/llvm/Support/MemoryBuffer.h \
@@ -327,41 +326,56 @@ src/CMakeFiles/clang-tool.dir/utils/utils.cc.o: \
  /usr/local/include/clang/Basic/Specifiers.h \
  /usr/local/include/clang/Basic/TransformTypeTraits.def \
  /usr/local/include/clang/Basic/OpenCLImageTypes.def \
+ /usr/local/include/clang/Basic/HLSLIntangibleTypes.def \
  /usr/include/c++/11/list /usr/include/c++/11/bits/stl_list.h \
  /usr/include/c++/11/bits/list.tcc \
  /usr/local/include/llvm/ADT/FoldingSet.h \
+ /usr/local/include/llvm/Support/xxhash.h \
  /usr/local/include/clang/AST/TemplateName.h \
  /usr/local/include/clang/Basic/AddressSpaces.h \
  /usr/local/include/clang/Basic/AttrKinds.h \
  /usr/local/include/clang/Basic/ExceptionSpecificationType.h \
  /usr/local/include/clang/Basic/PartialDiagnostic.h \
- /usr/local/include/llvm/ADT/APInt.h /usr/local/include/llvm/ADT/APSInt.h \
+ /usr/local/include/clang/Basic/PointerAuthOptions.h \
+ /usr/local/include/llvm/Target/TargetOptions.h \
+ /usr/local/include/llvm/MC/MCTargetOptions.h \
+ /usr/local/include/llvm/Support/Compression.h \
+ /usr/local/include/llvm/ADT/APInt.h \
+ /usr/local/include/llvm/Support/float128.h \
+ /usr/local/include/llvm/ADT/APSInt.h \
  /usr/local/include/llvm/Support/TrailingObjects.h \
  /usr/local/include/clang/Basic/OpenCLExtensionTypes.def \
  /usr/local/include/clang/Basic/AArch64SVEACLETypes.def \
  /usr/local/include/clang/Basic/PPCTypes.def \
  /usr/local/include/clang/Basic/RISCVVTypes.def \
  /usr/local/include/clang/Basic/WebAssemblyReferenceTypes.def \
+ /usr/local/include/clang/Basic/AMDGPUTypes.def \
  /usr/local/include/clang/AST/BuiltinTypes.def \
  /usr/local/include/clang/AST/CommentCommandTraits.h \
  /usr/local/include/clang/AST/CommentCommandList.inc \
  /usr/local/include/clang/AST/ComparisonCategories.h \
  /usr/local/include/clang/AST/Decl.h \
+ /usr/local/include/clang/AST/APNumericStorage.h \
+ /usr/local/include/llvm/ADT/APFloat.h \
  /usr/local/include/clang/AST/APValue.h \
  /usr/local/include/llvm/ADT/APFixedPoint.h \
- /usr/local/include/llvm/ADT/APFloat.h \
  /usr/local/include/clang/AST/ASTContextAllocate.h \
  /usr/local/include/clang/AST/DeclAccessPair.h \
  /usr/local/include/clang/AST/DeclBase.h \
  /usr/local/include/clang/AST/ASTDumperUtils.h \
  /usr/local/include/clang/AST/AttrIterator.h \
+ /usr/local/include/clang/AST/DeclID.h \
  /usr/local/include/clang/AST/DeclarationName.h \
  /usr/local/include/clang/Basic/IdentifierTable.h \
+ /usr/local/include/clang/Basic/Builtins.h \
+ /usr/local/include/clang/Basic/BuiltinHeaders.def \
+ /usr/local/include/clang/Basic/Builtins.inc \
  /usr/local/include/clang/Basic/TokenKinds.h \
  /usr/local/include/clang/Basic/TokenKinds.def \
- /usr/local/include/clang/Basic/AttrTokenKinds.inc \
+ /usr/local/include/clang/Basic/RegularKeywordAttrInfo.inc \
  /usr/local/include/clang/Basic/OperatorKinds.h \
  /usr/local/include/clang/Basic/OperatorKinds.def \
+ /usr/local/include/clang/AST/SelectorLocationsKind.h \
  /usr/local/include/llvm/Support/PrettyStackTrace.h \
  /usr/local/include/clang/AST/ExternalASTSource.h \
  /usr/local/include/clang/AST/CharUnits.h \
@@ -369,31 +383,21 @@ src/CMakeFiles/clang-tool.dir/utils/utils.cc.o: \
  /usr/local/include/clang/Basic/PragmaKinds.h \
  /usr/local/include/clang/AST/PrettyPrinter.h \
  /usr/local/include/clang/AST/RawCommentList.h \
- /usr/local/include/clang/Basic/NoSanitizeList.h \
- /usr/local/include/clang/Basic/ProfileList.h \
- /usr/local/include/clang/Basic/CodeGenOptions.h \
- /usr/local/include/clang/Basic/XRayInstr.h \
- /usr/local/include/llvm/Frontend/Debug/Options.h \
- /usr/local/include/llvm/Support/CodeGen.h \
- /usr/local/include/llvm/Support/Regex.h \
- /usr/local/include/llvm/Target/TargetOptions.h \
- /usr/local/include/llvm/MC/MCTargetOptions.h \
- /usr/local/include/llvm/Support/Compression.h \
- /usr/local/include/clang/Basic/CodeGenOptions.def \
- /usr/local/include/clang/Basic/XRayLists.h \
  /usr/local/include/llvm/ADT/DenseSet.h \
  /usr/local/include/llvm/ADT/MapVector.h \
+ /usr/local/include/llvm/ADT/SetVector.h \
+ /usr/local/include/llvm/ADT/StringSet.h \
  /usr/local/include/llvm/ADT/TinyPtrVector.h \
  /usr/local/include/llvm/Support/TypeSize.h \
  /usr/local/include/clang/Basic/SourceManager.h \
  /usr/local/include/llvm/ADT/BitVector.h \
+ /usr/local/include/llvm/ADT/PagedVector.h \
  /usr/local/include/clang/Basic/TargetOptions.h \
  /usr/local/include/clang/Basic/OpenCLOptions.h \
  /usr/local/include/clang/Lex/HeaderSearchOptions.h \
  /usr/local/include/llvm/ADT/CachedHashString.h \
- /usr/local/include/llvm/ADT/SetVector.h \
  /usr/local/include/clang/Lex/ModuleLoader.h \
- /usr/local/include/clang/Basic/Module.h \
+ /usr/local/include/clang/Basic/Module.h /usr/include/c++/11/variant \
  /usr/local/include/clang/Lex/PreprocessingRecord.h \
  /usr/local/include/clang/Lex/PPCallbacks.h \
  /usr/local/include/clang/Lex/Pragma.h \
@@ -414,15 +418,15 @@ src/CMakeFiles/clang-tool.dir/utils/utils.cc.o: \
  /usr/local/include/clang/AST/DeclGroup.h \
  /usr/local/include/clang/AST/StmtIterator.h \
  /usr/local/include/clang/Basic/CapturedStmt.h \
+ /usr/local/include/clang/Basic/Lambda.h \
+ /usr/local/include/clang/Basic/TypeTraits.h \
  /usr/local/include/clang/AST/TemplateBase.h \
  /usr/local/include/clang/Basic/CharInfo.h \
  /usr/local/include/clang/Basic/SyncScope.h \
- /usr/local/include/clang/Basic/TypeTraits.h \
  /usr/local/include/llvm/Support/AtomicOrdering.h \
- /usr/local/include/clang/Basic/Builtins.def \
  /usr/local/include/clang/AST/LambdaCapture.h \
- /usr/local/include/clang/Basic/Lambda.h \
  /usr/local/include/clang/AST/TypeLoc.h \
+ /usr/local/include/clang/AST/ASTConcept.h \
  /usr/local/include/clang/AST/TypeLocNodes.def \
  /usr/local/include/clang/AST/CXXRecordDeclDefinitionBits.def \
  /usr/local/include/clang/AST/DeclObjCCommon.h \
@@ -437,6 +441,7 @@ src/CMakeFiles/clang-tool.dir/utils/utils.cc.o: \
  /usr/local/include/llvm/Support/DynamicLibrary.h \
  /usr/include/c++/11/bitset /usr/local/include/llvm/ADT/SmallPtrSet.h \
  /usr/local/include/clang/Serialization/ASTBitCodes.h \
+ /usr/local/include/clang/Serialization/SourceLocationEncoding.h \
  /usr/local/include/llvm/Bitstream/BitCodes.h \
  /usr/local/include/llvm/ADT/StringExtras.h \
  /usr/local/include/llvm/Bitstream/BitCodeEnums.h \
@@ -450,18 +455,18 @@ src/CMakeFiles/clang-tool.dir/utils/utils.cc.o: \
  /usr/local/include/clang/Lex/HeaderSearch.h \
  /usr/local/include/clang/Lex/DirectoryLookup.h \
  /usr/local/include/clang/Lex/ModuleMap.h \
- /usr/local/include/llvm/ADT/StringSet.h \
+ /usr/local/include/clang/Lex/ExternalPreprocessorSource.h \
  /usr/local/include/clang/Lex/HeaderMap.h \
  /usr/local/include/clang/Lex/HeaderMapTypes.h \
+ /usr/local/include/clang/Lex/PPEmbedParameters.h \
+ /usr/local/include/clang/Lex/PPDirectiveParameter.h \
  /usr/local/include/clang/Lex/TokenLexer.h \
  /usr/local/include/llvm/ADT/FunctionExtras.h \
  /usr/local/include/clang/Frontend/FrontendOptions.h \
  /usr/local/include/clang/Frontend/CommandLineSourceLoc.h \
  /usr/local/include/llvm/Support/CommandLine.h \
- /usr/local/include/llvm/Support/ManagedStatic.h \
  /usr/local/include/llvm/Support/StringSaver.h \
  /usr/local/include/clang/Serialization/ModuleFileExtension.h \
- /usr/local/include/llvm/Support/ExtensibleRTTI.h \
  /usr/local/include/clang/Frontend/PCHContainerOperations.h \
  /usr/local/include/clang/Serialization/PCHContainerOperations.h \
  /usr/local/include/clang/Tooling/ArgumentsAdjusters.h \
