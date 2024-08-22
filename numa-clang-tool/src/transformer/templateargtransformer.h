@@ -96,6 +96,7 @@ class TemplateArgTransformer : public Transformer
         std::vector<const clang::FunctionDecl*> functionDecls;
         std::map<clang::VarDecl*, const clang::CXXNewExpr*> numaDeclTable;
         std::vector<const clang::CXXMethodDecl*> methodDecls;
+        std::vector<clang::FileID> fileIDs;
     public:
         void setNumaDeclTable(clang::VarDecl* varDecl, const clang::CXXNewExpr* newExpr){
             numaDeclTable[varDecl] = newExpr;

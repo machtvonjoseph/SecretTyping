@@ -18,7 +18,7 @@ case "$1" in
     echo "Running dummy"
     # Place the actual command for 'command2' here
     # For example: df -h
-    ./bin/clang-tool ../input/dummyimpl.cpp -- -I../numaLib/ -I/usr/local/lib/clang/20/include/
+    ./bin/clang-tool ../input/Dummy/dummyimpl.cpp -- -I../numaLib/ -I/usr/local/lib/clang/20/include/
     ;;
   *)
     echo "Invalid argument. Usage: $0 <DS|dummy>"

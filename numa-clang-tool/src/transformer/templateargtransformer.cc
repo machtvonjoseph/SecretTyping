@@ -662,6 +662,14 @@ void TemplateArgTransformer::makeVirtual(CXXRecordDecl * classDecl){
                 // print reconstructed function
                 method->dump();
             }
+            // Insert the virtual keyword if method is not a constructor
+            if(method->getNameAsString() != classDecl->getNameAsString()){
+                rewriteLoc = method->getBeginLoc();
+                rewriter.InsertTextBefore(rewriteLoc, "virtual ");
+                //getFIle ID 
+                fileIDs.push_back(rewriter.getSourceMgr().getFileID(rewriteLoc));     
+            }
+
         }
     }
 }
@@ -715,8 +723,21 @@ void TemplateArgTransformer::run(const clang::ast_matchers::MatchFinder::MatchRe
                 llvm::outs() << "About to specialize "<< FirstTempArg.getAsString() << " as numa\n";
                 llvm::outs() << "Making the methods of "<<FirstTempArg->getAsCXXRecordDecl()->getNameAsString() << " virtual\n";
                 makeVirtual(FirstTempArg->getAsCXXRecordDecl());
+                        //print rewrite buffer for fileID
+               
+                // llvm::outs() << "The buffer for the file is: \n";
+                // buffer->write(llvm::outs());
             }
-        }  
+            // for (auto fileID : fileIDs){
+            //     auto buffer = rewriter.getRewriteBufferFor(fileID);
+            //     if(buffer){
+            //         llvm::outs() << "The buffer for the file is: \n";
+            //         buffer->write(llvm::outs());
+            //     }
+            // }
+            
+        } 
+    
     return;
 }
 

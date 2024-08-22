@@ -18,13 +18,13 @@ public:
     IncludeTracker(clang::SourceManager &SM, clang::Rewriter &R)
         : SM(SM), TheRewriter(R) {}
 
-    void InclusionDirective(SourceLocation HashLoc,
-                                  const Token &IncludeTok, StringRef FileName,
-                                  bool IsAngled, CharSourceRange FilenameRange,
-                                  OptionalFileEntryRef File,
-                                  StringRef SearchPath, StringRef RelativePath,
-                                  const Module *Imported,
-                                  SrcMgr::CharacteristicKind FileType) override;
+    // void InclusionDirective(SourceLocation HashLoc,
+    //                               const Token &IncludeTok, StringRef FileName,
+    //                               bool IsAngled, CharSourceRange FilenameRange,
+    //                               OptionalFileEntryRef File,
+    //                               StringRef SearchPath, StringRef RelativePath,
+    //                               const Module *Imported,
+    //                               SrcMgr::CharacteristicKind FileType) override;
 
     std::vector<llvm::StringRef> getIncludedFiles(){ return includedFilesSet; }
 

@@ -31,19 +31,19 @@ namespace clang
 class NumaFrontendAction : public clang::ASTFrontendAction {
 public:
   virtual std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(clang::CompilerInstance &compiler, llvm::StringRef inFile) override;
-  void EndSourceFileAction() override;
+  //void EndSourceFileAction() override;
 private:
   clang::Rewriter TheRewriter;
   IncludeTracker* TheIncludeTracker;
 };
 
-class PPFrontendAction : public clang::ASTFrontendAction {
-public:
-  virtual std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(clang::CompilerInstance &compiler, llvm::StringRef inFile) override;
+// class PPFrontendAction : public clang::ASTFrontendAction {
+// public:
+//   virtual std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(clang::CompilerInstance &compiler, llvm::StringRef inFile) override;
 
-private:
-  clang::Rewriter TheRewriter;
-};
+// private:
+//   clang::Rewriter TheRewriter;
+// };
 
 
 

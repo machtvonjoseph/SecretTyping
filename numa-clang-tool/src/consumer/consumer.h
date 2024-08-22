@@ -17,23 +17,23 @@ class NumaConsumer : public clang::ASTConsumer
         clang::Rewriter rewriter;
         //The container for the file IDs in the rewriters source manager
         std::vector<llvm::StringRef> rewriterFileNames;
-
+        
     public:
         explicit NumaConsumer(clang::Rewriter& TheReWriter, clang::ASTContext* context);
-        
+        void WriteOutput(clang::SourceManager &SM);
         virtual void HandleTranslationUnit( clang::ASTContext &context) override;
 };
 
-class PPConsumer : public clang::ASTConsumer 
-{
-    private:
+// class PPConsumer : public clang::ASTConsumer 
+// {
+//     private:
     
-        clang::Rewriter rewriter;
+//         clang::Rewriter rewriter;
 
-    public:
-        explicit PPConsumer(clang::Rewriter TheReWriter, clang::ASTContext* context);
-        //PPConsumer is a deadend. The PPFrontend action has already taken care of the include directives.
-};
+//     public:
+//         explicit PPConsumer(clang::Rewriter TheReWriter, clang::ASTContext* context);
+//         //PPConsumer is a deadend. The PPFrontend action has already taken care of the include directives.
+// };
 
 
 

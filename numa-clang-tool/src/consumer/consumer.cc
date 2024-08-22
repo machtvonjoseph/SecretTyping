@@ -6,79 +6,54 @@
 NumaConsumer::NumaConsumer(clang::Rewriter& TheReWriter, clang::ASTContext* context)
 {
     rewriter = TheReWriter;
-    // context->getTranslationUnitDecl()->dump();
-
-    // TemplateArgTransformer tempArgTransformer(*context, rewriter);
-
-    // tempArgTransformer.start();
-
 }
 
-PPConsumer::PPConsumer(clang::Rewriter TheReWriter, clang::ASTContext* context)
-{
-//Does nothing.
+void NumaConsumer::WriteOutput(clang::SourceManager &SM){
+    for(auto it = SM.fileinfo_begin(); it != SM.fileinfo_end(); it++){
+        const FileEntry *FE = it->first;
+
+        if(FE){
+            FileID FID= SM.getOrCreateFileID(it->first, SrcMgr::CharacteristicKind::C_User);
+            auto buffer = rewriter.getRewriteBufferFor(FID);
+            if(buffer){
+                llvm::outs() << "File ID: " << FID.getHashValue() << " File Name: " << it->first.getName() << "\n";
+                //change /input to /output in File Name
+                std::string fileName = (std::string)it->first.getName();
+                std::string outputFileName = fileName.replace(fileName.find("input"), 5, "output");
+                llvm::outs() << "Output File Name: " << outputFileName << "\n";
+                //if directory doesn't exist create it
+            
+                std::string directory = outputFileName.substr(0, outputFileName.find_last_of("/"));
+                std::string command = "mkdir -p " + directory;  
+                system(command.c_str());
+
+                std::error_code EC;
+                llvm::raw_fd_ostream OutFile((llvm::StringRef)outputFileName, EC, llvm::sys::fs::OF_Text);
+                if(EC){
+                    llvm::errs() << "Error opening output file: " << EC.message() << "\n";
+                    return;
+                }
+                buffer->write(OutFile);
+                //write buffer
+                // buffer->write(llvm::outs());
+            }
+        }
+    }
 }
 
 
-
-void NumaConsumer::HandleTranslationUnit(clang::ASTContext &context)
-{
-
-    //context.getTranslationUnitDecl()->dump();
-    //FunctionCallTransformer fntransformer(context, rewriter);
+void NumaConsumer::HandleTranslationUnit(clang::ASTContext &context){
     llvm::outs() <<"Calling template arg transformer\n";
-    //print rewrite buffer
-    //llvm::outs() << "Rewrite buffer as it starts from consumer\n";
-    //rewriter.getEditBuffer(rewriter.getSourceMgr().getMainFileID()).write(llvm::outs());
     TemplateArgTransformer tempArgTransformer(context, rewriter);
     // // //fntransformer.start();
     tempArgTransformer.start();
     //fntransformer.print(llvm::outs());   
     llvm::outs() << "Get all the file names in rewriter source manager\n";
     for(auto it = rewriter.getSourceMgr().fileinfo_begin(); it != rewriter.getSourceMgr().fileinfo_end(); it++){
-        rewriterFileNames.push_back( it->first->getName());
+        rewriterFileNames.push_back( it->first.getName());
     }
-
-    //rewrite to a file
-
-
-    // //iterate through buffer using loop
-    // for(auto it = buffer->begin(); it != buffer->end(); it++){
-    //     // llvm::outs()<< "ITERATION\n";
-        
-    //     llvm::outs() << *it;
-    // }
-    // rewriter.buffer_begin()->second.write(llvm::outs());
-    // //print the buffer
-    // if (buffer) {
-    //     llvm::outs() << std::string(buffer->begin(), buffer->end());
-    // }
-    // //print rewriter
-    // rewriter.getEditBuffer(rewriter.getSourceMgr().getMainFileID());//.write(llvm::outs());
-    // //for each source location rewrite on the two files
-    // if (buffer) {
-    //     //Rewrite into header if the location is a header file
-        
-    // outputImpl.close();
-    // outputHeader.close();
-    // //cast outputImpl to raw_ostream
-    // // outputImpl.write(llvm::outs());
-    // std::error_code error_code;
-    // llvm::raw_fd_ostream outFile("../output/output.cpp", error_code);
-    // const clang::RewriteBuffer *RewriteBuf = rewriter.getRewriteBufferFor(rewriter.getSourceMgr().getMainFileID());
-    //   if (RewriteBuf) {
-    //       outFile << std::string(RewriteBuf->begin(), RewriteBuf->end());
-    //   } else {
-    //       llvm::errs() << "No rewrite buffer found!\n";
-    //   }
-    // const char *output = "../output/output.cpp";
-    // llvm::raw_fd_ostream outfile(*output, true);
-    // std::error_code error_code;
-    // llvm::raw_fd_ostream outFile("../output/output.cpp", error_code);
-    // if(buffer != nullptr)
-    //     buffer->write(llvm::outs());
+    WriteOutput(rewriter.getSourceMgr());
 }
-    //writeToFiles(rewriter);
     
 
 
