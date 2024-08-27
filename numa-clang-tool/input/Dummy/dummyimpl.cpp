@@ -10,8 +10,7 @@ class SomeClass{
     void someFunction(){
         return;
     }
-};
-numa<MyVector, 3>* v1= new numa<MyVector, 3>();
+};numa<MyVector, 3>* v1= new numa<MyVector, 3>();
 int main(){
     v1 = new numa<MyVector, 3>();
     numa<MyVector, 3>* v2 = new numa<MyVector, 3>();

@@ -119,7 +119,13 @@ class TemplateArgTransformer : public Transformer
 
         bool NumaDeclExists(clang::ASTContext *Context, QualType FirstTemplateArg, int64_t SecondTemplateArg);
         void makeVirtual(clang::CXXRecordDecl *classDecl);
+        void specializeClass(clang::CXXRecordDecl* classDecl, int64_t nodeID);
+        void numaFields(clang::CXXRecordDecl* classDecl, int64_t nodeID);
+        void numaConstructors(clang::CXXRecordDecl* classDecl, int64_t nodeID);
+        void numaDestructors(clang::CXXRecordDecl* classDecl, int64_t nodeID);
+        void numaHeapInMethods(clang::CXXRecordDecl* classDecl, int64_t nodeID);
 
+        
         void startRecursiveTyping(std::map<clang::VarDecl*, const clang::CXXNewExpr*> numaDeclTable, clang::ASTContext *Context);
 
         std::map<std::string, std::map<std::string, bool>> field_info_table;

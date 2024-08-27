@@ -7,9 +7,12 @@ class SomeClass{
     SomeClass(){};
     int a;
 
-    void someFunction(){
+    virtual void someFunction(){
         return;
     }
+};
+template<>
+class numa<SomeClass,3>{
 };
 numa<MyVector, 3>* v1= new numa<MyVector, 3>();
 int main(){

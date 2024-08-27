@@ -586,9 +586,6 @@ void TemplateArgTransformer::startRecursiveTyping(std::map<clang::VarDecl*, cons
 
 }
 
-
-
-
 void TemplateArgTransformer::extractNumaDecls(clang::Stmt* fnBody, ASTContext *Context){
     CompoundStmtVisitor CompoundStmtVisitor(Context);
     DeclStmtVisitor DeclStmtVisitor(Context);
@@ -644,10 +641,6 @@ bool TemplateArgTransformer::NumaDeclExists(clang::ASTContext *Context, QualType
                     }
                 }
             }
-                
-                // if(FoundType == tsd->getTemplateArgs().asArray()[0].getAsType() && FoundInt == tsd->getTemplateArgs().asArray()[1].getAsIntegral()){
-                //     return true;
-                // }
         }
     }   
     return false;     
@@ -672,6 +665,22 @@ void TemplateArgTransformer::makeVirtual(CXXRecordDecl * classDecl){
 
         }
     }
+}
+
+void TemplateArgTransformer::specializeClass(clang::CXXRecordDecl* classDecl, int64_t nodeID){
+    rewriteLoc = classDecl->getEndLoc();
+    SourceLocation semiLoc = Lexer::findLocationAfterToken(
+                rewriteLoc, tok::semi, rewriter.getSourceMgr(), rewriter.getLangOpts(), 
+                /*SkipTrailingWhitespaceAndNewLine=*/true);
+    
+    rewriter.InsertTextAfter(semiLoc, "\ntemplate<>\n"
+                                            "class numa<"+classDecl->getNameAsString()+"," + std::to_string(nodeID)+">{\n");
+    
+    numaFields(classDecl, nodeID);
+    // numaConstructors(classDecl, nodeID);
+    // numaHeapInMethods(classDecl, nodeID);
+    fileIDs.push_back(rewriter.getSourceMgr().getFileID(rewriteLoc));
+
 }
 
 
@@ -723,25 +732,15 @@ void TemplateArgTransformer::run(const clang::ast_matchers::MatchFinder::MatchRe
                 llvm::outs() << "About to specialize "<< FirstTempArg.getAsString() << " as numa\n";
                 llvm::outs() << "Making the methods of "<<FirstTempArg->getAsCXXRecordDecl()->getNameAsString() << " virtual\n";
                 makeVirtual(FirstTempArg->getAsCXXRecordDecl());
-                        //print rewrite buffer for fileID
-               
-                // llvm::outs() << "The buffer for the file is: \n";
-                // buffer->write(llvm::outs());
+
+                specializeClass(FirstTempArg->getAsCXXRecordDecl(), SecondTempArg);
             }
-            // for (auto fileID : fileIDs){
-            //     auto buffer = rewriter.getRewriteBufferFor(fileID);
-            //     if(buffer){
-            //         llvm::outs() << "The buffer for the file is: \n";
-            //         buffer->write(llvm::outs());
-            //     }
-            // }
+
             
         } 
     
     return;
 }
-
-    //print numaTable
 
 
 void TemplateArgTransformer::print(clang::raw_ostream &stream)

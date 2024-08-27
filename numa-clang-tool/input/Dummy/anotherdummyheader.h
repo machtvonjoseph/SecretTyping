@@ -9,11 +9,12 @@ class SomeOtherClass{
     SomeOtherClass();
     int a;
 
-    void someOtherFunction(){
-        return;
-    }
+    void someOtherFunction();
 };
 
+void SomeOtherClass::someOtherFunction(){
+    return;
+}
 
 
 #endif

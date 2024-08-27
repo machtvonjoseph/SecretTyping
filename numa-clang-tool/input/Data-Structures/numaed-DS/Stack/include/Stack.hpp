@@ -148,19 +148,7 @@ public:
 			delete temp;
 		}
 	}
-	int pop(){
-		if(top == nullptr)
-		{
-			return -1;
-		}
-		Node* retN = top;
-		top = top->getLink();
-		int data = retN->getData();
-		delete retN;
-		retN = nullptr;
-
-		return data;
-	}
+	int pop();
 	virtual void push(int data){
 		Node* newN = reinterpret_cast<Node*>(new numa<Node,1>(data));
 		std::cerr << "Pushing " << data << std::endl;
@@ -198,6 +186,20 @@ public:
 }
 
 };
+
+int numa<Stack,1> :: pop(){
+	if(top == nullptr)
+	{
+		return -1;
+	}
+	Node* retN = top;
+	top = top->getLink();
+	int data = retN->getData();
+	delete retN;
+	retN = nullptr;
+
+	return data;
+}
 
 
 #endif //_STACK_HPP_

@@ -48,7 +48,7 @@ public:
 	 *
 	 * \sa Stack::pop()
 	 */
-	virtual ~Stack();
+	~Stack();
 
 	/*!
 	 * \brief Function for removing a single stack node
@@ -59,7 +59,7 @@ public:
 	 *
 	 * \return The data from the removed node.
 	 */
-	virtual int pop();
+	int pop();
 
 	/*!
 	 * \brief Push function for adding stack variables
@@ -71,7 +71,7 @@ public:
 	 * \note To avoid Memory Allocation issues, if allocation fails (i.e. overflow)
 	 	Stack::push() is returned from immediately.
 	 */
-	virtual void push(int);
+	void push(int);
 
 
 	/*!
@@ -80,7 +80,7 @@ public:
 	 * This function iterates over and prints each node in the stack.
 	 * The first node printed is the top Node.
 	 */
-	virtual void display();
+	void display();
 
 
 };

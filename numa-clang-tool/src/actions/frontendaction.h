@@ -37,15 +37,6 @@ private:
   IncludeTracker* TheIncludeTracker;
 };
 
-// class PPFrontendAction : public clang::ASTFrontendAction {
-// public:
-//   virtual std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(clang::CompilerInstance &compiler, llvm::StringRef inFile) override;
-
-// private:
-//   clang::Rewriter TheRewriter;
-// };
-
-
 
 
 #endif

@@ -9,11 +9,16 @@ class SomeOtherClass{
     SomeOtherClass();
     int a;
 
-    void someOtherFunction(){
-        return;
-    }
+    virtual void someOtherFunction();
 };
 
+template<>
+class numa<SomeOtherClass,3>{
+};
+
+void SomeOtherClass::someOtherFunction(){
+    return;
+}
 
 
 #endif

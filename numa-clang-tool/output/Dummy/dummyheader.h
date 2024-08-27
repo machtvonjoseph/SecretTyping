@@ -8,37 +8,32 @@ template <typename T, int N>
 class numa{
 
 };
-
-
 class MyVector{  
     public:
     int* data;
 public:
     MyVector():MyVector(10,0){};
-    MyVector(int sz, int val = 0){
-        int assignment = val;
-        data = new int[sz];
-    }
-    int getData(int idx){
-        return data[idx];
-    }
-    void setData(int idx, int value){
-        data[idx] = value;
-    }
+    MyVector(int sz, int val);
+    virtual int getData(int idx);
+    virtual void setData(int idx, int value);
 };
 
+template<>
+class numa<MyVector,3>{
+};
+MyVector::MyVector(int sz, int val = 0){
+    int assignment = val;
+    data = new int[sz];
+}
 
-// template<>
-// class numa<MyVector, 3>:public MyVector{
-//     public:
-//     MyVector* data;
-//     numa(){
-//         data = new MyVector[3];
-//     }
-//     ~numa(){
-//         delete[] data;
-//     }                                               
-// };
+
+int MyVector::getData(int idx){
+    return data[idx];
+}
+
+void MyVector::setData(int idx, int value){
+    data[idx]=value;
+}
 
 
 #endif
