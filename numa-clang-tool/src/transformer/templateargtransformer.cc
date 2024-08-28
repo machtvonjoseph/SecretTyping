@@ -667,7 +667,21 @@ void TemplateArgTransformer::makeVirtual(CXXRecordDecl * classDecl){
     }
 }
 
-void TemplateArgTransformer::specializeClass(clang::CXXRecordDecl* classDecl, int64_t nodeID){
+void TemplateArgTransformer::specializeClass(clang::ASTContext* Context, clang::QualType FirstTempArg, int64_t SecondTempArg){
+     bool exists = NumaDeclExists(Context, FirstTempArg, SecondTempArg);
+        if(exists){
+            llvm::outs() << "The numa template "<< FirstTempArg.getAsString() << " is already specialized according as numa\n";
+        }
+        else{
+            llvm::outs() << "About to specialize "<< FirstTempArg.getAsString() << " as numa\n";
+            llvm::outs() << "Making the methods of "<<FirstTempArg->getAsCXXRecordDecl()->getNameAsString() << " virtual\n";
+            makeVirtual(FirstTempArg->getAsCXXRecordDecl());
+
+            constructSpecialization(FirstTempArg->getAsCXXRecordDecl(), SecondTempArg);
+        }
+}
+
+void TemplateArgTransformer::constructSpecialization(clang::CXXRecordDecl* classDecl, int64_t nodeID){
     rewriteLoc = classDecl->getEndLoc();
     SourceLocation semiLoc = Lexer::findLocationAfterToken(
                 rewriteLoc, tok::semi, rewriter.getSourceMgr(), rewriter.getLangOpts(), 
@@ -676,7 +690,7 @@ void TemplateArgTransformer::specializeClass(clang::CXXRecordDecl* classDecl, in
     rewriter.InsertTextAfter(semiLoc, "\ntemplate<>\n"
                                             "class numa<"+classDecl->getNameAsString()+"," + std::to_string(nodeID)+">{\n");
     
-    numaFields(classDecl, nodeID);
+    //numaFields(classDecl, nodeID);
     // numaConstructors(classDecl, nodeID);
     // numaHeapInMethods(classDecl, nodeID);
     fileIDs.push_back(rewriter.getSourceMgr().getFileID(rewriteLoc));
@@ -724,19 +738,7 @@ void TemplateArgTransformer::run(const clang::ast_matchers::MatchFinder::MatchRe
             FirstTempArg = TemplateArgs[0].getAsType();
             SecondTempArg = TemplateArgs[1].getAsIntegral().getExtValue();
 
-            bool exists = NumaDeclExists(result.Context, FirstTempArg, SecondTempArg);
-            if(exists){
-                llvm::outs() << "The numa template "<< FirstTempArg.getAsString() << " is already specialized according as numa\n";
-            }
-            else{
-                llvm::outs() << "About to specialize "<< FirstTempArg.getAsString() << " as numa\n";
-                llvm::outs() << "Making the methods of "<<FirstTempArg->getAsCXXRecordDecl()->getNameAsString() << " virtual\n";
-                makeVirtual(FirstTempArg->getAsCXXRecordDecl());
-
-                specializeClass(FirstTempArg->getAsCXXRecordDecl(), SecondTempArg);
-            }
-
-            
+            specializeClass(result.Context,FirstTempArg,SecondTempArg);
         } 
     
     return;

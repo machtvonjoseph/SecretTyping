@@ -1,5 +1,7 @@
 #ifndef DUMMYHEADER_H
 #define DUMMYHEADER_H
+
+#include "anotherdummyheader.h"
 //#include "numatype.hpp"
 void dummyFunction(){
     return;
@@ -11,6 +13,7 @@ class numa{
 class MyVector{  
     public:
     int* data;
+    SomeOtherClass* soc;
 public:
     MyVector():MyVector(10,0){};
     MyVector(int sz, int val);
@@ -20,7 +23,6 @@ public:
 
 template<>
 class numa<MyVector,3>{
-};
 MyVector::MyVector(int sz, int val = 0){
     int assignment = val;
     data = new int[sz];

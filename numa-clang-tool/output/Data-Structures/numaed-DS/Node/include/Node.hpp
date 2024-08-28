@@ -40,34 +40,34 @@ Node::Node(int initData, Node *node)
 	link = node;
 }
 
-template<>
-class numa<Node, 1>: public Node {
-private:
-	numa<int,1> data;
-	numa<Node*,1> link;
-public:
-	numa(){
-		data=0;
-		link = nullptr;
-	}
-	numa(int initData){
-		data = initData;
-	}
-	numa(int initData, Node* node){
-		data= initData;
-		link = node;
-	}
+// template<>
+// class numa<Node, 1>: public Node {
+// private:
+// 	numa<int,1> data;
+// 	numa<Node*,1> link;
+// public:
+// 	numa(){
+// 		data=0;
+// 		link = nullptr;
+// 	}
+// 	numa(int initData){
+// 		data = initData;
+// 	}
+// 	numa(int initData, Node* node){
+// 		data= initData;
+// 		link = node;
+// 	}
 
-	Node *getLink(){ return link; }
-	void setData(int n){ data = n; }
-	void setLink(Node *n) { std::cout<< "hello"<<std::endl; link = n; }
-	int getData(){ return data; }
+// 	Node *getLink(){ return link; }
+// 	void setData(int n){ data = n; }
+// 	void setLink(Node *n) { std::cout<< "hello"<<std::endl; link = n; }
+// 	int getData(){ return data; }
 	
-	virtual ~numa(){
-		std::cout<< "bye"<<std::endl;
-		link = NULL;
-	}
-};
+// 	virtual ~numa(){
+// 		std::cout<< "bye"<<std::endl;
+// 		link = NULL;
+// 	}
+// };
 
 
 

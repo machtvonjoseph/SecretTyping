@@ -119,7 +119,8 @@ class TemplateArgTransformer : public Transformer
 
         bool NumaDeclExists(clang::ASTContext *Context, QualType FirstTemplateArg, int64_t SecondTemplateArg);
         void makeVirtual(clang::CXXRecordDecl *classDecl);
-        void specializeClass(clang::CXXRecordDecl* classDecl, int64_t nodeID);
+        void specializeClass(clang::ASTContext* Context, clang::QualType FirstTemplateArg, int64_t SecondTemplateArg);
+        void constructSpecialization(clang::CXXRecordDecl* classDecl, int64_t nodeID);
         void numaFields(clang::CXXRecordDecl* classDecl, int64_t nodeID);
         void numaConstructors(clang::CXXRecordDecl* classDecl, int64_t nodeID);
         void numaDestructors(clang::CXXRecordDecl* classDecl, int64_t nodeID);
