@@ -20,7 +20,7 @@ Queue.so: Queue.o
 
 
 Queue.o: $(INC_DIR)Queue.hpp ../Node/include/Node.hpp $(SOURCE)Queue.cpp
-	$(CC) $(INC_FLAGS) -c -g -fPIC $(SOURCE)Queue.cpp
+	$(CC) $(INC_FLAGS) -I../../../numaLib/ -c -g -fPIC $(SOURCE)Queue.cpp
 
 clean:
 	rm bin/libqueue.*

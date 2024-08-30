@@ -20,10 +20,10 @@ class NumaConsumer : public clang::ASTConsumer
         
     public:
         explicit NumaConsumer(clang::Rewriter& TheReWriter, clang::ASTContext* context);
+        void includeNumaHeader(clang::ASTContext &context);
         void WriteOutput(clang::SourceManager &SM);
         virtual void HandleTranslationUnit( clang::ASTContext &context) override;
 };
-
 // class PPConsumer : public clang::ASTConsumer 
 // {
 //     private:

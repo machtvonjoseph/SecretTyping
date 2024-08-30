@@ -20,7 +20,7 @@ Stack.so: $(INC_DIR)Stack.hpp $(SOURCE)Stack.cpp
 	# ln -sf $(CURDIR)/libstack.so.1.0 bin/libstack.so
 
 Stack.o: $(INC_DIR)Stack.hpp ../Node/include/Node.hpp $(SOURCE)Stack.cpp
-	$(CC) $(INC_FLAGS) -g -c -fPIC $(SOURCE)Stack.cpp 
+	$(CC) $(INC_DIR) -I../../../numaLib/ -g -c -fPIC $(SOURCE)Stack.cpp 
 
 clean:
 	rm bin/*

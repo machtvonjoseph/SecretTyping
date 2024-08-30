@@ -95,6 +95,7 @@ class TemplateArgTransformer : public Transformer
         std::set<std::string> functions;
         std::vector<const clang::FunctionDecl*> functionDecls;
         std::map<clang::VarDecl*, const clang::CXXNewExpr*> numaDeclTable;
+        std::map<clang::QualType, int64_t> specializedClasses;
         std::vector<const clang::CXXMethodDecl*> methodDecls;
         std::vector<clang::FileID> fileIDs;
     public:
@@ -116,11 +117,13 @@ class TemplateArgTransformer : public Transformer
                 llvm::outs()<<"CXXNewExpr Return Type: " << it->second->getType().getAsString() << "\n";
             }
         }
-
+        
         bool NumaDeclExists(clang::ASTContext *Context, QualType FirstTemplateArg, int64_t SecondTemplateArg);
+        void addAllSpecializations(clang::ASTContext *Context);
+        bool NumaSpeclExists(QualType FirstTemplateArg, int64_t SecondTemplateArg);
         void makeVirtual(clang::CXXRecordDecl *classDecl);
         void specializeClass(clang::ASTContext* Context, clang::QualType FirstTemplateArg, int64_t SecondTemplateArg);
-        void constructSpecialization(clang::CXXRecordDecl* classDecl, int64_t nodeID);
+        void constructSpecialization(clang::ASTContext* Context,clang::CXXRecordDecl* classDecl, int64_t nodeID);
         void numaFields(clang::CXXRecordDecl* classDecl, int64_t nodeID);
         void numaConstructors(clang::CXXRecordDecl* classDecl, int64_t nodeID);
         void numaDestructors(clang::CXXRecordDecl* classDecl, int64_t nodeID);

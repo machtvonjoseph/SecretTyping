@@ -1,3 +1,4 @@
+#include "numatype.hpp"
 /*! \file TestSuite.hpp
  * \brief Testsuite program which allows for testing of various data structures
  * \author Nii Mante

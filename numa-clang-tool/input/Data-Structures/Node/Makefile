@@ -1,5 +1,5 @@
 CC=g++
-INC_DIR=include/
+INC_DIR=include/ 
 SOURCE=src/
 
 
@@ -17,7 +17,7 @@ Node.so: $(INC_DIR)Node.hpp $(SOURCE)Node.cpp
 
 
 Node.o: $(INC_DIR)Node.hpp $(SOURCE)Node.cpp
-	$(CC) -I$(INC_DIR) -c -g -fPIC $(SOURCE)Node.cpp
+	$(CC) -I$(INC_DIR) -I../../../numaLib/ -c -g -fPIC $(SOURCE)Node.cpp
 
 clean:
 	rm bin/*

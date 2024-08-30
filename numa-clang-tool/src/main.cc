@@ -87,15 +87,15 @@ int main(int argc, const char **argv) {
   }
   cout<<"Compile Commands: \n";
   //print compile commands
-    const std::vector<std::string> &ExtraArgs = OptionsParser.getCompilations().getAllCompileCommands().front().CommandLine;
-    std::vector<clang::tooling::CompileCommand> compileCommands = OptionsParser.getCompilations().getAllCompileCommands();
-    for (auto &cmd: compileCommands)
-    {
-        for (auto &arg : cmd.CommandLine)
-        {
-            llvm::outs() << arg << "\n";
-        }
-    }
+  const std::vector<std::string> &ExtraArgs = OptionsParser.getCompilations().getAllCompileCommands().front().CommandLine;
+  std::vector<clang::tooling::CompileCommand> compileCommands = OptionsParser.getCompilations().getAllCompileCommands();
+  for (auto &cmd: compileCommands)
+  {
+      for (auto &arg : cmd.CommandLine)
+      {
+          llvm::outs() << arg << "\n";
+      }
+  }
     
   registerBenchmarks();
 

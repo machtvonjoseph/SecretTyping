@@ -18,6 +18,19 @@ void NumaConsumer::WriteOutput(clang::SourceManager &SM){
             if(buffer){
                 llvm::outs() << "File ID: " << FID.getHashValue() << " File Name: " << it->first.getName() << "\n";
                 //change /input to /output in File Name
+                SourceLocation Loc = SM.getLocForStartOfFile(FID);
+                
+                if(SM.isInSystemHeader(Loc)){
+                    llvm::outs() << "Skipping system header\n";
+                    continue;
+                }
+
+                if(it->first.getName().find("../numaLib/numatype.hpp") != std::string::npos){
+                    llvm::outs() << "Skipping numaLib/numatype.hpp\n";
+                    continue;
+                }
+
+
                 std::string fileName = (std::string)it->first.getName();
                 std::string outputFileName = fileName.replace(fileName.find("input"), 5, "output");
                 llvm::outs() << "Output File Name: " << outputFileName << "\n";
@@ -40,6 +53,22 @@ void NumaConsumer::WriteOutput(clang::SourceManager &SM){
         }
     }
 }
+void NumaConsumer::includeNumaHeader(clang::ASTContext &context){
+    for(auto it = rewriter.getSourceMgr().fileinfo_begin(); it != rewriter.getSourceMgr().fileinfo_end(); it++){
+        const FileEntry *FE = it->first;
+        if(FE){
+            FileID FID= context.getSourceManager().getOrCreateFileID(it->first, SrcMgr::CharacteristicKind::C_User);
+    
+
+            // Skip invalid or built-in files
+            if (FID.isInvalid() || FID == context.getSourceManager().getMainFileID())
+            continue;
+
+            // Insert the include directive at the beginning of each file
+            rewriter.InsertTextBefore( context.getSourceManager().getLocForStartOfFile(FID),"#include \"numatype.hpp\"\n");
+        }
+    }
+}
 
 
 void NumaConsumer::HandleTranslationUnit(clang::ASTContext &context){
@@ -52,6 +81,8 @@ void NumaConsumer::HandleTranslationUnit(clang::ASTContext &context){
     for(auto it = rewriter.getSourceMgr().fileinfo_begin(); it != rewriter.getSourceMgr().fileinfo_end(); it++){
         rewriterFileNames.push_back( it->first.getName());
     }
+
+    includeNumaHeader(context);
     WriteOutput(rewriter.getSourceMgr());
 }
     

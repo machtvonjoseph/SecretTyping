@@ -6,23 +6,19 @@
 void dummyFunction(){
     return;
 }
-template <typename T, int N>
-class numa{
 
-};
 class MyVector{  
     public:
     int* data;
     SomeOtherClass* soc;
+    int valueData;
+    SomeOtherClass valuesoc;
 public:
     MyVector():MyVector(10,0){};
     MyVector(int sz, int val);
-    virtual int getData(int idx);
-    virtual void setData(int idx, int value);
+    int getData(int idx);
+    void setData(int idx, int value);
 };
-
-template<>
-class numa<MyVector,3>{
 MyVector::MyVector(int sz, int val = 0){
     int assignment = val;
     data = new int[sz];
@@ -37,5 +33,10 @@ void MyVector::setData(int idx, int value){
     data[idx]=value;
 }
 
+// template<>
+// class numa<MyVector,3>{
+// numa<int,3>* data;
+// numa<SomeOtherClass,3>* soc;
 
+// };
 #endif

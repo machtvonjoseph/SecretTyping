@@ -16,7 +16,7 @@ LinkedList.so: $(INC_DIR)LinkedList.hpp $(SOURCE)LinkedList.cpp
 
 
 LinkedList.o:
-	$(CC) $(INC_FLAGS) -c -g -fPIC $(SOURCE)LinkedList.cpp
+	$(CC) $(INC_FLAGS) -I../../../numaLib/ -c -g -fPIC $(SOURCE)LinkedList.cpp
 
 clean:
 	rm bin/liblinkedlist.*

@@ -221,8 +221,6 @@ void TemplateArgTransformer::recursive_introspective_typer(clang::FieldDecl *fie
                             }
                         }
 
-                    
-
                         rewriter.InsertTextAfter(rewriteLoc, ")");
                         
                         if(constructor->hasBody()){
@@ -566,6 +564,8 @@ void TemplateArgTransformer::myTemplateTransformer(clang::VarDecl* varDecl){
     }           
 }
 
+
+
 void TemplateArgTransformer::findNumaExpr(CompoundStmt* compoundStmt, ASTContext *Context){
     //check if the type of the new expression starts with numa
     //newExpr->dump();
@@ -621,29 +621,93 @@ void TemplateArgTransformer::extractNumaDecls(clang::Stmt* fnBody, ASTContext *C
 
 bool TemplateArgTransformer::NumaDeclExists(clang::ASTContext *Context, QualType FirstTempArg, int64_t SecondTempArg){
     clang::TranslationUnitDecl *TU = Context->getTranslationUnitDecl();
+    llvm::outs() << "About to check if the numa template specialization for " << FirstTempArg.getAsString() << " and " << SecondTempArg << " exists\n";
     for (const auto *Decl : TU->decls()) {
         if (const auto *SpecDecl = clang::dyn_cast<clang::ClassTemplateSpecializationDecl>(Decl)) {
             const auto *TemplateDecl = SpecDecl->getSpecializedTemplate();
             //check if its numa
             if(TemplateDecl->getNameAsString().compare("numa") == 0){
+                // llvm::outs()<< "We found a numa specialization here it is\n";
+                // SpecDecl->dump();
                 clang::QualType FoundType;
                 llvm::APSInt FoundInt;
                 //get arguments : You have to go through this because in the entire context, it might not be the case that the first parameter is always a type and the second is always an integral
                 for (const auto &Arg : SpecDecl->getTemplateArgs().asArray()) {
                     if (Arg.getKind() == clang::TemplateArgument::ArgKind::Type) {
                         FoundType = Arg.getAsType();
+                        //llvm::outs() << "The type is " << FoundType.getAsString() << "\n";
                     }
                     if (Arg.getKind() == clang::TemplateArgument::ArgKind::Integral) {
+                        //llvm::outs() << "The integral is " << Arg.getAsIntegral() << "\n";
                         FoundInt = Arg.getAsIntegral();
                     }
-                    if(FoundType ==FirstTempArg && FoundInt == SecondTempArg){
-                        return true;
+                }
+
+                //if not in specialized classes ad the foundtype and found integral to the specialized classes
+                auto it = specializedClasses.find(FoundType);
+                if (it != specializedClasses.end() && it->second == FoundInt) {
+                    
+                } else {
+                    llvm::outs() << "Adding " << FoundType.getAsString() << " and " << FoundInt << " to the specialized classes\n";
+                   // TemplateArgTransformer.insert({FoundType, FoundInt});
+                }
+
+
+                // llvm::outs() << "The found type is " << FoundType.getAsString() << " and the found integral is " << FoundInt << "\n";
+                // llvm::outs() << "The checked type is " << FirstTempArg.getAsString() << " and the checked integral is " << SecondTempArg << "\n";
+                // if(FoundType == FirstTempArg && FoundInt == SecondTempArg){
+                //     return true;    
+                // }
+            }
+        }
+    }   
+    return true;     
+}
+
+void TemplateArgTransformer::addAllSpecializations(clang::ASTContext* Context){
+    clang::TranslationUnitDecl *TU = Context->getTranslationUnitDecl();
+    for (const auto *Decl : TU->decls()) {
+        if (const auto *SpecDecl = clang::dyn_cast<clang::ClassTemplateSpecializationDecl>(Decl)) {
+            const auto *TemplateDecl = SpecDecl->getSpecializedTemplate();
+            //check if its numa
+            if(TemplateDecl->getNameAsString().compare("numa") == 0){
+                // llvm::outs()<< "We found a numa specialization here it is\n";
+                // SpecDecl->dump();
+                clang::QualType FoundType;
+                llvm::APSInt FoundInt;
+                //get arguments : You have to go through this because in the entire context, it might not be the case that the first parameter is always a type and the second is always an integral
+                for (const auto &Arg : SpecDecl->getTemplateArgs().asArray()) {
+                    if (Arg.getKind() == clang::TemplateArgument::ArgKind::Type) {
+                        FoundType = Arg.getAsType();
+                        //llvm::outs() << "The type is " << FoundType.getAsString() << "\n";
                     }
+                    if (Arg.getKind() == clang::TemplateArgument::ArgKind::Integral) {
+                        //llvm::outs() << "The integral is " << Arg.getAsIntegral() << "\n";
+                        FoundInt = Arg.getAsIntegral();
+                    }
+                }
+                //if not in specialized classes add the foundtype and found integral to the specialized classes
+                auto it = specializedClasses.find(FoundType);
+                if (it != specializedClasses.end() && it->second == FoundInt) {
+                    
+                } else {
+                    llvm::outs() << "Adding " << FoundType.getAsString() << " and " << FoundInt << " to the specialized classes\n";
+                    
+                    TemplateArgTransformer::specializedClasses.insert({FoundType, FoundInt.getExtValue()});
+                   // TemplateArgTransformer.insert({FoundType, FoundInt});
                 }
             }
         }
     }   
-    return false;     
+}
+
+bool TemplateArgTransformer::NumaSpeclExists(clang::QualType FirstTempArg, int64_t SecondTempArg){
+    auto it = specializedClasses.find(FirstTempArg);
+    if (it != specializedClasses.end() && it->second == SecondTempArg) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 void TemplateArgTransformer::makeVirtual(CXXRecordDecl * classDecl){
@@ -653,7 +717,7 @@ void TemplateArgTransformer::makeVirtual(CXXRecordDecl * classDecl){
             if(method->getNameAsString() != classDecl->getNameAsString()){
                 method->setVirtualAsWritten(true);
                 // print reconstructed function
-                method->dump();
+                //method->dump();
             }
             // Insert the virtual keyword if method is not a constructor
             if(method->getNameAsString() != classDecl->getNameAsString()){
@@ -667,21 +731,47 @@ void TemplateArgTransformer::makeVirtual(CXXRecordDecl * classDecl){
     }
 }
 
-void TemplateArgTransformer::specializeClass(clang::ASTContext* Context, clang::QualType FirstTempArg, int64_t SecondTempArg){
-     bool exists = NumaDeclExists(Context, FirstTempArg, SecondTempArg);
-        if(exists){
-            llvm::outs() << "The numa template "<< FirstTempArg.getAsString() << " is already specialized according as numa\n";
-        }
-        else{
-            llvm::outs() << "About to specialize "<< FirstTempArg.getAsString() << " as numa\n";
-            llvm::outs() << "Making the methods of "<<FirstTempArg->getAsCXXRecordDecl()->getNameAsString() << " virtual\n";
-            makeVirtual(FirstTempArg->getAsCXXRecordDecl());
 
-            constructSpecialization(FirstTempArg->getAsCXXRecordDecl(), SecondTempArg);
-        }
+
+
+void TemplateArgTransformer::specializeClass(clang::ASTContext* Context, clang::QualType FirstTempArg, int64_t SecondTempArg){
+
+    //check if the class is in specialized classes
+    if( FirstTempArg.getCanonicalType()->isBuiltinType()){
+        llvm::outs() << "The numa argument "<< FirstTempArg.getAsString() << " is canonically a built in type\n";
+        return;
+    }
+    if(NumaSpeclExists(FirstTempArg, SecondTempArg)){
+        llvm::outs() << "The numa template specialization for " << FirstTempArg.getAsString() << " and " << SecondTempArg << " already exists\n";
+        return;
+    }
+
+    llvm::outs() << "About to specialize "<< FirstTempArg.getAsString() << " as numa\n";
+
+    //insert to specialized classes
+    TemplateArgTransformer::specializedClasses.insert({FirstTempArg, SecondTempArg});
+
+    llvm::outs() << "Making the methods of "<< FirstTempArg->getAsCXXRecordDecl()->getNameAsString() << " virtual\n";
+
+    
+
+    constructSpecialization(Context, FirstTempArg->getAsCXXRecordDecl(), SecondTempArg);
+
+    // bool exists = NumaDeclExists(Context, FirstTempArg, SecondTempArg);
+
+    // if(exists || FirstTempArg.getCanonicalType()->isBuiltinType()){
+    //     llvm::outs() << "The numa template "<< FirstTempArg.getAsString() << " is already specialized according as numa or is canonically a built in type\n";
+    // }
+    // else{
+       
+        
+    //     constructSpecialization(Context, FirstTempArg->getAsCXXRecordDecl(), SecondTempArg);
+    // }
 }
 
-void TemplateArgTransformer::constructSpecialization(clang::CXXRecordDecl* classDecl, int64_t nodeID){
+void TemplateArgTransformer::constructSpecialization(clang::ASTContext* Context, clang::CXXRecordDecl* classDecl, int64_t nodeID){
+    makeVirtual(classDecl);
+    
     rewriteLoc = classDecl->getEndLoc();
     SourceLocation semiLoc = Lexer::findLocationAfterToken(
                 rewriteLoc, tok::semi, rewriter.getSourceMgr(), rewriter.getLangOpts(), 
@@ -689,13 +779,75 @@ void TemplateArgTransformer::constructSpecialization(clang::CXXRecordDecl* class
     
     rewriter.InsertTextAfter(semiLoc, "\ntemplate<>\n"
                                             "class numa<"+classDecl->getNameAsString()+"," + std::to_string(nodeID)+">{\n");
-    
+    for(auto fields : classDecl->fields()){
+        llvm::outs() << "The inrospected class is " << classDecl->getNameAsString() << " and the ";
+        llvm::outs() << "field about to be checked is " << fields->getNameAsString() << "\n";
+        //QualType fieldType = QualType(classDecl->getTypeForDecl(),0);
+
+        /*Case where the field is a built in type but not a pointer */
+        if(fields->getType()->isBuiltinType()){
+            llvm::outs()<<"Field is a fundamental type\n";
+            rewriter.InsertTextAfter(semiLoc, "numa<"+fields->getType().getAsString()+","+std::to_string(nodeID)+"> "+ fields->getNameAsString()+";\n" );
+        }
+
+        /*Case where the field is a built in type and a pointer*/
+        else if(fields->getType()->isPointerType() && fields->getType()->getPointeeType()->isBuiltinType()){
+                llvm::outs()<<"Field is a pointer\n";
+                rewriter.InsertTextAfter(semiLoc, "numa<"+fields->getType()->getPointeeType().getAsString() +","+std::to_string(nodeID)+">* "+ fields->getNameAsString()+";\n" );
+            
+        }
+
+        /*Case where the field is not a built in type but is a pointer*/
+        else if(fields->getType()->isPointerType() && !fields->getType()->getPointeeType()->isBuiltinType()){
+            llvm::outs()<<"Field is a pointer to a user defined class\n";
+            rewriter.InsertTextAfter(semiLoc, "numa<"+fields->getType()->getPointeeType().getAsString() +","+std::to_string(nodeID)+">* "+ fields->getNameAsString()+";\n" );
+            
+            if(NumaSpeclExists(QualType(fields->getType()->getPointeeCXXRecordDecl()->getTypeForDecl(),0) , nodeID)){
+                llvm::outs() << "The numa template specialization for " << fields->getNameAsString() << " and " << nodeID << " already exists\n";
+                continue;
+            }else{
+
+            llvm::outs() << "About to specialize "<< fields->getNameAsString() << " as numa\n";
+
+            //insert to specialized classes
+            TemplateArgTransformer::specializedClasses.insert({QualType(fields->getType()->getPointeeCXXRecordDecl()->getTypeForDecl(),0) , nodeID});
+
+            constructSpecialization(Context, fields->getType()->getPointeeType()->getAsCXXRecordDecl(), nodeID);
+            }
+        }
+        /*Case where the field is not a built in type and not a pointer*/
+        else if (!fields->getType()->isBuiltinType() && !fields->getType()->isPointerType()){
+            llvm::outs()<<"Field is a user defined class but not a pointer\n";
+            rewriter.InsertTextAfter(semiLoc, "numa<"+fields->getType().getAsString() +","+std::to_string(nodeID)+"> "+ fields->getNameAsString()+";\n" );
+            if(NumaSpeclExists(QualType(fields->getType()->getAsCXXRecordDecl()->getTypeForDecl(),0), nodeID)){
+                llvm::outs() << "The numa template specialization for " << fields->getNameAsString() << " and " << nodeID << " already exists\n";
+                continue;
+            }else{
+
+            llvm::outs() << "About to specialize "<< fields->getNameAsString() << " as numa\n";
+
+            //insert to specialized classes
+            TemplateArgTransformer::specializedClasses.insert({QualType(fields->getType()->getAsCXXRecordDecl()->getTypeForDecl(),0), nodeID});
+
+            constructSpecialization(Context, fields->getType()->getAsCXXRecordDecl(), nodeID);
+            }
+        }
+        else{
+            llvm::outs()<<"None of the above\n";
+        }
+         
+    }
+    rewriter.InsertTextAfter(semiLoc, "};\n");  
+
+ 
     //numaFields(classDecl, nodeID);
     // numaConstructors(classDecl, nodeID);
     // numaHeapInMethods(classDecl, nodeID);
     fileIDs.push_back(rewriter.getSourceMgr().getFileID(rewriteLoc));
 
 }
+
+
 
 
 void TemplateArgTransformer::run(const clang::ast_matchers::MatchFinder::MatchResult &result){
@@ -728,6 +880,8 @@ void TemplateArgTransformer::run(const clang::ast_matchers::MatchFinder::MatchRe
     
         }
         printNumaDeclTable(); 
+
+        addAllSpecializations(result.Context);
 
         for(auto &UserNumaDecl : numaDeclTable){
             QualType FirstTempArg;
