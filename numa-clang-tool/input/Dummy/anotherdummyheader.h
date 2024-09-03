@@ -9,7 +9,7 @@ void anotherdummyFunction(){
 }
 class SomeOtherClass{
     public:
-    SomeOtherClass();
+    SomeOtherClass(){};
     int a;
 
     void someOtherFunction();

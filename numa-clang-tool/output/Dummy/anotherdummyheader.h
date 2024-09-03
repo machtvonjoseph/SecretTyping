@@ -9,10 +9,15 @@ void anotherdummyFunction(){
 }
 class SomeOtherClass{
     public:
-    SomeOtherClass();
+    SomeOtherClass(){};
     int a;
 
-    void someOtherFunction();
+    virtual void someOtherFunction();
+};
+
+template<>
+class numa<SomeOtherClass,3>{
+numa<int,3> a;
 };
 
 void SomeOtherClass::someOtherFunction(){

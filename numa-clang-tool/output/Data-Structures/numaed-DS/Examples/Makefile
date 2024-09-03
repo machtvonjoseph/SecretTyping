@@ -2,8 +2,12 @@ CC=clang++
 DIRS=Node Stack BinarySearch 
 LINK_DIRS=-L../Stack/bin #-L../BinarySearch/bin
 LINK_FLAGS=-lnuma
+
+NUMADIR= ../../../../numaLib/
+REALDIR= $(realpath $(NUMADIR))
+
 STATIC_LINK_FLAGS=../Node/bin/libnode.a ../Stack/bin/libstack.a #../BinarySearch/bin/libbinarysearch.a 
-INC_DIRS= -I../Node/include -I../Stack/include -I../../../../numaLib/    #-I../BinarySearch/include -std=c++17 -I
+INC_DIRS= -I../Node/include -I../Stack/include -I$(REALDIR)   #-I../BinarySearch/include -std=c++17 -I
 EXE=./bin/DSExample
 OBJS=main.o TestSuite.o
 

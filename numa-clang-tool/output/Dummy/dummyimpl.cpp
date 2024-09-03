@@ -8,9 +8,15 @@ class SomeClass{
     int a;
     MyVector mv;
 
-    void someFunction(){
+    virtual void someFunction(){
         return;
     }
+};
+
+template<>
+class numa<SomeClass,3>{
+numa<int,3> a;
+numa<MyVector,3> mv;
 };
 int main(){
     numa<MyVector, 3>* v1 = new numa<MyVector, 3>();
