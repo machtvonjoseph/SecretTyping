@@ -124,12 +124,10 @@ class TemplateArgTransformer : public Transformer
         void makeVirtual(clang::CXXRecordDecl *classDecl);
         void specializeClass(clang::ASTContext* Context, clang::QualType FirstTemplateArg, int64_t SecondTemplateArg);
         void constructSpecialization(clang::ASTContext* Context,clang::CXXRecordDecl* classDecl, int64_t nodeID);
-        void numaFields(clang::CXXRecordDecl* classDecl, int64_t nodeID);
-        void numaConstructors(clang::CXXRecordDecl* classDecl, int64_t nodeID);
-        void numaDestructors(clang::CXXRecordDecl* classDecl, int64_t nodeID);
-        void numaHeapInMethods(clang::CXXRecordDecl* classDecl, int64_t nodeID);
-
-        
+        void numaPublicMembers(clang::ASTContext* Context, clang::SourceLocation& rewriteLocation, std::vector<clang::FieldDecl*> publicFields,std::vector<clang::CXXMethodDecl*> publicMethods, int64_t nodeID);
+        void numaPrivateMembers(clang::ASTContext* Context, clang::SourceLocation& rewriteLocation,std::vector<clang::FieldDecl*> privateFields, std::vector<clang::CXXMethodDecl*> privateMethods, int64_t nodeID);
+        void numaConstructors(clang::CXXConstructorDecl* Ctor, clang::SourceLocation& rewriteLocation, int64_t nodeID);
+        void numaDestructors(clang::CXXDestructorDecl* Dtor, clang::SourceLocation& rewriteLocation, int64_t nodeID);
         void startRecursiveTyping(std::map<clang::VarDecl*, const clang::CXXNewExpr*> numaDeclTable, clang::ASTContext *Context);
 
         std::map<std::string, std::map<std::string, bool>> field_info_table;

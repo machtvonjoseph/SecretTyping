@@ -17,7 +17,10 @@ class SomeOtherClass{
 
 template<>
 class numa<SomeOtherClass,3>{
+public:
 numa<int,3> a;
+numa();
+private:
 };
 
 void SomeOtherClass::someOtherFunction(){

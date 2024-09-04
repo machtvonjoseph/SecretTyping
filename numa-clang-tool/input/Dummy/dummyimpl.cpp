@@ -3,14 +3,13 @@
 //#include "numatype.hpp"
 
 class SomeClass{
-    public:
-    SomeClass(){};
     int a;
     MyVector mv;
-
-    void someFunction(){
-        return;
-    }
+    public:
+        SomeClass(){};
+        void someFunction(){
+            return;
+        }
 };
 int main(){
     numa<MyVector, 3>* v1 = new numa<MyVector, 3>();

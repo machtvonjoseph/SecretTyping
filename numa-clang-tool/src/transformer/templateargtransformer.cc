@@ -777,30 +777,68 @@ void TemplateArgTransformer::constructSpecialization(clang::ASTContext* Context,
                 rewriteLoc, tok::semi, rewriter.getSourceMgr(), rewriter.getLangOpts(), 
                 /*SkipTrailingWhitespaceAndNewLine=*/true);
     
+    std::vector<FieldDecl*> publicFields;
+    std::vector<FieldDecl*> privateFields;
+    std::vector<CXXMethodDecl*> publicMethods;
+    std::vector<CXXMethodDecl*> privateMethods;
+
+    for(auto field : classDecl->fields()){
+        if(field->getAccess() == AS_public){
+            publicFields.push_back(field);
+        }
+        else if(field->getAccess() == AS_private){
+            privateFields.push_back(field);
+        }
+    }
+
+    for(auto method : classDecl->methods()){
+        if(method->getAccess() == AS_public){
+            publicMethods.push_back(method);
+        }
+        else if(method->getAccess() == AS_private){
+            privateMethods.push_back(method);
+        }
+    }
+
     rewriter.InsertTextAfter(semiLoc, "\ntemplate<>\n"
                                             "class numa<"+classDecl->getNameAsString()+"," + std::to_string(nodeID)+">{\n");
-    for(auto fields : classDecl->fields()){
-        llvm::outs() << "The inrospected class is " << classDecl->getNameAsString() << " and the ";
+
+    numaPublicMembers(Context, semiLoc, publicFields, publicMethods, nodeID);
+    numaPrivateMembers(Context, semiLoc, privateFields, privateMethods, nodeID);
+
+    rewriter.InsertTextAfter(semiLoc, "};\n");  
+
+ 
+    //numaFields(classDecl, nodeID);
+    // numaConstructors(classDecl, nodeID);
+    // numaHeapInMethods(classDecl, nodeID);
+    fileIDs.push_back(rewriter.getSourceMgr().getFileID(rewriteLoc));
+
+}
+
+void TemplateArgTransformer::numaPublicMembers(clang::ASTContext* Context, clang::SourceLocation& rewriteLocation, std::vector<FieldDecl*> publicFields, std::vector<CXXMethodDecl*> publicMethods, int64_t nodeID){
+    rewriter.InsertTextAfter(rewriteLocation, "public:\n");
+     for(auto fields :publicFields){
         llvm::outs() << "field about to be checked is " << fields->getNameAsString() << "\n";
         //QualType fieldType = QualType(classDecl->getTypeForDecl(),0);
 
         /*Case where the field is a built in type but not a pointer */
         if(fields->getType()->isBuiltinType()){
             llvm::outs()<<"Field is a fundamental type\n";
-            rewriter.InsertTextAfter(semiLoc, "numa<"+fields->getType().getAsString()+","+std::to_string(nodeID)+"> "+ fields->getNameAsString()+";\n" );
+            rewriter.InsertTextAfter(rewriteLocation, "numa<"+fields->getType().getAsString()+","+std::to_string(nodeID)+"> "+ fields->getNameAsString()+";\n" );
         }
 
         /*Case where the field is a built in type and a pointer*/
         else if(fields->getType()->isPointerType() && fields->getType()->getPointeeType()->isBuiltinType()){
                 llvm::outs()<<"Field is a pointer\n";
-                rewriter.InsertTextAfter(semiLoc, "numa<"+fields->getType()->getPointeeType().getAsString() +","+std::to_string(nodeID)+">* "+ fields->getNameAsString()+";\n" );
+                rewriter.InsertTextAfter(rewriteLocation, "numa<"+fields->getType()->getPointeeType().getAsString() +","+std::to_string(nodeID)+">* "+ fields->getNameAsString()+";\n" );
             
         }
 
         /*Case where the field is not a built in type but is a pointer*/
         else if(fields->getType()->isPointerType() && !fields->getType()->getPointeeType()->isBuiltinType()){
             llvm::outs()<<"Field is a pointer to a user defined class\n";
-            rewriter.InsertTextAfter(semiLoc, "numa<"+fields->getType()->getPointeeType().getAsString() +","+std::to_string(nodeID)+">* "+ fields->getNameAsString()+";\n" );
+            rewriter.InsertTextAfter(rewriteLocation, "numa<"+fields->getType()->getPointeeType().getAsString() +","+std::to_string(nodeID)+">* "+ fields->getNameAsString()+";\n" );
             
             if(NumaSpeclExists(QualType(fields->getType()->getPointeeCXXRecordDecl()->getTypeForDecl(),0) , nodeID)){
                 llvm::outs() << "The numa template specialization for " << fields->getNameAsString() << " and " << nodeID << " already exists\n";
@@ -818,7 +856,82 @@ void TemplateArgTransformer::constructSpecialization(clang::ASTContext* Context,
         /*Case where the field is not a built in type and not a pointer*/
         else if (!fields->getType()->isBuiltinType() && !fields->getType()->isPointerType()){
             llvm::outs()<<"Field is a user defined class but not a pointer\n";
-            rewriter.InsertTextAfter(semiLoc, "numa<"+fields->getType().getAsString() +","+std::to_string(nodeID)+"> "+ fields->getNameAsString()+";\n" );
+            rewriter.InsertTextAfter(rewriteLocation, "numa<"+fields->getType().getAsString() +","+std::to_string(nodeID)+"> "+ fields->getNameAsString()+";\n" );
+            if(NumaSpeclExists(QualType(fields->getType()->getAsCXXRecordDecl()->getTypeForDecl(),0), nodeID)){
+                llvm::outs() << "The numa template specialization for " << fields->getNameAsString() << " and " << nodeID << " already exists\n";
+                continue;
+            }else{
+                llvm::outs() << "About to specialize "<< fields->getNameAsString() << " as numa\n";
+                //insert to specialized classes
+                TemplateArgTransformer::specializedClasses.insert({QualType(fields->getType()->getAsCXXRecordDecl()->getTypeForDecl(),0), nodeID});
+                constructSpecialization(Context, fields->getType()->getAsCXXRecordDecl(), nodeID);
+            }
+        }
+        else{
+            llvm::outs()<<"None of the above\n";
+        }
+         
+    }   
+
+
+    for(auto method : publicMethods){
+            //check if constructor
+        if (auto Ctor = dyn_cast<CXXConstructorDecl>(method)){
+            if(Ctor->isUserProvided()){
+                numaConstructors(Ctor, rewriteLocation, nodeID);
+            }
+        }
+        else if (auto Dtor = dyn_cast<CXXDestructorDecl>(method)){
+            if(Dtor->isUserProvided()){
+                numaDestructors(Dtor, rewriteLocation, nodeID);
+            }
+        }
+        else{
+        }
+    }
+}
+
+void TemplateArgTransformer::numaPrivateMembers(clang::ASTContext* Context, clang::SourceLocation& rewriteLocation, std::vector<FieldDecl*> privateFields, std::vector<CXXMethodDecl*> privateMethods, int64_t nodeID){
+        rewriter.InsertTextAfter(rewriteLocation, "private:\n");
+     for(auto fields :privateFields){
+        llvm::outs() << "field about to be checked is " << fields->getNameAsString() << "\n";
+        //QualType fieldType = QualType(classDecl->getTypeForDecl(),0);
+
+        /*Case where the field is a built in type but not a pointer */
+        if(fields->getType()->isBuiltinType()){
+            llvm::outs()<<"Field is a fundamental type\n";
+            rewriter.InsertTextAfter(rewriteLocation, "numa<"+fields->getType().getAsString()+","+std::to_string(nodeID)+"> "+ fields->getNameAsString()+";\n" );
+        }
+
+        /*Case where the field is a built in type and a pointer*/
+        else if(fields->getType()->isPointerType() && fields->getType()->getPointeeType()->isBuiltinType()){
+                llvm::outs()<<"Field is a pointer\n";
+                rewriter.InsertTextAfter(rewriteLocation, "numa<"+fields->getType()->getPointeeType().getAsString() +","+std::to_string(nodeID)+">* "+ fields->getNameAsString()+";\n" );
+            
+        }
+
+        /*Case where the field is not a built in type but is a pointer*/
+        else if(fields->getType()->isPointerType() && !fields->getType()->getPointeeType()->isBuiltinType()){
+            llvm::outs()<<"Field is a pointer to a user defined class\n";
+            rewriter.InsertTextAfter(rewriteLocation, "numa<"+fields->getType()->getPointeeType().getAsString() +","+std::to_string(nodeID)+">* "+ fields->getNameAsString()+";\n" );
+            
+            if(NumaSpeclExists(QualType(fields->getType()->getPointeeCXXRecordDecl()->getTypeForDecl(),0) , nodeID)){
+                llvm::outs() << "The numa template specialization for " << fields->getNameAsString() << " and " << nodeID << " already exists\n";
+                continue;
+            }else{
+
+            llvm::outs() << "About to specialize "<< fields->getNameAsString() << " as numa\n";
+
+            //insert to specialized classes
+            TemplateArgTransformer::specializedClasses.insert({QualType(fields->getType()->getPointeeCXXRecordDecl()->getTypeForDecl(),0) , nodeID});
+
+            constructSpecialization(Context, fields->getType()->getPointeeType()->getAsCXXRecordDecl(), nodeID);
+            }
+        }
+        /*Case where the field is not a built in type and not a pointer*/
+        else if (!fields->getType()->isBuiltinType() && !fields->getType()->isPointerType()){
+            llvm::outs()<<"Field is a user defined class but not a pointer\n";
+            rewriter.InsertTextAfter(rewriteLocation, "numa<"+fields->getType().getAsString() +","+std::to_string(nodeID)+"> "+ fields->getNameAsString()+";\n" );
             if(NumaSpeclExists(QualType(fields->getType()->getAsCXXRecordDecl()->getTypeForDecl(),0), nodeID)){
                 llvm::outs() << "The numa template specialization for " << fields->getNameAsString() << " and " << nodeID << " already exists\n";
                 continue;
@@ -835,19 +948,132 @@ void TemplateArgTransformer::constructSpecialization(clang::ASTContext* Context,
         else{
             llvm::outs()<<"None of the above\n";
         }
-         
+    } 
+    for(auto method : privateMethods){
+        //check if constructor
+    if (auto Ctor = dyn_cast<CXXConstructorDecl>(method)){
+        if(Ctor->isUserProvided()){
+            numaConstructors(Ctor, rewriteLocation, nodeID);
+        }
     }
-    rewriter.InsertTextAfter(semiLoc, "};\n");  
-
- 
-    //numaFields(classDecl, nodeID);
-    // numaConstructors(classDecl, nodeID);
-    // numaHeapInMethods(classDecl, nodeID);
-    fileIDs.push_back(rewriter.getSourceMgr().getFileID(rewriteLoc));
-
+    else if (auto Dtor = dyn_cast<CXXDestructorDecl>(method)){
+        if(Dtor->isUserProvided()){
+            numaDestructors(Dtor, rewriteLocation, nodeID);
+        }
+    }
+    else{
+    }
+}
 }
 
+void TemplateArgTransformer::numaConstructors(clang::CXXConstructorDecl* constructor, clang::SourceLocation& rewriteLocation, int64_t nodeID){
+    if(constructor->getNumCtorInitializers() > 0){
+        llvm::outs() << "Constructor "<<constructor->getNameAsString()<< " has an initializer list\n";
+        llvm::outs() << "The initializer list has " << constructor->getNumCtorInitializers() << " initializers\n";
+        for (auto Init = constructor->init_begin(); Init != constructor->init_end(); ++Init) {
+            if ((*Init)->isMemberInitializer()) {
+                FieldDecl *Member = (*Init)->getMember();
+                llvm::outs() << "  Initializes member: " << Member->getNameAsString() << "\n";
+            } else if ((*Init)->isBaseInitializer()) {
+                // Type *BaseType = (*Init)->getBaseClass()->getPointeeType().getTypePtr();
+                // llvm::outs() << "  Initializes base: " << BaseType->getAsCXXRecordDecl()->getNameAsString() << "\n";
+            } else if ((*Init)->isDelegatingInitializer()) {
+                llvm::outs() << "  Delegating initializer to another constructor\n";
+            }
+        }
+        llvm::outs() << "Construcor has " << constructor->getNumCtorInitializers() << " initializers\n";
+        std::string constructor_name = constructor->getNameAsString();
+        //constructor->dump();
+        //get the entire line of the constructor as text
+        SourceRange ConstructorRange = constructor->getSourceRange();
+        const SourceManager &SM = constructor->getASTContext().getSourceManager();
+        llvm::StringRef ConstructorText = Lexer::getSourceText(CharSourceRange::getTokenRange(ConstructorRange), SM, constructor->getASTContext().getLangOpts());
+        llvm::outs() << "Constructor Text:\n" << ConstructorText << "\n";
+        std::string line = (std::string)ConstructorText;
+        //llvm::outs()<<replaceConstructWithInits(line)<<"\n"; 
+        rewriter.InsertTextAfter(rewriteLocation, replaceConstructWithInits(line));
+        rewriter.InsertTextAfter(rewriteLocation, "\n");
+    }
 
+    else{
+        if(constructor->isUserProvided()){   
+            llvm::outs() << "Constructor "<<constructor->getNameAsString()<< " has no initializer list\n";
+            rewriter.InsertTextAfter(rewriteLocation, "numa(");
+            //if the constructor has no parameters, we just close the constructor
+            if (constructor->parameters().size() == 0){
+                rewriter.InsertTextAfter(rewriteLocation, ");\n");
+            }
+            //rewrite the paramenters of the constructor
+            else{
+                for(auto param : constructor->parameters())
+                {
+                    rewriter.InsertTextAfter(rewriteLocation, param->getType().getAsString() + " " + param->getNameAsString());
+                    //avoid the last comma
+                    if(param != constructor->parameters().back())
+                    {
+                        rewriter.InsertTextAfter(rewriteLocation, ", ");
+                    }
+                }
+                //after rewriting the parameters, we close the constructor
+                rewriter.InsertTextAfter(rewriteLocation, ")");
+
+                //if the constructor has a body, before we rewrite the body, we have to replace the new expression with new numa<T,N>
+                if(constructor->hasBody()){
+                    llvm::outs() << "constructor has a body\n" ;
+                    constructor->dump();
+                    SourceRange BodyRange = constructor->getBody()->getSourceRange();
+                    const SourceManager &SM = constructor->getASTContext().getSourceManager();
+                    llvm::StringRef BodyText = Lexer::getSourceText(CharSourceRange::getTokenRange(BodyRange), SM, constructor->getASTContext().getLangOpts());
+                    llvm::outs() << "Constructor Body:\n" << BodyText << "\n";
+                    //Pass it through a function that searches for 'new' in the body and replaces 'new''s return type with numa<T,N>
+                    //std::string numaedBody = replaceNewType(std::string(BodyText), N);
+                    //Then we replace the body 
+                    rewriter.InsertTextAfter(rewriteLocation, BodyText);
+                    rewriter.InsertTextAfter(rewriteLocation, "\n");
+                }
+            }
+        }
+    }
+}
+
+void TemplateArgTransformer::numaDestructors(clang::CXXDestructorDecl* destructor, clang::SourceLocation& rewriteLocation, int64_t nodeID){
+    if(destructor->isUserProvided()){
+        rewriter.InsertTextAfter(rewriteLocation, "~numa(");
+            //if the constructor has no parameters, we just close the constructor
+        if (destructor->parameters().size() == 0){
+            rewriter.InsertTextAfter(rewriteLocation, ");\n");
+        }
+        //rewrite the paramenters of the constructor
+        else{
+            for(auto param : destructor->parameters())
+            {
+                rewriter.InsertTextAfter(rewriteLocation, param->getType().getAsString() + " " + param->getNameAsString());
+                //avoid the last comma
+                if(param != destructor->parameters().back())
+                {
+                    rewriter.InsertTextAfter(rewriteLocation, ", ");
+                }
+            }
+            //after rewriting the parameters, we close the constructor
+            rewriter.InsertTextAfter(rewriteLoc, ")");
+
+            //if the constructor has a body, before we rewrite the body, we have to replace the new expression with new numa<T,N>
+            if(destructor->hasBody()){
+                llvm::outs() << "constructor has a body\n" ;
+                destructor->dump();
+                SourceRange BodyRange = destructor->getBody()->getSourceRange();
+                const SourceManager &SM = destructor->getASTContext().getSourceManager();
+                llvm::StringRef BodyText = Lexer::getSourceText(CharSourceRange::getTokenRange(BodyRange), SM, destructor->getASTContext().getLangOpts());
+                llvm::outs() << "Constructor Body:\n" << BodyText << "\n";
+                //Pass it through a function that searches for 'new' in the body and replaces 'new''s return type with numa<T,N>
+                //std::string numaedBody = replaceNewType(std::string(BodyText), N);
+                //Then we replace the body 
+                rewriter.InsertTextAfter(rewriteLocation, BodyText);
+                rewriter.InsertTextAfter(rewriteLocation, "\n");
+            }
+        }
+    }
+}
 
 
 void TemplateArgTransformer::run(const clang::ast_matchers::MatchFinder::MatchResult &result){

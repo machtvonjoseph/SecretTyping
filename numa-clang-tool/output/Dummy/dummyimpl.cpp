@@ -3,18 +3,20 @@
 //#include "numatype.hpp"
 
 class SomeClass{
-    public:
-    SomeClass(){};
     int a;
     MyVector mv;
-
-    virtual void someFunction(){
-        return;
-    }
+    public:
+        SomeClass(){};
+        virtual void someFunction(){
+            return;
+        }
 };
 
 template<>
 class numa<SomeClass,3>{
+public:
+numa():numa(){}
+private:
 numa<int,3> a;
 numa<MyVector,3> mv;
 };

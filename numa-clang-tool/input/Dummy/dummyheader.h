@@ -8,16 +8,17 @@ void dummyFunction(){
 }
 
 class MyVector{  
-    public:
+    void setData(int idx, int value);
+public:
     int* data;
     SomeOtherClass* soc;
     int valueData;
-    SomeOtherClass valuesoc;
-public:
     MyVector():MyVector(10,0){};
     MyVector(int sz, int val);
+private:
+    SomeOtherClass valuesoc;
     int getData(int idx);
-    void setData(int idx, int value);
+    
 };
 MyVector::MyVector(int sz, int val = 0){
     int assignment = val;
