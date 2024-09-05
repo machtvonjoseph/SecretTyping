@@ -82,7 +82,7 @@ void NumaConsumer::HandleTranslationUnit(clang::ASTContext &context){
         rewriterFileNames.push_back( it->first.getName());
     }
 
-    //includeNumaHeader(context);       #turn this on to include numaheaders
+    includeNumaHeader(context);       //turn this on to include numaheaders
     WriteOutput(rewriter.getSourceMgr());
 }
     

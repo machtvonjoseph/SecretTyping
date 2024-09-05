@@ -1,3 +1,4 @@
+#include "numatype.hpp"
 #ifndef DUMMYHEADER_H
 #define DUMMYHEADER_H
 
@@ -35,6 +36,7 @@ numa(int sz, int val){
 private:
 numa<SomeOtherClass,3> valuesoc;
 };
+
 MyVector::MyVector(int sz, int val = 0){
     int assignment = val;
     data = new int[sz];

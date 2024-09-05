@@ -20,6 +20,7 @@ private:
     int getData(int idx);
     
 };
+
 MyVector::MyVector(int sz, int val = 0){
     int assignment = val;
     data = new int[sz];

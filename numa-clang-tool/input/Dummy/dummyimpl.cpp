@@ -5,6 +5,7 @@
 class SomeClass{
     int a;
     MyVector mv;
+    SomeOtherClass soc;
     public:
         SomeClass(){};
         void someFunction(){

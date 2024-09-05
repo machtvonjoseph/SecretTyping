@@ -9,10 +9,12 @@ void anotherdummyFunction(){
 }
 class SomeOtherClass{
     public:
-    SomeOtherClass(){};
+    //SomeOtherClass(){};
     int a;
 
     void someOtherFunction();
+    SomeOtherClass() : a(0)
+	{}
 };
 
 void SomeOtherClass::someOtherFunction(){

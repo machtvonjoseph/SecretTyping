@@ -5,6 +5,7 @@
 class SomeClass{
     int a;
     MyVector mv;
+    SomeOtherClass soc;
     public:
         SomeClass(){};
         virtual void someFunction(){
@@ -15,10 +16,11 @@ class SomeClass{
 template<>
 class numa<SomeClass,3>{
 public:
-numa():numa(){}
+numa();
 private:
 numa<int,3> a;
 numa<MyVector,3> mv;
+numa<SomeOtherClass,3> soc;
 };
 int main(){
     numa<MyVector, 3>* v1 = new numa<MyVector, 3>();

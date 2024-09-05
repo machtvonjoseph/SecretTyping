@@ -1,3 +1,4 @@
+#include "numatype.hpp"
 #ifndef ANOTHERDUMMYHEADER_H
 #define ANOTHERDUMMYHEADER_H
 template <typename T, int N>
@@ -9,17 +10,20 @@ void anotherdummyFunction(){
 }
 class SomeOtherClass{
     public:
-    SomeOtherClass(){};
+    //SomeOtherClass(){};
     int a;
 
     virtual void someOtherFunction();
+    SomeOtherClass() : a(0)
+	{}
 };
 
 template<>
 class numa<SomeOtherClass,3>{
 public:
 numa<int,3> a;
-numa();
+numa():numa(0)
+	{}
 private:
 };
 

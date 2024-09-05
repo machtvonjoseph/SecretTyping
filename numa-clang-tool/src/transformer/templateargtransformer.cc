@@ -877,7 +877,9 @@ void TemplateArgTransformer::numaPublicMembers(clang::ASTContext* Context, clang
     for(auto method : publicMethods){
             //check if constructor
         if (auto Ctor = dyn_cast<CXXConstructorDecl>(method)){
+            
             if(Ctor->isUserProvided()){
+                llvm::outs() << "THE CONSTRUCTOR IS " << Ctor->getNameAsString() << "\n";
                 numaConstructors(Ctor, rewriteLocation, nodeID);
             }
         }
@@ -951,29 +953,42 @@ void TemplateArgTransformer::numaPrivateMembers(clang::ASTContext* Context, clan
     } 
     for(auto method : privateMethods){
         //check if constructor
-    if (auto Ctor = dyn_cast<CXXConstructorDecl>(method)){
-        if(Ctor->isUserProvided()){
-            numaConstructors(Ctor, rewriteLocation, nodeID);
+        if (auto Ctor = dyn_cast<CXXConstructorDecl>(method)){
+            
+            if(Ctor->isUserProvided()){
+                llvm::outs() << "THE CONSTRUCTOR IS " << Ctor->getNameAsString() << "\n";
+                numaConstructors(Ctor, rewriteLocation, nodeID);
+            }
+        }
+        else if (auto Dtor = dyn_cast<CXXDestructorDecl>(method)){
+            if(Dtor->isUserProvided()){
+                numaDestructors(Dtor, rewriteLocation, nodeID);
+            }
+        }
+        else{
         }
     }
-    else if (auto Dtor = dyn_cast<CXXDestructorDecl>(method)){
-        if(Dtor->isUserProvided()){
-            numaDestructors(Dtor, rewriteLocation, nodeID);
-        }
-    }
-    else{
-    }
-}
 }
 
 void TemplateArgTransformer::numaConstructors(clang::CXXConstructorDecl* constructor, clang::SourceLocation& rewriteLocation, int64_t nodeID){
+
     if(constructor->getNumCtorInitializers() > 0){
+        bool isWritten = false;
         llvm::outs() << "Constructor "<<constructor->getNameAsString()<< " has an initializer list\n";
         llvm::outs() << "The initializer list has " << constructor->getNumCtorInitializers() << " initializers\n";
         for (auto Init = constructor->init_begin(); Init != constructor->init_end(); ++Init) {
-            if ((*Init)->isMemberInitializer()) {
-                FieldDecl *Member = (*Init)->getMember();
-                llvm::outs() << "  Initializes member: " << Member->getNameAsString() << "\n";
+            if ((*Init)->isWritten()) {
+                // FieldDecl *Member = (*Init)->getMember();
+                // llvm::outs() << "  Initializes member: " << Member->getNameAsString() << "\n";
+                llvm::outs() << "  Initializes member is written\n";
+                isWritten = true;
+                // if (Member->hasInClassInitializer()){
+                //     llvm::outs() << "  Member has in class initializer\n";
+                // }
+                // else{
+                //     llvm::outs() << "  Member has no in class initializer\n";
+                // }
+                //TODO take care of indirect member initializer construction.
             } else if ((*Init)->isBaseInitializer()) {
                 // Type *BaseType = (*Init)->getBaseClass()->getPointeeType().getTypePtr();
                 // llvm::outs() << "  Initializes base: " << BaseType->getAsCXXRecordDecl()->getNameAsString() << "\n";
@@ -981,24 +996,23 @@ void TemplateArgTransformer::numaConstructors(clang::CXXConstructorDecl* constru
                 llvm::outs() << "  Delegating initializer to another constructor\n";
             }
         }
-        llvm::outs() << "Construcor has " << constructor->getNumCtorInitializers() << " initializers\n";
-        std::string constructor_name = constructor->getNameAsString();
-        //constructor->dump();
-        //get the entire line of the constructor as text
-        SourceRange ConstructorRange = constructor->getSourceRange();
-        const SourceManager &SM = constructor->getASTContext().getSourceManager();
-        llvm::StringRef ConstructorText = Lexer::getSourceText(CharSourceRange::getTokenRange(ConstructorRange), SM, constructor->getASTContext().getLangOpts());
-        llvm::outs() << "Constructor Text:\n" << ConstructorText << "\n";
-        std::string line = (std::string)ConstructorText;
-        //llvm::outs()<<replaceConstructWithInits(line)<<"\n"; 
-        rewriter.InsertTextAfter(rewriteLocation, replaceConstructWithInits(line));
-        rewriter.InsertTextAfter(rewriteLocation, "\n");
-    }
-
-    else{
-        if(constructor->isUserProvided()){   
+        if(isWritten){
+            std::string constructor_name = constructor->getNameAsString();
+            //constructor->dump();
+            //get the entire line of the constructor as text
+            SourceRange ConstructorRange = constructor->getSourceRange();
+            const SourceManager &SM = constructor->getASTContext().getSourceManager();
+            llvm::StringRef ConstructorText = Lexer::getSourceText(CharSourceRange::getTokenRange(ConstructorRange), SM, constructor->getASTContext().getLangOpts());
+            llvm::outs() << "Constructor Text:\n" << ConstructorText << "\n";
+            std::string line = (std::string)ConstructorText;
+            //llvm::outs()<<replaceConstructWithInits(line)<<"\n"; 
+            rewriter.InsertTextAfter(rewriteLocation, replaceConstructWithInits(line));
+            rewriter.InsertTextAfter(rewriteLocation, "\n");
+        }
+        else{
             llvm::outs() << "Constructor "<<constructor->getNameAsString()<< " has no initializer list\n";
             rewriter.InsertTextAfter(rewriteLocation, "numa(");
+
             //if the constructor has no parameters, we just close the constructor
             if (constructor->parameters().size() == 0){
                 rewriter.InsertTextAfter(rewriteLocation, ");\n");
@@ -1031,10 +1045,51 @@ void TemplateArgTransformer::numaConstructors(clang::CXXConstructorDecl* constru
                     rewriter.InsertTextAfter(rewriteLocation, BodyText);
                     rewriter.InsertTextAfter(rewriteLocation, "\n");
                 }
-            }
+            } 
         }
     }
+    else{
+        llvm::outs() << "Constructor "<<constructor->getNameAsString()<< " has no initializer list\n";
+            rewriter.InsertTextAfter(rewriteLocation, "numa(");
+
+        //if the constructor has no parameters, we just close the constructor
+        if (constructor->parameters().size() == 0){
+            rewriter.InsertTextAfter(rewriteLocation, ");\n");
+        }
+        //rewrite the paramenters of the constructor
+        else{
+            for(auto param : constructor->parameters())
+            {
+                rewriter.InsertTextAfter(rewriteLocation, param->getType().getAsString() + " " + param->getNameAsString());
+                //avoid the last comma
+                if(param != constructor->parameters().back())
+                {
+                    rewriter.InsertTextAfter(rewriteLocation, ", ");
+                }
+            }
+            //after rewriting the parameters, we close the constructor
+            rewriter.InsertTextAfter(rewriteLocation, ")");
+
+            //if the constructor has a body, before we rewrite the body, we have to replace the new expression with new numa<T,N>
+            if(constructor->hasBody()){
+                llvm::outs() << "constructor has a body\n" ;
+                constructor->dump();
+                SourceRange BodyRange = constructor->getBody()->getSourceRange();
+                const SourceManager &SM = constructor->getASTContext().getSourceManager();
+                llvm::StringRef BodyText = Lexer::getSourceText(CharSourceRange::getTokenRange(BodyRange), SM, constructor->getASTContext().getLangOpts());
+                llvm::outs() << "Constructor Body:\n" << BodyText << "\n";
+                //Pass it through a function that searches for 'new' in the body and replaces 'new''s return type with numa<T,N>
+                //std::string numaedBody = replaceNewType(std::string(BodyText), N);
+                //Then we replace the body 
+                rewriter.InsertTextAfter(rewriteLocation, BodyText);
+                rewriter.InsertTextAfter(rewriteLocation, "\n");
+            }
+        } 
+    }
 }
+
+        
+
 
 void TemplateArgTransformer::numaDestructors(clang::CXXDestructorDecl* destructor, clang::SourceLocation& rewriteLocation, int64_t nodeID){
     if(destructor->isUserProvided()){
