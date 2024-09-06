@@ -873,9 +873,9 @@ void TemplateArgTransformer::numaPublicMembers(clang::ASTContext* Context, clang
          
     }   
 
-
     for(auto method : publicMethods){
             //check if constructor
+        llvm::outs() << "The method name is " << method->getNameAsString() << "\n";
         if (auto Ctor = dyn_cast<CXXConstructorDecl>(method)){
             
             if(Ctor->isUserProvided()){
@@ -885,6 +885,7 @@ void TemplateArgTransformer::numaPublicMembers(clang::ASTContext* Context, clang
         }
         else if (auto Dtor = dyn_cast<CXXDestructorDecl>(method)){
             if(Dtor->isUserProvided()){
+                llvm::outs() << "THE DESTRUCTOR IS " << Dtor->getNameAsString() << "\n";
                 numaDestructors(Dtor, rewriteLocation, nodeID);
             }
         }
@@ -1019,11 +1020,14 @@ void TemplateArgTransformer::numaConstructors(clang::CXXConstructorDecl* constru
         }
         //rewrite the paramenters of the constructor
         else{
-            for(auto param : constructor->parameters())
+            for(auto param : constructor->getDefinition()->parameters())
             {
+                //get the implementation of the constructor
+                
                 rewriter.InsertTextAfter(rewriteLocation, param->getType().getAsString() + " " + param->getNameAsString());
+                llvm::outs() << "The parameter is " << param->getType().getAsString() << " and the name is " << param->getNameAsString() << "\n";
                 //avoid the last comma
-                if(param != constructor->parameters().back())
+                if(param != constructor->getDefinition()->parameters().back())
                 {
                     rewriter.InsertTextAfter(rewriteLocation, ", ");
                 }
@@ -1054,43 +1058,60 @@ void TemplateArgTransformer::numaConstructors(clang::CXXConstructorDecl* constru
 
 
 void TemplateArgTransformer::numaDestructors(clang::CXXDestructorDecl* destructor, clang::SourceLocation& rewriteLocation, int64_t nodeID){
-    if(destructor->isUserProvided()){
-        rewriter.InsertTextAfter(rewriteLocation, "~numa(");
-            //if the constructor has no parameters, we just close the constructor
-        if (destructor->parameters().size() == 0){
-            rewriter.InsertTextAfter(rewriteLocation, ");\n");
-        }
-        //rewrite the paramenters of the constructor
-        else{
-            for(auto param : destructor->parameters())
-            {
-                rewriter.InsertTextAfter(rewriteLocation, param->getType().getAsString() + " " + param->getNameAsString());
-                //avoid the last comma
-                if(param != destructor->parameters().back())
-                {
-                    rewriter.InsertTextAfter(rewriteLocation, ", ");
-                }
-            }
-            //after rewriting the parameters, we close the constructor
-            rewriter.InsertTextAfter(rewriteLoc, ")");
+    //if the constructor has no parameters, we just close the constructor
 
-            //if the constructor has a body, before we rewrite the body, we have to replace the new expression with new numa<T,N>
-            if(destructor->hasBody()){
-                llvm::outs() << "constructor has a body\n" ;
-                destructor->dump();
-                SourceRange BodyRange = destructor->getBody()->getSourceRange();
-                const SourceManager &SM = destructor->getASTContext().getSourceManager();
-                llvm::StringRef BodyText = Lexer::getSourceText(CharSourceRange::getTokenRange(BodyRange), SM, destructor->getASTContext().getLangOpts());
-                llvm::outs() << "Constructor Body:\n" << BodyText << "\n";
-                //Pass it through a function that searches for 'new' in the body and replaces 'new''s return type with numa<T,N>
-                //std::string numaedBody = replaceNewType(std::string(BodyText), N);
-                //Then we replace the body 
-                rewriter.InsertTextAfter(rewriteLocation, BodyText);
-                rewriter.InsertTextAfter(rewriteLocation, "\n");
-            }
+    rewriter.InsertTextAfter(rewriteLocation, "~numa(");
+    if (destructor->parameters().size() == 0){
+        rewriter.InsertTextAfter(rewriteLocation, ")\n");
+    
+        if(destructor->hasBody()){
+            llvm::outs() << "destructor has a body\n" ;
+            destructor->dump();
+            SourceRange BodyRange = destructor->getBody()->getSourceRange();
+            const SourceManager &SM = destructor->getASTContext().getSourceManager();
+            llvm::StringRef BodyText = Lexer::getSourceText(CharSourceRange::getTokenRange(BodyRange), SM, destructor->getASTContext().getLangOpts());
+            llvm::outs() << "Destructor Body:\n" << BodyText << "\n";
+            //Pass it through a function that searches for 'new' in the body and replaces 'new''s return type with numa<T,N>
+            //std::string numaedBody = replaceNewType(std::string(BodyText), N);
+            //Then we replace the body 
+            rewriter.InsertTextAfter(rewriteLocation, BodyText);
+            rewriter.InsertTextAfter(rewriteLocation, "\n");
         }
     }
+    //rewrite the paramenters of the constructor
+    else{
+        for(auto param : destructor->getDefinition()->parameters())
+        {
+            //get the implementation of the constructor
+            
+            rewriter.InsertTextAfter(rewriteLocation, param->getType().getAsString() + " " + param->getNameAsString());
+            llvm::outs() << "The parameter is " << param->getType().getAsString() << " and the name is " << param->getNameAsString() << "\n";
+            //avoid the last comma
+            if(param != destructor->getDefinition()->parameters().back())
+            {
+                rewriter.InsertTextAfter(rewriteLocation, ", ");
+            }
+        }
+        //after rewriting the parameters, we close the constructor
+        rewriter.InsertTextAfter(rewriteLocation, ")");
+
+        //if the constructor has a body, before we rewrite the body, we have to replace the new expression with new numa<T,N>
+        if(destructor->hasBody()){
+            llvm::outs() << "destructor has a body\n" ;
+            destructor->dump();
+            SourceRange BodyRange = destructor->getBody()->getSourceRange();
+            const SourceManager &SM = destructor->getASTContext().getSourceManager();
+            llvm::StringRef BodyText = Lexer::getSourceText(CharSourceRange::getTokenRange(BodyRange), SM, destructor->getASTContext().getLangOpts());
+            llvm::outs() << "Destructor Body:\n" << BodyText << "\n";
+            //Pass it through a function that searches for 'new' in the body and replaces 'new''s return type with numa<T,N>
+            //std::string numaedBody = replaceNewType(std::string(BodyText), N);
+            //Then we replace the body 
+            rewriter.InsertTextAfter(rewriteLocation, BodyText);
+            rewriter.InsertTextAfter(rewriteLocation, "\n");
+        }
+    } 
 }
+
 
 
 void TemplateArgTransformer::run(const clang::ast_matchers::MatchFinder::MatchResult &result){

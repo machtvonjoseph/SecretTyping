@@ -30,11 +30,14 @@ numa():numa(0)
 numa(int initData){
 	data = initData;
 }
-numa(int , Node * ){
+numa(int initData, Node * node){
 	data = initData;
 	link = node;
 }
-~numa();
+~numa()
+{
+	link = nullptr;
+}
 private:
 numa<int,1> data;
 numa<Node,1>* link;

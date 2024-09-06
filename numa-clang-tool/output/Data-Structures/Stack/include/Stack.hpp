@@ -93,7 +93,22 @@ numa()
 {
 	top = NULL;
 }
-~numa();
+~numa()
+{
+	
+	if(top == NULL)
+	{
+		return;
+	}
+	Node *temp;
+	while(top != NULL)
+	{
+		temp = top;
+		top = top->getLink();
+		delete temp;
+	}
+
+}
 private:
 numa<Node,1>* top;
 };
