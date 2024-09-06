@@ -1,3 +1,4 @@
+#include "numatype.hpp"
 /*! \file Stack.hpp
  * \brief Interface for a simple Stack class
  * \author Nii Mante
@@ -48,7 +49,7 @@ public:
 	 *
 	 * \sa Stack::pop()
 	 */
-	~Stack();
+	virtual ~Stack();
 
 	/*!
 	 * \brief Function for removing a single stack node
@@ -59,7 +60,7 @@ public:
 	 *
 	 * \return The data from the removed node.
 	 */
-	int pop();
+	virtual int pop();
 
 	/*!
 	 * \brief Push function for adding stack variables
@@ -71,7 +72,7 @@ public:
 	 * \note To avoid Memory Allocation issues, if allocation fails (i.e. overflow)
 	 	Stack::push() is returned from immediately.
 	 */
-	void push(int);
+	virtual void push(int);
 
 
 	/*!
@@ -80,9 +81,21 @@ public:
 	 * This function iterates over and prints each node in the stack.
 	 * The first node printed is the top Node.
 	 */
-	void display();
+	virtual void display();
 
 
+};
+
+template<>
+class numa<Stack,1>{
+public:
+numa()
+{
+	top = NULL;
+}
+~numa();
+private:
+numa<Node,1>* top;
 };
 
 

@@ -16,17 +16,17 @@ void NumaConsumer::WriteOutput(clang::SourceManager &SM){
             FileID FID= SM.getOrCreateFileID(it->first, SrcMgr::CharacteristicKind::C_User);
             auto buffer = rewriter.getRewriteBufferFor(FID);
             if(buffer){
-                llvm::outs() << "File ID: " << FID.getHashValue() << " File Name: " << it->first.getName() << "\n";
+                // llvm::outs() << "File ID: " << FID.getHashValue() << " File Name: " << it->first.getName() << "\n";
                 //change /input to /output in File Name
                 SourceLocation Loc = SM.getLocForStartOfFile(FID);
                 
                 if(SM.isInSystemHeader(Loc)){
-                    llvm::outs() << "Skipping system header\n";
+                    // llvm::outs() << "Skipping system header\n";
                     continue;
                 }
 
                 if(it->first.getName().find("../numaLib/numatype.hpp") != std::string::npos){
-                    llvm::outs() << "Skipping numaLib/numatype.hpp\n";
+                    // llvm::outs() << "Skipping numaLib/numatype.hpp\n";
                     continue;
                 }
 

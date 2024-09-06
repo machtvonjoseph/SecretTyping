@@ -1,3 +1,4 @@
+#include "numatype.hpp"
 #ifndef _NODE_HPP_
 #define _NODE_HPP_
 
@@ -12,13 +13,31 @@ public:
 	{}
 	Node(int initData);
 	Node(int, Node*);
-	Node *getLink();
-	void setLink(Node *n);
+	virtual Node *getLink();
+	virtual void setLink(Node *n);
 
-	int getData();
-	void setData(int n);
+	virtual int getData();
+	virtual void setData(int n);
 
-	~Node();
+	virtual ~Node();
+};
+
+template<>
+class numa<Node,1>{
+public:
+numa():numa(0)
+	{}
+numa(int initData){
+	data = initData;
+}
+numa(int , Node * ){
+	data = initData;
+	link = node;
+}
+~numa();
+private:
+numa<int,1> data;
+numa<Node,1>* link;
 };
 
 

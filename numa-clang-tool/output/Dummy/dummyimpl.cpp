@@ -8,19 +8,9 @@ class SomeClass{
     SomeOtherClass soc;
     public:
         SomeClass(){};
-        virtual void someFunction(){
+        void someFunction(){
             return;
         }
-};
-
-template<>
-class numa<SomeClass,3>{
-public:
-numa();
-private:
-numa<int,3> a;
-numa<MyVector,3> mv;
-numa<SomeOtherClass,3> soc;
 };
 int main(){
     numa<MyVector, 3>* v1 = new numa<MyVector, 3>();
