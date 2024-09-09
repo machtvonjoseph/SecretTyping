@@ -540,6 +540,30 @@ src/CMakeFiles/clang-tool.dir/main.cc.o: \
  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
  /usr/include/c++/11/bits/fstream.tcc \
+ /usr/local/include/clang/ASTMatchers/ASTMatchers.h \
+ /usr/local/include/clang/AST/ASTTypeTraits.h \
+ /usr/local/include/clang/AST/CXXInheritance.h \
+ /usr/local/include/clang/AST/TypeOrdering.h \
+ /usr/local/include/clang/AST/DeclFriend.h \
+ /usr/local/include/clang/AST/OpenMPClause.h \
+ /usr/local/include/llvm/Frontend/OpenMP/OMPAssume.h \
+ /usr/local/include/llvm/Frontend/OpenMP/OMPContext.h \
+ /usr/local/include/clang/AST/ParentMapContext.h \
+ /usr/local/include/clang/AST/StmtObjC.h \
+ /usr/local/include/clang/AST/StmtOpenMP.h \
+ /usr/local/include/clang/ASTMatchers/ASTMatchersInternal.h \
+ /usr/local/include/llvm/Support/ManagedStatic.h \
+ /usr/local/include/clang/ASTMatchers/ASTMatchersMacros.h \
+ /usr/local/include/clang/AST/RecursiveASTVisitor.h \
+ /usr/local/include/clang/AST/DeclOpenMP.h \
+ /usr/local/include/clang/AST/ExprConcepts.h \
+ /usr/local/include/clang/AST/ExprOpenMP.h \
+ /usr/local/include/clang/AST/OpenACCClause.h \
+ /usr/local/include/clang/Basic/OpenACCKinds.h \
+ /usr/local/include/clang/Basic/OpenACCClauses.def \
+ /usr/local/include/clang/AST/StmtOpenACC.h \
+ /usr/local/include/clang/AST/AttrVisitor.inc /usr/include/c++/11/sstream \
+ /usr/include/c++/11/bits/sstream.tcc \
  /usr/local/include/clang/CodeGen/ModuleBuilder.h \
  /usr/local/include/clang/Parse/ParseAST.h \
  /usr/local/include/llvm/TargetParser/Host.h \
@@ -549,5 +573,4 @@ src/CMakeFiles/clang-tool.dir/main.cc.o: \
  /usr/local/include/llvm/Config/AsmParsers.def \
  /usr/local/include/llvm/Config/Disassemblers.def \
  /usr/local/include/llvm/Config/TargetMCAs.def \
- /usr/local/include/llvm/Support/InitLLVM.h /usr/include/c++/11/sstream \
- /usr/include/c++/11/bits/sstream.tcc
+ /usr/local/include/llvm/Support/InitLLVM.h

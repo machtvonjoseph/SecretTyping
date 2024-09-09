@@ -979,7 +979,7 @@ src/CMakeFiles/clang-tool.dir/consumer/consumer.cc.o: ../src/consumer/consumer.c
   /usr/local/include/llvm/ADT/RewriteBuffer.h \
   /usr/local/include/llvm/ADT/DeltaTree.h \
   /usr/local/include/llvm/ADT/RewriteRope.h \
-  ../src/transformer/templateargtransformer.h \
+  ../src/transformer/RecursiveNumaTyper.h \
   ../src/transformer/transformer.h \
   /usr/local/include/clang/ASTMatchers/ASTMatchFinder.h \
   /usr/local/include/clang/ASTMatchers/ASTMatchers.h \
@@ -1078,7 +1078,6 @@ src/CMakeFiles/clang-tool.dir/consumer/consumer.cc.o: ../src/consumer/consumer.c
   /usr/local/include/llvm/ADT/PagedVector.h \
   /usr/local/include/llvm/ADT/StringExtras.h \
   /usr/local/include/llvm/Support/Timer.h \
-  ../src/transformer/templateargtransformer.h \
   /usr/local/include/clang/AST/RecursiveASTVisitor.h \
   /usr/local/include/clang/AST/DeclOpenMP.h \
   /usr/local/include/clang/AST/ExprConcepts.h \
@@ -1784,6 +1783,31 @@ src/CMakeFiles/clang-tool.dir/main.cc.o: ../src/main.cc \
   /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
   /usr/include/c++/11/bits/fstream.tcc \
+  /usr/local/include/clang/ASTMatchers/ASTMatchers.h \
+  /usr/local/include/clang/AST/ASTTypeTraits.h \
+  /usr/local/include/clang/AST/CXXInheritance.h \
+  /usr/local/include/clang/AST/TypeOrdering.h \
+  /usr/local/include/clang/AST/DeclFriend.h \
+  /usr/local/include/clang/AST/OpenMPClause.h \
+  /usr/local/include/llvm/Frontend/OpenMP/OMPAssume.h \
+  /usr/local/include/llvm/Frontend/OpenMP/OMPContext.h \
+  /usr/local/include/clang/AST/ParentMapContext.h \
+  /usr/local/include/clang/AST/StmtObjC.h \
+  /usr/local/include/clang/AST/StmtOpenMP.h \
+  /usr/local/include/clang/ASTMatchers/ASTMatchersInternal.h \
+  /usr/local/include/llvm/Support/ManagedStatic.h \
+  /usr/local/include/clang/ASTMatchers/ASTMatchersMacros.h \
+  /usr/local/include/clang/AST/RecursiveASTVisitor.h \
+  /usr/local/include/clang/AST/DeclOpenMP.h \
+  /usr/local/include/clang/AST/ExprConcepts.h \
+  /usr/local/include/clang/AST/ExprOpenMP.h \
+  /usr/local/include/clang/AST/OpenACCClause.h \
+  /usr/local/include/clang/Basic/OpenACCKinds.h \
+  /usr/local/include/clang/Basic/OpenACCClauses.def \
+  /usr/local/include/clang/AST/StmtOpenACC.h \
+  /usr/local/include/clang/AST/AttrVisitor.inc \
+  /usr/include/c++/11/sstream \
+  /usr/include/c++/11/bits/sstream.tcc \
   /usr/local/include/clang/CodeGen/ModuleBuilder.h \
   /usr/local/include/clang/Parse/ParseAST.h \
   /usr/local/include/llvm/TargetParser/Host.h \
@@ -1793,13 +1817,11 @@ src/CMakeFiles/clang-tool.dir/main.cc.o: ../src/main.cc \
   /usr/local/include/llvm/Config/AsmParsers.def \
   /usr/local/include/llvm/Config/Disassemblers.def \
   /usr/local/include/llvm/Config/TargetMCAs.def \
-  /usr/local/include/llvm/Support/InitLLVM.h \
-  /usr/include/c++/11/sstream \
-  /usr/include/c++/11/bits/sstream.tcc
+  /usr/local/include/llvm/Support/InitLLVM.h
 
-src/CMakeFiles/clang-tool.dir/transformer/templateargtransformer.cc.o: ../src/transformer/templateargtransformer.cc \
+src/CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.o: ../src/transformer/RecursiveNumaTyper.cc \
   /usr/include/stdc-predef.h \
-  ../src/transformer/templateargtransformer.h \
+  ../src/transformer/RecursiveNumaTyper.h \
   ../src/transformer/transformer.h \
   /usr/local/include/clang/ASTMatchers/ASTMatchFinder.h \
   /usr/local/include/clang/ASTMatchers/ASTMatchers.h \
@@ -2378,7 +2400,15 @@ src/CMakeFiles/clang-tool.dir/transformer/templateargtransformer.cc.o: ../src/tr
   /usr/include/c++/11/ostream \
   /usr/include/c++/11/bits/ostream.tcc \
   /usr/include/c++/11/bits/istream.tcc \
-  /usr/include/c++/11/bits/sstream.tcc
+  /usr/include/c++/11/bits/sstream.tcc \
+  ../src/utils/utils.h \
+  /usr/include/c++/11/fstream \
+  /usr/include/c++/11/bits/codecvt.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
+  /usr/include/c++/11/bits/fstream.tcc \
+  /usr/local/include/clang/Frontend/FrontendActions.h \
+  /usr/local/include/clang/Tooling/CompilationDatabase.h
 
 src/CMakeFiles/clang-tool.dir/transformer/transformer.cc.o: ../src/transformer/transformer.cc \
   /usr/include/stdc-predef.h \
@@ -3402,12 +3432,64 @@ src/CMakeFiles/clang-tool.dir/utils/utils.cc.o: ../src/utils/utils.cc \
   /usr/local/include/llvm/Option/OptSpecifier.h \
   /usr/local/include/llvm/Option/OptTable.h \
   /usr/local/include/clang/Frontend/FrontendActions.h \
-  /usr/local/include/clang/Tooling/CompilationDatabase.h
+  /usr/local/include/clang/Tooling/CompilationDatabase.h \
+  /usr/local/include/clang/ASTMatchers/ASTMatchers.h \
+  /usr/local/include/clang/AST/ASTTypeTraits.h \
+  /usr/local/include/clang/AST/Attr.h \
+  /usr/local/include/clang/Basic/OpenMPKinds.h \
+  /usr/local/include/llvm/Frontend/OpenMP/OMPConstants.h \
+  /usr/local/include/llvm/Frontend/OpenMP/OMP.h \
+  /usr/local/include/llvm/Frontend/OpenMP/OMP.h.inc \
+  /usr/local/include/llvm/Frontend/OpenMP/OMPKinds.def \
+  /usr/local/include/llvm/Frontend/OpenMP/OMPDeviceConstants.h \
+  /usr/local/include/clang/Basic/OpenMPKinds.def \
+  /usr/local/include/llvm/Frontend/HLSL/HLSLResource.h \
+  /usr/local/include/llvm/Support/DXILABI.h \
+  /usr/local/include/llvm/Support/CodeGen.h \
+  /usr/local/include/clang/AST/Attrs.inc \
+  /usr/local/include/clang/AST/CXXInheritance.h \
+  /usr/local/include/clang/AST/TypeOrdering.h \
+  /usr/local/include/llvm/ADT/SmallSet.h \
+  /usr/include/c++/11/set \
+  /usr/include/c++/11/bits/stl_set.h \
+  /usr/include/c++/11/bits/stl_multiset.h \
+  /usr/local/include/clang/AST/DeclFriend.h \
+  /usr/local/include/clang/AST/DeclTemplate.h \
+  /usr/local/include/clang/AST/DeclObjC.h \
+  /usr/local/include/clang/AST/ExprCXX.h \
+  /usr/local/include/clang/AST/StmtCXX.h \
+  /usr/local/include/clang/Basic/ExpressionTraits.h \
+  /usr/local/include/clang/AST/ExprObjC.h \
+  /usr/local/include/clang/AST/OpenMPClause.h \
+  /usr/local/include/llvm/Frontend/OpenMP/OMPAssume.h \
+  /usr/local/include/llvm/Frontend/OpenMP/OMPContext.h \
+  /usr/local/include/clang/AST/ParentMapContext.h \
+  /usr/local/include/clang/AST/StmtObjC.h \
+  /usr/local/include/clang/AST/StmtOpenMP.h \
+  /usr/local/include/clang/ASTMatchers/ASTMatchersInternal.h \
+  /usr/local/include/llvm/Support/ManagedStatic.h \
+  /usr/local/include/llvm/Support/Regex.h \
+  /usr/local/include/clang/ASTMatchers/ASTMatchersMacros.h \
+  /usr/local/include/clang/Rewrite/Core/Rewriter.h \
+  /usr/local/include/llvm/ADT/RewriteBuffer.h \
+  /usr/local/include/llvm/ADT/DeltaTree.h \
+  /usr/local/include/llvm/ADT/RewriteRope.h \
+  /usr/local/include/clang/AST/RecursiveASTVisitor.h \
+  /usr/local/include/clang/AST/DeclOpenMP.h \
+  /usr/local/include/clang/AST/ExprConcepts.h \
+  /usr/local/include/clang/AST/ExprOpenMP.h \
+  /usr/local/include/clang/AST/OpenACCClause.h \
+  /usr/local/include/clang/Basic/OpenACCKinds.h \
+  /usr/local/include/clang/Basic/OpenACCClauses.def \
+  /usr/local/include/clang/AST/StmtOpenACC.h \
+  /usr/local/include/clang/AST/AttrVisitor.inc \
+  /usr/include/c++/11/sstream \
+  /usr/include/c++/11/bits/sstream.tcc
 
 
 ../src/utils/utils.cc:
 
-../src/transformer/templateargtransformer.cc:
+../src/transformer/RecursiveNumaTyper.cc:
 
 /usr/local/include/llvm/Support/InitLLVM.h:
 
@@ -3691,6 +3773,8 @@ src/CMakeFiles/clang-tool.dir/utils/utils.cc.o: ../src/utils/utils.cc \
 
 /usr/include/c++/11/ext/aligned_buffer.h:
 
+../src/transformer/RecursiveNumaTyper.h:
+
 /usr/local/include/llvm/Support/FormatProviders.h:
 
 /usr/local/include/llvm/Frontend/Driver/CodeGenOptions.h:
@@ -3826,8 +3910,6 @@ src/CMakeFiles/clang-tool.dir/utils/utils.cc.o: ../src/utils/utils.cc \
 /usr/include/asm-generic/errno.h:
 
 /usr/local/include/llvm/ADT/DenseMap.h:
-
-../src/transformer/templateargtransformer.h:
 
 /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
 

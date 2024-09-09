@@ -1,5 +1,5 @@
 #include "consumer.h"
-#include "../transformer/templateargtransformer.h"
+#include "../transformer/RecursiveNumaTyper.h"
 #include <fstream>
 #include <string>
 #include "llvm/Support/WithColor.h"
@@ -73,9 +73,9 @@ void NumaConsumer::includeNumaHeader(clang::ASTContext &context){
 
 void NumaConsumer::HandleTranslationUnit(clang::ASTContext &context){
     llvm::outs() <<"Calling template arg transformer\n";
-    TemplateArgTransformer tempArgTransformer(context, rewriter);
+    RecursiveNumaTyper recursiveNumaTyper(context, rewriter);
     // // //fntransformer.start();
-    tempArgTransformer.start();
+    recursiveNumaTyper.start();
     //fntransformer.print(llvm::outs());   
     llvm::outs() << "Get all the file names in rewriter source manager\n";
     for(auto it = rewriter.getSourceMgr().fileinfo_begin(); it != rewriter.getSourceMgr().fileinfo_end(); it++){

@@ -342,7 +342,7 @@ src/CMakeFiles/clang-tool.dir/consumer/consumer.cc.o: \
  /usr/local/include/llvm/ADT/RewriteBuffer.h \
  /usr/local/include/llvm/ADT/DeltaTree.h \
  /usr/local/include/llvm/ADT/RewriteRope.h \
- /home/kidus/NUMATyping/numa-clang-tool/src/consumer/../transformer/templateargtransformer.h \
+ /home/kidus/NUMATyping/numa-clang-tool/src/consumer/../transformer/RecursiveNumaTyper.h \
  /home/kidus/NUMATyping/numa-clang-tool/src/consumer/../transformer/transformer.h \
  /usr/local/include/clang/ASTMatchers/ASTMatchFinder.h \
  /usr/local/include/clang/ASTMatchers/ASTMatchers.h \
@@ -437,7 +437,6 @@ src/CMakeFiles/clang-tool.dir/consumer/consumer.cc.o: \
  /usr/local/include/llvm/ADT/PagedVector.h \
  /usr/local/include/llvm/ADT/StringExtras.h \
  /usr/local/include/llvm/Support/Timer.h \
- /home/kidus/NUMATyping/numa-clang-tool/src/consumer/../transformer/templateargtransformer.h \
  /usr/local/include/clang/AST/RecursiveASTVisitor.h \
  /usr/local/include/clang/AST/DeclOpenMP.h \
  /usr/local/include/clang/AST/ExprConcepts.h \

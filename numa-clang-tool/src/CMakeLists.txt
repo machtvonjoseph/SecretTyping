@@ -24,7 +24,7 @@ set(CLANG_TOOL_SRC
         
         transformer/transformer.cc
         # transformer/functioncalltransformer.cc
-        transformer/templateargtransformer.cc
+        transformer/RecursiveNumaTyper.cc
         
         # finder/finder.cc
         # finder/integervariablefinder.cc

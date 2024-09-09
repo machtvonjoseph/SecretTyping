@@ -139,19 +139,19 @@ src/CMakeFiles/clang-tool.dir/transformer/transformer.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/clang-tool.dir/transformer/transformer.cc.s"
 	cd /home/kidus/NUMATyping/numa-clang-tool/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kidus/NUMATyping/numa-clang-tool/src/transformer/transformer.cc -o CMakeFiles/clang-tool.dir/transformer/transformer.cc.s
 
-src/CMakeFiles/clang-tool.dir/transformer/templateargtransformer.cc.o: src/CMakeFiles/clang-tool.dir/flags.make
-src/CMakeFiles/clang-tool.dir/transformer/templateargtransformer.cc.o: ../src/transformer/templateargtransformer.cc
-src/CMakeFiles/clang-tool.dir/transformer/templateargtransformer.cc.o: src/CMakeFiles/clang-tool.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kidus/NUMATyping/numa-clang-tool/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object src/CMakeFiles/clang-tool.dir/transformer/templateargtransformer.cc.o"
-	cd /home/kidus/NUMATyping/numa-clang-tool/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/clang-tool.dir/transformer/templateargtransformer.cc.o -MF CMakeFiles/clang-tool.dir/transformer/templateargtransformer.cc.o.d -o CMakeFiles/clang-tool.dir/transformer/templateargtransformer.cc.o -c /home/kidus/NUMATyping/numa-clang-tool/src/transformer/templateargtransformer.cc
+src/CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.o: src/CMakeFiles/clang-tool.dir/flags.make
+src/CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.o: ../src/transformer/RecursiveNumaTyper.cc
+src/CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.o: src/CMakeFiles/clang-tool.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kidus/NUMATyping/numa-clang-tool/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object src/CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.o"
+	cd /home/kidus/NUMATyping/numa-clang-tool/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.o -MF CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.o.d -o CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.o -c /home/kidus/NUMATyping/numa-clang-tool/src/transformer/RecursiveNumaTyper.cc
 
-src/CMakeFiles/clang-tool.dir/transformer/templateargtransformer.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/clang-tool.dir/transformer/templateargtransformer.cc.i"
-	cd /home/kidus/NUMATyping/numa-clang-tool/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kidus/NUMATyping/numa-clang-tool/src/transformer/templateargtransformer.cc > CMakeFiles/clang-tool.dir/transformer/templateargtransformer.cc.i
+src/CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.i"
+	cd /home/kidus/NUMATyping/numa-clang-tool/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kidus/NUMATyping/numa-clang-tool/src/transformer/RecursiveNumaTyper.cc > CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.i
 
-src/CMakeFiles/clang-tool.dir/transformer/templateargtransformer.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/clang-tool.dir/transformer/templateargtransformer.cc.s"
-	cd /home/kidus/NUMATyping/numa-clang-tool/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kidus/NUMATyping/numa-clang-tool/src/transformer/templateargtransformer.cc -o CMakeFiles/clang-tool.dir/transformer/templateargtransformer.cc.s
+src/CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.s"
+	cd /home/kidus/NUMATyping/numa-clang-tool/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kidus/NUMATyping/numa-clang-tool/src/transformer/RecursiveNumaTyper.cc -o CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.s
 
 # Object files for target clang-tool
 clang__tool_OBJECTS = \
@@ -160,7 +160,7 @@ clang__tool_OBJECTS = \
 "CMakeFiles/clang-tool.dir/consumer/consumer.cc.o" \
 "CMakeFiles/clang-tool.dir/utils/utils.cc.o" \
 "CMakeFiles/clang-tool.dir/transformer/transformer.cc.o" \
-"CMakeFiles/clang-tool.dir/transformer/templateargtransformer.cc.o"
+"CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.o"
 
 # External object files for target clang-tool
 clang__tool_EXTERNAL_OBJECTS =
@@ -170,7 +170,7 @@ bin/clang-tool: src/CMakeFiles/clang-tool.dir/actions/frontendaction.cc.o
 bin/clang-tool: src/CMakeFiles/clang-tool.dir/consumer/consumer.cc.o
 bin/clang-tool: src/CMakeFiles/clang-tool.dir/utils/utils.cc.o
 bin/clang-tool: src/CMakeFiles/clang-tool.dir/transformer/transformer.cc.o
-bin/clang-tool: src/CMakeFiles/clang-tool.dir/transformer/templateargtransformer.cc.o
+bin/clang-tool: src/CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.o
 bin/clang-tool: src/CMakeFiles/clang-tool.dir/build.make
 bin/clang-tool: /usr/local/lib/libclangFrontend.a
 bin/clang-tool: /usr/local/lib/libclangDriver.a

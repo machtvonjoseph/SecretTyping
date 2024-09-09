@@ -11,7 +11,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/kidus/NUMATyping/numa-clang-tool/src/actions/frontendaction.cc" "src/CMakeFiles/clang-tool.dir/actions/frontendaction.cc.o" "gcc" "src/CMakeFiles/clang-tool.dir/actions/frontendaction.cc.o.d"
   "/home/kidus/NUMATyping/numa-clang-tool/src/consumer/consumer.cc" "src/CMakeFiles/clang-tool.dir/consumer/consumer.cc.o" "gcc" "src/CMakeFiles/clang-tool.dir/consumer/consumer.cc.o.d"
   "/home/kidus/NUMATyping/numa-clang-tool/src/main.cc" "src/CMakeFiles/clang-tool.dir/main.cc.o" "gcc" "src/CMakeFiles/clang-tool.dir/main.cc.o.d"
-  "/home/kidus/NUMATyping/numa-clang-tool/src/transformer/templateargtransformer.cc" "src/CMakeFiles/clang-tool.dir/transformer/templateargtransformer.cc.o" "gcc" "src/CMakeFiles/clang-tool.dir/transformer/templateargtransformer.cc.o.d"
+  "/home/kidus/NUMATyping/numa-clang-tool/src/transformer/RecursiveNumaTyper.cc" "src/CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.o" "gcc" "src/CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.o.d"
   "/home/kidus/NUMATyping/numa-clang-tool/src/transformer/transformer.cc" "src/CMakeFiles/clang-tool.dir/transformer/transformer.cc.o" "gcc" "src/CMakeFiles/clang-tool.dir/transformer/transformer.cc.o.d"
   "/home/kidus/NUMATyping/numa-clang-tool/src/utils/utils.cc" "src/CMakeFiles/clang-tool.dir/utils/utils.cc.o" "gcc" "src/CMakeFiles/clang-tool.dir/utils/utils.cc.o.d"
   )

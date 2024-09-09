@@ -202,29 +202,29 @@ main.cc.s:
 	cd /home/kidus/NUMATyping/numa-clang-tool/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/clang-tool.dir/build.make src/CMakeFiles/clang-tool.dir/main.cc.s
 .PHONY : main.cc.s
 
-transformer/templateargtransformer.o: transformer/templateargtransformer.cc.o
-.PHONY : transformer/templateargtransformer.o
+transformer/RecursiveNumaTyper.o: transformer/RecursiveNumaTyper.cc.o
+.PHONY : transformer/RecursiveNumaTyper.o
 
 # target to build an object file
-transformer/templateargtransformer.cc.o:
-	cd /home/kidus/NUMATyping/numa-clang-tool/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/clang-tool.dir/build.make src/CMakeFiles/clang-tool.dir/transformer/templateargtransformer.cc.o
-.PHONY : transformer/templateargtransformer.cc.o
+transformer/RecursiveNumaTyper.cc.o:
+	cd /home/kidus/NUMATyping/numa-clang-tool/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/clang-tool.dir/build.make src/CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.o
+.PHONY : transformer/RecursiveNumaTyper.cc.o
 
-transformer/templateargtransformer.i: transformer/templateargtransformer.cc.i
-.PHONY : transformer/templateargtransformer.i
+transformer/RecursiveNumaTyper.i: transformer/RecursiveNumaTyper.cc.i
+.PHONY : transformer/RecursiveNumaTyper.i
 
 # target to preprocess a source file
-transformer/templateargtransformer.cc.i:
-	cd /home/kidus/NUMATyping/numa-clang-tool/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/clang-tool.dir/build.make src/CMakeFiles/clang-tool.dir/transformer/templateargtransformer.cc.i
-.PHONY : transformer/templateargtransformer.cc.i
+transformer/RecursiveNumaTyper.cc.i:
+	cd /home/kidus/NUMATyping/numa-clang-tool/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/clang-tool.dir/build.make src/CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.i
+.PHONY : transformer/RecursiveNumaTyper.cc.i
 
-transformer/templateargtransformer.s: transformer/templateargtransformer.cc.s
-.PHONY : transformer/templateargtransformer.s
+transformer/RecursiveNumaTyper.s: transformer/RecursiveNumaTyper.cc.s
+.PHONY : transformer/RecursiveNumaTyper.s
 
 # target to generate assembly for a file
-transformer/templateargtransformer.cc.s:
-	cd /home/kidus/NUMATyping/numa-clang-tool/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/clang-tool.dir/build.make src/CMakeFiles/clang-tool.dir/transformer/templateargtransformer.cc.s
-.PHONY : transformer/templateargtransformer.cc.s
+transformer/RecursiveNumaTyper.cc.s:
+	cd /home/kidus/NUMATyping/numa-clang-tool/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/clang-tool.dir/build.make src/CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.s
+.PHONY : transformer/RecursiveNumaTyper.cc.s
 
 transformer/transformer.o: transformer/transformer.cc.o
 .PHONY : transformer/transformer.o
@@ -292,9 +292,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... transformer/templateargtransformer.o"
-	@echo "... transformer/templateargtransformer.i"
-	@echo "... transformer/templateargtransformer.s"
+	@echo "... transformer/RecursiveNumaTyper.o"
+	@echo "... transformer/RecursiveNumaTyper.i"
+	@echo "... transformer/RecursiveNumaTyper.s"
 	@echo "... transformer/transformer.o"
 	@echo "... transformer/transformer.i"
 	@echo "... transformer/transformer.s"
