@@ -89,7 +89,7 @@ public:
 template<>
 class numa<Stack,1>{
 public:
-numa()
+numa ()
 {
 	top = NULL;
 }

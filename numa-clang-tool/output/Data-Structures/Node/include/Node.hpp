@@ -25,12 +25,14 @@ public:
 template<>
 class numa<Node,1>{
 public:
-numa():numa(0)
-	{}
-numa(int initData){
+numa (): data(0)
+{}
+numa (int initData)
+{
 	data = initData;
 }
-numa(int initData, Node * node){
+numa (int, Node *)
+{
 	data = initData;
 	link = node;
 }

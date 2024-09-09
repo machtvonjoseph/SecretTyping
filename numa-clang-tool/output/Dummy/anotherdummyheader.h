@@ -11,10 +11,12 @@ class SomeOtherClass{
     public:
     //SomeOtherClass(){};
     int a;
-
+    int b;
+    int c;
     void someOtherFunction();
-    SomeOtherClass() : a(0)
+    SomeOtherClass() : a(0), b(1), c(2)
 	{}
+    SomeOtherClass(int a, int b, int c) : a(a), b(b), c(c){}
 };
 
 void SomeOtherClass::someOtherFunction(){

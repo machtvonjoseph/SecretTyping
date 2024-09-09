@@ -117,7 +117,7 @@ std::string TemplateArgTransformer::replaceNewType(const std::string& str, std::
     }
     return output;
 }
-std::string TemplateArgTransformer::replaceConstructWithInits(const std::string& input) {
+std::string TemplateArgTransformer::replaceCtorWithInits(const std::string& input) {
     // Find the position of '('
     size_t pos = input.find('(');
     if (pos == std::string::npos) {
@@ -148,6 +148,90 @@ std::string TemplateArgTransformer::replaceConstructWithInits(const std::string&
     std::string suffix = input.substr(endPos + 1);
     return replacement + "()" + ":" + replacement + "(" + param;
 }
+
+std::string TemplateArgTransformer::numaConstructorSignature(clang::CXXConstructorDecl* constructor) {
+    std::string ConstructorName = constructor->getParent()->getNameAsString();    
+    // Initialize an empty string to build the signature
+    std::string ConstructorSignature = "numa (";
+    
+    // Get the number of parameters
+    unsigned ParamCount = constructor->getNumParams();
+    
+    // Traverse through parameters
+    for (unsigned i = 0; i < ParamCount; ++i) {
+        ParmVarDecl *Param = constructor->getParamDecl(i);
+        
+        // Get the type of the parameter and print it
+        std::string ParamType;
+        llvm::raw_string_ostream OS(ParamType);
+        Param->getType().print(OS, constructor->getASTContext().getPrintingPolicy());
+        
+        // Append parameter type to the signature
+        ConstructorSignature += OS.str();
+        
+        // If parameter has a name, append it
+        if (!Param->getName().empty()) {
+            ConstructorSignature += " " + Param->getNameAsString();
+        }
+        
+        // Add comma between parameters, except after the last one
+        if (i < ParamCount - 1) {
+            ConstructorSignature += ", ";
+        }
+    }
+    // Close the parameter list in the signature
+    ConstructorSignature += ")";
+
+    return ConstructorSignature;
+}
+
+
+std::string TemplateArgTransformer::getMemberInitString(std::map<std::string, std::string>& initMemberlist) {
+    std::string result = ": ";
+    for (auto it = initMemberlist.begin(); it != initMemberlist.end(); ++it) {
+    result += it->first + "(" + it->second + ")";
+    
+    // Add a comma and space unless it's the last element
+        if (std::next(it) != initMemberlist.end()) {
+            result += ", ";
+        }
+    }
+    return result;
+}
+
+std::string TemplateArgTransformer::getDelegatingInitString(CXXConstructorDecl* constructor) {
+     for (const auto *Init : constructor->inits()) {
+        if (Init->isDelegatingInitializer()) {
+                    // Cast the initializer expression to CXXConstructExpr to get the arguments
+            if (const auto *ConstructExpr = dyn_cast<CXXConstructExpr>(Init->getInit())) {
+                // Get the number of arguments
+                unsigned ArgCount = ConstructExpr->getNumArgs();
+                
+                // Start building the delegated constructor signature
+                std::string DelegatedSignature = ": numa(";
+                
+                // Extract arguments and append to the signature
+                for (unsigned i = 0; i < ArgCount; ++i) {
+                    const Expr *ArgExpr = ConstructExpr->getArg(i);
+
+                    std::string ArgStr;
+                    llvm::raw_string_ostream ArgOS(ArgStr);
+                    ArgExpr->printPretty(ArgOS, nullptr, constructor->getASTContext().getPrintingPolicy());
+                    
+                    DelegatedSignature += ArgOS.str();
+                    if (i < ArgCount - 1) {
+                        DelegatedSignature += ", ";
+                    }
+                }
+                DelegatedSignature += ")";
+                return DelegatedSignature;
+            }
+        }
+    }
+}
+
+
+
 
 void TemplateArgTransformer::recursive_introspective_typer(clang::FieldDecl *field, std::string N, clang::SourceLocation endLoc,clang::ClassTemplateSpecializationDecl* varClassTemplateSpecializationDecl){
 
@@ -198,7 +282,7 @@ void TemplateArgTransformer::recursive_introspective_typer(clang::FieldDecl *fie
             llvm::outs() << "Constructor Text:\n" << ConstructorText << "\n";
             std::string line = (std::string)ConstructorText;
             //llvm::outs()<<replaceConstructWithInits(line)<<"\n"; 
-            rewriter.InsertTextAfter(rewriteLoc, replaceConstructWithInits(line));
+            rewriter.InsertTextAfter(rewriteLoc, replaceCtorWithInits(line));
             rewriter.InsertTextAfter(rewriteLoc, "\n");
             }
             else{
@@ -338,7 +422,7 @@ void TemplateArgTransformer::fundamental_introspective_typer(std::string classNa
                 llvm::outs() << "Constructor Text:\n" << ConstructorText << "\n";
                 std::string line = (std::string)ConstructorText;
                 //llvm::outs()<<replaceConstructWithInits(line)<<"\n"; 
-                rewriter.InsertTextAfter(rewriteLoc, replaceConstructWithInits(line));
+                rewriter.InsertTextAfter(rewriteLoc, replaceCtorWithInits(line));
                 rewriter.InsertTextAfter(rewriteLoc, "\n");
             }
 
@@ -894,6 +978,7 @@ void TemplateArgTransformer::numaPublicMembers(clang::ASTContext* Context, clang
     }
 }
 
+
 void TemplateArgTransformer::numaPrivateMembers(clang::ASTContext* Context, clang::SourceLocation& rewriteLocation, std::vector<FieldDecl*> privateFields, std::vector<CXXMethodDecl*> privateMethods, int64_t nodeID){
         rewriter.InsertTextAfter(rewriteLocation, "private:\n");
      for(auto fields :privateFields){
@@ -952,8 +1037,9 @@ void TemplateArgTransformer::numaPrivateMembers(clang::ASTContext* Context, clan
             llvm::outs()<<"None of the above\n";
         }
     } 
-    for(auto method : privateMethods){
-        //check if constructor
+   for(auto method : privateMethods){
+            //check if constructor
+        llvm::outs() << "The method name is " << method->getNameAsString() << "\n";
         if (auto Ctor = dyn_cast<CXXConstructorDecl>(method)){
             
             if(Ctor->isUserProvided()){
@@ -963,16 +1049,36 @@ void TemplateArgTransformer::numaPrivateMembers(clang::ASTContext* Context, clan
         }
         else if (auto Dtor = dyn_cast<CXXDestructorDecl>(method)){
             if(Dtor->isUserProvided()){
+                llvm::outs() << "THE DESTRUCTOR IS " << Dtor->getNameAsString() << "\n";
                 numaDestructors(Dtor, rewriteLocation, nodeID);
             }
         }
         else{
+            // if(method->getDefinition()){
+            //     //copy the entire method
+            //     if(method->hasBody()){
+            //         //if the method has a body, before we rewrite the body, we have to replace the new expression with new numa<T,N>
+            //         SourceRange MethodRange = method->getSourceRange();
+            //         const SourceManager &SM = method->getASTContext().getSourceManager();
+            //         llvm::StringRef MethodText = Lexer::getSourceText(CharSourceRange::getTokenRange(MethodRange), SM, method->getASTContext().getLangOpts());
+            //         //Pass it through a function that searches for 'new' in the body and replaces 'new''s return type with numa<T,N>
+            //         // /std::string numaedBody = replaceNewType(std::string(MethodText),N);
+            //         rewriter.InsertTextAfter(rewriteLocation, MethodText);
+            //         rewriter.InsertTextAfter(rewriteLocation, "\n");
+            //     }
+            // }
         }
     }
 }
 
 void TemplateArgTransformer::numaConstructors(clang::CXXConstructorDecl* constructor, clang::SourceLocation& rewriteLocation, int64_t nodeID){
+    std::map<std::string, std::string> initMembers;
     bool isWritten = false;
+    bool isDelegatingInit = false;
+    bool isMemberInit = false;
+    std::string initMembersString;
+    //llvm::outs() << "CONSTRUCTOR SIGNATURE IS: "<< numaConstructorSignature(constructor) << "\n";
+    std::string numaConstructorSignatrue = numaConstructorSignature(constructor);  
     if(constructor->getNumCtorInitializers() > 0){
         llvm::outs() << "Constructor "<<constructor->getNameAsString()<< " has an initializer list\n";
         llvm::outs() << "The initializer list has " << constructor->getNumCtorInitializers() << " initializers\n";
@@ -980,76 +1086,49 @@ void TemplateArgTransformer::numaConstructors(clang::CXXConstructorDecl* constru
             if ((*Init)->isWritten()) {
                 llvm::outs() << "  Initializes member is written\n";
                 isWritten = true;
-            }
-        }
-    }
-    if(isWritten){
-            std::string constructor_name = constructor->getNameAsString();
-            //constructor->dump();
-            //get the entire line of the constructor as text
-            SourceRange ConstructorRange = constructor->getSourceRange();
-            const SourceManager &SM = constructor->getASTContext().getSourceManager();
-            llvm::StringRef ConstructorText = Lexer::getSourceText(CharSourceRange::getTokenRange(ConstructorRange), SM, constructor->getASTContext().getLangOpts());
-            llvm::outs() << "Constructor Text:\n" << ConstructorText << "\n";
-            std::string line = (std::string)ConstructorText;
-            //llvm::outs()<<replaceConstructWithInits(line)<<"\n"; 
-            rewriter.InsertTextAfter(rewriteLocation, replaceConstructWithInits(line));
-            rewriter.InsertTextAfter(rewriteLocation, "\n");
-    }
-    else{
-        llvm::outs() << "Constructor "<<constructor->getNameAsString()<< " has no initializer list\n";
-        rewriter.InsertTextAfter(rewriteLocation, "numa(");
-
-        //if the constructor has no parameters, we just close the constructor
-        if (constructor->parameters().size() == 0){
-            rewriter.InsertTextAfter(rewriteLocation, ")\n");
-        
-            if(constructor->hasBody()){
-                llvm::outs() << "constructor has a body\n" ;
-                constructor->dump();
-                SourceRange BodyRange = constructor->getBody()->getSourceRange();
-                const SourceManager &SM = constructor->getASTContext().getSourceManager();
-                llvm::StringRef BodyText = Lexer::getSourceText(CharSourceRange::getTokenRange(BodyRange), SM, constructor->getASTContext().getLangOpts());
-                llvm::outs() << "Constructor Body:\n" << BodyText << "\n";
-                //Pass it through a function that searches for 'new' in the body and replaces 'new''s return type with numa<T,N>
-                //std::string numaedBody = replaceNewType(std::string(BodyText), N);
-                //Then we replace the body 
-                rewriter.InsertTextAfter(rewriteLocation, BodyText);
-                rewriter.InsertTextAfter(rewriteLocation, "\n");
-            }
-        }
-        //rewrite the paramenters of the constructor
-        else{
-            for(auto param : constructor->getDefinition()->parameters())
-            {
-                //get the implementation of the constructor
-                
-                rewriter.InsertTextAfter(rewriteLocation, param->getType().getAsString() + " " + param->getNameAsString());
-                llvm::outs() << "The parameter is " << param->getType().getAsString() << " and the name is " << param->getNameAsString() << "\n";
-                //avoid the last comma
-                if(param != constructor->getDefinition()->parameters().back())
-                {
-                    rewriter.InsertTextAfter(rewriteLocation, ", ");
+                if((*Init)->isDelegatingInitializer()){
+                    llvm::outs() << "  Initializes member is delegating\n";
+                    isDelegatingInit = true;
+                }
+                if((*Init)->isMemberInitializer()){
+                    llvm::outs() << "  Initializes member is member\n";
+                    isMemberInit = true;
+                    FieldDecl *initializedField = (*Init)->getMember();
+                    if(initializedField){
+                        std::string fieldName = initializedField->getNameAsString();
+                        Expr *initExpr = (*Init)->getInit();
+                        //get value
+                        if (initExpr) {
+                            std::string InitValue;
+                            llvm::raw_string_ostream OS(InitValue);
+                            initExpr->printPretty(OS, nullptr, constructor->getASTContext().getPrintingPolicy());
+                            // Store the member name and its corresponding initialization value
+                            initMembers[fieldName] = OS.str();
+                        }
+                    }
+                    initMembersString= getMemberInitString(initMembers);
                 }
             }
-            //after rewriting the parameters, we close the constructor
-            rewriter.InsertTextAfter(rewriteLocation, ")");
-
-            //if the constructor has a body, before we rewrite the body, we have to replace the new expression with new numa<T,N>
-            if(constructor->hasBody()){
-                llvm::outs() << "constructor has a body\n" ;
-                constructor->dump();
-                SourceRange BodyRange = constructor->getBody()->getSourceRange();
-                const SourceManager &SM = constructor->getASTContext().getSourceManager();
-                llvm::StringRef BodyText = Lexer::getSourceText(CharSourceRange::getTokenRange(BodyRange), SM, constructor->getASTContext().getLangOpts());
-                llvm::outs() << "Constructor Body:\n" << BodyText << "\n";
-                //Pass it through a function that searches for 'new' in the body and replaces 'new''s return type with numa<T,N>
-                //std::string numaedBody = replaceNewType(std::string(BodyText), N);
-                //Then we replace the body 
-                rewriter.InsertTextAfter(rewriteLocation, BodyText);
-                rewriter.InsertTextAfter(rewriteLocation, "\n");
-            }
-        } 
+        }
+    }
+    if (isMemberInit){
+        numaConstructorSignatrue += initMembersString;
+    }
+    if(isDelegatingInit){
+        numaConstructorSignatrue += getDelegatingInitString(constructor);
+    }
+    rewriter.InsertTextAfter(rewriteLocation, numaConstructorSignatrue);
+    // rewriter.InsertTextAfter(rewriteLocation, "{");
+    if(constructor->hasBody()){
+        llvm::outs() << "constructor has a body\n" ;
+        constructor->dump();
+        SourceRange BodyRange = constructor->getBody()->getSourceRange();
+        const SourceManager &SM = constructor->getASTContext().getSourceManager();
+        llvm::StringRef BodyText = Lexer::getSourceText(CharSourceRange::getTokenRange(BodyRange), SM, constructor->getASTContext().getLangOpts());
+        llvm::outs() << "Constructor Body:\n" << BodyText << "\n";
+        rewriter.InsertTextAfter(rewriteLocation, "\n");
+        rewriter.InsertTextAfter(rewriteLocation, BodyText);
+        rewriter.InsertTextAfter(rewriteLocation, "\n");
     }
 }
    

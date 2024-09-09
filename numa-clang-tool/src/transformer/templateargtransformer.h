@@ -127,6 +127,10 @@ class TemplateArgTransformer : public Transformer
         void numaPublicMembers(clang::ASTContext* Context, clang::SourceLocation& rewriteLocation, std::vector<clang::FieldDecl*> publicFields,std::vector<clang::CXXMethodDecl*> publicMethods, int64_t nodeID);
         void numaPrivateMembers(clang::ASTContext* Context, clang::SourceLocation& rewriteLocation,std::vector<clang::FieldDecl*> privateFields, std::vector<clang::CXXMethodDecl*> privateMethods, int64_t nodeID);
         void numaConstructors(clang::CXXConstructorDecl* Ctor, clang::SourceLocation& rewriteLocation, int64_t nodeID);
+        std::string replaceCtorWithInits(const std::string& input);
+        std::string numaConstructorSignature(clang::CXXConstructorDecl* Ctor);
+        std::string getMemberInitString(std::map<std::string, std::string>& initMemberlist); 
+        std::string getDelegatingInitString(CXXConstructorDecl* Ctor);
         void numaDestructors(clang::CXXDestructorDecl* Dtor, clang::SourceLocation& rewriteLocation, int64_t nodeID);
         void startRecursiveTyping(std::map<clang::VarDecl*, const clang::CXXNewExpr*> numaDeclTable, clang::ASTContext *Context);
 
@@ -152,7 +156,7 @@ class TemplateArgTransformer : public Transformer
         void constructTemplate_fieldPtr(clang::FieldDecl *field, std::string N, clang::SourceLocation endLoc);
         void fundamental_introspective_typer(std::string className, std::string N, clang::SourceLocation endLoc, clang::ClassTemplateSpecializationDecl* tsd);
         std::string replaceNewType(const std::string& str, std::string N);
-        std::string replaceConstructWithInits(const std::string& input); 
+        
 };
 
 
