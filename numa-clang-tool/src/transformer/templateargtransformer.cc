@@ -149,22 +149,24 @@ std::string TemplateArgTransformer::replaceCtorWithInits(const std::string& inpu
     return replacement + "()" + ":" + replacement + "(" + param;
 }
 
-std::string TemplateArgTransformer::numaConstructorSignature(clang::CXXConstructorDecl* constructor) {
+std::string TemplateArgTransformer::getNumaConstructorSignature(clang::CXXConstructorDecl* constructor) {
     std::string ConstructorName = constructor->getParent()->getNameAsString();    
+
+    FunctionDecl* constructorDefinition= constructor->getDefinition();
     // Initialize an empty string to build the signature
     std::string ConstructorSignature = "numa (";
     
     // Get the number of parameters
-    unsigned ParamCount = constructor->getNumParams();
+    unsigned ParamCount = constructorDefinition->getNumParams();
     
     // Traverse through parameters
     for (unsigned i = 0; i < ParamCount; ++i) {
-        ParmVarDecl *Param = constructor->getParamDecl(i);
+        ParmVarDecl *Param = constructorDefinition->getParamDecl(i);
         
         // Get the type of the parameter and print it
         std::string ParamType;
         llvm::raw_string_ostream OS(ParamType);
-        Param->getType().print(OS, constructor->getASTContext().getPrintingPolicy());
+        Param->getType().print(OS, constructorDefinition->getASTContext().getPrintingPolicy());
         
         // Append parameter type to the signature
         ConstructorSignature += OS.str();
@@ -230,6 +232,38 @@ std::string TemplateArgTransformer::getDelegatingInitString(CXXConstructorDecl* 
     }
 }
 
+std::string TemplateArgTransformer::getNumaMethodSignature(CXXMethodDecl* method){
+    FunctionDecl *methodDefinition = method->getDefinition();
+    std::string ReturnTypeStr;
+    llvm::raw_string_ostream ReturnTypeOS(ReturnTypeStr);
+    methodDefinition->getReturnType().print(ReturnTypeOS, methodDefinition->getASTContext().getPrintingPolicy());
+
+    // Get method name
+    std::string MethodName = methodDefinition->getNameAsString();
+
+    // Get parameters
+    std::string ParamsStr = "(";
+    for (unsigned i = 0; i < methodDefinition->getNumParams(); ++i) {
+        ParmVarDecl *Param = methodDefinition->getParamDecl(i);
+        std::string ParamTypeStr;
+        llvm::raw_string_ostream ParamTypeOS(ParamTypeStr);
+        Param->getType().print(ParamTypeOS, methodDefinition->getASTContext().getPrintingPolicy());
+
+        ParamsStr += ParamTypeOS.str();
+        if (!Param->getName().empty()) {
+            ParamsStr += " " + Param->getNameAsString();
+        }
+
+        if (i < method->getNumParams() - 1) {
+            ParamsStr += ", ";
+        }
+    }
+    ParamsStr += ")";
+
+    // Build full method signature
+    std::string MethodSignature = ReturnTypeOS.str() + " " + MethodName + ParamsStr;
+    return MethodSignature;
+}
 
 
 
@@ -974,6 +1008,11 @@ void TemplateArgTransformer::numaPublicMembers(clang::ASTContext* Context, clang
             }
         }
         else{
+            if(method->getDefinition()){
+                if(method->isUserProvided()){
+                    numaMethods(method,rewriteLocation,nodeID);
+                }
+            }
         }
     }
 }
@@ -1054,19 +1093,11 @@ void TemplateArgTransformer::numaPrivateMembers(clang::ASTContext* Context, clan
             }
         }
         else{
-            // if(method->getDefinition()){
-            //     //copy the entire method
-            //     if(method->hasBody()){
-            //         //if the method has a body, before we rewrite the body, we have to replace the new expression with new numa<T,N>
-            //         SourceRange MethodRange = method->getSourceRange();
-            //         const SourceManager &SM = method->getASTContext().getSourceManager();
-            //         llvm::StringRef MethodText = Lexer::getSourceText(CharSourceRange::getTokenRange(MethodRange), SM, method->getASTContext().getLangOpts());
-            //         //Pass it through a function that searches for 'new' in the body and replaces 'new''s return type with numa<T,N>
-            //         // /std::string numaedBody = replaceNewType(std::string(MethodText),N);
-            //         rewriter.InsertTextAfter(rewriteLocation, MethodText);
-            //         rewriter.InsertTextAfter(rewriteLocation, "\n");
-            //     }
-            // }
+            if(method->getDefinition()){
+               if(method->isUserProvided()){
+                    numaMethods(method,rewriteLocation,nodeID);
+                }
+            }
         }
     }
 }
@@ -1078,7 +1109,7 @@ void TemplateArgTransformer::numaConstructors(clang::CXXConstructorDecl* constru
     bool isMemberInit = false;
     std::string initMembersString;
     //llvm::outs() << "CONSTRUCTOR SIGNATURE IS: "<< numaConstructorSignature(constructor) << "\n";
-    std::string numaConstructorSignatrue = numaConstructorSignature(constructor);  
+    std::string numaConstructorSignatrue = getNumaConstructorSignature(constructor);  
     if(constructor->getNumCtorInitializers() > 0){
         llvm::outs() << "Constructor "<<constructor->getNameAsString()<< " has an initializer list\n";
         llvm::outs() << "The initializer list has " << constructor->getNumCtorInitializers() << " initializers\n";
@@ -1119,16 +1150,17 @@ void TemplateArgTransformer::numaConstructors(clang::CXXConstructorDecl* constru
     }
     rewriter.InsertTextAfter(rewriteLocation, numaConstructorSignatrue);
     // rewriter.InsertTextAfter(rewriteLocation, "{");
-    if(constructor->hasBody()){
-        llvm::outs() << "constructor has a body\n" ;
-        constructor->dump();
-        SourceRange BodyRange = constructor->getBody()->getSourceRange();
-        const SourceManager &SM = constructor->getASTContext().getSourceManager();
-        llvm::StringRef BodyText = Lexer::getSourceText(CharSourceRange::getTokenRange(BodyRange), SM, constructor->getASTContext().getLangOpts());
-        llvm::outs() << "Constructor Body:\n" << BodyText << "\n";
-        rewriter.InsertTextAfter(rewriteLocation, "\n");
-        rewriter.InsertTextAfter(rewriteLocation, BodyText);
-        rewriter.InsertTextAfter(rewriteLocation, "\n");
+    if (constructor->hasBody()) { // Check if the method has a body
+        const Stmt *ConstructorBody = constructor->getBody(); // Get the body
+        std::string BodyStr;
+        llvm::raw_string_ostream OS(BodyStr);
+        // Pretty print the body
+        ConstructorBody->printPretty(OS, nullptr, constructor->getASTContext().getPrintingPolicy());
+        llvm::outs() << "Constructor Body:\n" << OS.str() << "\n";
+        rewriter.InsertTextAfter(rewriteLocation, OS.str());
+    }
+    else{
+        rewriter.InsertTextAfter(rewriteLocation, "{}\n");
     }
 }
    
@@ -1189,6 +1221,24 @@ void TemplateArgTransformer::numaDestructors(clang::CXXDestructorDecl* destructo
             rewriter.InsertTextAfter(rewriteLocation, "\n");
         }
     } 
+}
+
+void TemplateArgTransformer::numaMethods(clang::CXXMethodDecl* method, clang::SourceLocation& rewriteLocation, int64_t nodeID){
+    std::string methodSignature = getNumaMethodSignature(method);
+    llvm::outs() << "The method signature is " << methodSignature << "\n";
+    rewriter.InsertTextAfter(rewriteLocation, methodSignature);
+    if (method->hasBody()) { // Check if the method has a body
+        const Stmt *MethodBody = method->getBody(); // Get the body
+        std::string BodyStr;
+        llvm::raw_string_ostream OS(BodyStr);
+        // Pretty print the body
+        MethodBody->printPretty(OS, nullptr, method->getASTContext().getPrintingPolicy());
+        llvm::outs() << "Method Body:\n" << OS.str() << "\n";
+        rewriter.InsertTextAfter(rewriteLocation, OS.str());
+    }
+    else{
+        rewriter.InsertTextAfter(rewriteLocation, "{}\n");
+    }
 }
 
 

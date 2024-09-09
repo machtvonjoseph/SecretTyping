@@ -25,16 +25,26 @@ public:
 template<>
 class numa<Node,1>{
 public:
-numa (): data(0)
-{}
-numa (int initData)
-{
-	data = initData;
+numa (): data(0){
 }
-numa (int, Node *)
-{
-	data = initData;
-	link = node;
+numa (int initData){
+    this->data = initData;
+}
+numa (int initData, Node * node){
+    this->data = initData;
+    this->link = node;
+}
+Node * getLink(){
+    return this->link;
+}
+void setLink(Node * n){
+    this->link = n;
+}
+int getData(){
+    return this->data;
+}
+void setData(int n){
+    this->data = n;
 }
 ~numa()
 {

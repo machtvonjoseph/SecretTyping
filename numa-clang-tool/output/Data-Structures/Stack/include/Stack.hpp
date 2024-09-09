@@ -89,9 +89,8 @@ public:
 template<>
 class numa<Stack,1>{
 public:
-numa ()
-{
-	top = NULL;
+numa (){
+    this->top = __null;
 }
 ~numa()
 {
@@ -108,6 +107,42 @@ numa ()
 		delete temp;
 	}
 
+}
+int pop(){
+    if (this->top == __null) {
+        return -1;
+    }
+    Node *retN = this->top;
+    this->top = this->top->getLink();
+    int data = retN->getData();
+    delete retN;
+    retN = __null;
+    return data;
+}
+void push(int data){
+    Node *newN = new Node(data);
+    if (newN == __null) {
+        std::cerr << "Stack full" << std::endl;
+        return;
+    }
+    newN->setLink(this->top);
+    this->top = newN;
+}
+void display(){
+    if (this->top == __null) {
+        std::cout << "Stack Empty!!" << std::endl;
+        return;
+    }
+    int i = 0;
+    Node *temp = this->top;
+    while (temp != __null)
+        {
+            if (i == 0)
+                std::cout << "TOP ";
+            std::cout << temp->getData() << std::endl;
+            temp = temp->getLink();
+            i++;
+        }
 }
 private:
 numa<Node,1>* top;

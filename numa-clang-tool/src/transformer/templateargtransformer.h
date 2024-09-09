@@ -128,10 +128,12 @@ class TemplateArgTransformer : public Transformer
         void numaPrivateMembers(clang::ASTContext* Context, clang::SourceLocation& rewriteLocation,std::vector<clang::FieldDecl*> privateFields, std::vector<clang::CXXMethodDecl*> privateMethods, int64_t nodeID);
         void numaConstructors(clang::CXXConstructorDecl* Ctor, clang::SourceLocation& rewriteLocation, int64_t nodeID);
         std::string replaceCtorWithInits(const std::string& input);
-        std::string numaConstructorSignature(clang::CXXConstructorDecl* Ctor);
+        std::string getNumaConstructorSignature(clang::CXXConstructorDecl* Ctor);
         std::string getMemberInitString(std::map<std::string, std::string>& initMemberlist); 
         std::string getDelegatingInitString(CXXConstructorDecl* Ctor);
         void numaDestructors(clang::CXXDestructorDecl* Dtor, clang::SourceLocation& rewriteLocation, int64_t nodeID);
+        void numaMethods(clang::CXXMethodDecl* method, clang::SourceLocation& rewriteLocation, int64_t nodeID);
+        std::string getNumaMethodSignature(clang::CXXMethodDecl* method);
         void startRecursiveTyping(std::map<clang::VarDecl*, const clang::CXXNewExpr*> numaDeclTable, clang::ASTContext *Context);
 
         std::map<std::string, std::map<std::string, bool>> field_info_table;
