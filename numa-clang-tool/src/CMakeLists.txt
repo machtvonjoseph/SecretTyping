@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 
 find_package(LLVM REQUIRED)
 find_package(Clang REQUIRED)
-
+find_package(jsoncpp REQUIRED)
 
 #NUMA_LLVM_COMPILE_FLAGS is just ${LLVM_COMPILE_FLAGS} without the -fno-exceptions flag
 set(NUMA_LLVM_COMPILE_FLAGS ""-I/usr/local/include -std=c++20 -I/usr/local/lib/clang/18/include/-fno-exceptions -funwind-tables -fno-rtti -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS"")
@@ -18,6 +18,7 @@ set(CLANG_TOOL_SRC
         main.cc
         
         actions/frontendaction.cc
+        actions/cast_frontendaction.cc
         consumer/consumer.cc
         #inclusiondirective/inclusiondirective.cc
         utils/utils.cc
@@ -35,5 +36,5 @@ string(STRIP ${LLVM_LDFLAGS} LLVM_LDFLAGS)
 
 add_executable(clang-tool ${CLANG_TOOL_SRC})
 
-target_link_libraries(clang-tool ${CLANG_LIBS} ${LLVM_LIBS_CORE} ${LLVM_LDFLAGS})
+target_link_libraries(clang-tool ${CLANG_LIBS} ${LLVM_LIBS_CORE} ${LLVM_LDFLAGS} jsoncpp_lib)
 

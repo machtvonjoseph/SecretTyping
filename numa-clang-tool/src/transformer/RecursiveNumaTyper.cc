@@ -185,7 +185,7 @@ std::string RecursiveNumaTyper::getNumaMethodSignature(CXXMethodDecl* method){
     ParamsStr += ")";
 
     // Build full method signature
-    std::string MethodSignature = ReturnTypeOS.str() + " " + MethodName + ParamsStr;
+    std::string MethodSignature = "virtual "+ReturnTypeOS.str() + " " + MethodName + ParamsStr;
     return MethodSignature;
 }
 
@@ -416,26 +416,26 @@ void RecursiveNumaTyper::numaPublicMembers(clang::ASTContext* Context, clang::So
         /*Case where the field is a built in type and a pointer*/
         else if(fields->getType()->isPointerType() && fields->getType()->getPointeeType()->isBuiltinType()){
                 llvm::outs()<<"Field is a pointer\n";
-                rewriter.InsertTextAfter(rewriteLocation, "numa<"+fields->getType()->getPointeeType().getAsString() +","+std::to_string(nodeID)+">* "+ fields->getNameAsString()+";\n" );
+                rewriter.InsertTextAfter(rewriteLocation, "numa<"+fields->getType()->getPointeeType().getAsString() +"*,"+std::to_string(nodeID)+"> "+ fields->getNameAsString()+";\n" );
             
         }
 
         /*Case where the field is not a built in type but is a pointer*/
         else if(fields->getType()->isPointerType() && !fields->getType()->getPointeeType()->isBuiltinType()){
             llvm::outs()<<"Field is a pointer to a user defined class\n";
-            rewriter.InsertTextAfter(rewriteLocation, "numa<"+fields->getType()->getPointeeType().getAsString() +","+std::to_string(nodeID)+">* "+ fields->getNameAsString()+";\n" );
+            rewriter.InsertTextAfter(rewriteLocation, "numa<"+fields->getType()->getPointeeType().getAsString() +"*,"+std::to_string(nodeID)+"> "+ fields->getNameAsString()+";\n" );
             
             if(NumaSpeclExists(QualType(fields->getType()->getPointeeCXXRecordDecl()->getTypeForDecl(),0) , nodeID)){
                 llvm::outs() << "The numa template specialization for " << fields->getNameAsString() << " and " << nodeID << " already exists\n";
                 continue;
             }else{
 
-            llvm::outs() << "About to specialize "<< fields->getNameAsString() << " as numa\n";
+            //llvm::outs() << "About to specialize "<< fields->getNameAsString() << " as numa\n";
 
             //insert to specialized classes
-            RecursiveNumaTyper::specializedClasses.insert({QualType(fields->getType()->getPointeeCXXRecordDecl()->getTypeForDecl(),0) , nodeID});
+            //RecursiveNumaTyper::specializedClasses.insert({QualType(fields->getType()->getPointeeCXXRecordDecl()->getTypeForDecl(),0) , nodeID});
 
-            constructSpecialization(Context, fields->getType()->getPointeeType()->getAsCXXRecordDecl(), nodeID);
+            //constructSpecialization(Context, fields->getType()->getPointeeType()->getAsCXXRecordDecl(), nodeID);
             }
         }
         /*Case where the field is not a built in type and not a pointer*/
@@ -500,26 +500,26 @@ void RecursiveNumaTyper::numaPrivateMembers(clang::ASTContext* Context, clang::S
         /*Case where the field is a built in type and a pointer*/
         else if(fields->getType()->isPointerType() && fields->getType()->getPointeeType()->isBuiltinType()){
                 llvm::outs()<<"Field is a pointer\n";
-                rewriter.InsertTextAfter(rewriteLocation, "numa<"+fields->getType()->getPointeeType().getAsString() +","+std::to_string(nodeID)+">* "+ fields->getNameAsString()+";\n" );
+                rewriter.InsertTextAfter(rewriteLocation, "numa<"+fields->getType()->getPointeeType().getAsString() +"*,"+std::to_string(nodeID)+"> "+ fields->getNameAsString()+";\n" );
             
         }
 
         /*Case where the field is not a built in type but is a pointer*/
         else if(fields->getType()->isPointerType() && !fields->getType()->getPointeeType()->isBuiltinType()){
             llvm::outs()<<"Field is a pointer to a user defined class\n";
-            rewriter.InsertTextAfter(rewriteLocation, "numa<"+fields->getType()->getPointeeType().getAsString() +","+std::to_string(nodeID)+">* "+ fields->getNameAsString()+";\n" );
+            rewriter.InsertTextAfter(rewriteLocation, "numa<"+fields->getType()->getPointeeType().getAsString() +"*,"+std::to_string(nodeID)+"> "+ fields->getNameAsString()+";\n" );
             
             if(NumaSpeclExists(QualType(fields->getType()->getPointeeCXXRecordDecl()->getTypeForDecl(),0) , nodeID)){
                 llvm::outs() << "The numa template specialization for " << fields->getNameAsString() << " and " << nodeID << " already exists\n";
                 continue;
             }else{
 
-            llvm::outs() << "About to specialize "<< fields->getNameAsString() << " as numa\n";
+            // llvm::outs() << "About to specialize "<< fields->getNameAsString() << " as numa\n";
 
-            //insert to specialized classes
-            RecursiveNumaTyper::specializedClasses.insert({QualType(fields->getType()->getPointeeCXXRecordDecl()->getTypeForDecl(),0) , nodeID});
+            // //insert to specialized classes
+            // RecursiveNumaTyper::specializedClasses.insert({QualType(fields->getType()->getPointeeCXXRecordDecl()->getTypeForDecl(),0) , nodeID});
 
-            constructSpecialization(Context, fields->getType()->getPointeeType()->getAsCXXRecordDecl(), nodeID);
+            // constructSpecialization(Context, fields->getType()->getPointeeType()->getAsCXXRecordDecl(), nodeID);
             }
         }
         /*Case where the field is not a built in type and not a pointer*/
@@ -729,14 +729,6 @@ void RecursiveNumaTyper::run(const clang::ast_matchers::MatchFinder::MatchResult
             auto fnBody = result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getBody();
             llvm::outs() << "Processing Function : "<< result.Nodes.getNodeAs<FunctionDecl>("functionDecl")
             ->getNameAsString() << "\n";   
-            // SourceRange SrcRange = result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getSourceRange();
-            // SourceManager &SM = result.Context->getSourceManager();
-            // LangOptions LO = result.Context->getLangOpts();
-
-            // // Get the source code text from the source range
-            // std::string FuncText = Lexer::getSourceText(CharSourceRange::getTokenRange(SrcRange), SM, LO).str();
-
-            // llvm::outs()  << FuncText << "\n";
             extractNumaDecls(fnBody, result.Context);
             } 
     

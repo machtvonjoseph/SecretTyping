@@ -130,6 +130,30 @@ clang-tool/fast:
 	cd /home/kidus/NUMATyping/numa-clang-tool/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/clang-tool.dir/build.make src/CMakeFiles/clang-tool.dir/build
 .PHONY : clang-tool/fast
 
+actions/cast_frontendaction.o: actions/cast_frontendaction.cc.o
+.PHONY : actions/cast_frontendaction.o
+
+# target to build an object file
+actions/cast_frontendaction.cc.o:
+	cd /home/kidus/NUMATyping/numa-clang-tool/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/clang-tool.dir/build.make src/CMakeFiles/clang-tool.dir/actions/cast_frontendaction.cc.o
+.PHONY : actions/cast_frontendaction.cc.o
+
+actions/cast_frontendaction.i: actions/cast_frontendaction.cc.i
+.PHONY : actions/cast_frontendaction.i
+
+# target to preprocess a source file
+actions/cast_frontendaction.cc.i:
+	cd /home/kidus/NUMATyping/numa-clang-tool/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/clang-tool.dir/build.make src/CMakeFiles/clang-tool.dir/actions/cast_frontendaction.cc.i
+.PHONY : actions/cast_frontendaction.cc.i
+
+actions/cast_frontendaction.s: actions/cast_frontendaction.cc.s
+.PHONY : actions/cast_frontendaction.s
+
+# target to generate assembly for a file
+actions/cast_frontendaction.cc.s:
+	cd /home/kidus/NUMATyping/numa-clang-tool/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/clang-tool.dir/build.make src/CMakeFiles/clang-tool.dir/actions/cast_frontendaction.cc.s
+.PHONY : actions/cast_frontendaction.cc.s
+
 actions/frontendaction.o: actions/frontendaction.cc.o
 .PHONY : actions/frontendaction.o
 
@@ -283,6 +307,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... clang-tool"
+	@echo "... actions/cast_frontendaction.o"
+	@echo "... actions/cast_frontendaction.i"
+	@echo "... actions/cast_frontendaction.s"
 	@echo "... actions/frontendaction.o"
 	@echo "... actions/frontendaction.i"
 	@echo "... actions/frontendaction.s"

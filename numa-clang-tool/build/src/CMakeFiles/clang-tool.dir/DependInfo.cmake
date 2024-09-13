@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/kidus/NUMATyping/numa-clang-tool/src/actions/cast_frontendaction.cc" "src/CMakeFiles/clang-tool.dir/actions/cast_frontendaction.cc.o" "gcc" "src/CMakeFiles/clang-tool.dir/actions/cast_frontendaction.cc.o.d"
   "/home/kidus/NUMATyping/numa-clang-tool/src/actions/frontendaction.cc" "src/CMakeFiles/clang-tool.dir/actions/frontendaction.cc.o" "gcc" "src/CMakeFiles/clang-tool.dir/actions/frontendaction.cc.o.d"
   "/home/kidus/NUMATyping/numa-clang-tool/src/consumer/consumer.cc" "src/CMakeFiles/clang-tool.dir/consumer/consumer.cc.o" "gcc" "src/CMakeFiles/clang-tool.dir/consumer/consumer.cc.o.d"
   "/home/kidus/NUMATyping/numa-clang-tool/src/main.cc" "src/CMakeFiles/clang-tool.dir/main.cc.o" "gcc" "src/CMakeFiles/clang-tool.dir/main.cc.o.d"

@@ -97,10 +97,24 @@ src/CMakeFiles/clang-tool.dir/actions/frontendaction.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/clang-tool.dir/actions/frontendaction.cc.s"
 	cd /home/kidus/NUMATyping/numa-clang-tool/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kidus/NUMATyping/numa-clang-tool/src/actions/frontendaction.cc -o CMakeFiles/clang-tool.dir/actions/frontendaction.cc.s
 
+src/CMakeFiles/clang-tool.dir/actions/cast_frontendaction.cc.o: src/CMakeFiles/clang-tool.dir/flags.make
+src/CMakeFiles/clang-tool.dir/actions/cast_frontendaction.cc.o: ../src/actions/cast_frontendaction.cc
+src/CMakeFiles/clang-tool.dir/actions/cast_frontendaction.cc.o: src/CMakeFiles/clang-tool.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kidus/NUMATyping/numa-clang-tool/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object src/CMakeFiles/clang-tool.dir/actions/cast_frontendaction.cc.o"
+	cd /home/kidus/NUMATyping/numa-clang-tool/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/clang-tool.dir/actions/cast_frontendaction.cc.o -MF CMakeFiles/clang-tool.dir/actions/cast_frontendaction.cc.o.d -o CMakeFiles/clang-tool.dir/actions/cast_frontendaction.cc.o -c /home/kidus/NUMATyping/numa-clang-tool/src/actions/cast_frontendaction.cc
+
+src/CMakeFiles/clang-tool.dir/actions/cast_frontendaction.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/clang-tool.dir/actions/cast_frontendaction.cc.i"
+	cd /home/kidus/NUMATyping/numa-clang-tool/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kidus/NUMATyping/numa-clang-tool/src/actions/cast_frontendaction.cc > CMakeFiles/clang-tool.dir/actions/cast_frontendaction.cc.i
+
+src/CMakeFiles/clang-tool.dir/actions/cast_frontendaction.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/clang-tool.dir/actions/cast_frontendaction.cc.s"
+	cd /home/kidus/NUMATyping/numa-clang-tool/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kidus/NUMATyping/numa-clang-tool/src/actions/cast_frontendaction.cc -o CMakeFiles/clang-tool.dir/actions/cast_frontendaction.cc.s
+
 src/CMakeFiles/clang-tool.dir/consumer/consumer.cc.o: src/CMakeFiles/clang-tool.dir/flags.make
 src/CMakeFiles/clang-tool.dir/consumer/consumer.cc.o: ../src/consumer/consumer.cc
 src/CMakeFiles/clang-tool.dir/consumer/consumer.cc.o: src/CMakeFiles/clang-tool.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kidus/NUMATyping/numa-clang-tool/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object src/CMakeFiles/clang-tool.dir/consumer/consumer.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kidus/NUMATyping/numa-clang-tool/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object src/CMakeFiles/clang-tool.dir/consumer/consumer.cc.o"
 	cd /home/kidus/NUMATyping/numa-clang-tool/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/clang-tool.dir/consumer/consumer.cc.o -MF CMakeFiles/clang-tool.dir/consumer/consumer.cc.o.d -o CMakeFiles/clang-tool.dir/consumer/consumer.cc.o -c /home/kidus/NUMATyping/numa-clang-tool/src/consumer/consumer.cc
 
 src/CMakeFiles/clang-tool.dir/consumer/consumer.cc.i: cmake_force
@@ -114,7 +128,7 @@ src/CMakeFiles/clang-tool.dir/consumer/consumer.cc.s: cmake_force
 src/CMakeFiles/clang-tool.dir/utils/utils.cc.o: src/CMakeFiles/clang-tool.dir/flags.make
 src/CMakeFiles/clang-tool.dir/utils/utils.cc.o: ../src/utils/utils.cc
 src/CMakeFiles/clang-tool.dir/utils/utils.cc.o: src/CMakeFiles/clang-tool.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kidus/NUMATyping/numa-clang-tool/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object src/CMakeFiles/clang-tool.dir/utils/utils.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kidus/NUMATyping/numa-clang-tool/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object src/CMakeFiles/clang-tool.dir/utils/utils.cc.o"
 	cd /home/kidus/NUMATyping/numa-clang-tool/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/clang-tool.dir/utils/utils.cc.o -MF CMakeFiles/clang-tool.dir/utils/utils.cc.o.d -o CMakeFiles/clang-tool.dir/utils/utils.cc.o -c /home/kidus/NUMATyping/numa-clang-tool/src/utils/utils.cc
 
 src/CMakeFiles/clang-tool.dir/utils/utils.cc.i: cmake_force
@@ -128,7 +142,7 @@ src/CMakeFiles/clang-tool.dir/utils/utils.cc.s: cmake_force
 src/CMakeFiles/clang-tool.dir/transformer/transformer.cc.o: src/CMakeFiles/clang-tool.dir/flags.make
 src/CMakeFiles/clang-tool.dir/transformer/transformer.cc.o: ../src/transformer/transformer.cc
 src/CMakeFiles/clang-tool.dir/transformer/transformer.cc.o: src/CMakeFiles/clang-tool.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kidus/NUMATyping/numa-clang-tool/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object src/CMakeFiles/clang-tool.dir/transformer/transformer.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kidus/NUMATyping/numa-clang-tool/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object src/CMakeFiles/clang-tool.dir/transformer/transformer.cc.o"
 	cd /home/kidus/NUMATyping/numa-clang-tool/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/clang-tool.dir/transformer/transformer.cc.o -MF CMakeFiles/clang-tool.dir/transformer/transformer.cc.o.d -o CMakeFiles/clang-tool.dir/transformer/transformer.cc.o -c /home/kidus/NUMATyping/numa-clang-tool/src/transformer/transformer.cc
 
 src/CMakeFiles/clang-tool.dir/transformer/transformer.cc.i: cmake_force
@@ -142,7 +156,7 @@ src/CMakeFiles/clang-tool.dir/transformer/transformer.cc.s: cmake_force
 src/CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.o: src/CMakeFiles/clang-tool.dir/flags.make
 src/CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.o: ../src/transformer/RecursiveNumaTyper.cc
 src/CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.o: src/CMakeFiles/clang-tool.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kidus/NUMATyping/numa-clang-tool/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object src/CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kidus/NUMATyping/numa-clang-tool/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object src/CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.o"
 	cd /home/kidus/NUMATyping/numa-clang-tool/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.o -MF CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.o.d -o CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.o -c /home/kidus/NUMATyping/numa-clang-tool/src/transformer/RecursiveNumaTyper.cc
 
 src/CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.i: cmake_force
@@ -157,6 +171,7 @@ src/CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.s: cmake_force
 clang__tool_OBJECTS = \
 "CMakeFiles/clang-tool.dir/main.cc.o" \
 "CMakeFiles/clang-tool.dir/actions/frontendaction.cc.o" \
+"CMakeFiles/clang-tool.dir/actions/cast_frontendaction.cc.o" \
 "CMakeFiles/clang-tool.dir/consumer/consumer.cc.o" \
 "CMakeFiles/clang-tool.dir/utils/utils.cc.o" \
 "CMakeFiles/clang-tool.dir/transformer/transformer.cc.o" \
@@ -167,6 +182,7 @@ clang__tool_EXTERNAL_OBJECTS =
 
 bin/clang-tool: src/CMakeFiles/clang-tool.dir/main.cc.o
 bin/clang-tool: src/CMakeFiles/clang-tool.dir/actions/frontendaction.cc.o
+bin/clang-tool: src/CMakeFiles/clang-tool.dir/actions/cast_frontendaction.cc.o
 bin/clang-tool: src/CMakeFiles/clang-tool.dir/consumer/consumer.cc.o
 bin/clang-tool: src/CMakeFiles/clang-tool.dir/utils/utils.cc.o
 bin/clang-tool: src/CMakeFiles/clang-tool.dir/transformer/transformer.cc.o
@@ -196,6 +212,7 @@ bin/clang-tool: /usr/local/lib/libclangRewriteFrontend.a
 bin/clang-tool: /usr/local/lib/libclangASTMatchers.a
 bin/clang-tool: /usr/local/lib/libclangToolingCore.a
 bin/clang-tool: /usr/local/lib/libclang-cpp.so
+bin/clang-tool: /usr/lib/x86_64-linux-gnu/libjsoncpp.so.1.9.5
 bin/clang-tool: /usr/local/lib/libclangAnalysis.a
 bin/clang-tool: /usr/local/lib/libclangRewrite.a
 bin/clang-tool: /usr/local/lib/libclangAST.a
@@ -215,7 +232,7 @@ bin/clang-tool: /usr/local/lib/libclangASTMatchers.a
 bin/clang-tool: /usr/local/lib/libclangToolingCore.a
 bin/clang-tool: /usr/local/lib/libclang-cpp.so
 bin/clang-tool: src/CMakeFiles/clang-tool.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kidus/NUMATyping/numa-clang-tool/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable ../bin/clang-tool"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kidus/NUMATyping/numa-clang-tool/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable ../bin/clang-tool"
 	cd /home/kidus/NUMATyping/numa-clang-tool/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/clang-tool.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

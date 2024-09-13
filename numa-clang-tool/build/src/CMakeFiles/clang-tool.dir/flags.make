@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = 
+CXX_INCLUDES = -isystem /usr/include/jsoncpp
 
 CXX_FLAGS = -Wall -lnuma -g3 -O0 -fno-rtti 
 

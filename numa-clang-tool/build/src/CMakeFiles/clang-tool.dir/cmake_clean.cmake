@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "../bin/clang-tool"
   "../bin/clang-tool.pdb"
+  "CMakeFiles/clang-tool.dir/actions/cast_frontendaction.cc.o"
+  "CMakeFiles/clang-tool.dir/actions/cast_frontendaction.cc.o.d"
   "CMakeFiles/clang-tool.dir/actions/frontendaction.cc.o"
   "CMakeFiles/clang-tool.dir/actions/frontendaction.cc.o.d"
   "CMakeFiles/clang-tool.dir/consumer/consumer.cc.o"

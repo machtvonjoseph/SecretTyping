@@ -13,46 +13,13 @@ public:
 	{}
 	Node(int initData);
 	Node(int, Node*);
-	virtual Node *getLink();
-	virtual void setLink(Node *n);
+	Node *getLink();
+	void setLink(Node *n);
 
-	virtual int getData();
-	virtual void setData(int n);
+	int getData();
+	void setData(int n);
 
-	virtual ~Node();
-};
-
-template<>
-class numa<Node,1>{
-public:
-numa (): data(0){
-}
-numa (int initData){
-    this->data = initData;
-}
-numa (int initData, Node * node){
-    this->data = initData;
-    this->link = node;
-}
-Node * getLink(){
-    return this->link;
-}
-void setLink(Node * n){
-    this->link = n;
-}
-int getData(){
-    return this->data;
-}
-void setData(int n){
-    this->data = n;
-}
-~numa()
-{
-	link = nullptr;
-}
-private:
-numa<int,1> data;
-numa<Node,1>* link;
+	~Node();
 };
 
 

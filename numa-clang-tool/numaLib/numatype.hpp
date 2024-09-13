@@ -64,7 +64,7 @@ bool operator!=(const NumaAllocator<T1, NodeID1>&, const NumaAllocator<T2, NodeI
 }
 
 
-int get_numa_node_id(void* ptr) {                   //what is going on here??
+inline int get_numa_node_id(void* ptr) {                   //what is going on here??
     int status[1];
     int ret_code;
     status[0]=-1;

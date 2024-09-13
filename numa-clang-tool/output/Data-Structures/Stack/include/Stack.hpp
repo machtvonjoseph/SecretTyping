@@ -108,7 +108,7 @@ numa (){
 	}
 
 }
-int pop(){
+virtual int pop(){
     if (this->top == __null) {
         return -1;
     }
@@ -119,7 +119,7 @@ int pop(){
     retN = __null;
     return data;
 }
-void push(int data){
+virtual void push(int data){
     Node *newN = new Node(data);
     if (newN == __null) {
         std::cerr << "Stack full" << std::endl;
@@ -128,7 +128,7 @@ void push(int data){
     newN->setLink(this->top);
     this->top = newN;
 }
-void display(){
+virtual void display(){
     if (this->top == __null) {
         std::cout << "Stack Empty!!" << std::endl;
         return;
@@ -145,7 +145,7 @@ void display(){
         }
 }
 private:
-numa<Node,1>* top;
+numa<Node*,1> top;
 };
 
 

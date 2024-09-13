@@ -3,6 +3,7 @@
 #include <clang-c/Index.h>
 #include <iostream>
 #include "actions/frontendaction.h"
+#include "actions/cast_frontendaction.h"
 #include "utils/utils.h"
 #include "clang/Tooling/Tooling.h"
 #include "clang/Frontend/CompilerInstance.h"
@@ -71,38 +72,61 @@ void registerBenchmarks(){
   }
 }
 
+
+
+void print(const std::vector<CompileCommand> &Commands) {
+  if (Commands.empty()) {
+    return;
+  }
+  for (auto opt : Commands[0].CommandLine) {
+    llvm::errs() << "\t" << opt << "\n";
+  }
+}
+
+
 int main(int argc, const char **argv) {
 
-  auto ExpectedParser = CommonOptionsParser::create(argc, argv, MyToolCategory);
-  if (!ExpectedParser) {
-    llvm::errs() << ExpectedParser.takeError();
-    return 1;
-  }
-  CommonOptionsParser& OptionsParser = ExpectedParser.get();
-
-  //print source path list
-  for(auto &sourcePath : OptionsParser.getSourcePathList())
-  {
-      cout<<"Source Path: "<<sourcePath<<"\n";
-  }
-  cout<<"Compile Commands: \n";
-  //print compile commands
-  const std::vector<std::string> &ExtraArgs = OptionsParser.getCompilations().getAllCompileCommands().front().CommandLine;
-  std::vector<clang::tooling::CompileCommand> compileCommands = OptionsParser.getCompilations().getAllCompileCommands();
-  for (auto &cmd: compileCommands)
-  {
-      for (auto &arg : cmd.CommandLine)
-      {
-          llvm::outs() << arg << "\n";
-      }
-  }
-    
   registerBenchmarks();
 
+  static cl::OptionCategory ToolCategory("my-clang-tool options");
 
-  ClangTool Tool(OptionsParser.getCompilations(),
-                OptionsParser.getSourcePathList());
+  static cl::opt<bool> NUMAFrontendAction(
+      "numa",
+      cl::desc("Run numa frontend action"),
+      cl::cat(ToolCategory)
+  );
 
-  return Tool.run(newFrontendActionFactory<NumaFrontendAction>().get());
-  
+  static cl::opt<bool> CastFrontendAction(
+      "cast",
+      cl::desc("Run the cast frontend action"),
+      cl::cat(ToolCategory)
+  );
+
+
+
+  auto ExpectedParser = CommonOptionsParser::create(argc, argv, ToolCategory);
+    if (!ExpectedParser) {
+        llvm::errs() << ExpectedParser.takeError();
+        return 1;
+    }
+    CommonOptionsParser& OptionsParser = ExpectedParser.get();
+
+  std::unique_ptr<FrontendActionFactory> Factory;
+  if (NUMAFrontendAction) {
+      Factory = newFrontendActionFactory<NumaFrontendAction>();
+  } else if (CastFrontendAction) {
+      Factory = newFrontendActionFactory<CastNumaFrontendAction>();
+  } else {
+      llvm::errs() << "Please specify either --count-functions or --count-classes.\n";
+      return 1;
+  }
+
+  ClangTool Tool(OptionsParser.getCompilations(), OptionsParser.getSourcePathList());
+  return Tool.run(Factory.get());
+
+
+  // ClangTool Tool(OptionsParser.getCompilations(), OptionsParser.getSourcePathList());
+  // return Tool.run(newFrontendActionFactory<NumaFrontendAction>().get());
+
+
 }
