@@ -19,14 +19,29 @@
 #include "llvm/Support/raw_ostream.h"
 #include "../consumer/consumer.h"
 #include "../inclusiondirective/inclusiondirective.h"
+#include "clang/CodeGen/CodeGenAction.h"
+#include "llvm/IR/Module.h"
+// #include "clang/lib/CodeGen/CodeGenModule.h"
+#include "llvm/IR/PassManager.h"
+#include "llvm/Support/InitLLVM.h"
+#include "llvm/Support/TargetSelect.h"
 #include <memory>
 #include <vector>
 #include <string>
 using namespace clang;
+using namespace llvm;
 namespace clang
 {
     class CompilerInstance;
 }
+
+class HelloWorldPass : public PassInfoMixin<HelloWorldPass> {
+public:
+  PreservedAnalyses run(Function &F, FunctionAnalysisManager &AM);
+};
+
+
+
 
 class CastNumaFrontendAction : public clang::ASTFrontendAction {
 public:

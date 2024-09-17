@@ -536,6 +536,58 @@ src/CMakeFiles/clang-tool.dir/main.cc.o: \
  /home/kidus/NUMATyping/numa-clang-tool/src/actions/../consumer/consumer.h \
  /home/kidus/NUMATyping/numa-clang-tool/src/actions/../inclusiondirective/inclusiondirective.h \
  /home/kidus/NUMATyping/numa-clang-tool/src/actions/cast_frontendaction.h \
+ /usr/local/include/clang/CodeGen/CodeGenAction.h \
+ /usr/local/include/llvm/IR/Module.h \
+ /usr/local/include/llvm/IR/Attributes.h \
+ /usr/local/include/llvm/Support/ModRef.h \
+ /usr/local/include/llvm/ADT/Sequence.h \
+ /usr/local/include/llvm/IR/Attributes.inc \
+ /usr/local/include/llvm/IR/Comdat.h \
+ /usr/local/include/llvm/IR/DataLayout.h \
+ /usr/local/include/llvm/IR/Function.h \
+ /usr/local/include/llvm/ADT/ilist_node.h \
+ /usr/local/include/llvm/ADT/ilist_node_base.h \
+ /usr/local/include/llvm/ADT/ilist_node_options.h \
+ /usr/local/include/llvm/IR/Argument.h /usr/local/include/llvm/IR/Value.h \
+ /usr/local/include/llvm/IR/Use.h /usr/local/include/llvm/IR/Value.def \
+ /usr/local/include/llvm/IR/BasicBlock.h \
+ /usr/local/include/llvm/ADT/ilist.h \
+ /usr/local/include/llvm/ADT/simple_ilist.h \
+ /usr/local/include/llvm/ADT/ilist_base.h \
+ /usr/local/include/llvm/ADT/ilist_iterator.h \
+ /usr/local/include/llvm/IR/DebugProgramInstruction.h \
+ /usr/local/include/llvm/IR/DbgVariableFragmentInfo.h \
+ /usr/local/include/llvm/IR/DebugLoc.h \
+ /usr/local/include/llvm/IR/TrackingMDRef.h \
+ /usr/local/include/llvm/IR/Metadata.h \
+ /usr/local/include/llvm/IR/Constant.h /usr/local/include/llvm/IR/User.h \
+ /usr/local/include/llvm/IR/LLVMContext.h \
+ /usr/local/include/llvm/IR/DiagnosticHandler.h \
+ /usr/local/include/llvm/IR/FixedMetadataKinds.def \
+ /usr/local/include/llvm/IR/Metadata.def \
+ /usr/local/include/llvm/IR/Instruction.h \
+ /usr/local/include/llvm/ADT/Bitfields.h \
+ /usr/local/include/llvm/IR/SymbolTableListTraits.h \
+ /usr/local/include/llvm/IR/Instruction.def \
+ /usr/local/include/llvm/IR/CallingConv.h \
+ /usr/local/include/llvm/IR/GlobalObject.h \
+ /usr/local/include/llvm/IR/GlobalValue.h \
+ /usr/local/include/llvm/IR/OperandTraits.h \
+ /usr/local/include/llvm/IR/GlobalAlias.h \
+ /usr/local/include/llvm/IR/GlobalIFunc.h \
+ /usr/local/include/llvm/IR/GlobalVariable.h \
+ /usr/local/include/llvm/IR/ProfileSummary.h \
+ /usr/local/include/llvm/IR/PassManager.h \
+ /usr/local/include/llvm/IR/Analysis.h \
+ /usr/local/include/llvm/IR/PassManagerInternal.h \
+ /usr/local/include/llvm/Support/TypeName.h \
+ /usr/local/include/llvm/Support/InitLLVM.h \
+ /usr/local/include/llvm/Support/TargetSelect.h \
+ /usr/local/include/llvm/Config/Targets.def \
+ /usr/local/include/llvm/Config/AsmPrinters.def \
+ /usr/local/include/llvm/Config/AsmParsers.def \
+ /usr/local/include/llvm/Config/Disassemblers.def \
+ /usr/local/include/llvm/Config/TargetMCAs.def \
  /home/kidus/NUMATyping/numa-clang-tool/src/utils/utils.h \
  /usr/include/c++/11/fstream /usr/include/c++/11/bits/codecvt.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
@@ -567,11 +619,4 @@ src/CMakeFiles/clang-tool.dir/main.cc.o: \
  /usr/include/c++/11/bits/sstream.tcc \
  /usr/local/include/clang/CodeGen/ModuleBuilder.h \
  /usr/local/include/clang/Parse/ParseAST.h \
- /usr/local/include/llvm/TargetParser/Host.h \
- /usr/local/include/llvm/Support/TargetSelect.h \
- /usr/local/include/llvm/Config/Targets.def \
- /usr/local/include/llvm/Config/AsmPrinters.def \
- /usr/local/include/llvm/Config/AsmParsers.def \
- /usr/local/include/llvm/Config/Disassemblers.def \
- /usr/local/include/llvm/Config/TargetMCAs.def \
- /usr/local/include/llvm/Support/InitLLVM.h
+ /usr/local/include/llvm/TargetParser/Host.h

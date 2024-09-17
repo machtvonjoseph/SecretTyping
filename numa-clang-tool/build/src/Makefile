@@ -178,6 +178,30 @@ actions/frontendaction.cc.s:
 	cd /home/kidus/NUMATyping/numa-clang-tool/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/clang-tool.dir/build.make src/CMakeFiles/clang-tool.dir/actions/frontendaction.cc.s
 .PHONY : actions/frontendaction.cc.s
 
+consumer/cast_consumer.o: consumer/cast_consumer.cc.o
+.PHONY : consumer/cast_consumer.o
+
+# target to build an object file
+consumer/cast_consumer.cc.o:
+	cd /home/kidus/NUMATyping/numa-clang-tool/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/clang-tool.dir/build.make src/CMakeFiles/clang-tool.dir/consumer/cast_consumer.cc.o
+.PHONY : consumer/cast_consumer.cc.o
+
+consumer/cast_consumer.i: consumer/cast_consumer.cc.i
+.PHONY : consumer/cast_consumer.i
+
+# target to preprocess a source file
+consumer/cast_consumer.cc.i:
+	cd /home/kidus/NUMATyping/numa-clang-tool/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/clang-tool.dir/build.make src/CMakeFiles/clang-tool.dir/consumer/cast_consumer.cc.i
+.PHONY : consumer/cast_consumer.cc.i
+
+consumer/cast_consumer.s: consumer/cast_consumer.cc.s
+.PHONY : consumer/cast_consumer.s
+
+# target to generate assembly for a file
+consumer/cast_consumer.cc.s:
+	cd /home/kidus/NUMATyping/numa-clang-tool/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/clang-tool.dir/build.make src/CMakeFiles/clang-tool.dir/consumer/cast_consumer.cc.s
+.PHONY : consumer/cast_consumer.cc.s
+
 consumer/consumer.o: consumer/consumer.cc.o
 .PHONY : consumer/consumer.o
 
@@ -225,6 +249,30 @@ main.s: main.cc.s
 main.cc.s:
 	cd /home/kidus/NUMATyping/numa-clang-tool/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/clang-tool.dir/build.make src/CMakeFiles/clang-tool.dir/main.cc.s
 .PHONY : main.cc.s
+
+transformer/NumaTargetNumaPointer.o: transformer/NumaTargetNumaPointer.cc.o
+.PHONY : transformer/NumaTargetNumaPointer.o
+
+# target to build an object file
+transformer/NumaTargetNumaPointer.cc.o:
+	cd /home/kidus/NUMATyping/numa-clang-tool/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/clang-tool.dir/build.make src/CMakeFiles/clang-tool.dir/transformer/NumaTargetNumaPointer.cc.o
+.PHONY : transformer/NumaTargetNumaPointer.cc.o
+
+transformer/NumaTargetNumaPointer.i: transformer/NumaTargetNumaPointer.cc.i
+.PHONY : transformer/NumaTargetNumaPointer.i
+
+# target to preprocess a source file
+transformer/NumaTargetNumaPointer.cc.i:
+	cd /home/kidus/NUMATyping/numa-clang-tool/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/clang-tool.dir/build.make src/CMakeFiles/clang-tool.dir/transformer/NumaTargetNumaPointer.cc.i
+.PHONY : transformer/NumaTargetNumaPointer.cc.i
+
+transformer/NumaTargetNumaPointer.s: transformer/NumaTargetNumaPointer.cc.s
+.PHONY : transformer/NumaTargetNumaPointer.s
+
+# target to generate assembly for a file
+transformer/NumaTargetNumaPointer.cc.s:
+	cd /home/kidus/NUMATyping/numa-clang-tool/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/clang-tool.dir/build.make src/CMakeFiles/clang-tool.dir/transformer/NumaTargetNumaPointer.cc.s
+.PHONY : transformer/NumaTargetNumaPointer.cc.s
 
 transformer/RecursiveNumaTyper.o: transformer/RecursiveNumaTyper.cc.o
 .PHONY : transformer/RecursiveNumaTyper.o
@@ -313,12 +361,18 @@ help:
 	@echo "... actions/frontendaction.o"
 	@echo "... actions/frontendaction.i"
 	@echo "... actions/frontendaction.s"
+	@echo "... consumer/cast_consumer.o"
+	@echo "... consumer/cast_consumer.i"
+	@echo "... consumer/cast_consumer.s"
 	@echo "... consumer/consumer.o"
 	@echo "... consumer/consumer.i"
 	@echo "... consumer/consumer.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... transformer/NumaTargetNumaPointer.o"
+	@echo "... transformer/NumaTargetNumaPointer.i"
+	@echo "... transformer/NumaTargetNumaPointer.s"
 	@echo "... transformer/RecursiveNumaTyper.o"
 	@echo "... transformer/RecursiveNumaTyper.i"
 	@echo "... transformer/RecursiveNumaTyper.s"

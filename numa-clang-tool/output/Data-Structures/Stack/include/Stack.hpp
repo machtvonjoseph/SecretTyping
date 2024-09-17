@@ -1,4 +1,3 @@
-#include "numatype.hpp"
 /*! \file Stack.hpp
  * \brief Interface for a simple Stack class
  * \author Nii Mante
@@ -49,7 +48,7 @@ public:
 	 *
 	 * \sa Stack::pop()
 	 */
-	virtual ~Stack();
+	~Stack();
 
 	/*!
 	 * \brief Function for removing a single stack node
@@ -60,7 +59,7 @@ public:
 	 *
 	 * \return The data from the removed node.
 	 */
-	virtual int pop();
+	int pop();
 
 	/*!
 	 * \brief Push function for adding stack variables
@@ -72,7 +71,7 @@ public:
 	 * \note To avoid Memory Allocation issues, if allocation fails (i.e. overflow)
 	 	Stack::push() is returned from immediately.
 	 */
-	virtual void push(int);
+	void push(int);
 
 
 	/*!
@@ -81,71 +80,9 @@ public:
 	 * This function iterates over and prints each node in the stack.
 	 * The first node printed is the top Node.
 	 */
-	virtual void display();
+	void display();
 
 
-};
-
-template<>
-class numa<Stack,1>{
-public:
-numa (){
-    this->top = __null;
-}
-~numa()
-{
-	
-	if(top == NULL)
-	{
-		return;
-	}
-	Node *temp;
-	while(top != NULL)
-	{
-		temp = top;
-		top = top->getLink();
-		delete temp;
-	}
-
-}
-virtual int pop(){
-    if (this->top == __null) {
-        return -1;
-    }
-    Node *retN = this->top;
-    this->top = this->top->getLink();
-    int data = retN->getData();
-    delete retN;
-    retN = __null;
-    return data;
-}
-virtual void push(int data){
-    Node *newN = new Node(data);
-    if (newN == __null) {
-        std::cerr << "Stack full" << std::endl;
-        return;
-    }
-    newN->setLink(this->top);
-    this->top = newN;
-}
-virtual void display(){
-    if (this->top == __null) {
-        std::cout << "Stack Empty!!" << std::endl;
-        return;
-    }
-    int i = 0;
-    Node *temp = this->top;
-    while (temp != __null)
-        {
-            if (i == 0)
-                std::cout << "TOP ";
-            std::cout << temp->getData() << std::endl;
-            temp = temp->getLink();
-            i++;
-        }
-}
-private:
-numa<Node*,1> top;
 };
 
 

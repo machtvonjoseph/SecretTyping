@@ -1,4 +1,3 @@
-#include "numatype.hpp"
 #ifndef _NODE_HPP_
 #define _NODE_HPP_
 

@@ -20,13 +20,14 @@ set(CLANG_TOOL_SRC
         actions/frontendaction.cc
         actions/cast_frontendaction.cc
         consumer/consumer.cc
+        consumer/cast_consumer.cc
         #inclusiondirective/inclusiondirective.cc
         utils/utils.cc
         
         transformer/transformer.cc
         # transformer/functioncalltransformer.cc
         transformer/RecursiveNumaTyper.cc
-        
+        transformer/NumaTargetNumaPointer.cc
         # finder/finder.cc
         # finder/integervariablefinder.cc
 )
