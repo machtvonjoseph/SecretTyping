@@ -4,6 +4,7 @@
 #include <clang/AST/Decl.h>
 #include <clang/AST/Expr.h>
 #include <clang/ASTMatchers/ASTMatchers.h>
+#include "clang/ASTMatchers/ASTMatchFinder.h"
 #include <clang/Rewrite/Core/Rewriter.h>
 #include <string>
 #include "clang/AST/ASTConsumer.h"
@@ -22,10 +23,14 @@
 #include "llvm/Analysis/AliasAnalysis.h"
 #include "llvm/Analysis/BasicAliasAnalysis.h"
 #include "llvm/IRReader/IRReader.h"
+#include "RecursiveNumaTyper.h"
 #include <sstream>
 #include <string>
 #include <unordered_map>
 #include <map>
+
+#include "clang/ASTMatchers/ASTMatchers.h"
+#include "clang/ASTMatchers/ASTMatchFinder.h"
 
 
 
@@ -34,32 +39,106 @@ NumaTargetNumaPointer::NumaTargetNumaPointer(clang::ASTContext &context, clang::
 {}
 using namespace clang;
 
-void NumaTargetNumaPointer::start()
-{
+void NumaTargetNumaPointer::start(){       
     using namespace clang::ast_matchers;
-    MatchFinder functionFinder;
-    auto functionDeclMatcher = functionDecl().bind("functionDecl");
-    functionFinder.addMatcher(functionDeclMatcher, this);
-    functionFinder.matchAST(context);
+    MatchFinder templateSpecializationFinder;
+    auto templateSpecializationDeclMatcher = classTemplateSpecializationDecl().bind("templateSpecializationDecl");
+    templateSpecializationFinder.addMatcher(templateSpecializationDeclMatcher, this);
+    templateSpecializationFinder.matchAST(context);
+    return;
 }
-
 
 
 void NumaTargetNumaPointer::run(const clang::ast_matchers::MatchFinder::MatchResult &result){
-    // llvm::outs() << "Running TransformerFunction\n";
-    // if (const FunctionDecl *FD = result.Nodes.getNodeAs<FunctionDecl>("funcDecl")) {
-    //     llvm::errs() << "Matched function: " << FD->getNameAsString() << "\n";
+    RecursiveNumaTyper RecursiveNumaTyper(*result.Context, rewriter);
+    if(result.SourceManager->isInSystemHeader(result.Nodes.getNodeAs<ClassTemplateSpecializationDecl>("templateSpecializationDecl")->getSourceRange().getBegin()))
+        return;
+    if(result.SourceManager->getFilename(result.Nodes.getNodeAs<ClassTemplateSpecializationDecl>("templateSpecializationDecl")->getLocation()).find("../numaLib/numatype.hpp") != std::string::npos)
+        return;
+    if(result.SourceManager->getFilename(result.Nodes.getNodeAs<ClassTemplateSpecializationDecl>("templateSpecializationDecl")->getLocation()).empty())
+        return;
+    if(result.Nodes.getNodeAs<ClassTemplateSpecializationDecl>("templateSpecializationDecl")->isImplicit())
+        return;
+    if(result.Nodes.getNodeAs<ClassTemplateSpecializationDecl>("templateSpecializationDecl")->getNameAsString().empty())
+        return;
+    
+    
+    const auto *TemplateDecl = result.Nodes.getNodeAs<ClassTemplateSpecializationDecl>("templateSpecializationDecl")->getSpecializedTemplate();
+            //check if its numa
+    clang::QualType FoundType;
+    llvm::APSInt FoundInt;
+    llvm::outs() << "The template class name is " << TemplateDecl->getNameAsString() << "\n";
 
-    //     // Now we retrieve the LLVM function corresponding to the AST FunctionDecl
-    //     if (llvm::Function *LLVMFunc = CGM->getFunction(FD)) {
-    //         llvm::errs() << "LLVM IR function found: " << LLVMFunc->getName() << "\n";
-    //     } else {
-    //         llvm::errs() << "No corresponding LLVM IR function found.\n";
-    //     }
-    // }
+    if(TemplateDecl->getNameAsString().compare("numa") == 0){
+
+        for (const auto &Arg : result.Nodes.getNodeAs<ClassTemplateSpecializationDecl>("templateSpecializationDecl")->getTemplateArgs().asArray()) {
+            if (Arg.getKind() == clang::TemplateArgument::ArgKind::Type) {
+                FoundType = Arg.getAsType();
+                llvm::outs() << "The type is " << FoundType.getAsString() << "\n";
+            }
+            if (Arg.getKind() == clang::TemplateArgument::ArgKind::Integral) {
+                llvm::outs() << "The integral is " << Arg.getAsIntegral() << "\n";
+                FoundInt = Arg.getAsIntegral();
+            }
+        }
+    }
+
+    //print all the methods in the specialization
+    for(auto method : result.Nodes.getNodeAs<ClassTemplateSpecializationDecl>("templateSpecializationDecl")->methods()){
+    if (method->hasBody()) { // Check if the method has a body
+        //look for CXXnewExpr in the method body
+        utils::CXXNewExprVisitor CXXNewExprVisitor(result.Context);
+        utils::CompoundStmtVisitor CompoundStmtVisitor(result.Context);
+        utils::DeclStmtVisitor DeclStmtVisitor(result.Context);
+        utils::VarDeclVisitor VarDeclVisitor(result.Context);
+
+        Stmt *MethodBody = method->getBody(); 
+        //MethodBody->dump();
+        
+        if(DeclStmtVisitor.TraverseStmt(MethodBody)){
+            for(auto declStmt : DeclStmtVisitor.getDeclStmts()){
+                if(CXXNewExprVisitor.TraverseStmt(declStmt)){
+                    for(auto CXXNewExpr : CXXNewExprVisitor.getCXXNewExprs()){
+                        if(CXXNewExpr){
+
+                            llvm::outs() << "CXXNewExpr found in method: " << method->getNameAsString() << "\n";
+                            std::string NewType = CXXNewExpr->getAllocatedType().getAsString();
+                            //check if dump is empty
+                            rewriteLocation = CXXNewExprVisitor.getCXXNewExprLocs().back();
+                            llvm::outs() << "Rewrite Location: ";
+                            rewriteLocation.print(llvm::outs(),context.getSourceManager());
+                            llvm::outs() << "\n";
+                            llvm::outs() << "New Type length: " << NewType.length() << "\n";
+                            llvm::outs() << "New Type: " << NewType << "\n";
+
+                            SourceLocation TypeLoc = CXXNewExpr->getAllocatedTypeSourceInfo()->getTypeLoc().getBeginLoc();
+                            rewriter.ReplaceText(TypeLoc, NewType.length(), "numa<"+NewType+","+std::to_string(FoundInt.getExtValue())+">");
+
+                            rewriter.InsertTextBefore(rewriteLocation, "reinterpret_cast<"+NewType+"*>(");
+
+                            //getFIle ID 
+                            clang::SourceLocation NewEndLocaiton = CXXNewExpr->getEndLoc();
+                            rewriter.InsertTextAfter(NewEndLocaiton, ")");
+                            RecursiveNumaTyper.constructSpecialization(result.Context,CXXNewExpr->getAllocatedType()->getAsCXXRecordDecl(), FoundInt.getExtValue());
+                            fileIDs.push_back(rewriter.getSourceMgr().getFileID(rewriteLocation)); 
+                        }
+                    }      
+                    CXXNewExprVisitor.clearCXXNewExprs();
+                }
+            }
+        }
+
+// Get the body
+        std::string BodyStr;
+        llvm::raw_string_ostream OS(BodyStr);
+        // Pretty print the body
+        MethodBody->printPretty(OS, nullptr, method->getASTContext().getPrintingPolicy());
+        llvm::outs() << "\nMethod Body:\n" << OS.str() << "\n";
+        }
+    }
+    return;
 }
 
-void NumaTargetNumaPointer::print(clang::raw_ostream &stream)
-{
+void NumaTargetNumaPointer::print(clang::raw_ostream &stream){
 
 }

@@ -580,4 +580,28 @@ src/CMakeFiles/clang-tool.dir/actions/cast_frontendaction.cc.o: \
  /usr/local/include/llvm/Config/AsmParsers.def \
  /usr/local/include/llvm/Config/Disassemblers.def \
  /usr/local/include/llvm/Config/TargetMCAs.def \
+ /usr/local/include/clang/AST/AST.h \
+ /usr/local/include/clang/AST/StmtVisitor.h \
+ /usr/local/include/clang/AST/ExprConcepts.h \
+ /usr/local/include/clang/AST/ExprOpenMP.h \
+ /usr/local/include/clang/AST/StmtObjC.h \
+ /usr/local/include/clang/AST/StmtOpenACC.h \
+ /usr/local/include/clang/AST/OpenACCClause.h \
+ /usr/local/include/clang/Basic/OpenACCKinds.h \
+ /usr/local/include/clang/Basic/OpenACCClauses.def \
+ /usr/local/include/clang/AST/StmtOpenMP.h \
+ /usr/local/include/clang/AST/OpenMPClause.h \
+ /usr/local/include/llvm/Frontend/OpenMP/OMPAssume.h \
+ /usr/local/include/llvm/Frontend/OpenMP/OMPContext.h \
+ /usr/local/include/clang/ASTMatchers/ASTMatchers.h \
+ /usr/local/include/clang/AST/ASTTypeTraits.h \
+ /usr/local/include/clang/AST/CXXInheritance.h \
+ /usr/local/include/clang/AST/TypeOrdering.h \
+ /usr/local/include/clang/AST/DeclFriend.h \
+ /usr/local/include/clang/AST/ParentMapContext.h \
+ /usr/local/include/clang/ASTMatchers/ASTMatchersInternal.h \
+ /usr/local/include/llvm/Support/ManagedStatic.h \
+ /usr/local/include/clang/ASTMatchers/ASTMatchersMacros.h \
+ /usr/local/include/clang/ASTMatchers/ASTMatchFinder.h \
+ /usr/local/include/llvm/Support/Timer.h \
  /home/kidus/NUMATyping/numa-clang-tool/src/actions/../consumer/cast_consumer.h

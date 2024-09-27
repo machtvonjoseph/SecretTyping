@@ -685,4 +685,5 @@ src/CMakeFiles/clang-tool.dir/transformer/NumaTargetNumaPointer.cc.o: \
  /usr/include/c++/11/bits/fstream.tcc \
  /usr/local/include/clang/Tooling/CompilationDatabase.h \
  /usr/local/include/llvm/IRReader/IRReader.h \
- /usr/local/include/llvm/Bitcode/BitcodeReader.h
+ /usr/local/include/llvm/Bitcode/BitcodeReader.h \
+ /home/kidus/NUMATyping/numa-clang-tool/src/transformer/RecursiveNumaTyper.h

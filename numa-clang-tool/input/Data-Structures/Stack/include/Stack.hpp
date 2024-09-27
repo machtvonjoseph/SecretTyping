@@ -138,9 +138,6 @@ void Stack::push(int data)
 	//Node *newNext = newN->getLink();
 	newN->setLink(top);
 	top = newN;
-	
-
-
 
 }
 

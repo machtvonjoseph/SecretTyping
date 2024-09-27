@@ -37,7 +37,7 @@ void CastConsumer::WriteOutput(clang::SourceManager &SM){
 
 
                 std::string fileName = (std::string)it->first.getName();
-                std::string outputFileName = fileName.replace(fileName.find("input"), 5, "output");
+                std::string outputFileName = fileName.replace(fileName.find("output"), 6, "output2");
                 llvm::outs() << "Output File Name: " << outputFileName << "\n";
                 //if directory doesn't exist create it
             
@@ -77,7 +77,7 @@ void CastConsumer::includeNumaHeader(clang::ASTContext &context){
 
 
 void CastConsumer::HandleTranslationUnit(clang::ASTContext &context){
-    llvm::outs() <<"Calling template arg transformer\n";
+    llvm::outs() <<"Calling template arg transformer from cast consumer\n";
     NumaTargetNumaPointer numaTargetNumaPointer(context, rewriter);
     // // //fntransformer.start();
     numaTargetNumaPointer.start();
@@ -88,7 +88,7 @@ void CastConsumer::HandleTranslationUnit(clang::ASTContext &context){
     // }
 
     // includeNumaHeader(context);       //turn this on to include numaheaders
-    // WriteOutput(rewriter.getSourceMgr());
+    WriteOutput(rewriter.getSourceMgr());
 }
     
 

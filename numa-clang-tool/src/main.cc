@@ -23,6 +23,16 @@
 #include <sstream>
 #include <string>
 
+#include "clang/AST/AST.h"
+#include "clang/ASTMatchers/ASTMatchers.h"
+#include "clang/ASTMatchers/ASTMatchFinder.h"
+
+
+#include "clang/Frontend/CompilerInstance.h"
+#include "clang/Tooling/CommonOptionsParser.h"
+#include "clang/Basic/SourceManager.h"
+
+
 using namespace std;
 using namespace llvm;
 using namespace clang;
@@ -72,7 +82,32 @@ void registerBenchmarks(){
   }
 }
 
+void copyOuputToOutput2(){
+    for(auto &benchmark : benchmarks)
+  {
+      std::string directory = "../output2/" + benchmark;
+      if(utils::fileExists(directory) == true)
+      {
+          //remove everything in the directory
+          std::string command = "rm -rf " + directory + "/*";
+          system(command.c_str());
+      }
+      else
+      {
+          std::string command = "mkdir -p " + directory;
+          system(command.c_str());
+      }
+  }
 
+  //For each benchmark, copy the contents from the input directory to the output directory
+  for(auto &benchmark : benchmarks)
+  {
+      std::string inputDirectory = "../output/" + benchmark;
+      std::string outputDirectory = "../output2/" + benchmark;
+      std::string command = "cp -r " + inputDirectory + "/* " + outputDirectory;
+      system(command.c_str());
+  }
+}
 
 void print(const std::vector<CompileCommand> &Commands) {
   if (Commands.empty()) {
@@ -84,9 +119,12 @@ void print(const std::vector<CompileCommand> &Commands) {
 }
 
 
+
+
+
 int main(int argc, const char **argv) {
 
-  registerBenchmarks();
+
 
   static cl::OptionCategory ToolCategory("my-clang-tool options");
 
@@ -113,15 +151,21 @@ int main(int argc, const char **argv) {
 
   std::unique_ptr<FrontendActionFactory> Factory;
   if (NUMAFrontendAction) {
+      registerBenchmarks();
       Factory = newFrontendActionFactory<NumaFrontendAction>();
   } else if (CastFrontendAction) {
+      copyOuputToOutput2();
       Factory = newFrontendActionFactory<CastNumaFrontendAction>();
   } else {
       llvm::errs() << "Please specify either --count-functions or --count-classes.\n";
       return 1;
   }
 
+
   ClangTool Tool(OptionsParser.getCompilations(), OptionsParser.getSourcePathList());
+  //return Tool.run(newFrontendActionFactory(&Finder).get());
+
+
   return Tool.run(Factory.get());
 
 

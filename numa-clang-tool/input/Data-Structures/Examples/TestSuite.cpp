@@ -24,30 +24,32 @@
 void StackTest()
 {
 	Stack a;
-	numa<Stack,1>* v = new numa<Stack,1>();
+	numa<Stack,0>* v = new numa<Stack,0>();
 	//Stack *b;
-	a.push(1);
+	v->push(1);
 	std::cout << "----------------------------------" << std::endl;
 	std::cout << "Display Stack after adding 1 node." << std::endl;
 	std::cout << "----------------------------------" << std::endl;
-	a.display();
+	v->display();
 	
 
-	a.push(5);
-	a.push(30);
+	v->push(5);
+	v->push(30);
 	std::cout << "----------------------------------" << std::endl;
 	std::cout << "Display Stack after adding 2 nodes." << std::endl;
 	std::cout << "----------------------------------" << std::endl;
-	a.display();
+	v->display();
 
-	a.pop();
+	v->pop();
 	std::cout << "----------------------------------" << std::endl;
 	std::cout << "Display Stack after removing 1 node" << std::endl;
 	std::cout << "----------------------------------" << std::endl;
-	a.display();
+	v->display();
 
 
 	//b = new Stack();
+	v->pop();
+	v->pop();
 	std::cout << "----------------------------------" << std::endl;
 	std::cout << "Display empty stack." << std::endl;
 	std::cout << "----------------------------------" << std::endl;

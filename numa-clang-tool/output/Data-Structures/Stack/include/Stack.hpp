@@ -1,3 +1,4 @@
+#include "numatype.hpp"
 /*! \file Stack.hpp
  * \brief Interface for a simple Stack class
  * \author Nii Mante
@@ -48,7 +49,7 @@ public:
 	 *
 	 * \sa Stack::pop()
 	 */
-	~Stack();
+	virtual ~Stack();
 
 	/*!
 	 * \brief Function for removing a single stack node
@@ -59,7 +60,7 @@ public:
 	 *
 	 * \return The data from the removed node.
 	 */
-	int pop();
+	virtual int pop();
 
 	/*!
 	 * \brief Push function for adding stack variables
@@ -71,7 +72,7 @@ public:
 	 * \note To avoid Memory Allocation issues, if allocation fails (i.e. overflow)
 	 	Stack::push() is returned from immediately.
 	 */
-	void push(int);
+	virtual void push(int);
 
 
 	/*!
@@ -80,9 +81,99 @@ public:
 	 * This function iterates over and prints each node in the stack.
 	 * The first node printed is the top Node.
 	 */
-	void display();
+	virtual void display();
 
 
+};
+
+template<>
+class numa<Stack,0>{
+public: 
+    static void* operator new(std::size_t sz){
+        std::cout<<"new operator called"<<std::endl;
+		 void* p = numa_alloc_onnode(sz * sizeof(Stack), 0);
+        if (p == nullptr) {
+            throw std::bad_alloc();
+        }
+        return p;
+    }
+
+    static void* operator new[](std::size_t sz){
+		std::cout<<"new operator called"<<std::endl;
+		 void* p = numa_alloc_onnode(sz * sizeof(Stack), 0);
+        if (p == nullptr) {
+            throw std::bad_alloc();
+        }
+        return p;
+    }
+
+    static void operator delete(void* ptr){
+		std::cout<<"delete operator called"<<std::endl;
+		numa_free(ptr, 1 * sizeof(Stack));
+    }
+
+    static void operator delete[](void* ptr){
+		std::cout<<"delete operator called"<<std::endl;
+		numa_free(ptr, 1 * sizeof(Stack));
+    }
+public:
+numa (){
+    this->top = __null;
+}
+virtual ~numa()
+{
+	
+	if(top == NULL)
+	{
+		return;
+	}
+	Node *temp;
+	while(top != NULL)
+	{
+		temp = top;
+		top = top->getLink();
+		delete temp;
+	}
+
+}
+virtual int pop(){
+    if (this->top == __null) {
+        return -1;
+    }
+    Node *retN = this->top;
+    this->top = this->top->getLink();
+    int data = retN->getData();
+    delete retN;
+    retN = __null;
+    return data;
+}
+virtual void push(int data){
+    Node *newN = new Node(data);
+    if (newN == __null) {
+        std::cerr << "Stack full" << std::endl;
+        return;
+    }
+    newN->setLink(this->top);
+    this->top = newN;
+}
+virtual void display(){
+    if (this->top == __null) {
+        std::cout << "Stack Empty!!" << std::endl;
+        return;
+    }
+    int i = 0;
+    Node *temp = this->top;
+    while (temp != __null)
+        {
+            if (i == 0)
+                std::cout << "TOP ";
+            std::cout << temp->getData() << std::endl;
+            temp = temp->getLink();
+            i++;
+        }
+}
+private:
+numa<Node*,0> top;
 };
 
 
@@ -138,9 +229,6 @@ void Stack::push(int data)
 	//Node *newNext = newN->getLink();
 	newN->setLink(top);
 	top = newN;
-	
-
-
 
 }
 

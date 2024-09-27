@@ -56,7 +56,37 @@ public:
     int node_id = NodeID;
     constexpr operator int() const { return NodeID; }
     )";
+std::string utils::getNumaAllocatorCode(std::string classDecl, std::string nodeID){
+ return R"(public: 
+    static void* operator new(std::size_t sz){
+        std::cout<<"new operator called"<<std::endl;
+		 void* p = numa_alloc_onnode(sz * sizeof()"+classDecl+R"(), )"+ nodeID +R"();
+        if (p == nullptr) {
+            throw std::bad_alloc();
+        }
+        return p;
+    }
 
+    static void* operator new[](std::size_t sz){
+		std::cout<<"new operator called"<<std::endl;
+		 void* p = numa_alloc_onnode(sz * sizeof()"+classDecl+R"(), )"+ nodeID +R"();
+        if (p == nullptr) {
+            throw std::bad_alloc();
+        }
+        return p;
+    }
+
+    static void operator delete(void* ptr){
+		std::cout<<"delete operator called"<<std::endl;
+		numa_free(ptr, 1 * sizeof()"+classDecl+R"());
+    }
+
+    static void operator delete[](void* ptr){
+		std::cout<<"delete operator called"<<std::endl;
+		numa_free(ptr, 1 * sizeof()"+classDecl+R"());
+    }
+)";
+}
 
 RecursiveNumaTyper::RecursiveNumaTyper(clang::ASTContext &context, clang::Rewriter &rewriter)
     : Transformer(context, rewriter)
@@ -154,6 +184,7 @@ std::string utils::getDelegatingInitString(CXXConstructorDecl* constructor) {
             }
         }
     }
+    return " ";
 }
 
 std::string RecursiveNumaTyper::getNumaMethodSignature(CXXMethodDecl* method){
@@ -199,7 +230,7 @@ void RecursiveNumaTyper::extractNumaDecls(clang::Stmt* fnBody, ASTContext *Conte
         for(auto declStmt : DeclStmtVisitor.getDeclStmts()){
             if(CXXNewExprVisitor.TraverseStmt(declStmt)){
                 //add the vardecl name, the type and the newExpr to the numaTable
-                for(auto newExpr : CXXNewExprVisitor.getCompoundStmts()){
+                for(auto newExpr : CXXNewExprVisitor.getCXXNewExprs()){
                     if(newExpr){
                         auto newType = newExpr->getType().getAsString();
                         for (auto decl : declStmt->decls()){
@@ -312,7 +343,7 @@ bool RecursiveNumaTyper::NumaSpeclExists(clang::QualType FirstTempArg, int64_t S
     }
 }
 
-void RecursiveNumaTyper::makeVirtual(CXXRecordDecl * classDecl){
+void RecursiveNumaTyper::makeVirtual(const CXXRecordDecl* classDecl){
     for(auto method : classDecl->methods()){
         if(method->isUserProvided()){
             //check if it is not a constructor
@@ -392,6 +423,7 @@ void RecursiveNumaTyper::constructSpecialization(clang::ASTContext* Context, cla
 
     rewriter.InsertTextAfter(semiLoc, "\ntemplate<>\n"
                                             "class numa<"+classDecl->getNameAsString()+"," + std::to_string(nodeID)+">{\n");
+    rewriter.InsertTextAfter(semiLoc, utils::getNumaAllocatorCode(classDecl->getNameAsString(), std::to_string(nodeID)));
 
     numaPublicMembers(Context, semiLoc, publicFields, publicMethods, nodeID);
     numaPrivateMembers(Context, semiLoc, privateFields, privateMethods, nodeID);
@@ -425,6 +457,11 @@ void RecursiveNumaTyper::numaPublicMembers(clang::ASTContext* Context, clang::So
             llvm::outs()<<"Field is a pointer to a user defined class\n";
             rewriter.InsertTextAfter(rewriteLocation, "numa<"+fields->getType()->getPointeeType().getAsString() +"*,"+std::to_string(nodeID)+"> "+ fields->getNameAsString()+";\n" );
             
+
+            llvm::outs()<<"Making the methods of "<< fields->getType()->getPointeeCXXRecordDecl()->getNameAsString() << " virtual\n";
+
+            makeVirtual(fields->getType()->getPointeeCXXRecordDecl());
+            
             if(NumaSpeclExists(QualType(fields->getType()->getPointeeCXXRecordDecl()->getTypeForDecl(),0) , nodeID)){
                 llvm::outs() << "The numa template specialization for " << fields->getNameAsString() << " and " << nodeID << " already exists\n";
                 continue;
@@ -436,6 +473,7 @@ void RecursiveNumaTyper::numaPublicMembers(clang::ASTContext* Context, clang::So
             //RecursiveNumaTyper::specializedClasses.insert({QualType(fields->getType()->getPointeeCXXRecordDecl()->getTypeForDecl(),0) , nodeID});
 
             //constructSpecialization(Context, fields->getType()->getPointeeType()->getAsCXXRecordDecl(), nodeID);
+            
             }
         }
         /*Case where the field is not a built in type and not a pointer*/
@@ -508,6 +546,10 @@ void RecursiveNumaTyper::numaPrivateMembers(clang::ASTContext* Context, clang::S
         else if(fields->getType()->isPointerType() && !fields->getType()->getPointeeType()->isBuiltinType()){
             llvm::outs()<<"Field is a pointer to a user defined class\n";
             rewriter.InsertTextAfter(rewriteLocation, "numa<"+fields->getType()->getPointeeType().getAsString() +"*,"+std::to_string(nodeID)+"> "+ fields->getNameAsString()+";\n" );
+
+            llvm::outs()<<"Making the methods of "<< fields->getType()->getPointeeCXXRecordDecl()->getNameAsString() << " virtual\n";
+
+            
             
             if(NumaSpeclExists(QualType(fields->getType()->getPointeeCXXRecordDecl()->getTypeForDecl(),0) , nodeID)){
                 llvm::outs() << "The numa template specialization for " << fields->getNameAsString() << " and " << nodeID << " already exists\n";
@@ -571,9 +613,9 @@ void RecursiveNumaTyper::numaPrivateMembers(clang::ASTContext* Context, clang::S
 
 void RecursiveNumaTyper::numaConstructors(clang::CXXConstructorDecl* constructor, clang::SourceLocation& rewriteLocation, int64_t nodeID){
     std::map<std::string, std::string> initMembers;
-    bool isWritten = false;
     bool isDelegatingInit = false;
     bool isMemberInit = false;
+
     std::string initMembersString;
     //llvm::outs() << "CONSTRUCTOR SIGNATURE IS: "<< numaConstructorSignature(constructor) << "\n";
     std::string numaConstructorSignatrue = getNumaConstructorSignature(constructor);  
@@ -583,7 +625,7 @@ void RecursiveNumaTyper::numaConstructors(clang::CXXConstructorDecl* constructor
         for (auto Init = constructor->init_begin(); Init != constructor->init_end(); ++Init) {
             if ((*Init)->isWritten()) {
                 llvm::outs() << "  Initializes member is written\n";
-                isWritten = true;
+                
                 if((*Init)->isDelegatingInitializer()){
                     llvm::outs() << "  Initializes member is delegating\n";
                     isDelegatingInit = true;
@@ -638,7 +680,7 @@ void RecursiveNumaTyper::numaConstructors(clang::CXXConstructorDecl* constructor
 void RecursiveNumaTyper::numaDestructors(clang::CXXDestructorDecl* destructor, clang::SourceLocation& rewriteLocation, int64_t nodeID){
     //if the constructor has no parameters, we just close the constructor
 
-    rewriter.InsertTextAfter(rewriteLocation, "~numa(");
+    rewriter.InsertTextAfter(rewriteLocation, "virtual ~numa(");
     if (destructor->parameters().size() == 0){
         rewriter.InsertTextAfter(rewriteLocation, ")\n");
     

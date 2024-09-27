@@ -7,6 +7,7 @@
 #include <clang/AST/Decl.h>
 #include <clang/AST/Expr.h>
 #include <clang/ASTMatchers/ASTMatchers.h>
+#include "clang/ASTMatchers/ASTMatchFinder.h"
 #include <clang/Rewrite/Core/Rewriter.h>
 #include "clang/AST/ASTConsumer.h"
 #include "clang/AST/ASTContext.h"
@@ -42,27 +43,11 @@
 using namespace clang;
 
 
-class GetModule: public CodeGenAction{
-
-   std::unique_ptr<llvm::Module> M = takeModule();
-};
-
-class AliasAnalysisPass: public llvm::PassInfoMixin<AliasAnalysisPass>{
-    public:
-        llvm::PreservedAnalyses run(llvm::Function &F, llvm::FunctionAnalysisManager &FAM){
-            llvm::outs() << "Running Alias Analysis Pass\n";
-        }
-};
-
-
-
-
-
-
 class NumaTargetNumaPointer : public Transformer
 {
     private: 
-    
+        clang::SourceLocation rewriteLocation;
+        std::vector<clang::FileID> fileIDs;
     public:
         explicit NumaTargetNumaPointer(clang::ASTContext &context, clang::Rewriter &rewriter);
 

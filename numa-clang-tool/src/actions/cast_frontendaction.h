@@ -28,20 +28,22 @@
 #include <memory>
 #include <vector>
 #include <string>
+
+#include "clang/AST/AST.h"
+#include "clang/ASTMatchers/ASTMatchers.h"
+#include "clang/ASTMatchers/ASTMatchFinder.h"
+
+
+#include "clang/Frontend/CompilerInstance.h"
+#include "clang/Tooling/CommonOptionsParser.h"
+#include "clang/Basic/SourceManager.h"
+
 using namespace clang;
 using namespace llvm;
 namespace clang
 {
     class CompilerInstance;
 }
-
-class HelloWorldPass : public PassInfoMixin<HelloWorldPass> {
-public:
-  PreservedAnalyses run(Function &F, FunctionAnalysisManager &AM);
-};
-
-
-
 
 class CastNumaFrontendAction : public clang::ASTFrontendAction {
 public:

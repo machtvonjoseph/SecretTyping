@@ -24,7 +24,6 @@
 #include <sstream>
 #include <string>
 #include "llvm/Support/raw_ostream.h"
-
 #include <set>
 #include <map>
 
@@ -67,12 +66,20 @@ namespace utils
         explicit CXXNewExprVisitor(clang::ASTContext *Context) : Context(Context) {}
         bool VisitCXXNewExpr(CXXNewExpr *NE) {
             CXXNewExprs.push_back(NE);
+            SourceLocation Loc = NE->getBeginLoc();
+            CXXNewExprLocs.push_back(Loc);
+            // std::string FileName = SM.getFilename(Loc).str();
+            // unsigned Line = SM.getSpellingLineNumber(Loc);
+
+            // llvm::outs() << "'new' expression found at " << FileName << ":" << Line << "\n";
             return true;
         }
-        std::vector<CXXNewExpr* > getCompoundStmts() { return CXXNewExprs; }
-        void clearCXXNewExprs() { CXXNewExprs.clear(); }
+        std::vector<CXXNewExpr* > getCXXNewExprs() { return CXXNewExprs; }
+        std::vector<SourceLocation> getCXXNewExprLocs() { return CXXNewExprLocs; }
+        void clearCXXNewExprs() { CXXNewExprs.clear(); CXXNewExprLocs.clear(); }
     private:
         std::vector<CXXNewExpr*> CXXNewExprs;
+        std::vector<SourceLocation> CXXNewExprLocs;
         ASTContext *Context;
     };
 
@@ -94,24 +101,8 @@ namespace utils
 
     std::string getMemberInitString(std::map<std::string, std::string>& initMemberlist); 
     std::string getDelegatingInitString(CXXConstructorDecl* Ctor);
+    std::string getNumaAllocatorCode(std::string classDecl, std::string nodeID);
 
-
-    
-
-
-
-    // std::vector<std::string> getSyntaxOnlyToolArgs(const std::vector<std::string> &ExtraArgs, llvm::StringRef FileName);
-
-    // bool customRunToolOnCodeWithArgs(std::unique_ptr<clang::FrontendAction> frontendAction, const llvm::Twine &Code,
-    //                                  const std::vector<std::string> &Args, const llvm::Twine &FileName,
-    //                                  const clang::tooling::FileContentMappings &VirtualMappedFiles = clang::tooling::FileContentMappings());
-
-
-    
-    // std::vector<std::string> getCompileArgs(const std::vector<clang::tooling::CompileCommand> &compileCommands);
-    // std::string getSourceCode(const std::string &sourceFile);
-
-    // std::string getClangBuiltInIncludePath(const std::string &fullCallPath);
 }
 
 #endif

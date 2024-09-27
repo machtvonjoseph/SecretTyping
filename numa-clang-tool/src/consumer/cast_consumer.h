@@ -24,16 +24,7 @@ class CastConsumer : public clang::ASTConsumer
         void WriteOutput(clang::SourceManager &SM);
         virtual void HandleTranslationUnit( clang::ASTContext &context) override;
 };
-// class PPConsumer : public clang::ASTConsumer 
-// {
-//     private:
-    
-//         clang::Rewriter rewriter;
 
-//     public:
-//         explicit PPConsumer(clang::Rewriter TheReWriter, clang::ASTContext* context);
-//         //PPConsumer is a deadend. The PPFrontend action has already taken care of the include directives.
-// };
 
 
 

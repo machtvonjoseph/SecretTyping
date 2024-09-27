@@ -642,6 +642,30 @@ src/CMakeFiles/clang-tool.dir/actions/cast_frontendaction.cc.o: ../src/actions/c
   /usr/local/include/llvm/Config/AsmParsers.def \
   /usr/local/include/llvm/Config/Disassemblers.def \
   /usr/local/include/llvm/Config/TargetMCAs.def \
+  /usr/local/include/clang/AST/AST.h \
+  /usr/local/include/clang/AST/StmtVisitor.h \
+  /usr/local/include/clang/AST/ExprConcepts.h \
+  /usr/local/include/clang/AST/ExprOpenMP.h \
+  /usr/local/include/clang/AST/StmtObjC.h \
+  /usr/local/include/clang/AST/StmtOpenACC.h \
+  /usr/local/include/clang/AST/OpenACCClause.h \
+  /usr/local/include/clang/Basic/OpenACCKinds.h \
+  /usr/local/include/clang/Basic/OpenACCClauses.def \
+  /usr/local/include/clang/AST/StmtOpenMP.h \
+  /usr/local/include/clang/AST/OpenMPClause.h \
+  /usr/local/include/llvm/Frontend/OpenMP/OMPAssume.h \
+  /usr/local/include/llvm/Frontend/OpenMP/OMPContext.h \
+  /usr/local/include/clang/ASTMatchers/ASTMatchers.h \
+  /usr/local/include/clang/AST/ASTTypeTraits.h \
+  /usr/local/include/clang/AST/CXXInheritance.h \
+  /usr/local/include/clang/AST/TypeOrdering.h \
+  /usr/local/include/clang/AST/DeclFriend.h \
+  /usr/local/include/clang/AST/ParentMapContext.h \
+  /usr/local/include/clang/ASTMatchers/ASTMatchersInternal.h \
+  /usr/local/include/llvm/Support/ManagedStatic.h \
+  /usr/local/include/clang/ASTMatchers/ASTMatchersMacros.h \
+  /usr/local/include/clang/ASTMatchers/ASTMatchFinder.h \
+  /usr/local/include/llvm/Support/Timer.h \
   ../src/consumer/cast_consumer.h
 
 src/CMakeFiles/clang-tool.dir/actions/frontendaction.cc.o: ../src/actions/frontendaction.cc \
@@ -3240,34 +3264,38 @@ src/CMakeFiles/clang-tool.dir/main.cc.o: ../src/main.cc \
   /usr/local/include/llvm/Config/AsmParsers.def \
   /usr/local/include/llvm/Config/Disassemblers.def \
   /usr/local/include/llvm/Config/TargetMCAs.def \
+  /usr/local/include/clang/AST/AST.h \
+  /usr/local/include/clang/AST/StmtVisitor.h \
+  /usr/local/include/clang/AST/ExprConcepts.h \
+  /usr/local/include/clang/AST/ExprOpenMP.h \
+  /usr/local/include/clang/AST/StmtObjC.h \
+  /usr/local/include/clang/AST/StmtOpenACC.h \
+  /usr/local/include/clang/AST/OpenACCClause.h \
+  /usr/local/include/clang/Basic/OpenACCKinds.h \
+  /usr/local/include/clang/Basic/OpenACCClauses.def \
+  /usr/local/include/clang/AST/StmtOpenMP.h \
+  /usr/local/include/clang/AST/OpenMPClause.h \
+  /usr/local/include/llvm/Frontend/OpenMP/OMPAssume.h \
+  /usr/local/include/llvm/Frontend/OpenMP/OMPContext.h \
+  /usr/local/include/clang/ASTMatchers/ASTMatchers.h \
+  /usr/local/include/clang/AST/ASTTypeTraits.h \
+  /usr/local/include/clang/AST/CXXInheritance.h \
+  /usr/local/include/clang/AST/TypeOrdering.h \
+  /usr/local/include/clang/AST/DeclFriend.h \
+  /usr/local/include/clang/AST/ParentMapContext.h \
+  /usr/local/include/clang/ASTMatchers/ASTMatchersInternal.h \
+  /usr/local/include/llvm/Support/ManagedStatic.h \
+  /usr/local/include/clang/ASTMatchers/ASTMatchersMacros.h \
+  /usr/local/include/clang/ASTMatchers/ASTMatchFinder.h \
+  /usr/local/include/llvm/Support/Timer.h \
   ../src/utils/utils.h \
   /usr/include/c++/11/fstream \
   /usr/include/c++/11/bits/codecvt.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
   /usr/include/c++/11/bits/fstream.tcc \
-  /usr/local/include/clang/ASTMatchers/ASTMatchers.h \
-  /usr/local/include/clang/AST/ASTTypeTraits.h \
-  /usr/local/include/clang/AST/CXXInheritance.h \
-  /usr/local/include/clang/AST/TypeOrdering.h \
-  /usr/local/include/clang/AST/DeclFriend.h \
-  /usr/local/include/clang/AST/OpenMPClause.h \
-  /usr/local/include/llvm/Frontend/OpenMP/OMPAssume.h \
-  /usr/local/include/llvm/Frontend/OpenMP/OMPContext.h \
-  /usr/local/include/clang/AST/ParentMapContext.h \
-  /usr/local/include/clang/AST/StmtObjC.h \
-  /usr/local/include/clang/AST/StmtOpenMP.h \
-  /usr/local/include/clang/ASTMatchers/ASTMatchersInternal.h \
-  /usr/local/include/llvm/Support/ManagedStatic.h \
-  /usr/local/include/clang/ASTMatchers/ASTMatchersMacros.h \
   /usr/local/include/clang/AST/RecursiveASTVisitor.h \
   /usr/local/include/clang/AST/DeclOpenMP.h \
-  /usr/local/include/clang/AST/ExprConcepts.h \
-  /usr/local/include/clang/AST/ExprOpenMP.h \
-  /usr/local/include/clang/AST/OpenACCClause.h \
-  /usr/local/include/clang/Basic/OpenACCKinds.h \
-  /usr/local/include/clang/Basic/OpenACCClauses.def \
-  /usr/local/include/clang/AST/StmtOpenACC.h \
   /usr/local/include/clang/AST/AttrVisitor.inc \
   /usr/include/c++/11/sstream \
   /usr/include/c++/11/bits/sstream.tcc \
@@ -4032,7 +4060,8 @@ src/CMakeFiles/clang-tool.dir/transformer/NumaTargetNumaPointer.cc.o: ../src/tra
   /usr/include/c++/11/bits/fstream.tcc \
   /usr/local/include/clang/Tooling/CompilationDatabase.h \
   /usr/local/include/llvm/IRReader/IRReader.h \
-  /usr/local/include/llvm/Bitcode/BitcodeReader.h
+  /usr/local/include/llvm/Bitcode/BitcodeReader.h \
+  ../src/transformer/RecursiveNumaTyper.h
 
 src/CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.o: ../src/transformer/RecursiveNumaTyper.cc \
   /usr/include/stdc-predef.h \
@@ -5888,19 +5917,15 @@ src/CMakeFiles/clang-tool.dir/utils/utils.cc.o: ../src/utils/utils.cc \
 
 /usr/local/include/clang/AST/AttrVisitor.inc:
 
-/usr/local/include/clang/AST/StmtOpenACC.h:
+../src/transformer/NumaTargetNumaPointer.h:
 
-/usr/local/include/clang/Basic/OpenACCClauses.def:
+../src/consumer/cast_consumer.cc:
 
-/usr/local/include/llvm/IR/ValueMap.h:
-
-/usr/local/include/clang/Basic/OpenACCKinds.h:
-
-/usr/local/include/clang/AST/OpenACCClause.h:
-
-/usr/local/include/clang/AST/ExprConcepts.h:
+../src/actions/frontendaction.cc:
 
 /usr/local/include/llvm/Support/Timer.h:
+
+/usr/local/include/clang/ASTMatchers/ASTMatchFinder.h:
 
 /usr/local/include/clang/ASTMatchers/ASTMatchersMacros.h:
 
@@ -5910,19 +5935,27 @@ src/CMakeFiles/clang-tool.dir/utils/utils.cc.o: ../src/utils/utils.cc \
 
 /usr/local/include/clang/ASTMatchers/ASTMatchersInternal.h:
 
-/usr/local/include/clang/AST/StmtObjC.h:
-
 /usr/local/include/clang/AST/ParentMapContext.h:
 
 /usr/local/include/clang/AST/CXXInheritance.h:
 
-/usr/local/include/clang/ASTMatchers/ASTMatchFinder.h:
+/usr/local/include/clang/Basic/OpenACCClauses.def:
 
-../src/transformer/NumaTargetNumaPointer.h:
+/usr/local/include/llvm/IR/ValueMap.h:
 
-../src/consumer/cast_consumer.cc:
+/usr/local/include/clang/Basic/OpenACCKinds.h:
 
-../src/actions/frontendaction.cc:
+/usr/local/include/clang/AST/OpenACCClause.h:
+
+/usr/local/include/clang/AST/StmtOpenACC.h:
+
+/usr/local/include/clang/AST/StmtObjC.h:
+
+/usr/local/include/clang/AST/ExprConcepts.h:
+
+/usr/local/include/clang/AST/StmtVisitor.h:
+
+/usr/local/include/clang/AST/AST.h:
 
 /usr/local/include/llvm/Config/TargetMCAs.def:
 

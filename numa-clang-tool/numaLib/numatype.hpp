@@ -12,7 +12,7 @@
 #include <memory>
 #include <stdexcept>
 #include <iostream>
-
+#include <cassert>
 template <typename T, int NodeID>
 class NumaAllocator {
 public:
@@ -135,38 +135,16 @@ public:
 
 };
 
+
+//This is only needed pre compiling and it doesn't do anything after
+
 template<typename T, int NodeID, template <typename, int> class Alloc>
 class numa<T,NodeID, Alloc, typename std::enable_if<!(std::is_fundamental<T>::value || std::is_pointer<T>::value)>::type>: public T{
 public:
-    
-    using allocator_type = Alloc<T, NodeID>;
     numa(){
         std::cout<<"numa constructor called"<<std::endl;
-    }
-    template<typename... Args>
-    numa(Args... args):T(args...){}
-
-    static void* operator new(std::size_t sz){
-		allocator_type alloc;
-        return alloc.allocate(sz);
-    }
-
-    static void* operator new[](std::size_t sz){
-		allocator_type alloc;
-        return alloc.allocate(sz);
-    }
-
-
-    static void operator delete(void* ptr){
-        std::cout<<"delete operator called"<<std::endl;
-        allocator_type alloc;
-        alloc.deallocate(static_cast<T*>(ptr), 1);
-    }
-
-    static void operator delete[](void* ptr){
-        allocator_type alloc;
-        alloc.deallocate(static_cast<T*>(ptr), 1);
-    }
+        assert(false && "This constructor should never get called");
+    }    
 };
 
 #endif

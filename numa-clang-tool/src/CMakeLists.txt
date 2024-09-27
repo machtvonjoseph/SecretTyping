@@ -5,7 +5,7 @@ find_package(Clang REQUIRED)
 find_package(jsoncpp REQUIRED)
 
 #NUMA_LLVM_COMPILE_FLAGS is just ${LLVM_COMPILE_FLAGS} without the -fno-exceptions flag
-set(NUMA_LLVM_COMPILE_FLAGS ""-I/usr/local/include -std=c++20 -I/usr/local/lib/clang/18/include/-fno-exceptions -funwind-tables -fno-rtti -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS"")
+set(NUMA_LLVM_COMPILE_FLAGS ""-I/usr/local/include -std=c++20 -fexperimental-library -I/usr/local/lib/clang/18/include/-fno-exceptions -funwind-tables -fno-rtti -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS"")
 #
 set(CMAKE_CXX_FLAGS "-Wall -lnuma -g3 -O0 -fno-rtti ${NUMA__LLVM_COMPILE_FLAGS}")
 

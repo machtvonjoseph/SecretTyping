@@ -47,7 +47,7 @@ class RecursiveNumaTyper : public Transformer
         void addAllSpecializations(clang::ASTContext *Context);
         void extractNumaDecls(clang::Stmt *stmt, ASTContext *Context);
         bool NumaSpeclExists(QualType FirstTemplateArg, int64_t SecondTemplateArg);
-        void makeVirtual(clang::CXXRecordDecl *classDecl);
+        void makeVirtual(const clang::CXXRecordDecl *classDecl);
 
         void specializeClass(clang::ASTContext* Context, clang::QualType FirstTemplateArg, int64_t SecondTemplateArg);
         void constructSpecialization(clang::ASTContext* Context,clang::CXXRecordDecl* classDecl, int64_t nodeID);
