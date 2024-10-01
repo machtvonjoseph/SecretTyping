@@ -20,7 +20,7 @@ void StackTest()
 {
 	Stack a;
 	//Stack *b = new Stack();
-	numa<Stack ,1>* b = new numa<Stack,1>();
+	numa<Stack ,0>* b = new numa<Stack,0>();
 	// a.push(1);
 	// std::cout << "----------------------------------" << std::endl;
 	// std::cout << "Display Stack after adding 1 node." << std::endl;

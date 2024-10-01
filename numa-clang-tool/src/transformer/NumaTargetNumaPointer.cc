@@ -35,11 +35,15 @@
 
 
 NumaTargetNumaPointer::NumaTargetNumaPointer(clang::ASTContext &context, clang::Rewriter &rewriter)
-    : Transformer(context, rewriter)
-{}
+    : Transformer(context, rewriter), RecursiveNumaTyperobj(context, rewriter)
+{
+    // RecursiveNumaTyperobj(context, rewriter);
+    RecursiveNumaTyperobj.addAllSpecializations(&context); 
+}
 using namespace clang;
 
-void NumaTargetNumaPointer::start(){       
+void NumaTargetNumaPointer::start(){   
+       
     using namespace clang::ast_matchers;
     MatchFinder templateSpecializationFinder;
     auto templateSpecializationDeclMatcher = classTemplateSpecializationDecl().bind("templateSpecializationDecl");
@@ -48,9 +52,134 @@ void NumaTargetNumaPointer::start(){
     return;
 }
 
+void NumaTargetNumaPointer::introspectMethods(CXXMethodDecl* method,const clang::CXXRecordDecl* FoundType, llvm::APSInt FoundInt,  const clang::ast_matchers::MatchFinder::MatchResult &result, RecursiveNumaTyper* RecursiveNumaTyper){
+    utils::CXXNewExprVisitor CXXNewExprVisitor(result.Context);
+    utils::CompoundStmtVisitor CompoundStmtVisitor(result.Context);
+    utils::DeclStmtVisitor DeclStmtVisitor(result.Context);
+    utils::VarDeclVisitor VarDeclVisitor(result.Context);
+    utils::AssignmentOperatorCallVisitor AssignmentOperatorCallVisitor(result.Context);
+    utils::MemberExprVisitor MemberExprVisitor(result.Context);
+
+    if(AssignmentOperatorCallVisitor.TraverseStmt(method->getBody())){
+        for(auto assignment : AssignmentOperatorCallVisitor.getAssignmentOperatorCallExprs()){
+            if(MemberExprVisitor.TraverseStmt(assignment)){
+                for(auto memberExpr : MemberExprVisitor.getMemberExprs()){
+                    if(memberExpr){
+                        if(CXXNewExprVisitor.TraverseStmt(assignment)){
+                            for(auto CXXNewExpr : CXXNewExprVisitor.getCXXNewExprs()){
+                                if(CXXNewExpr){
+                                    llvm::outs()<<"This new expression comes from a member variable assignment. Now calling castNewExprOCE\n";
+                                    castNewExprOCE(CXXNewExpr, memberExpr,  FoundType, FoundInt, rewriteLocation, result, RecursiveNumaTyper);
+                                }
+                                CXXNewExprVisitor.clearCXXNewExprs();
+                            }
+                        }
+                    }
+                MemberExprVisitor.clearMemberExprs();
+                } 
+            }
+            AssignmentOperatorCallVisitor.clearAssignmentOperatorCallExprs();
+        }
+    }
+
+    if(DeclStmtVisitor.TraverseStmt(method->getBody())){
+        //llvm::outs()<<"DeclStmt found\n";
+        for(auto declStmt : DeclStmtVisitor.getDeclStmts()){
+            if(VarDeclVisitor.TraverseStmt(declStmt)){
+                for(auto varDecl : VarDeclVisitor.getVarDecls()){
+                    if(varDecl){
+                        if(CXXNewExprVisitor.TraverseStmt(declStmt)){
+                            for(auto CXXNewExpr : CXXNewExprVisitor.getCXXNewExprs()){
+                                if(CXXNewExpr){
+                                    castNewExprDecls(CXXNewExpr, varDecl,  FoundType, FoundInt, rewriteLocation, result, RecursiveNumaTyper);
+                                }
+                                CXXNewExprVisitor.clearCXXNewExprs();
+                            }
+                        }
+                    }
+                }
+                VarDeclVisitor.clearVarDecls();
+            }
+        }
+    }
+
+
+}
+
+void NumaTargetNumaPointer::castNewExprOCE(clang::CXXNewExpr* CXXNewExpr, clang::MemberExpr* CXXMemberCallExpr , const clang::CXXRecordDecl* FoundType, llvm::APSInt FoundInt,  clang::SourceLocation rewriteLocation, const clang::ast_matchers::MatchFinder::MatchResult &result, RecursiveNumaTyper* RecursiveNumaTyper){
+    // llvm::outs()<<"FOUND TYPE FROM CASTNEWEXPR: "<<FoundType->getNameAsString()<<"\n";
+    std::string NewType = CXXNewExpr->getAllocatedType().getAsString();
+    llvm::outs() << "New Type: " << NewType << "\n";
+    llvm::outs() << "MemberExpr Type: " << CXXMemberCallExpr->getMemberDecl()->getType().getAsString() << "\n";
+    std::string MemberExprType = CXXMemberCallExpr->getMemberDecl()->getType().getAsString();
+
+    //if the first four letters are numa, then return
+    if(MemberExprType.substr(0,4).compare("numa") == 0){
+        if(!NewType.substr(0,4).compare("numa") == 0){
+            llvm::outs() << "MemberExpr Type is numa but NewType is not\n";
+            SourceLocation TypeLoc = CXXNewExpr->getAllocatedTypeSourceInfo()->getTypeLoc().getBeginLoc();
+            rewriter.ReplaceText(TypeLoc, NewType.length(), "numa<"+NewType+","+std::to_string(FoundInt.getExtValue())+">");
+            
+            //getFIle ID        
+            llvm::outs()<<"Type replaced\n";
+            const clang::CXXRecordDecl* NewTypeAsCXXRecodDecl;
+            if(const RecordType* RT = CXXNewExpr->getAllocatedType()->getAs<RecordType>()){
+                if (CXXRecordDecl *CXXRD = dyn_cast<CXXRecordDecl>(RT->getDecl())) {
+                    NewTypeAsCXXRecodDecl = CXXRD;
+                    if(RecursiveNumaTyperobj.NumaSpeclExists(NewTypeAsCXXRecodDecl, FoundInt.getExtValue())){
+                        llvm::outs() <<  "Specialization for " << NewTypeAsCXXRecodDecl->getNameAsString() << " and " << FoundInt.getExtValue() << " already exists.\n";
+                        return;
+                    }else{
+                        llvm::outs() << "Specializing " << NewTypeAsCXXRecodDecl->getNameAsString() << " and " << FoundInt.getExtValue() << "\n";
+                        RecursiveNumaTyperobj.specializeClass(result.Context, NewTypeAsCXXRecodDecl, FoundInt.getExtValue());
+                        fileIDs.push_back(rewriter.getSourceMgr().getFileID(rewriteLocation)); 
+                    }
+
+
+                }
+            }
+           
+        }
+    }
+}
+
+void NumaTargetNumaPointer::castNewExprDecls(clang::CXXNewExpr* CXXNewExpr, clang::VarDecl* VarDecl, const clang::CXXRecordDecl* FoundType, llvm::APSInt FoundInt,  clang::SourceLocation rewriteLocation, const clang::ast_matchers::MatchFinder::MatchResult &result, RecursiveNumaTyper* RecursiveNumaTyper){
+    std::string NewType = CXXNewExpr->getAllocatedType().getAsString();
+    std::string VarDeclType = VarDecl->getType().getAsString();
+    llvm::outs() << "New Type: " << NewType << "\n";
+    llvm::outs() << "VarDecl Type: " << VarDeclType << "\n";
+    //if the first four letters are numa, then return
+    if(!NewType.substr(0,4).compare("numa") == 0){
+        //check if dump is empty
+        rewriteLocation = CXXNewExpr->getBeginLoc();
+        SourceLocation TypeLoc = CXXNewExpr->getAllocatedTypeSourceInfo()->getTypeLoc().getBeginLoc();
+        rewriter.ReplaceText(TypeLoc, NewType.length(), "numa<"+NewType+","+std::to_string(FoundInt.getExtValue())+">");
+
+        rewriter.InsertTextBefore(rewriteLocation, "reinterpret_cast<"+NewType+"*>(");
+
+        //getFIle ID 
+        clang::SourceLocation NewEndLocaiton = CXXNewExpr->getEndLoc();
+        rewriter.InsertTextAfter(NewEndLocaiton, ")");
+        const clang::CXXRecordDecl* NewTypeAsCXXRecodDecl;
+        if(const RecordType* RT = CXXNewExpr->getAllocatedType()->getAs<RecordType>()){
+            if (CXXRecordDecl *CXXRD = dyn_cast<CXXRecordDecl>(RT->getDecl())) {
+                NewTypeAsCXXRecodDecl = CXXRD;
+                if(RecursiveNumaTyperobj.NumaSpeclExists(NewTypeAsCXXRecodDecl, FoundInt.getExtValue())){
+                    llvm::outs() <<  "Specialization for " << NewTypeAsCXXRecodDecl->getNameAsString() << " and " << FoundInt.getExtValue() << " already exists.\n";
+                    return;
+                }else{
+                    llvm::outs() << "Specializing " << NewTypeAsCXXRecodDecl->getNameAsString() << " and " << FoundInt.getExtValue() << "\n";
+                    RecursiveNumaTyperobj.specializeClass(result.Context, NewTypeAsCXXRecodDecl, FoundInt.getExtValue());
+                    fileIDs.push_back(rewriter.getSourceMgr().getFileID(rewriteLocation)); 
+                }
+            }
+        }
+    }
+}
+
 
 void NumaTargetNumaPointer::run(const clang::ast_matchers::MatchFinder::MatchResult &result){
-    RecursiveNumaTyper RecursiveNumaTyper(*result.Context, rewriter);
+
     if(result.SourceManager->isInSystemHeader(result.Nodes.getNodeAs<ClassTemplateSpecializationDecl>("templateSpecializationDecl")->getSourceRange().getBegin()))
         return;
     if(result.SourceManager->getFilename(result.Nodes.getNodeAs<ClassTemplateSpecializationDecl>("templateSpecializationDecl")->getLocation()).find("../numaLib/numatype.hpp") != std::string::npos)
@@ -61,11 +190,14 @@ void NumaTargetNumaPointer::run(const clang::ast_matchers::MatchFinder::MatchRes
         return;
     if(result.Nodes.getNodeAs<ClassTemplateSpecializationDecl>("templateSpecializationDecl")->getNameAsString().empty())
         return;
-    
-    
+
+    for(auto &specialization : RecursiveNumaTyperobj.getSpecializedClasses()){
+        llvm::outs() << "Specialized Class: " << specialization.first->getNameAsString() << " NodeID: " << specialization.second << "\n";
+    }
+
     const auto *TemplateDecl = result.Nodes.getNodeAs<ClassTemplateSpecializationDecl>("templateSpecializationDecl")->getSpecializedTemplate();
             //check if its numa
-    clang::QualType FoundType;
+    const CXXRecordDecl* FoundType;
     llvm::APSInt FoundInt;
     llvm::outs() << "The template class name is " << TemplateDecl->getNameAsString() << "\n";
 
@@ -73,67 +205,26 @@ void NumaTargetNumaPointer::run(const clang::ast_matchers::MatchFinder::MatchRes
 
         for (const auto &Arg : result.Nodes.getNodeAs<ClassTemplateSpecializationDecl>("templateSpecializationDecl")->getTemplateArgs().asArray()) {
             if (Arg.getKind() == clang::TemplateArgument::ArgKind::Type) {
-                FoundType = Arg.getAsType();
-                llvm::outs() << "The type is " << FoundType.getAsString() << "\n";
+                if(const RecordType *RT = Arg.getAsType()->getAs<RecordType>()){
+                    if (CXXRecordDecl *CXXRD = dyn_cast<CXXRecordDecl>(RT->getDecl())) {
+                        llvm::outs() << "Found CXXRecordDecl: " << CXXRD->getNameAsString() << "\n";
+                        FoundType = CXXRD;
+                    }
+                }
             }
             if (Arg.getKind() == clang::TemplateArgument::ArgKind::Integral) {
                 llvm::outs() << "The integral is " << Arg.getAsIntegral() << "\n";
                 FoundInt = Arg.getAsIntegral();
-            }
-        }
-    }
-
-    //print all the methods in the specialization
-    for(auto method : result.Nodes.getNodeAs<ClassTemplateSpecializationDecl>("templateSpecializationDecl")->methods()){
-    if (method->hasBody()) { // Check if the method has a body
-        //look for CXXnewExpr in the method body
-        utils::CXXNewExprVisitor CXXNewExprVisitor(result.Context);
-        utils::CompoundStmtVisitor CompoundStmtVisitor(result.Context);
-        utils::DeclStmtVisitor DeclStmtVisitor(result.Context);
-        utils::VarDeclVisitor VarDeclVisitor(result.Context);
-
-        Stmt *MethodBody = method->getBody(); 
-        //MethodBody->dump();
-        
-        if(DeclStmtVisitor.TraverseStmt(MethodBody)){
-            for(auto declStmt : DeclStmtVisitor.getDeclStmts()){
-                if(CXXNewExprVisitor.TraverseStmt(declStmt)){
-                    for(auto CXXNewExpr : CXXNewExprVisitor.getCXXNewExprs()){
-                        if(CXXNewExpr){
-
-                            llvm::outs() << "CXXNewExpr found in method: " << method->getNameAsString() << "\n";
-                            std::string NewType = CXXNewExpr->getAllocatedType().getAsString();
-                            //check if dump is empty
-                            rewriteLocation = CXXNewExprVisitor.getCXXNewExprLocs().back();
-                            llvm::outs() << "Rewrite Location: ";
-                            rewriteLocation.print(llvm::outs(),context.getSourceManager());
-                            llvm::outs() << "\n";
-                            llvm::outs() << "New Type length: " << NewType.length() << "\n";
-                            llvm::outs() << "New Type: " << NewType << "\n";
-
-                            SourceLocation TypeLoc = CXXNewExpr->getAllocatedTypeSourceInfo()->getTypeLoc().getBeginLoc();
-                            rewriter.ReplaceText(TypeLoc, NewType.length(), "numa<"+NewType+","+std::to_string(FoundInt.getExtValue())+">");
-
-                            rewriter.InsertTextBefore(rewriteLocation, "reinterpret_cast<"+NewType+"*>(");
-
-                            //getFIle ID 
-                            clang::SourceLocation NewEndLocaiton = CXXNewExpr->getEndLoc();
-                            rewriter.InsertTextAfter(NewEndLocaiton, ")");
-                            RecursiveNumaTyper.constructSpecialization(result.Context,CXXNewExpr->getAllocatedType()->getAsCXXRecordDecl(), FoundInt.getExtValue());
-                            fileIDs.push_back(rewriter.getSourceMgr().getFileID(rewriteLocation)); 
-                        }
-                    }      
-                    CXXNewExprVisitor.clearCXXNewExprs();
+                for(auto method : result.Nodes.getNodeAs<ClassTemplateSpecializationDecl>("templateSpecializationDecl")->methods()){
+                    llvm::outs()<< "Gonna introspect the method "<<method->getNameAsString() <<" of the class " << FoundType->getNameAsString() << " that is specialized in numa class\n";
+                    if (method->hasBody()) { // Check if the method has a body
+                            //look for CXXnewExpr in the method body
+                        introspectMethods(method, FoundType, FoundInt, result, &RecursiveNumaTyperobj);
+                    }
                 }
             }
-        }
-
-// Get the body
-        std::string BodyStr;
-        llvm::raw_string_ostream OS(BodyStr);
-        // Pretty print the body
-        MethodBody->printPretty(OS, nullptr, method->getASTContext().getPrintingPolicy());
-        llvm::outs() << "\nMethod Body:\n" << OS.str() << "\n";
+        
+            
         }
     }
     return;

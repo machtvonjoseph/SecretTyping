@@ -1837,6 +1837,7 @@ src/CMakeFiles/clang-tool.dir/consumer/cast_consumer.cc.o: ../src/consumer/cast_
   /usr/include/c++/11/bits/ostream.tcc \
   /usr/include/c++/11/bits/istream.tcc \
   /usr/include/c++/11/bits/sstream.tcc \
+  ../src/transformer/RecursiveNumaTyper.h \
   /usr/local/include/llvm/IR/LegacyPassManager.h \
   /usr/local/include/llvm/IR/Function.h \
   /usr/local/include/llvm/ADT/ilist_node.h \
@@ -3885,6 +3886,7 @@ src/CMakeFiles/clang-tool.dir/transformer/NumaTargetNumaPointer.cc.o: ../src/tra
   /usr/include/c++/11/bits/ostream.tcc \
   /usr/include/c++/11/bits/istream.tcc \
   /usr/include/c++/11/bits/sstream.tcc \
+  ../src/transformer/RecursiveNumaTyper.h \
   /usr/local/include/llvm/IR/LegacyPassManager.h \
   /usr/local/include/llvm/IR/Function.h \
   /usr/local/include/llvm/ADT/ilist_node.h \
@@ -4060,8 +4062,7 @@ src/CMakeFiles/clang-tool.dir/transformer/NumaTargetNumaPointer.cc.o: ../src/tra
   /usr/include/c++/11/bits/fstream.tcc \
   /usr/local/include/clang/Tooling/CompilationDatabase.h \
   /usr/local/include/llvm/IRReader/IRReader.h \
-  /usr/local/include/llvm/Bitcode/BitcodeReader.h \
-  ../src/transformer/RecursiveNumaTyper.h
+  /usr/local/include/llvm/Bitcode/BitcodeReader.h
 
 src/CMakeFiles/clang-tool.dir/transformer/RecursiveNumaTyper.cc.o: ../src/transformer/RecursiveNumaTyper.cc \
   /usr/include/stdc-predef.h \
@@ -6261,9 +6262,9 @@ src/CMakeFiles/clang-tool.dir/utils/utils.cc.o: ../src/utils/utils.cc \
 
 /usr/include/c++/11/ext/aligned_buffer.h:
 
-../src/transformer/RecursiveNumaTyper.h:
-
 /usr/local/include/llvm/Analysis/LoopAccessAnalysis.h:
+
+../src/transformer/RecursiveNumaTyper.h:
 
 /usr/local/include/llvm/Support/FormatProviders.h:
 

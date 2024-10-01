@@ -9,6 +9,7 @@
 #include "Node.hpp"
 // #include "Queue.hpp"
 #include "Stack.hpp"
+#include "Queue.hpp"
 // #include "BinarySearch.hpp"
 // #include "LinkedList.hpp"
 // #include "../src/Stack.cpp"
@@ -75,64 +76,61 @@ void StackTest()
 	v->display();
 
 	delete v;
-
-
-
 }
 
-// void QueueTest()
-// {
-// 	Queue a;
-// 	Queue *b;
+void QueueTest()
+{
+	Queue a;
+	numa<Queue,0> *b = new numa<Queue,0>();
 
-// 	a.add(1);
-// 	std::cout << "----------------------------------" << std::endl;
-// 	std::cout << "Display Queue after adding 1 node." << std::endl;
-// 	std::cout << "----------------------------------" << std::endl;
-// 	a.display();
+	a.add(1);
+	std::cout << "----------------------------------" << std::endl;
+	std::cout << "Display Queue after adding 1 node." << std::endl;
+	std::cout << "----------------------------------" << std::endl;
+	a.display();
 	
 
-// 	a.add(5);
-// 	a.add(30);
-// 	std::cout << "----------------------------------" << std::endl;
-// 	std::cout << "Display Queue after adding 2 nodes." << std::endl;
-// 	std::cout << "----------------------------------" << std::endl;
-// 	a.display();
+	a.add(5);
+	a.add(30);
+	std::cout << "----------------------------------" << std::endl;
+	std::cout << "Display Queue after adding 2 nodes." << std::endl;
+	std::cout << "----------------------------------" << std::endl;
+	a.display();
 
-// 	a.del();
-// 	std::cout << "----------------------------------" << std::endl;
-// 	std::cout << "Display Queue after removing 1 node" << std::endl;
-// 	std::cout << "----------------------------------" << std::endl;
-// 	a.display();
+	a.del();
+	std::cout << "----------------------------------" << std::endl;
+	std::cout << "Display Queue after removing 1 node" << std::endl;
+	std::cout << "----------------------------------" << std::endl;
+	a.display();
 
-// 	b = new Queue();
-// 	std::cout << "----------------------------------" << std::endl;
-// 	std::cout << "Display empty Queue." << std::endl;
-// 	std::cout << "----------------------------------" << std::endl;
-// 	b->display();
+	// b = new Queue();
+	std::cout << "----------------------------------" << std::endl;
+	std::cout << "Display empty NUMA Queue." << std::endl;
+	std::cout << "----------------------------------" << std::endl;
+	b->display();
 
-// 	for(int i = 0; i < 5; i++)
-// 	{
-// 		b->add(i);
-// 	}
-// 	std::cout << "----------------------------------" << std::endl;
-// 	std::cout << "Display Queue after adding 5 node." << std::endl;
-// 	std::cout << "----------------------------------" << std::endl;
-// 	b->display();
+	for(int i = 0; i < 5; i++)
+	{
+		b->add(i);
+	}
+	std::cout << "----------------------------------" << std::endl;
+	std::cout << "Display NUMA Queue after adding 5 node." << std::endl;
+	std::cout << "----------------------------------" << std::endl;
+	b->display();
 
-// 	for(int i = 0; i < 3; i++)
-// 	{	
-// 		b->del();
-// 	}
+	for(int i = 0; i < 3; i++)
+	{	
+		b->del();
+	}
 
-// 	std::cout << "----------------------------------" << std::endl;
-// 	std::cout << "Display Queue after removing 3 nodes." << std::endl;
-// 	std::cout << "----------------------------------" << std::endl;
-// 	b->display();
+	std::cout << "----------------------------------" << std::endl;
+	std::cout << "Display NUMA Queue after removing 3 nodes." << std::endl;
+	std::cout << "----------------------------------" << std::endl;
+	b->display();
 
-// 	delete b;
+	delete b;
 
-// }
+}
 
 // void BinarySearchTest()
 // {

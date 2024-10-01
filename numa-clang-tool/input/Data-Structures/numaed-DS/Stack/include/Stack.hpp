@@ -125,11 +125,39 @@ void Stack::display()
 }
 
 template<>
-class numa<Stack, 1>:public Stack{
+class numa<Stack, 0>:public Stack{
+public: 
+    static void* operator new(std::size_t sz){
+        std::cout<<"new operator called"<<std::endl;
+		 void* p = numa_alloc_onnode(sz * sizeof(Stack), 0);
+        if (p == nullptr) {
+            throw std::bad_alloc();
+        }
+        return p;
+    }
+
+    static void* operator new[](std::size_t sz){
+		std::cout<<"new operator called"<<std::endl;
+		 void* p = numa_alloc_onnode(sz * sizeof(Stack), 0);
+        if (p == nullptr) {
+            throw std::bad_alloc();
+        }
+        return p;
+    }
+
+    static void operator delete(void* ptr){
+		std::cout<<"delete operator called"<<std::endl;
+		numa_free(ptr, 1 * sizeof(Stack));
+    }
+
+    static void operator delete[](void* ptr){
+		std::cout<<"delete operator called"<<std::endl;
+		numa_free(ptr, 1 * sizeof(Stack));
+    }
 private:
 	// Node* top;
     // numa<Node, 1>* top;
-	numa<Node*,1> top;
+	numa<Node*,0> top;
 public:
 	numa(){
 		top = nullptr;
@@ -148,9 +176,21 @@ public:
 			delete temp;
 		}
 	}
-	int pop();
+	int pop(){
+		if(top == nullptr)
+		{
+			return -1;
+		}
+		Node* retN = top;
+		top = top->getLink();
+		int data = retN->getData();
+		delete retN;
+		retN = nullptr;
+
+		return data;
+	}
 	virtual void push(int data){
-		Node* newN = reinterpret_cast<Node*>(new numa<Node,1>(data));
+		Node* newN = reinterpret_cast<Node*>(new numa<Node,0>(data));
 		std::cerr << "Pushing " << data << std::endl;
 		if(newN == nullptr)
 		{
@@ -186,20 +226,5 @@ public:
 }
 
 };
-
-int numa<Stack,1> :: pop(){
-	if(top == nullptr)
-	{
-		return -1;
-	}
-	Node* retN = top;
-	top = top->getLink();
-	int data = retN->getData();
-	delete retN;
-	retN = nullptr;
-
-	return data;
-}
-
 
 #endif //_STACK_HPP_

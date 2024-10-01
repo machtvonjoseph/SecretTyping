@@ -17,6 +17,7 @@
 #include "clang/Tooling/Tooling.h"
 #include <sstream>
 #include <string>
+#include "RecursiveNumaTyper.h"
 #include "llvm/Support/raw_ostream.h"
 #include "llvm/IR/LegacyPassManager.h"
 #include "llvm/IR/Function.h"
@@ -48,14 +49,16 @@ class NumaTargetNumaPointer : public Transformer
     private: 
         clang::SourceLocation rewriteLocation;
         std::vector<clang::FileID> fileIDs;
+        RecursiveNumaTyper RecursiveNumaTyperobj;
     public:
         explicit NumaTargetNumaPointer(clang::ASTContext &context, clang::Rewriter &rewriter);
 
         virtual void start() override;
         virtual void print(clang::raw_ostream &stream) override;
         virtual void run(const clang::ast_matchers::MatchFinder::MatchResult &result);
-
-        
+        void introspectMethods(clang::CXXMethodDecl* method, const clang::CXXRecordDecl* FoundType, llvm::APSInt FoundInt, const clang::ast_matchers::MatchFinder::MatchResult &result, RecursiveNumaTyper* RecursiveNumaTyper);
+        void castNewExprOCE(clang::CXXNewExpr* NewType, clang::MemberExpr* MemberExprType, const clang::CXXRecordDecl* FoundType, llvm::APSInt FoundInt, clang::SourceLocation rewriteLocation, const clang::ast_matchers::MatchFinder::MatchResult &result, RecursiveNumaTyper* RecursiveNumaTyper);
+        void castNewExprDecls(clang::CXXNewExpr* NewType, clang::VarDecl* MemberExprType, const clang::CXXRecordDecl* FoundType, llvm::APSInt FoundInt, clang::SourceLocation rewriteLocation, const clang::ast_matchers::MatchFinder::MatchResult &result, RecursiveNumaTyper* RecursiveNumaTyper);
 };
 
 

@@ -523,6 +523,7 @@ src/CMakeFiles/clang-tool.dir/consumer/cast_consumer.cc.o: \
  /usr/include/c++/11/bits/ostream.tcc \
  /usr/include/c++/11/bits/istream.tcc \
  /usr/include/c++/11/bits/sstream.tcc \
+ /home/kidus/NUMATyping/numa-clang-tool/src/consumer/../transformer/RecursiveNumaTyper.h \
  /usr/local/include/llvm/IR/LegacyPassManager.h \
  /usr/local/include/llvm/IR/Function.h \
  /usr/local/include/llvm/ADT/ilist_node.h \

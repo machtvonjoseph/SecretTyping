@@ -32,11 +32,12 @@ class RecursiveNumaTyper : public Transformer
 {
     private:
         std::map<clang::VarDecl*, const clang::CXXNewExpr*> numaDeclTable;
-        std::map<clang::QualType, int64_t> specializedClasses;
+        std::map<const clang::CXXRecordDecl*, int64_t> specializedClasses;
         clang::SourceLocation rewriteLocation;
         std::vector<clang::FileID> fileIDs;
         
     public:
+        
         explicit RecursiveNumaTyper(clang::ASTContext &context, clang::Rewriter &rewriter);
 
         virtual void start() override;
@@ -45,12 +46,15 @@ class RecursiveNumaTyper : public Transformer
 
         bool NumaDeclExists(clang::ASTContext *Context, QualType FirstTemplateArg, int64_t SecondTemplateArg);
         void addAllSpecializations(clang::ASTContext *Context);
+        std::map<const clang::CXXRecordDecl*, int64_t> getSpecializedClasses(){
+            return specializedClasses;
+        }
         void extractNumaDecls(clang::Stmt *stmt, ASTContext *Context);
-        bool NumaSpeclExists(QualType FirstTemplateArg, int64_t SecondTemplateArg);
+        bool NumaSpeclExists(const clang::CXXRecordDecl* FirstTemplateArg, int64_t SecondTemplateArg);
         void makeVirtual(const clang::CXXRecordDecl *classDecl);
 
-        void specializeClass(clang::ASTContext* Context, clang::QualType FirstTemplateArg, int64_t SecondTemplateArg);
-        void constructSpecialization(clang::ASTContext* Context,clang::CXXRecordDecl* classDecl, int64_t nodeID);
+        void specializeClass(clang::ASTContext* Context, const clang::CXXRecordDecl* FirstTemplateArg, int64_t SecondTemplateArg);
+        void constructSpecialization(clang::ASTContext* Context,const clang::CXXRecordDecl* classDecl, int64_t nodeID);
 
         void numaPublicMembers(clang::ASTContext* Context, clang::SourceLocation& rewriteLocation, std::vector<clang::FieldDecl*> publicFields,std::vector<clang::CXXMethodDecl*> publicMethods, int64_t nodeID);
         void numaPrivateMembers(clang::ASTContext* Context, clang::SourceLocation& rewriteLocation,std::vector<clang::FieldDecl*> privateFields, std::vector<clang::CXXMethodDecl*> privateMethods, int64_t nodeID);

@@ -253,50 +253,6 @@ void RecursiveNumaTyper::extractNumaDecls(clang::Stmt* fnBody, ASTContext *Conte
 }
 
 
-bool RecursiveNumaTyper::NumaDeclExists(clang::ASTContext *Context, QualType FirstTempArg, int64_t SecondTempArg){
-    clang::TranslationUnitDecl *TU = Context->getTranslationUnitDecl();
-    llvm::outs() << "About to check if the numa template specialization for " << FirstTempArg.getAsString() << " and " << SecondTempArg << " exists\n";
-    for (const auto *Decl : TU->decls()) {
-        if (const auto *SpecDecl = clang::dyn_cast<clang::ClassTemplateSpecializationDecl>(Decl)) {
-            const auto *TemplateDecl = SpecDecl->getSpecializedTemplate();
-            //check if its numa
-            if(TemplateDecl->getNameAsString().compare("numa") == 0){
-                // llvm::outs()<< "We found a numa specialization here it is\n";
-                // SpecDecl->dump();
-                clang::QualType FoundType;
-                llvm::APSInt FoundInt;
-                //get arguments : You have to go through this because in the entire context, it might not be the case that the first parameter is always a type and the second is always an integral
-                for (const auto &Arg : SpecDecl->getTemplateArgs().asArray()) {
-                    if (Arg.getKind() == clang::TemplateArgument::ArgKind::Type) {
-                        FoundType = Arg.getAsType();
-                        //llvm::outs() << "The type is " << FoundType.getAsString() << "\n";
-                    }
-                    if (Arg.getKind() == clang::TemplateArgument::ArgKind::Integral) {
-                        //llvm::outs() << "The integral is " << Arg.getAsIntegral() << "\n";
-                        FoundInt = Arg.getAsIntegral();
-                    }
-                }
-
-                //if not in specialized classes ad the foundtype and found integral to the specialized classes
-                auto it = specializedClasses.find(FoundType);
-                if (it != specializedClasses.end() && it->second == FoundInt) {
-                    
-                } else {
-                    llvm::outs() << "Adding " << FoundType.getAsString() << " and " << FoundInt << " to the specialized classes\n";
-                   // RecursiveNumaTyper.insert({FoundType, FoundInt});
-                }
-
-                // llvm::outs() << "The found type is " << FoundType.getAsString() << " and the found integral is " << FoundInt << "\n";
-                // llvm::outs() << "The checked type is " << FirstTempArg.getAsString() << " and the checked integral is " << SecondTempArg << "\n";
-                // if(FoundType == FirstTempArg && FoundInt == SecondTempArg){
-                //     return true;    
-                // }
-            }
-        }
-    }   
-    return true;     
-}
-
 void RecursiveNumaTyper::addAllSpecializations(clang::ASTContext* Context){
     clang::TranslationUnitDecl *TU = Context->getTranslationUnitDecl();
     for (const auto *Decl : TU->decls()) {
@@ -306,35 +262,37 @@ void RecursiveNumaTyper::addAllSpecializations(clang::ASTContext* Context){
             if(TemplateDecl->getNameAsString().compare("numa") == 0){
                 // llvm::outs()<< "We found a numa specialization here it is\n";
                 // SpecDecl->dump();
-                clang::QualType FoundType;
+                clang::CXXRecordDecl* FoundType;
                 llvm::APSInt FoundInt;
                 //get arguments : You have to go through this because in the entire context, it might not be the case that the first parameter is always a type and the second is always an integral
                 for (const auto &Arg : SpecDecl->getTemplateArgs().asArray()) {
                     if (Arg.getKind() == clang::TemplateArgument::ArgKind::Type) {
-                        FoundType = Arg.getAsType();
-                        //llvm::outs() << "The type is " << FoundType.getAsString() << "\n";
+                        if(const RecordType* RT = Arg.getAsType()->getAs<RecordType>()){
+                            if (CXXRecordDecl *CXXRD = dyn_cast<CXXRecordDecl>(RT->getDecl())) {
+                                
+                                FoundType= CXXRD;
+                            }
+                        }
                     }
                     if (Arg.getKind() == clang::TemplateArgument::ArgKind::Integral) {
-                        //llvm::outs() << "The integral is " << Arg.getAsIntegral() << "\n";
+                        
                         FoundInt = Arg.getAsIntegral();
+
+                        llvm::outs() << "The type is " << FoundType->getNameAsString() << "\n";
+                        llvm::outs() << "The integral is " << Arg.getAsIntegral() << "\n";
+                        
+                        if(!NumaSpeclExists(FoundType, FoundInt.getExtValue())){
+                            llvm::outs() << "Adding " << FoundType->getNameAsString() << " and " << FoundInt << " to the specialized classes\n";
+                            RecursiveNumaTyper::specializedClasses.insert({FoundType, FoundInt.getExtValue()});
+                        }
                     }
-                }
-                //if not in specialized classes add the foundtype and found integral to the specialized classes
-                auto it = specializedClasses.find(FoundType);
-                if (it != specializedClasses.end() && it->second == FoundInt) {
-                    
-                } else {
-                    llvm::outs() << "Adding " << FoundType.getAsString() << " and " << FoundInt << " to the specialized classes\n";
-                    
-                    RecursiveNumaTyper::specializedClasses.insert({FoundType, FoundInt.getExtValue()});
-                   // RecursiveNumaTyper.insert({FoundType, FoundInt});
                 }
             }
         }
     }   
 }
 
-bool RecursiveNumaTyper::NumaSpeclExists(clang::QualType FirstTempArg, int64_t SecondTempArg){
+bool RecursiveNumaTyper::NumaSpeclExists(const clang::CXXRecordDecl* FirstTempArg, int64_t SecondTempArg){
     auto it = specializedClasses.find(FirstTempArg);
     if (it != specializedClasses.end() && it->second == SecondTempArg) {
         return true;
@@ -347,6 +305,9 @@ void RecursiveNumaTyper::makeVirtual(const CXXRecordDecl* classDecl){
     for(auto method : classDecl->methods()){
         if(method->isUserProvided()){
             //check if it is not a constructor
+            if(method->isVirtual()){
+                continue;
+            }
             if(method->getNameAsString() != classDecl->getNameAsString()){
                 method->setVirtualAsWritten(true);
                 // print reconstructed function
@@ -367,30 +328,25 @@ void RecursiveNumaTyper::makeVirtual(const CXXRecordDecl* classDecl){
 
 
 
-void RecursiveNumaTyper::specializeClass(clang::ASTContext* Context, clang::QualType FirstTempArg, int64_t SecondTempArg){
-
-    //check if the class is in specialized classes
-    if( FirstTempArg.getCanonicalType()->isBuiltinType()){
-        llvm::outs() << "The numa argument "<< FirstTempArg.getAsString() << " is canonically a built in type\n";
-        return;
-    }
+void RecursiveNumaTyper::specializeClass(clang::ASTContext* Context, const clang::CXXRecordDecl* FirstTempArg, int64_t SecondTempArg){
+    // if( FirstTempArg->isB){
+    //     return;
+    // }
     if(NumaSpeclExists(FirstTempArg, SecondTempArg)){
-        llvm::outs() << "The numa template specialization for " << FirstTempArg.getAsString() << " and " << SecondTempArg << " already exists\n";
         return;
     }
 
-    llvm::outs() << "About to specialize "<< FirstTempArg.getAsString() << " as numa\n";
+    llvm::outs() << "About to specialize "<< FirstTempArg->getNameAsString() << " as numa\n";
 
+    //check if specialization exists
     //insert to specialized classes
     RecursiveNumaTyper::specializedClasses.insert({FirstTempArg, SecondTempArg});
 
-    llvm::outs() << "Making the methods of "<< FirstTempArg->getAsCXXRecordDecl()->getNameAsString() << " virtual\n";
-
-    constructSpecialization(Context, FirstTempArg->getAsCXXRecordDecl(), SecondTempArg);
+    constructSpecialization(Context, FirstTempArg, SecondTempArg);
 
 }
 
-void RecursiveNumaTyper::constructSpecialization(clang::ASTContext* Context, clang::CXXRecordDecl* classDecl, int64_t nodeID){
+void RecursiveNumaTyper::constructSpecialization(clang::ASTContext* Context,const clang::CXXRecordDecl* classDecl, int64_t nodeID){
     makeVirtual(classDecl);
     
     rewriteLocation = classDecl->getEndLoc();
@@ -436,34 +392,29 @@ void RecursiveNumaTyper::constructSpecialization(clang::ASTContext* Context, cla
 void RecursiveNumaTyper::numaPublicMembers(clang::ASTContext* Context, clang::SourceLocation& rewriteLocation, std::vector<FieldDecl*> publicFields, std::vector<CXXMethodDecl*> publicMethods, int64_t nodeID){
     rewriter.InsertTextAfter(rewriteLocation, "public:\n");
      for(auto fields :publicFields){
-        llvm::outs() << "field about to be checked is " << fields->getNameAsString() << "\n";
+        
         //QualType fieldType = QualType(classDecl->getTypeForDecl(),0);
 
         /*Case where the field is a built in type but not a pointer */
         if(fields->getType()->isBuiltinType()){
-            llvm::outs()<<"Field is a fundamental type\n";
+         
             rewriter.InsertTextAfter(rewriteLocation, "numa<"+fields->getType().getAsString()+","+std::to_string(nodeID)+"> "+ fields->getNameAsString()+";\n" );
         }
 
         /*Case where the field is a built in type and a pointer*/
         else if(fields->getType()->isPointerType() && fields->getType()->getPointeeType()->isBuiltinType()){
-                llvm::outs()<<"Field is a pointer\n";
+               
                 rewriter.InsertTextAfter(rewriteLocation, "numa<"+fields->getType()->getPointeeType().getAsString() +"*,"+std::to_string(nodeID)+"> "+ fields->getNameAsString()+";\n" );
             
         }
 
         /*Case where the field is not a built in type but is a pointer*/
         else if(fields->getType()->isPointerType() && !fields->getType()->getPointeeType()->isBuiltinType()){
-            llvm::outs()<<"Field is a pointer to a user defined class\n";
+            
             rewriter.InsertTextAfter(rewriteLocation, "numa<"+fields->getType()->getPointeeType().getAsString() +"*,"+std::to_string(nodeID)+"> "+ fields->getNameAsString()+";\n" );
-            
-
-            llvm::outs()<<"Making the methods of "<< fields->getType()->getPointeeCXXRecordDecl()->getNameAsString() << " virtual\n";
-
+        
             makeVirtual(fields->getType()->getPointeeCXXRecordDecl());
-            
-            if(NumaSpeclExists(QualType(fields->getType()->getPointeeCXXRecordDecl()->getTypeForDecl(),0) , nodeID)){
-                llvm::outs() << "The numa template specialization for " << fields->getNameAsString() << " and " << nodeID << " already exists\n";
+            if(NumaSpeclExists(fields->getType()->getPointeeCXXRecordDecl() , nodeID)){
                 continue;
             }else{
 
@@ -478,37 +429,30 @@ void RecursiveNumaTyper::numaPublicMembers(clang::ASTContext* Context, clang::So
         }
         /*Case where the field is not a built in type and not a pointer*/
         else if (!fields->getType()->isBuiltinType() && !fields->getType()->isPointerType()){
-            llvm::outs()<<"Field is a user defined class but not a pointer\n";
+            
             rewriter.InsertTextAfter(rewriteLocation, "numa<"+fields->getType().getAsString() +","+std::to_string(nodeID)+"> "+ fields->getNameAsString()+";\n" );
-            if(NumaSpeclExists(QualType(fields->getType()->getAsCXXRecordDecl()->getTypeForDecl(),0), nodeID)){
-                llvm::outs() << "The numa template specialization for " << fields->getNameAsString() << " and " << nodeID << " already exists\n";
+            if(NumaSpeclExists(fields->getType()->getAsCXXRecordDecl(), nodeID)){
                 continue;
             }else{
-                llvm::outs() << "About to specialize "<< fields->getNameAsString() << " as numa\n";
                 //insert to specialized classes
-                RecursiveNumaTyper::specializedClasses.insert({QualType(fields->getType()->getAsCXXRecordDecl()->getTypeForDecl(),0), nodeID});
+                RecursiveNumaTyper::specializedClasses.insert({fields->getType()->getAsCXXRecordDecl(), nodeID});
                 constructSpecialization(Context, fields->getType()->getAsCXXRecordDecl(), nodeID);
             }
         }
         else{
-            llvm::outs()<<"None of the above\n";
         }
          
     }   
 
     for(auto method : publicMethods){
-            //check if constructor
-        llvm::outs() << "The method name is " << method->getNameAsString() << "\n";
-        if (auto Ctor = dyn_cast<CXXConstructorDecl>(method)){
-            
+            //check if constructor   
+        if (auto Ctor = dyn_cast<CXXConstructorDecl>(method)){   
             if(Ctor->isUserProvided()){
-                llvm::outs() << "THE CONSTRUCTOR IS " << Ctor->getNameAsString() << "\n";
                 numaConstructors(Ctor, rewriteLocation, nodeID);
             }
         }
         else if (auto Dtor = dyn_cast<CXXDestructorDecl>(method)){
             if(Dtor->isUserProvided()){
-                llvm::outs() << "THE DESTRUCTOR IS " << Dtor->getNameAsString() << "\n";
                 numaDestructors(Dtor, rewriteLocation, nodeID);
             }
         }
@@ -524,81 +468,58 @@ void RecursiveNumaTyper::numaPublicMembers(clang::ASTContext* Context, clang::So
 
 
 void RecursiveNumaTyper::numaPrivateMembers(clang::ASTContext* Context, clang::SourceLocation& rewriteLocation, std::vector<FieldDecl*> privateFields, std::vector<CXXMethodDecl*> privateMethods, int64_t nodeID){
-        rewriter.InsertTextAfter(rewriteLocation, "private:\n");
-     for(auto fields :privateFields){
-        llvm::outs() << "field about to be checked is " << fields->getNameAsString() << "\n";
-        //QualType fieldType = QualType(classDecl->getTypeForDecl(),0);
-
+    rewriter.InsertTextAfter(rewriteLocation, "private:\n");
+    for(auto fields :privateFields){
         /*Case where the field is a built in type but not a pointer */
         if(fields->getType()->isBuiltinType()){
-            llvm::outs()<<"Field is a fundamental type\n";
             rewriter.InsertTextAfter(rewriteLocation, "numa<"+fields->getType().getAsString()+","+std::to_string(nodeID)+"> "+ fields->getNameAsString()+";\n" );
         }
 
         /*Case where the field is a built in type and a pointer*/
         else if(fields->getType()->isPointerType() && fields->getType()->getPointeeType()->isBuiltinType()){
-                llvm::outs()<<"Field is a pointer\n";
                 rewriter.InsertTextAfter(rewriteLocation, "numa<"+fields->getType()->getPointeeType().getAsString() +"*,"+std::to_string(nodeID)+"> "+ fields->getNameAsString()+";\n" );
             
         }
 
         /*Case where the field is not a built in type but is a pointer*/
         else if(fields->getType()->isPointerType() && !fields->getType()->getPointeeType()->isBuiltinType()){
-            llvm::outs()<<"Field is a pointer to a user defined class\n";
+           
             rewriter.InsertTextAfter(rewriteLocation, "numa<"+fields->getType()->getPointeeType().getAsString() +"*,"+std::to_string(nodeID)+"> "+ fields->getNameAsString()+";\n" );
-
-            llvm::outs()<<"Making the methods of "<< fields->getType()->getPointeeCXXRecordDecl()->getNameAsString() << " virtual\n";
-
             
             
-            if(NumaSpeclExists(QualType(fields->getType()->getPointeeCXXRecordDecl()->getTypeForDecl(),0) , nodeID)){
-                llvm::outs() << "The numa template specialization for " << fields->getNameAsString() << " and " << nodeID << " already exists\n";
+            if(NumaSpeclExists(fields->getType()->getPointeeCXXRecordDecl() , nodeID)){
                 continue;
-            }else{
-
-            // llvm::outs() << "About to specialize "<< fields->getNameAsString() << " as numa\n";
-
-            // //insert to specialized classes
-            // RecursiveNumaTyper::specializedClasses.insert({QualType(fields->getType()->getPointeeCXXRecordDecl()->getTypeForDecl(),0) , nodeID});
-
-            // constructSpecialization(Context, fields->getType()->getPointeeType()->getAsCXXRecordDecl(), nodeID);
+            }
+            else{
             }
         }
         /*Case where the field is not a built in type and not a pointer*/
         else if (!fields->getType()->isBuiltinType() && !fields->getType()->isPointerType()){
-            llvm::outs()<<"Field is a user defined class but not a pointer\n";
             rewriter.InsertTextAfter(rewriteLocation, "numa<"+fields->getType().getAsString() +","+std::to_string(nodeID)+"> "+ fields->getNameAsString()+";\n" );
-            if(NumaSpeclExists(QualType(fields->getType()->getAsCXXRecordDecl()->getTypeForDecl(),0), nodeID)){
-                llvm::outs() << "The numa template specialization for " << fields->getNameAsString() << " and " << nodeID << " already exists\n";
+            if(NumaSpeclExists(fields->getType()->getAsCXXRecordDecl(), nodeID)){
                 continue;
             }else{
 
-            llvm::outs() << "About to specialize "<< fields->getNameAsString() << " as numa\n";
-
             //insert to specialized classes
-            RecursiveNumaTyper::specializedClasses.insert({QualType(fields->getType()->getAsCXXRecordDecl()->getTypeForDecl(),0), nodeID});
+            RecursiveNumaTyper::specializedClasses.insert({fields->getType()->getAsCXXRecordDecl(), nodeID});
 
             constructSpecialization(Context, fields->getType()->getAsCXXRecordDecl(), nodeID);
             }
         }
         else{
-            llvm::outs()<<"None of the above\n";
         }
     } 
    for(auto method : privateMethods){
             //check if constructor
-        llvm::outs() << "The method name is " << method->getNameAsString() << "\n";
         if (auto Ctor = dyn_cast<CXXConstructorDecl>(method)){
             
             if(Ctor->isUserProvided()){
-                llvm::outs() << "THE CONSTRUCTOR IS " << Ctor->getNameAsString() << "\n";
                 numaConstructors(Ctor, rewriteLocation, nodeID);
             }
         }
         else if (auto Dtor = dyn_cast<CXXDestructorDecl>(method)){
             if(Dtor->isUserProvided()){
-                llvm::outs() << "THE DESTRUCTOR IS " << Dtor->getNameAsString() << "\n";
-                numaDestructors(Dtor, rewriteLocation, nodeID);
+                   numaDestructors(Dtor, rewriteLocation, nodeID);
             }
         }
         else{
@@ -620,12 +541,10 @@ void RecursiveNumaTyper::numaConstructors(clang::CXXConstructorDecl* constructor
     //llvm::outs() << "CONSTRUCTOR SIGNATURE IS: "<< numaConstructorSignature(constructor) << "\n";
     std::string numaConstructorSignatrue = getNumaConstructorSignature(constructor);  
     if(constructor->getNumCtorInitializers() > 0){
-        llvm::outs() << "Constructor "<<constructor->getNameAsString()<< " has an initializer list\n";
-        llvm::outs() << "The initializer list has " << constructor->getNumCtorInitializers() << " initializers\n";
+       
         for (auto Init = constructor->init_begin(); Init != constructor->init_end(); ++Init) {
             if ((*Init)->isWritten()) {
                 llvm::outs() << "  Initializes member is written\n";
-                
                 if((*Init)->isDelegatingInitializer()){
                     llvm::outs() << "  Initializes member is delegating\n";
                     isDelegatingInit = true;
@@ -665,7 +584,6 @@ void RecursiveNumaTyper::numaConstructors(clang::CXXConstructorDecl* constructor
         llvm::raw_string_ostream OS(BodyStr);
         // Pretty print the body
         ConstructorBody->printPretty(OS, nullptr, constructor->getASTContext().getPrintingPolicy());
-        llvm::outs() << "Constructor Body:\n" << OS.str() << "\n";
         rewriter.InsertTextAfter(rewriteLocation, OS.str());
     }
     else{
@@ -685,12 +603,11 @@ void RecursiveNumaTyper::numaDestructors(clang::CXXDestructorDecl* destructor, c
         rewriter.InsertTextAfter(rewriteLocation, ")\n");
     
         if(destructor->hasBody()){
-            llvm::outs() << "destructor has a body\n" ;
+
             destructor->dump();
             SourceRange BodyRange = destructor->getBody()->getSourceRange();
             const SourceManager &SM = destructor->getASTContext().getSourceManager();
             llvm::StringRef BodyText = Lexer::getSourceText(CharSourceRange::getTokenRange(BodyRange), SM, destructor->getASTContext().getLangOpts());
-            llvm::outs() << "Destructor Body:\n" << BodyText << "\n";
             //Pass it through a function that searches for 'new' in the body and replaces 'new''s return type with numa<T,N>
             //std::string numaedBody = replaceNewType(std::string(BodyText), N);
             //Then we replace the body 
@@ -705,7 +622,6 @@ void RecursiveNumaTyper::numaDestructors(clang::CXXDestructorDecl* destructor, c
             //get the implementation of the constructor
             
             rewriter.InsertTextAfter(rewriteLocation, param->getType().getAsString() + " " + param->getNameAsString());
-            llvm::outs() << "The parameter is " << param->getType().getAsString() << " and the name is " << param->getNameAsString() << "\n";
             //avoid the last comma
             if(param != destructor->getDefinition()->parameters().back())
             {
@@ -717,12 +633,10 @@ void RecursiveNumaTyper::numaDestructors(clang::CXXDestructorDecl* destructor, c
 
         //if the constructor has a body, before we rewrite the body, we have to replace the new expression with new numa<T,N>
         if(destructor->hasBody()){
-            llvm::outs() << "destructor has a body\n" ;
-            destructor->dump();
+            //destructor->dump();
             SourceRange BodyRange = destructor->getBody()->getSourceRange();
             const SourceManager &SM = destructor->getASTContext().getSourceManager();
             llvm::StringRef BodyText = Lexer::getSourceText(CharSourceRange::getTokenRange(BodyRange), SM, destructor->getASTContext().getLangOpts());
-            llvm::outs() << "Destructor Body:\n" << BodyText << "\n";
             //Pass it through a function that searches for 'new' in the body and replaces 'new''s return type with numa<T,N>
             //std::string numaedBody = replaceNewType(std::string(BodyText), N);
             //Then we replace the body 
@@ -736,7 +650,7 @@ void RecursiveNumaTyper::numaDestructors(clang::CXXDestructorDecl* destructor, c
 
 void RecursiveNumaTyper::numaMethods(clang::CXXMethodDecl* method, clang::SourceLocation& rewriteLocation, int64_t nodeID){
     std::string methodSignature = getNumaMethodSignature(method);
-    llvm::outs() << "The method signature is " << methodSignature << "\n";
+
     rewriter.InsertTextAfter(rewriteLocation, methodSignature);
     if (method->hasBody()) { // Check if the method has a body
         const Stmt *MethodBody = method->getBody(); // Get the body
@@ -744,7 +658,7 @@ void RecursiveNumaTyper::numaMethods(clang::CXXMethodDecl* method, clang::Source
         llvm::raw_string_ostream OS(BodyStr);
         // Pretty print the body
         MethodBody->printPretty(OS, nullptr, method->getASTContext().getPrintingPolicy());
-        llvm::outs() << "Method Body:\n" << OS.str() << "\n";
+        // llvm::outs() << "Method Body:\n" << OS.str() << "\n";
         rewriter.InsertTextAfter(rewriteLocation, OS.str());
     }
     else{
@@ -766,6 +680,7 @@ void RecursiveNumaTyper::run(const clang::ast_matchers::MatchFinder::MatchResult
     if(result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getNameAsString().empty())
         return;
 
+    addAllSpecializations(result.Context);
     if(result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->isThisDeclarationADefinition()){   
         if(!result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getBody()->children().empty()){
             auto fnBody = result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getBody();
@@ -777,26 +692,38 @@ void RecursiveNumaTyper::run(const clang::ast_matchers::MatchFinder::MatchResult
         }
 
 
-        llvm::outs()<<"------------------------------Printing NumaDeclTable----------------------------------\n";
-        llvm::outs()<<"Size of NumaDeclTable: "<<numaDeclTable.size()<<"\n";
-        for(auto it = numaDeclTable.begin(); it != numaDeclTable.end(); it++){
-            llvm::outs()<<"VarDecl Name: " << it->first->getNameAsString() << "\n";
-            llvm::outs()<<"VarType: " << it->first->getType().getAsString() << "\n";
-            llvm::outs()<<"CXXNewExpr Return Type: " << it->second->getType().getAsString() << "\n";
-        }
+        // llvm::outs()<<"------------------------------Printing NumaDeclTable----------------------------------\n";
+        // llvm::outs()<<"Size of NumaDeclTable: "<<numaDeclTable.size()<<"\n";
+        // for(auto it = numaDeclTable.begin(); it != numaDeclTable.end(); it++){
+        //     llvm::outs()<<"VarDecl Name: " << it->first->getNameAsString() << "\n";
+        //     llvm::outs()<<"VarType: " << it->first->getType().getAsString() << "\n";
+        //     llvm::outs()<<"CXXNewExpr Return Type: " << it->second->getType().getAsString() << "\n";
+        // }
 
-        addAllSpecializations(result.Context);
+        
 
         for(auto &UserNumaDecl : numaDeclTable){
-            QualType FirstTempArg;
+            CXXRecordDecl* FirstTempArg;
+            //QualType FirstTempArg;
             int64_t SecondTempArg;
             auto CXXRecordNumaType = UserNumaDecl.second->getType()->getPointeeType()->getAsCXXRecordDecl();
             auto TemplateNumaType = dyn_cast<ClassTemplateSpecializationDecl>(CXXRecordNumaType);
             llvm::ArrayRef<TemplateArgument> TemplateArgs = TemplateNumaType->getTemplateArgs().asArray();
-            FirstTempArg = TemplateArgs[0].getAsType();
-            SecondTempArg = TemplateArgs[1].getAsIntegral().getExtValue();
 
-            specializeClass(result.Context,FirstTempArg,SecondTempArg);
+
+            if(const RecordType* RT = TemplateArgs[0].getAsType()->getAs<RecordType>()){
+                 if (CXXRecordDecl *CXXRD = dyn_cast<CXXRecordDecl>(RT->getDecl())) {
+                    // llvm::outs() << "About to specialize  " << CXXRD->getNameAsString() << "\n";
+                    FirstTempArg = CXXRD;
+                    SecondTempArg = TemplateArgs[1].getAsIntegral().getExtValue();
+                    specializeClass(result.Context,FirstTempArg,SecondTempArg);
+                }
+            }
+
+            //FirstTempArg = TemplateArgs[0].getAsType();
+            
+
+            
         } 
     
     return;

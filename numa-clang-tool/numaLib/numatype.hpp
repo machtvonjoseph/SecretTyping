@@ -143,7 +143,7 @@ class numa<T,NodeID, Alloc, typename std::enable_if<!(std::is_fundamental<T>::va
 public:
     numa(){
         std::cout<<"numa constructor called"<<std::endl;
-        assert(false && "This constructor should never get called");
+        // assert(false && "This constructor should never get called");
     }    
 };
 

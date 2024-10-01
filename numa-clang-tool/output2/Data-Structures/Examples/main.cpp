@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 
 	
 	StackTest();
-	// QueueTest();
+	QueueTest();
 	// BinarySearchTest();
 	// LinkedListTest();
 

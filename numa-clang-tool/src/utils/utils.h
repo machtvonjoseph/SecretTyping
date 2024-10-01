@@ -83,16 +83,60 @@ namespace utils
         ASTContext *Context;
     };
 
+    class AssignmentOperatorCallVisitor :public RecursiveASTVisitor<AssignmentOperatorCallVisitor>{
+    public:
+        explicit AssignmentOperatorCallVisitor(clang::ASTContext *Context) : Context(Context) {}
+        bool VisitCXXOperatorCallExpr(CXXOperatorCallExpr *OCE){
+            // if(OCE->isLValue()){
+            AssignmentOperatorCallExprs.push_back(OCE);
+            SourceLocation Loc = OCE->getBeginLoc();
+            AssignmentOperatorCallExprLocs.push_back(Loc);
+            return true;
+            // }
+            // return false;
+        }
+        std::vector<CXXOperatorCallExpr* > getAssignmentOperatorCallExprs() { return AssignmentOperatorCallExprs; }
+        std::vector<SourceLocation> getAssignmentOperatorCallExprLocs() { return AssignmentOperatorCallExprLocs; }
+        void clearAssignmentOperatorCallExprs() { AssignmentOperatorCallExprs.clear(); AssignmentOperatorCallExprLocs.clear(); }
+    private:
+        std::vector<CXXOperatorCallExpr*> AssignmentOperatorCallExprs;
+        std::vector<SourceLocation> AssignmentOperatorCallExprLocs;
+        ASTContext *Context;
+    };
+
+    class MemberExprVisitor : public RecursiveASTVisitor<MemberExprVisitor>{
+    public:
+        explicit MemberExprVisitor(clang::ASTContext *Context) : Context(Context) {}
+        bool VisitMemberExpr(MemberExpr *ME) {
+            MemberExprs.push_back(ME);
+            return true;
+        }
+        std::vector<MemberExpr* > getMemberExprs() { return MemberExprs; }
+        void clearMemberExprs() { MemberExprs.clear(); }
+    private:
+        std::vector<MemberExpr*> MemberExprs;
+        ASTContext *Context;
+    };
+
 
     class VarDeclVisitor : public RecursiveASTVisitor<VarDeclVisitor>
     {
     public:
         explicit VarDeclVisitor(clang::ASTContext *Context) : Context(Context) {}
-        bool VarDeclExpr(VarDecl *VD) {
+        // bool VarDeclExpr(VarDecl *VD) {
+        //     llvm::outs() << "VarDecl found from inside the visitor\n";
+        //     llvm::outs() << "VarDecl Name: " << VD->getNameAsString() << "\n";
+        //     VarDecls.push_back(VD);
+        //     return true;
+        // }
+        bool VisitVarDecl(VarDecl *VD) {
+            llvm::outs() << "VarDecl found from inside the visitor\n";
+            llvm::outs() << "VarDecl Name: " << VD->getNameAsString() << "\n";
             VarDecls.push_back(VD);
             return true;
         }
         std::vector<VarDecl* > getVarDecls() { return VarDecls; }
+        void clearVarDecls() { VarDecls.clear(); }
     private:
         std::vector<VarDecl*> VarDecls;
         ASTContext *Context;
