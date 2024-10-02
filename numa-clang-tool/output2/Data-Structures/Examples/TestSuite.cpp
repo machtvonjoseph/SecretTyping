@@ -10,7 +10,7 @@
 // #include "Queue.hpp"
 #include "Stack.hpp"
 #include "Queue.hpp"
-// #include "BinarySearch.hpp"
+#include "BinarySearch.hpp"
 // #include "LinkedList.hpp"
 // #include "../src/Stack.cpp"
 // #include "../src/Queue.cpp"
@@ -132,22 +132,39 @@ void QueueTest()
 
 }
 
-// void BinarySearchTest()
-// {
-// 	BinarySearchTree a;
-// 	BinarySearchTree *b;
-// 	a.insert(4);
-// 	a.insert(2);
-// 	a.insert(5);
-// 	a.insert(1);
-// 	a.insert(3);
+void BinarySearchTest()
+{
+	BinarySearchTree a;
+	numa<BinarySearchTree,0> *b= new numa<BinarySearchTree,0>();
+	a.insert(4);
+	a.insert(2);
+	a.insert(5);
+	a.insert(1);
+	a.insert(3);
 	
 
-// 	a.postOrderPrint();
-// 	a.preOrderPrint();
-// 	a.inOrderPrint();
+	a.postOrderPrint();
+	a.preOrderPrint();
+	a.inOrderPrint();
 
-// }
+	cout<<"----------------------------------"<<endl;
+	cout<<" NUMA Binary Search Tree"<<endl;
+	cout<<"----------------------------------"<<endl;
+
+
+	b->insert(4);
+	b->insert(2);
+	b->insert(5);
+	b->insert(1);
+	b->insert(3);
+	
+
+	b->postOrderPrint();
+	b->preOrderPrint();
+	b->inOrderPrint();
+
+	delete b;
+}
 
 // void LinkedListTest()
 // {

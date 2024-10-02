@@ -117,9 +117,15 @@ void NumaTargetNumaPointer::castNewExprOCE(clang::CXXNewExpr* CXXNewExpr, clang:
     if(MemberExprType.substr(0,4).compare("numa") == 0){
         if(!NewType.substr(0,4).compare("numa") == 0){
             llvm::outs() << "MemberExpr Type is numa but NewType is not\n";
+            rewriteLocation = CXXNewExpr->getBeginLoc();
             SourceLocation TypeLoc = CXXNewExpr->getAllocatedTypeSourceInfo()->getTypeLoc().getBeginLoc();
             rewriter.ReplaceText(TypeLoc, NewType.length(), "numa<"+NewType+","+std::to_string(FoundInt.getExtValue())+">");
-            
+
+            rewriter.InsertTextBefore(rewriteLocation, "reinterpret_cast<"+NewType+"*>(");
+
+            //getFIle ID 
+            clang::SourceLocation NewEndLocaiton = CXXNewExpr->getEndLoc();
+            rewriter.InsertTextAfter(NewEndLocaiton, ")");
             //getFIle ID        
             llvm::outs()<<"Type replaced\n";
             const clang::CXXRecordDecl* NewTypeAsCXXRecodDecl;

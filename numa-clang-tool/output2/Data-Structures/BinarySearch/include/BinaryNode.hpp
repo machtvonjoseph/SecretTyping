@@ -1,3 +1,4 @@
+#include "numatype.hpp"
 #ifndef _BINARYNODE_HPP_
 #define _BINARYNODE_HPP_
 
@@ -36,24 +37,89 @@ public:
 	: data(data), leftChild(NULL), rightChild(NULL)
 	{}
 
-	~BinaryNode()
+	virtual ~BinaryNode()
 	{
 		
 		leftChild = NULL;
 		rightChild = NULL;
 	}
 
-	int getData() { return data; }
-	void setData(int data) { data = data; }
+	virtual int getData() { return data; }
+	virtual void setData(int data) { data = data; }
 
-	BinaryNode *getLeftChild() { return leftChild; }
-	BinaryNode *getRightChild() { return rightChild; }
+	virtual BinaryNode *getLeftChild() { return leftChild; }
+	virtual BinaryNode *getRightChild() { return rightChild; }
 
-	void setLeftChild(BinaryNode *node) { leftChild = node; }
-	void setRightChild(BinaryNode *node) { rightChild = node; }
+	virtual void setLeftChild(BinaryNode *node) { leftChild = node; }
+	virtual void setRightChild(BinaryNode *node) { rightChild = node; }
 
 
 
+};
+
+template<>
+class numa<BinaryNode,0>{
+public: 
+    static void* operator new(std::size_t sz){
+        std::cout<<"new operator called"<<std::endl;
+		 void* p = numa_alloc_onnode(sz * sizeof(BinaryNode), 0);
+        if (p == nullptr) {
+            throw std::bad_alloc();
+        }
+        return p;
+    }
+
+    static void* operator new[](std::size_t sz){
+		std::cout<<"new operator called"<<std::endl;
+		 void* p = numa_alloc_onnode(sz * sizeof(BinaryNode), 0);
+        if (p == nullptr) {
+            throw std::bad_alloc();
+        }
+        return p;
+    }
+
+    static void operator delete(void* ptr){
+		std::cout<<"delete operator called"<<std::endl;
+		numa_free(ptr, 1 * sizeof(BinaryNode));
+    }
+
+    static void operator delete[](void* ptr){
+		std::cout<<"delete operator called"<<std::endl;
+		numa_free(ptr, 1 * sizeof(BinaryNode));
+    }
+public:
+numa (): data(0), leftChild(__null), rightChild(__null){
+}
+numa (int data): data(data), leftChild(__null), rightChild(__null){
+}
+virtual ~numa()
+{
+		
+		leftChild = NULL;
+		rightChild = NULL;
+	}
+virtual int getData(){
+    return this->data;
+}
+virtual void setData(int data){
+    data = data;
+}
+virtual BinaryNode * getLeftChild(){
+    return this->leftChild;
+}
+virtual BinaryNode * getRightChild(){
+    return this->rightChild;
+}
+virtual void setLeftChild(BinaryNode * node){
+    this->leftChild = node;
+}
+virtual void setRightChild(BinaryNode * node){
+    this->rightChild = node;
+}
+private:
+numa<int,0> data;
+numa<BinaryNode*,0> leftChild;
+numa<BinaryNode*,0> rightChild;
 };
 
 #endif /* _BINARYNODE_HPP_ */

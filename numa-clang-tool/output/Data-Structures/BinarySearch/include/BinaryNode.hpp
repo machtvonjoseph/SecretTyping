@@ -1,3 +1,4 @@
+#include "numatype.hpp"
 #ifndef _BINARYNODE_HPP_
 #define _BINARYNODE_HPP_
 

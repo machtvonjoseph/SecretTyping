@@ -124,7 +124,7 @@ virtual int del(){
 }
 virtual void add(int initData){
     if (this->front == __null) {
-        this->front = new numa<Node,0>(initData);
+        this->front = reinterpret_cast<Node*>(new numa<Node,0>(initData));
         this->front->setLink(this->rear);
         this->rear = this->front;
         return;

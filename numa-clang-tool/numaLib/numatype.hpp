@@ -104,10 +104,10 @@ public:
 		store((T)0);
 	}
     //constructor with multiple arguments
-    template<typename... Args>
-    numa(Args... args){
-        store(T(args...));
-    }
+    // template<typename... Args>
+    // numa(Args... args){
+    //     store(T(args...));
+    // }
 	// inline operator T() {return load();}
     inline operator T&(){return contents;}
     
@@ -138,12 +138,13 @@ public:
 
 //This is only needed pre compiling and it doesn't do anything after
 
+
 template<typename T, int NodeID, template <typename, int> class Alloc>
 class numa<T,NodeID, Alloc, typename std::enable_if<!(std::is_fundamental<T>::value || std::is_pointer<T>::value)>::type>: public T{
 public:
     numa(){
         std::cout<<"numa constructor called"<<std::endl;
-        // assert(false && "This constructor should never get called");
+        assert(false && "This constructor should never get called");
     }    
 };
 
