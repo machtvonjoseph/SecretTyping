@@ -1,4 +1,3 @@
-#include "numatype.hpp"
 #ifndef _NODE_HPP_
 #define _NODE_HPP_
 
@@ -13,74 +12,13 @@ public:
 	{}
 	Node(int initData);
 	Node(int, Node*);
-	virtual Node *getLink();
-	virtual void setLink(Node *n);
+	Node *getLink();
+	void setLink(Node *n);
 
-	virtual int getData();
-	virtual void setData(int n);
+	int getData();
+	void setData(int n);
 
-	virtual ~Node();
-};
-
-template<>
-class numa<Node,0>{
-public: 
-    static void* operator new(std::size_t sz){
-        std::cout<<"new operator called"<<std::endl;
-		 void* p = numa_alloc_onnode(sz * sizeof(Node), 0);
-        if (p == nullptr) {
-            throw std::bad_alloc();
-        }
-        return p;
-    }
-
-    static void* operator new[](std::size_t sz){
-		std::cout<<"new operator called"<<std::endl;
-		 void* p = numa_alloc_onnode(sz * sizeof(Node), 0);
-        if (p == nullptr) {
-            throw std::bad_alloc();
-        }
-        return p;
-    }
-
-    static void operator delete(void* ptr){
-		std::cout<<"delete operator called"<<std::endl;
-		numa_free(ptr, 1 * sizeof(Node));
-    }
-
-    static void operator delete[](void* ptr){
-		std::cout<<"delete operator called"<<std::endl;
-		numa_free(ptr, 1 * sizeof(Node));
-    }
-public:
-numa (): data(0){
-}
-numa (int initData){
-    this->data = initData;
-}
-numa (int initData, Node * node){
-    this->data = initData;
-    this->link = node;
-}
-virtual Node * getLink(){
-    return this->link;
-}
-virtual void setLink(Node * n){
-    this->link = n;
-}
-virtual int getData(){
-    return this->data;
-}
-virtual void setData(int n){
-    this->data = n;
-}
-virtual ~numa()
-{
-	link = nullptr;
-}
-private:
-numa<int,0> data;
-numa<Node*,0> link;
+	~Node();
 };
 
 

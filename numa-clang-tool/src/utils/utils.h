@@ -30,7 +30,43 @@
 using namespace clang;
 
 namespace utils
-{ class DeclStmtVisitor : public RecursiveASTVisitor<DeclStmtVisitor>{
+{ 
+    class NewExprInBinaryOperatorVisitor : public RecursiveASTVisitor<NewExprInBinaryOperatorVisitor>
+    {
+    public:
+        explicit NewExprInBinaryOperatorVisitor(clang::ASTContext *Context) : Context(Context) {}
+        bool VisitBinaryOperator(BinaryOperator *BO)
+        {
+            if (const Expr *LHS = BO->getLHS()) {
+                if (const CXXNewExpr *NewExpr = dyn_cast<CXXNewExpr>(LHS->IgnoreParenImpCasts())) {
+                    llvm::outs() << "Found CXXNewExpr in BinaryOperator LHS\n";
+                }
+            }
+            if (const Expr *RHS = BO->getRHS()) {
+                if (const CXXNewExpr *NewExpr = dyn_cast<CXXNewExpr>(RHS->IgnoreParenImpCasts())) {
+                    llvm::outs() << "Found CXXNewExpr in BinaryOperator RHS\n";
+                    //if newexprs type  is numa, then push to CXXNewExprs
+                    if (NewExpr->getType().getAsString().substr(0, 4).compare("numa") == 0)
+                    {
+                        CXXNewExprs.push_back(NewExpr);
+                    }
+
+                }
+            }
+            return true; // Continue traversal
+            //BinaryOperators.push_back(BO);
+            //return true;
+        }
+        
+        std::vector<const CXXNewExpr *> getBinaryOperators() { return CXXNewExprs; }
+        void clearBinaryOperators() { CXXNewExprs.clear(); }
+    private:
+        std::vector<const CXXNewExpr *> CXXNewExprs;
+        ASTContext *Context;
+    };
+
+    
+    class DeclStmtVisitor : public RecursiveASTVisitor<DeclStmtVisitor>{
     public:
         explicit DeclStmtVisitor(clang::ASTContext *Context) : Context(Context) {}
         bool VisitDeclStmt(DeclStmt *DS) {

@@ -11,97 +11,92 @@
 #include "Stack.hpp"
 #include "Queue.hpp"
 #include "BinarySearch.hpp"
+#include "LinkedList.hpp"
 // #include "LinkedList.hpp"
 // #include "../src/Stack.cpp"
 // #include "../src/Queue.cpp"
 // #include "../src/BinarySearch.cpp"
-// #include "../src/LinkedList.cpp"
+
 // #include "../src/Node.cpp"
 #include "numatype.hpp"
 
 #include <iostream>
 
+numa<Stack,0> *a;
+numa<Queue,0> *b;
+numa<BinarySearchTree,0> *c;
+numa<LinkedList,0> *d;
+
+void init(){
+	a = new numa<Stack,0>();
+	b = new numa<Queue,0>();
+	c = new numa<BinarySearchTree,0>();
+	d = new numa<LinkedList,0>();
+
+}
 
 void StackTest()
 {
-	Stack a;
-	numa<Stack,0>* v = new numa<Stack,0>();
+	Stack p;
 	//Stack *b;
-	v->push(1);
+	cout<<"----------------------------------"<<endl;
+	cout<<"NUMA Stack"<<endl;
+	cout<<"----------------------------------"<<endl;
+
+	a->push(1);
 	std::cout << "----------------------------------" << std::endl;
-	std::cout << "Display Stack after adding 1 node." << std::endl;
+	std::cout << "Display NUMA Stack after adding 1 node." << std::endl;
 	std::cout << "----------------------------------" << std::endl;
-	v->display();
+	a->display();
 	
 
-	v->push(5);
-	v->push(30);
+	a->push(5);
+	a->push(30);
 	std::cout << "----------------------------------" << std::endl;
-	std::cout << "Display Stack after adding 2 nodes." << std::endl;
+	std::cout << "Display NUMA Stack after adding 2 nodes." << std::endl;
 	std::cout << "----------------------------------" << std::endl;
-	v->display();
+	a->display();
 
-	v->pop();
+	a->pop();
 	std::cout << "----------------------------------" << std::endl;
-	std::cout << "Display Stack after removing 1 node" << std::endl;
+	std::cout << "Display NUMA Stack after removing 1 node" << std::endl;
 	std::cout << "----------------------------------" << std::endl;
-	v->display();
+	a->display();
 
 
 	//b = new Stack();
-	v->pop();
-	v->pop();
+	a->pop();
+	a->pop();
 	std::cout << "----------------------------------" << std::endl;
 	std::cout << "Display empty stack." << std::endl;
 	std::cout << "----------------------------------" << std::endl;
-	v->display();
+	a->display();
 
 	for(int i = 0; i < 5; i++)
 	{
-		v->push(i);
+		a->push(i);
 	}
 	std::cout << "----------------------------------" << std::endl;
-	std::cout << "Display Stack after adding 5 node." << std::endl;
+	std::cout << "Display NUMA Stack after adding 5 node." << std::endl;
 	std::cout << "----------------------------------" << std::endl;
-	v->display();
+	a->display();
 
 	for(int i = 0; i < 3; i++)
 	{	
-		v->pop();
+		a->pop();
 	}
 
 	std::cout << "----------------------------------" << std::endl;
-	std::cout << "Display Stack after removing 3 nodes." << std::endl;
+	std::cout << "Display NUMA Stack after removing 3 nodes." << std::endl;
 	std::cout << "----------------------------------" << std::endl;
-	v->display();
+	a->display();
 
-	delete v;
+	delete a;
 }
 
 void QueueTest()
 {
 	Queue a;
-	numa<Queue,0> *b = new numa<Queue,0>();
-
-	a.add(1);
-	std::cout << "----------------------------------" << std::endl;
-	std::cout << "Display Queue after adding 1 node." << std::endl;
-	std::cout << "----------------------------------" << std::endl;
-	a.display();
-	
-
-	a.add(5);
-	a.add(30);
-	std::cout << "----------------------------------" << std::endl;
-	std::cout << "Display Queue after adding 2 nodes." << std::endl;
-	std::cout << "----------------------------------" << std::endl;
-	a.display();
-
-	a.del();
-	std::cout << "----------------------------------" << std::endl;
-	std::cout << "Display Queue after removing 1 node" << std::endl;
-	std::cout << "----------------------------------" << std::endl;
-	a.display();
 
 	// b = new Queue();
 	std::cout << "----------------------------------" << std::endl;
@@ -135,103 +130,97 @@ void QueueTest()
 void BinarySearchTest()
 {
 	BinarySearchTree a;
-	numa<BinarySearchTree,0> *b= new numa<BinarySearchTree,0>();
-	a.insert(4);
-	a.insert(2);
-	a.insert(5);
-	a.insert(1);
-	a.insert(3);
-	
-
-	a.postOrderPrint();
-	a.preOrderPrint();
-	a.inOrderPrint();
+	c= new numa<BinarySearchTree,0>();
 
 	cout<<"----------------------------------"<<endl;
 	cout<<" NUMA Binary Search Tree"<<endl;
 	cout<<"----------------------------------"<<endl;
 
 
-	b->insert(4);
-	b->insert(2);
-	b->insert(5);
-	b->insert(1);
-	b->insert(3);
+	c->insert(4);
+	c->insert(2);
+	c->insert(5);
+	c->insert(1);
+	c->insert(3);
 	
 
-	b->postOrderPrint();
-	b->preOrderPrint();
-	b->inOrderPrint();
+	c->postOrderPrint();
+	c->preOrderPrint();
+	c->inOrderPrint();
 
-	delete b;
+	delete c;
 }
 
-// void LinkedListTest()
-// {
-// 	LinkedList a;
-// 	LinkedList *b;
+void LinkedListTest()
+{
+	LinkedList a;
+	d = new numa<LinkedList,0>();
+	cout<<"----------------------------------"<<endl;
+	cout<<" NUMA Linked List"<<endl;
+	cout<<"----------------------------------"<<endl;
 
-// 	a.append(1);
-// 	a.append(3);
-// 	std::cout << "----------------------------------" << std::endl;
-// 	std::cout << "Display LinkedList after adding 2 nodes." << std::endl;
-// 	std::cout << "----------------------------------" << std::endl;
-// 	a.display();
+	d->append(1);
+	d->append(3);
+	std::cout << "----------------------------------" << std::endl;
+	std::cout << "Display LinkedList after adding 2 nodes." << std::endl;
+	std::cout << "----------------------------------" << std::endl;
+	d->display();
 
-// 	a.append(20);
-// 	std::cout << "----------------------------------" << std::endl;
-// 	std::cout << "Display LinkedList after adding 1 node." << std::endl;
-// 	std::cout << "----------------------------------" << std::endl;
-// 	a.display();
+	d->append(20);
+	std::cout << "----------------------------------" << std::endl;
+	std::cout << "Display LinkedList after adding 1 node." << std::endl;
+	std::cout << "----------------------------------" << std::endl;
+	d->display();
 
-// 	a.prepend(50);
-// 	std::cout << "----------------------------------" << std::endl;
-// 	std::cout << "Display Linked List after adding 1 node." << std::endl;
-// 	std::cout << "----------------------------------" << std::endl;
+	d->prepend(50);
+	std::cout << "----------------------------------" << std::endl;
+	std::cout << "Display Linked List after adding 1 node." << std::endl;
+	std::cout << "----------------------------------" << std::endl;
 
 	
-// 	a.display();
+	d->display();
 
-// 	std::cout << "----------------------------------" << std::endl;
-// 	std::cout << "------------ LENGTH "<< a.getLength() << " --------------" << std::endl;
-// 	std::cout << "----------------------------------" << std::endl;
+	std::cout << "----------------------------------" << std::endl;
+	std::cout << "------------ LENGTH "<< a.getLength() << " --------------" << std::endl;
+	std::cout << "----------------------------------" << std::endl;
 
 
-// 	a.removeHead();
-// 	std::cout << "----------------------------------" << std::endl;
-// 	std::cout << "Display Linked List after removing HEAD node." << std::endl;
-// 	std::cout << "----------------------------------" << std::endl;
+	d->removeHead();
+	std::cout << "----------------------------------" << std::endl;
+	std::cout << "Display Linked List after removing HEAD node." << std::endl;
+	std::cout << "----------------------------------" << std::endl;
 
-// 	a.display();
+	d->display();
 
-// 	a.removeTail();
-// 	std::cout << "----------------------------------" << std::endl;
-// 	std::cout << "Display Linked List after removing TAIL node." << std::endl;
-// 	std::cout << "----------------------------------" << std::endl;
+	d->removeTail();
+	std::cout << "----------------------------------" << std::endl;
+	std::cout << "Display Linked List after removing TAIL node." << std::endl;
+	std::cout << "----------------------------------" << std::endl;
 
-// 	a.display();
+	d->display();
 
-// 	a.insertAfter(3,78);
-// 	std::cout << "----------------------------------" << std::endl;
-// 	std::cout << "Display Linked List after insertingAfter 1 node." << std::endl;
-// 	std::cout << "----------------------------------" << std::endl;
-// 	a.display();
+	d->insertAfter(3,78);
+	std::cout << "----------------------------------" << std::endl;
+	std::cout << "Display Linked List after insertingAfter 1 node." << std::endl;
+	std::cout << "----------------------------------" << std::endl;
+	d->display();
 
-// 	a.insertAtIndex(1, 97);
-// 	std::cout << "----------------------------------" << std::endl;
-// 	std::cout << "Display Linked List after insertingAtIndex 1 node." << std::endl;
-// 	std::cout << "----------------------------------" << std::endl;
+	d->insertAtIndex(1, 97);
+	std::cout << "----------------------------------" << std::endl;
+	std::cout << "Display Linked List after insertingAtIndex 1 node." << std::endl;
+	std::cout << "----------------------------------" << std::endl;
 
-// 	a.display();
+	d->display();
 
-// 	for(int i = 0; i < 20; i++)
-// 	{
-// 		a.removeHead();
-// 	}
+	for(int i = 0; i < 20; i++)
+	{
+		d->removeHead();
+	}
 
-// 	std::cout << "----------------------------------" << std::endl;
-// 	std::cout << "Display Linked List after removing 20 nodes" << std::endl;
-// 	std::cout << "----------------------------------" << std::endl;
+	std::cout << "----------------------------------" << std::endl;
+	std::cout << "Display Linked List after removing 20 nodes" << std::endl;
+	std::cout << "----------------------------------" << std::endl;
 
-// 	a.display();
-// }
+	d->display();
+
+}

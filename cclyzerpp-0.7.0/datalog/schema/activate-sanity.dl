@@ -1,2 +1,0 @@
-// Enable all sanity checks of this project
-schema_sanity().

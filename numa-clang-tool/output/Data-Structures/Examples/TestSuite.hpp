@@ -1,4 +1,3 @@
-#include "numatype.hpp"
 /*! \file TestSuite.hpp
  * \brief Testsuite program which allows for testing of various data structures
  * \author Nii Mante
@@ -9,7 +8,7 @@
 #ifndef _TESTSUITE_HPP_
 #define _TESTSUITE_HPP_
 
-
+void init();
 /*!
  * \brief Test function for the Stack classes
  * 

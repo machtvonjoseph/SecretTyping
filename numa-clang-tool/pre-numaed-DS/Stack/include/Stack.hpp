@@ -75,6 +75,7 @@ int Stack::pop()
 		return -1;
 	}
 	Node *retN = top;
+	std::cout << "Popping: " << retN->getData() << std::endl;
 	top = top->getLink();
 	int data = retN->getData();
 	delete retN;

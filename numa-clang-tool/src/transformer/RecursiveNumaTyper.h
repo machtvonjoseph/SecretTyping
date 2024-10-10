@@ -31,7 +31,7 @@ using namespace clang;
 class RecursiveNumaTyper : public Transformer
 {
     private:
-        std::map<clang::VarDecl*, const clang::CXXNewExpr*> numaDeclTable;
+        std::vector<const clang::CXXNewExpr*> numaDeclTable;
         std::map<const clang::CXXRecordDecl*, int64_t> specializedClasses;
         clang::SourceLocation rewriteLocation;
         std::vector<clang::FileID> fileIDs;

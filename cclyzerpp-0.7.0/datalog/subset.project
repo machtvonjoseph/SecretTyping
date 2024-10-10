@@ -1,3 +1,0 @@
-#include "common.project"
-#include "export/subset.dl"
-#include "points-to/subset.dl"

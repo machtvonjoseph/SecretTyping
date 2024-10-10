@@ -1,9 +1,9 @@
 CC=clang++
 DIRS=Node Stack Queue BinarySearch
-LINK_DIRS=-L../Stack/bin -L../Queue/bin -L../BinarySearch/bin
+LINK_DIRS=-L../Stack/bin -L../Queue/bin -L../BinarySearch/bin -L../LinkdedList/bin
 LINK_FLAGS=-lnuma
-STATIC_LINK_FLAGS=../Node/bin/libnode.a ../Stack/bin/libstack.a ../Queue/bin/libqueue.a ../BinarySearch/bin/libbinarysearch.a 
-INC_DIRS= -I../Node/include -I../Stack/include -I../Queue/include -I../../../numaLib -I../BinarySearch/include -std=c++17 
+STATIC_LINK_FLAGS=../Node/bin/libnode.a ../Stack/bin/libstack.a ../Queue/bin/libqueue.a ../BinarySearch/bin/libbinarysearch.a ../LinkdedList/bin/liblinkedlist.a
+INC_DIRS= -I../Node/include -I../Stack/include -I../Queue/include -I../../../../numaLib -I../BinarySearch/include -I ../LinkedList/include -std=c++17 
 EXE=./bin/DSExample
 OBJS=main.o TestSuite.o
 

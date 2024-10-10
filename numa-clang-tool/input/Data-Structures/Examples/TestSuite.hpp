@@ -8,7 +8,7 @@
 #ifndef _TESTSUITE_HPP_
 #define _TESTSUITE_HPP_
 
-
+void init();
 /*!
  * \brief Test function for the Stack classes
  * 

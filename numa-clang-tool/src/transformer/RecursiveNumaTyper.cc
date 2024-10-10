@@ -222,10 +222,22 @@ std::string RecursiveNumaTyper::getNumaMethodSignature(CXXMethodDecl* method){
 
 
 void RecursiveNumaTyper::extractNumaDecls(clang::Stmt* fnBody, ASTContext *Context){
+    //fnBody->dump();
+
     utils::CompoundStmtVisitor CompoundStmtVisitor(Context);
     utils::DeclStmtVisitor DeclStmtVisitor(Context);
     utils::CXXNewExprVisitor CXXNewExprVisitor(Context);
     utils::VarDeclVisitor VarDeclVisitor(Context);
+    utils::NewExprInBinaryOperatorVisitor NewExprInBinaryOperatorVisitor(Context);
+
+    if(NewExprInBinaryOperatorVisitor.TraverseStmt(fnBody)){
+        llvm::outs() << "Found binary operator\n";
+        for(auto newExpr: NewExprInBinaryOperatorVisitor.getBinaryOperators()){
+            if(newExpr){
+                numaDeclTable.push_back(newExpr);
+            }
+        }
+    }
     if(DeclStmtVisitor.TraverseStmt(fnBody)){
         for(auto declStmt : DeclStmtVisitor.getDeclStmts()){
             if(CXXNewExprVisitor.TraverseStmt(declStmt)){
@@ -237,7 +249,7 @@ void RecursiveNumaTyper::extractNumaDecls(clang::Stmt* fnBody, ASTContext *Conte
                             if(newType.substr(0,4).compare("numa") == 0){
                                 if(VarDecl *varDecl = dyn_cast<VarDecl>(decl)){
                                     llvm::outs() << "Gonna add variable "<< varDecl->getNameAsString() << " to the numa table\n";
-                                    numaDeclTable[varDecl] = newExpr;
+                                    numaDeclTable.push_back(newExpr);
                                 }
                             }
                         }
@@ -671,7 +683,7 @@ void RecursiveNumaTyper::numaMethods(clang::CXXMethodDecl* method, clang::Source
 void RecursiveNumaTyper::run(const clang::ast_matchers::MatchFinder::MatchResult &result){
     if(result.SourceManager->isInSystemHeader(result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getSourceRange().getBegin()))
         return;
-    if(result.SourceManager->getFilename(result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getLocation()).find("../numaLib/numatype.hpp") != std::string::npos)
+    if(result.SourceManager->getFilename(result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getLocation()).find("../../numaLib/numatype.hpp") != std::string::npos)
         return;
     if(result.SourceManager->getFilename(result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getLocation()).empty())
         return;
@@ -706,7 +718,7 @@ void RecursiveNumaTyper::run(const clang::ast_matchers::MatchFinder::MatchResult
             CXXRecordDecl* FirstTempArg;
             //QualType FirstTempArg;
             int64_t SecondTempArg;
-            auto CXXRecordNumaType = UserNumaDecl.second->getType()->getPointeeType()->getAsCXXRecordDecl();
+            auto CXXRecordNumaType = UserNumaDecl->getType()->getPointeeType()->getAsCXXRecordDecl();
             auto TemplateNumaType = dyn_cast<ClassTemplateSpecializationDecl>(CXXRecordNumaType);
             llvm::ArrayRef<TemplateArgument> TemplateArgs = TemplateNumaType->getTemplateArgs().asArray();
 

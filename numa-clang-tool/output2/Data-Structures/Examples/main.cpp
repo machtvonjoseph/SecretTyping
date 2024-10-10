@@ -15,10 +15,11 @@ int main(int argc, char *argv[])
 	std::cout << "Welcome to the Test Suite for Data Structures" << std::endl;
 
 	
+	init();
 	StackTest();
 	QueueTest();
 	BinarySearchTest();
-	// LinkedListTest();
+	LinkedListTest();
 
 
 

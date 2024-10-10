@@ -1,3 +1,0 @@
-#include "common.project"
-#include "export/unification.dl"
-#include "points-to/unification.dl"

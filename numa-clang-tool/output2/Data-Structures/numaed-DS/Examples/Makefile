@@ -3,7 +3,7 @@ DIRS=Node Stack BinarySearch
 LINK_DIRS=-L../Stack/bin #-L../BinarySearch/bin
 LINK_FLAGS=-lnuma
 
-NUMADIR= ../../../../numaLib/
+NUMADIR= ../../../../../numaLib/
 REALDIR= $(realpath $(NUMADIR))
 
 STATIC_LINK_FLAGS=../Node/bin/libnode.a ../Stack/bin/libstack.a #../BinarySearch/bin/libbinarysearch.a 
