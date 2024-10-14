@@ -190,6 +190,8 @@ void NumaTargetNumaPointer::run(const clang::ast_matchers::MatchFinder::MatchRes
         return;
     if(result.SourceManager->getFilename(result.Nodes.getNodeAs<ClassTemplateSpecializationDecl>("templateSpecializationDecl")->getLocation()).find("../numaLib/numatype.hpp") != std::string::npos)
         return;
+    if(result.SourceManager->getFilename(result.Nodes.getNodeAs<ClassTemplateSpecializationDecl>("templateSpecializationDecl")->getLocation()).find("../numaLib/numathreads.hpp") != std::string::npos)
+        return;
     if(result.SourceManager->getFilename(result.Nodes.getNodeAs<ClassTemplateSpecializationDecl>("templateSpecializationDecl")->getLocation()).empty())
         return;
     if(result.Nodes.getNodeAs<ClassTemplateSpecializationDecl>("templateSpecializationDecl")->isImplicit())

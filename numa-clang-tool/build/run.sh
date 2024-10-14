@@ -11,13 +11,16 @@ case "$1" in
   DS)
     echo "Running DS"
     # Place the actual command for 'command1' here
-    # For example: ls -l
+    # # For example: ls -l
     ./bin/clang-tool  --numa ../input/mt-Data-Structures/Examples/main.cpp ../input/mt-Data-Structures/Examples/TestSuite.cpp -- -I ../input/mt-Data-Structures/Node/include/ -I ../input/mt-Data-Structures/Stack/include/   -I ../input/mt-Data-Structures/Queue/include/ -I ../input/mt-Data-Structures/BinarySearch/include/  -I ../input/mt-Data-Structures/LinkedList/include -I../../numaLib/ -I/usr/local/lib/clang/20/include/ -lnuma
 
 
     ./bin/clang-tool  --cast ../output/mt-Data-Structures/Examples/main.cpp ../output/mt-Data-Structures/Examples/TestSuite.cpp -- -I ../output/mt-Data-Structures/Node/include/ -I ../output/mt-Data-Structures/Stack/include/ -I ../output/mt-Data-Structures/Queue/include/ -I ../output/mt-Data-Structures/BinarySearch/include/  -I ../output/mt-Data-Structures/LinkedList/include -I../../numaLib/ -I/usr/local/lib/clang/20/include/ -lnuma
 
-    # ./bin/clang-tool  --numa ../input/Data-Structures/numaed-DS/Examples/main.cpp ../input/Data-Structures/numaed-DS/Examples/TestSuite.cpp -- -I ../input/Data-Structures/numaed-DS/Node/include/ -I ../input/Data-Structures/numaed-DS/Stack/include/  -I../numaLib/ -I/usr/local/lib/clang/20/include/ -lnuma
+    # ./bin/clang-tool  --numa ../input/Data-Structures/Examples/main.cpp ../input/Data-Structures/Examples/TestSuite.cpp -- -I ../input/Data-Structures/Node/include/ -I ../input/Data-Structures/Stack/include/ -I ../input/Data-Structures/Queue/include -I ../input/Data-Structures/BinarySearch/include -I ../input/Data-Structures/LinkedList/include -I../../numaLib/ -I/usr/local/lib/clang/20/include/ -lnuma
+
+
+
     ;;
     
   dummy)

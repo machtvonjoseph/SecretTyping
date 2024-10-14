@@ -29,7 +29,10 @@ void NumaConsumer::WriteOutput(clang::SourceManager &SM){
                     // llvm::outs() << "Skipping numaLib/numatype.hpp\n";
                     continue;
                 }
-
+                if(it->first.getName().find("../numaLib/numathreads.hpp") != std::string::npos){
+                    // llvm::outs() << "Skipping numaLib/numatype.hpp\n";
+                    continue;
+                }
 
                 std::string fileName = (std::string)it->first.getName();
                 std::string outputFileName = fileName.replace(fileName.find("input"), 5, "output");

@@ -13,89 +13,56 @@
 #include <syncstream>
 #include <string>
 #include <vector>
-
+#include "numatype.hpp"
+#include "numathreads.hpp"
 
 
 int main(int argc, char *argv[])
 {
 	int num_threads = std::stoi(argv[1]);
-	std::vector <std::thread*> threads(num_threads);
+	std::vector <thread_numa<0>*> thread0;
+
+	
 	std::cout << "---------------------------------------------" << std::endl;
 	std::cout << "Welcome to the Multi Threaded Test Suite for Data Structures" << std::endl;
 
 	std::cout << "Initializing Test Suite with " << num_threads << " threads." << std::endl;
-	threads.resize(num_threads);
+	thread0.resize(num_threads);
 
 	DS_init();
 	sync_init(num_threads);
 	
-	// for(int i=0; i < num_threads; i++){
-	// 	threads[i] = new std::thread(StackTest,i, num_threads);
-	// }
-
-	// for(int i=0; i < num_threads; i++){
-	// 	threads[i]->join();
-	// }
-
-	size_t i;
-	for(i=1; i < num_threads; i++){
-		threads[i] = new thread(StackTest, i+1, num_threads);
-	}
-	i =1;
-	StackTest(i, num_threads);
-	for(size_t i=1; i < num_threads; i++){
-		cout << "Joining thread " << i << endl;
-        threads[i]->join();
-        printf("Thread %zu joined\n", i);
-        delete threads[i];
-    }
-
-	threads.resize(num_threads);
-	cout<<threads.size()<<endl;
-
-	for(i=1; i < num_threads; i++){
-		cout<<"Creating threads for Queue"<<i<<endl;
-		threads[i] = new thread(QueueTest, i+1, num_threads);
-	}
-	i =1;
-	QueueTest(i, num_threads);
-
-	for(size_t i=1; i < num_threads; i++){
-		cout << "Joining thread " << i << endl;
-		threads[i]->join();
-		printf("Thread %zu joined\n", i);
-		delete threads[i];
+	for(int i=0; i < num_threads; i++){
+		thread0[i] = new thread_numa<0>(StackTest,i, num_threads);
 	}
 
-
-	for(i=1; i < num_threads; i++){
-		threads[i] = new thread(BinarySearchTest, i+1, num_threads);
-	}
-	i =1;
-	BinarySearchTest(i, num_threads);
-
-	for(size_t i=1; i < num_threads; i++){
-		cout << "Joining thread " << i << endl;
-		threads[i]->join();
-		printf("Thread %zu joined\n", i);
-		delete threads[i];
+	for(int i=0; i < num_threads; i++){
+		thread0[i]->join();
 	}
 
-	for(i=1; i < num_threads; i++){
-		threads[i] = new thread(LinkedListTest, i+1, num_threads);
+	for(int i=0; i < num_threads; i++){
+		thread0[i] = new thread_numa<0>(QueueTest,i, num_threads);
 	}
-	i =1;
-	LinkedListTest(i, num_threads);
 
-	for(size_t i=1; i < num_threads; i++){
-		cout << "Joining thread " << i << endl;
-		threads[i]->join();
-		printf("Thread %zu joined\n", i);
-		delete threads[i];
+	for(int i=0; i < num_threads; i++){
+		thread0[i]->join();
+	}
+
+	for(int i=0; i < num_threads; i++){
+		thread0[i] = new thread_numa<0>(BinarySearchTest,i, num_threads);
+	}
+
+	for(int i=0; i < num_threads; i++){
+		thread0[i]->join();
+	}
+
+	for(int i=0; i < num_threads; i++){
+		thread0[i] = new thread_numa<0>(LinkedListTest,i, num_threads);
+	}
+
+	for(int i=0; i < num_threads; i++){
+		thread0[i]->join();
 	}
 
 	global_cleanup();
-
-
-	return 0;
 }

@@ -35,6 +35,10 @@ void CastConsumer::WriteOutput(clang::SourceManager &SM){
                     continue;
                 }
 
+                if(it->first.getName().find("../numaLib/numathreads.hpp") != std::string::npos){
+                    // llvm::outs() << "Skipping numaLib/numatype.hpp\n";
+                    continue;
+                }
 
                 std::string fileName = (std::string)it->first.getName();
                 std::string outputFileName = fileName.replace(fileName.find("output"), 6, "output2");

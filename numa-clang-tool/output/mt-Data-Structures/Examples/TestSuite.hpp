@@ -36,7 +36,7 @@ void* StackTest(int t_id, int num_threads);
  * (pop, push, ctor, dtor, display)
  * 
  */
-void QueueTest(int t_id, int num_threads);
+void* QueueTest(int t_id, int num_threads);
 
 /*!
  * \brief Test function for the Stack classes
@@ -45,7 +45,7 @@ void QueueTest(int t_id, int num_threads);
  * (pop, push, ctor, dtor, display)
  * 
  */
-void BinarySearchTest(int t_id, int num_threads);
+void* BinarySearchTest(int t_id, int num_threads);
 
 /*!
  * \brief Test function for the Stack classes
@@ -54,7 +54,7 @@ void BinarySearchTest(int t_id, int num_threads);
  * (pop, push, ctor, dtor, display)
  * 
  */
-void LinkedListTest(int t_id, int num_threads);
+void* LinkedListTest(int t_id, int num_threads);
 
 void global_cleanup();
 

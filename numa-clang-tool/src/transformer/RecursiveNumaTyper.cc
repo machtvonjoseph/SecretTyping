@@ -685,6 +685,8 @@ void RecursiveNumaTyper::run(const clang::ast_matchers::MatchFinder::MatchResult
         return;
     if(result.SourceManager->getFilename(result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getLocation()).find("../../numaLib/numatype.hpp") != std::string::npos)
         return;
+    if(result.SourceManager->getFilename(result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getLocation()).find("../../numaLib/numathreads.hpp") != std::string::npos)
+        return;
     if(result.SourceManager->getFilename(result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getLocation()).empty())
         return;
     if(result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->isImplicit())
