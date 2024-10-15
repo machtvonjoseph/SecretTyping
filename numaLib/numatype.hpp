@@ -135,10 +135,6 @@ public:
 
 };
 
-
-//This is only needed pre compiling and it doesn't do anything after
-
-
 template<typename T, int NodeID, template <typename, int> class Alloc>
 class numa<T,NodeID, Alloc, typename std::enable_if<!(std::is_fundamental<T>::value || std::is_pointer<T>::value)>::type>: public T{
 public:

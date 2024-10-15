@@ -20,7 +20,7 @@
 int main(int argc, char *argv[])
 {
 	int num_threads = std::stoi(argv[1]);
-	std::vector <numa_thread<0>*> thread0;
+	std::vector <thread_numa<0>*> thread0;
 
 	
 	std::cout << "---------------------------------------------" << std::endl;
@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 	sync_init(num_threads);
 	
 	for(int i=0; i < num_threads; i++){
-		thread0[i] = new numa_thread<0>(StackTest,i, num_threads);
+		thread0[i] = new thread_numa<0>(StackTest,i, num_threads);
 	}
 
 	for(int i=0; i < num_threads; i++){
@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 	}
 
 	for(int i=0; i < num_threads; i++){
-		thread0[i] = new numa_thread<0>(QueueTest,i, num_threads);
+		thread0[i] = new thread_numa<0>(QueueTest,i, num_threads);
 	}
 
 	for(int i=0; i < num_threads; i++){
@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
 	}
 
 	for(int i=0; i < num_threads; i++){
-		thread0[i] = new numa_thread<0>(BinarySearchTest,i, num_threads);
+		thread0[i] = new thread_numa<0>(BinarySearchTest,i, num_threads);
 	}
 
 	for(int i=0; i < num_threads; i++){
@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
 	}
 
 	for(int i=0; i < num_threads; i++){
-		thread0[i] = new numa_thread<0>(LinkedListTest,i, num_threads);
+		thread0[i] = new thread_numa<0>(LinkedListTest,i, num_threads);
 	}
 
 	for(int i=0; i < num_threads; i++){
