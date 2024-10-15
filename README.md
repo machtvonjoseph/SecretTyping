@@ -5,7 +5,7 @@ A brief description of the project, including its purpose, features, and key tec
 ## Table of Contents
 
 - [Project Structure](#project-structure)
-- [Installation](#installation)
+- [Building](#building)
 - [Usage](#usage)
 - [Configuration](#configuration)
 - [Contributing](#contributing)
@@ -57,13 +57,43 @@ This directory holds the header file for the ```numa<Type, NodeID>``` type and t
 ### numa-clang-tool
 This has all the necessary clang-tool source code. [INSERT LINK TO NOTION]
 
-## Installation
+## Building
 
 1. Make sure the main repository is in your home directory. 
-2. ```bash
+2. To compile the clang tool, 
+```bash
     cd NUMATYPING/numa-clang-tool
+    mkdir build
+    cd build 
+    cmake ..
     cmake --build .
-    ```
+```
+NB: You only have to do this the first time. To compile any changes made to the tool you can just do 
+```bash
+    cd NUMATYPING/numa-clang-tool/build
+    cmake --build .
+```
 
+## Usage
+To use the source to source transformation tool you will have to have all your source code in the **input/** directory. Currently, **input/** has four benchmarks; **Data-Structures/**, **Dummy/** , **numa-mt-Data-Structures/** and **Point/**. 
+The **Dummy/** and **Point/** benchmarks are very simple dummy benchmarks used for debugging.
+
+To run the **numa-mt-Data-Structures/** benchmark for examples (This is what we are interested in the most), we have a script **run.sh** the **numa-clang-tool/** directory and you can invoke the script with the DS argument, 
+```bash
+./run.sh DS
+```
+(If you want to run the dummy benchmark instead of the DS, you can use dummy. The other benchmarks are not supported through the scipt yet.)
+
+The script with the DS argument takes in the **input/numa-mt-Data-Structures/** benchmark, i.e numa-multi-threaded data structures, and it numa types all the allocations of the four data structures within and copies all numa allocation mechanisms within the class. The transformed code will be put in **output2/numa-mt-Data-Structures**. There will be an intermediate product of running this script that only handles recursive typing and copying numa allocators in the **output/numa-mt-Data-Structures** directory.
+
+To verify the output works do 
+```bash
+cd output2/numa-mt-data-structures
+make clean
+make DEBUG=1
+./Examples/bin/DSExample 5
+```
+
+The argument 5 is the number of threads to spawn. If it compiles and it runs correctly, the tool works.
 
 

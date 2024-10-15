@@ -683,9 +683,9 @@ void RecursiveNumaTyper::numaMethods(clang::CXXMethodDecl* method, clang::Source
 void RecursiveNumaTyper::run(const clang::ast_matchers::MatchFinder::MatchResult &result){
     if(result.SourceManager->isInSystemHeader(result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getSourceRange().getBegin()))
         return;
-    if(result.SourceManager->getFilename(result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getLocation()).find("../../numaLib/numatype.hpp") != std::string::npos)
+    if(result.SourceManager->getFilename(result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getLocation()).find("../numaLib/numatype.hpp") != std::string::npos)
         return;
-    if(result.SourceManager->getFilename(result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getLocation()).find("../../numaLib/numathreads.hpp") != std::string::npos)
+    if(result.SourceManager->getFilename(result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getLocation()).find("../numaLib/numathreads.hpp") != std::string::npos)
         return;
     if(result.SourceManager->getFilename(result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getLocation()).empty())
         return;

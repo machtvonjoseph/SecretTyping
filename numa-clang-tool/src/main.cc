@@ -52,13 +52,13 @@ static cl::extrahelp CommonHelp(CommonOptionsParser::HelpMessage);
 // A help message for this specific tool can be added afterwards.
 static cl::extrahelp MoreHelp("\nMore help text...\n");
 
-std::vector<std::string> benchmarks = {"Dummy","Data-Structures","mt-Data-Structures"};
+std::vector<std::string> benchmarks = {"Dummy","Data-Structures","numa-mt-Data-Structures"};
 
 
 void registerBenchmarks(){
     for(auto &benchmark : benchmarks)
   {
-      std::string directory = "../output/" + benchmark;
+      std::string directory = "output/" + benchmark;
       if(utils::fileExists(directory) == true)
       {
           //remove everything in the directory
@@ -75,8 +75,8 @@ void registerBenchmarks(){
   //For each benchmark, copy the contents from the input directory to the output directory
   for(auto &benchmark : benchmarks)
   {
-      std::string inputDirectory = "../input/" + benchmark;
-      std::string outputDirectory = "../output/" + benchmark;
+      std::string inputDirectory = "input/" + benchmark;
+      std::string outputDirectory = "output/" + benchmark;
       std::string command = "cp -r " + inputDirectory + "/* " + outputDirectory;
       system(command.c_str());
   }
@@ -85,7 +85,7 @@ void registerBenchmarks(){
 void copyOuputToOutput2(){
     for(auto &benchmark : benchmarks)
   {
-      std::string directory = "../output2/" + benchmark;
+      std::string directory = "output2/" + benchmark;
       if(utils::fileExists(directory) == true)
       {
           //remove everything in the directory
@@ -102,8 +102,8 @@ void copyOuputToOutput2(){
   //For each benchmark, copy the contents from the input directory to the output directory
   for(auto &benchmark : benchmarks)
   {
-      std::string inputDirectory = "../output/" + benchmark;
-      std::string outputDirectory = "../output2/" + benchmark;
+      std::string inputDirectory = "output/" + benchmark;
+      std::string outputDirectory = "output2/" + benchmark;
       std::string command = "cp -r " + inputDirectory + "/* " + outputDirectory;
       system(command.c_str());
   }

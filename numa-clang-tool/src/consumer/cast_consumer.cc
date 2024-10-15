@@ -30,12 +30,12 @@ void CastConsumer::WriteOutput(clang::SourceManager &SM){
                     continue;
                 }
 
-                if(it->first.getName().find("../numaLib/numatype.hpp") != std::string::npos){
+                if(it->first.getName().find("numaLib/numatype.hpp") != std::string::npos){
                     // llvm::outs() << "Skipping numaLib/numatype.hpp\n";
                     continue;
                 }
 
-                if(it->first.getName().find("../numaLib/numathreads.hpp") != std::string::npos){
+                if(it->first.getName().find("numaLib/numathreads.hpp") != std::string::npos){
                     // llvm::outs() << "Skipping numaLib/numatype.hpp\n";
                     continue;
                 }
