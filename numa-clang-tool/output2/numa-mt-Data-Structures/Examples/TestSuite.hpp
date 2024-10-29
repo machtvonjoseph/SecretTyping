@@ -1,4 +1,3 @@
-#include "numatype.hpp"
 #pragma once
 /*! \file TestSuite.hpp
  * \brief Testsuite program which allows for testing of various data structures

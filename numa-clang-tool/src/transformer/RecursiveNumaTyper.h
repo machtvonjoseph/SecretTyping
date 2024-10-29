@@ -32,7 +32,7 @@ class RecursiveNumaTyper : public Transformer
 {
     private:
         std::vector<const clang::CXXNewExpr*> numaDeclTable;
-        std::map<const clang::CXXRecordDecl*, int64_t> specializedClasses;
+        std::vector<std::pair<const clang::CXXRecordDecl*, int64_t>> specializedClasses;
         clang::SourceLocation rewriteLocation;
         std::vector<clang::FileID> fileIDs;
         
@@ -46,7 +46,7 @@ class RecursiveNumaTyper : public Transformer
 
         bool NumaDeclExists(clang::ASTContext *Context, QualType FirstTemplateArg, int64_t SecondTemplateArg);
         void addAllSpecializations(clang::ASTContext *Context);
-        std::map<const clang::CXXRecordDecl*, int64_t> getSpecializedClasses(){
+        std::vector<std::pair<const clang::CXXRecordDecl*, int64_t>> getSpecializedClasses(){
             return specializedClasses;
         }
         void extractNumaDecls(clang::Stmt *stmt, ASTContext *Context);

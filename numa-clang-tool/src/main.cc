@@ -52,7 +52,7 @@ static cl::extrahelp CommonHelp(CommonOptionsParser::HelpMessage);
 // A help message for this specific tool can be added afterwards.
 static cl::extrahelp MoreHelp("\nMore help text...\n");
 
-std::vector<std::string> benchmarks = {"Dummy","Data-Structures","numa-mt-Data-Structures"};
+std::vector<std::string> benchmarks = {"Dummy","Data-Structures","numa-mt-Data-Structures","Exprs"};
 
 
 void registerBenchmarks(){

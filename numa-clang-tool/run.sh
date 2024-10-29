@@ -29,8 +29,19 @@ case "$1" in
     # For example: df -h
     ./bin/clang-tool --numa ../input/Dummy/dummyimpl.cpp -- -I../numaLib/ -I/usr/local/lib/clang/20/include/
     ;;
+  
+  Exprs)
+    echo "Running Exprs"
+    # Place the actual command for 'command2' here
+    # For example: df -h
+
+    ./build/bin/clang-tool  --numa input/Exprs/Examples/main.cpp input/Exprs/Examples/TestSuite.cpp -- -I input/Exprs/Node/include/ -I input/Exprs/Stack/include/ -I input/Exprs/Queue/include/ -I input/Exprs/BinarySearch/include/  -I input/Exprs/LinkedList/include -I../numaLib/ -I/usr/local/lib/clang/20/include/ -lnuma
+
+
+    ./build/bin/clang-tool  --cast output/Exprs/Examples/main.cpp output/numa-mt-Data-Structures/Examples/TestSuite.cpp -- -I output/Exprs/Node/include/ -I output/Exprs/Stack/include/ -I output/Exprs/Queue/include/ -I output/Exprs/BinarySearch/include/  -I output/Exprs/LinkedList/include -I../numaLib/ -I/usr/local/lib/clang/20/include/ -lnuma
+    ;;
   *)
-    echo "Invalid argument. Usage: $0 <DS|dummy>"
+    echo "Invalid argument. Usage: $0 <DS|dummy|Exprs>"
     exit 1
     ;;
 esac

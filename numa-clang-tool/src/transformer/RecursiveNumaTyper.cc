@@ -59,7 +59,6 @@ public:
 std::string utils::getNumaAllocatorCode(std::string classDecl, std::string nodeID){
  return R"(public: 
     static void* operator new(std::size_t sz){
-        std::cout<<"new operator called"<<std::endl;
 		 void* p = numa_alloc_onnode(sz * sizeof()"+classDecl+R"(), )"+ nodeID +R"();
         if (p == nullptr) {
             throw std::bad_alloc();
@@ -68,7 +67,6 @@ std::string utils::getNumaAllocatorCode(std::string classDecl, std::string nodeI
     }
 
     static void* operator new[](std::size_t sz){
-		std::cout<<"new operator called"<<std::endl;
 		 void* p = numa_alloc_onnode(sz * sizeof()"+classDecl+R"(), )"+ nodeID +R"();
         if (p == nullptr) {
             throw std::bad_alloc();
@@ -77,12 +75,10 @@ std::string utils::getNumaAllocatorCode(std::string classDecl, std::string nodeI
     }
 
     static void operator delete(void* ptr){
-		std::cout<<"delete operator called"<<std::endl;
 		numa_free(ptr, 1 * sizeof()"+classDecl+R"());
     }
 
     static void operator delete[](void* ptr){
-		std::cout<<"delete operator called"<<std::endl;
 		numa_free(ptr, 1 * sizeof()"+classDecl+R"());
     }
 )";
@@ -234,9 +230,11 @@ void RecursiveNumaTyper::extractNumaDecls(clang::Stmt* fnBody, ASTContext *Conte
         llvm::outs() << "Found binary operator\n";
         for(auto newExpr: NewExprInBinaryOperatorVisitor.getBinaryOperators()){
             if(newExpr){
+                llvm::outs() << "new expression is "<< newExpr->getType().getAsString() << "\n";
                 numaDeclTable.push_back(newExpr);
             }
         }
+        NewExprInBinaryOperatorVisitor.clearBinaryOperators();
     }
     if(DeclStmtVisitor.TraverseStmt(fnBody)){
         for(auto declStmt : DeclStmtVisitor.getDeclStmts()){
@@ -295,7 +293,7 @@ void RecursiveNumaTyper::addAllSpecializations(clang::ASTContext* Context){
                         
                         if(!NumaSpeclExists(FoundType, FoundInt.getExtValue())){
                             llvm::outs() << "Adding " << FoundType->getNameAsString() << " and " << FoundInt << " to the specialized classes\n";
-                            RecursiveNumaTyper::specializedClasses.insert({FoundType, FoundInt.getExtValue()});
+                            RecursiveNumaTyper::specializedClasses.push_back({FoundType, FoundInt.getExtValue()});
                         }
                     }
                 }
@@ -305,8 +303,12 @@ void RecursiveNumaTyper::addAllSpecializations(clang::ASTContext* Context){
 }
 
 bool RecursiveNumaTyper::NumaSpeclExists(const clang::CXXRecordDecl* FirstTempArg, int64_t SecondTempArg){
-    auto it = specializedClasses.find(FirstTempArg);
-    if (it != specializedClasses.end() && it->second == SecondTempArg) {
+     std::pair<const clang::CXXRecordDecl*,int64_t> searchPair = {FirstTempArg, SecondTempArg};
+
+    // Search for the pair in the vector
+    auto it = std::find(specializedClasses.begin(), specializedClasses.end(), searchPair);
+
+    if (it != specializedClasses.end()) {
         return true;
     } else {
         return false;
@@ -347,13 +349,24 @@ void RecursiveNumaTyper::specializeClass(clang::ASTContext* Context, const clang
     if(NumaSpeclExists(FirstTempArg, SecondTempArg)){
         return;
     }
-
+    llvm::outs()<< "Size of specialized classes is " << specializedClasses.size() << "\n";
+    specializedClasses.push_back({FirstTempArg, SecondTempArg});
+    llvm::outs()<< "Size of specialized classes is " << specializedClasses.size() << "\n";
+    llvm::outs() << "FirstTempArg from specialzeClass" << FirstTempArg->getNameAsString() << " and SecondTempArg from specialize class is " << SecondTempArg << "\n";
+    llvm::outs() << "Specialized classes:\n";
+    for(auto it = specializedClasses.begin(); it != specializedClasses.end(); ++it){
+            llvm::outs() << it->first->getNameAsString() << " " << it->second << "\n";
+        }
     llvm::outs() << "About to specialize "<< FirstTempArg->getNameAsString() << " as numa\n";
 
     //check if specialization exists
     //insert to specialized classes
-    RecursiveNumaTyper::specializedClasses.insert({FirstTempArg, SecondTempArg});
+   
 
+
+    // for(auto it = specializedClasses.begin(); it != specializedClasses.end(); ++it){
+    //     llvm::outs() << it->first->getNameAsString() << " " << it->second << "\n";
+    // }
     constructSpecialization(Context, FirstTempArg, SecondTempArg);
 
 }
@@ -447,7 +460,7 @@ void RecursiveNumaTyper::numaPublicMembers(clang::ASTContext* Context, clang::So
                 continue;
             }else{
                 //insert to specialized classes
-                RecursiveNumaTyper::specializedClasses.insert({fields->getType()->getAsCXXRecordDecl(), nodeID});
+                RecursiveNumaTyper::specializedClasses.push_back({fields->getType()->getAsCXXRecordDecl(), nodeID});
                 constructSpecialization(Context, fields->getType()->getAsCXXRecordDecl(), nodeID);
             }
         }
@@ -513,7 +526,7 @@ void RecursiveNumaTyper::numaPrivateMembers(clang::ASTContext* Context, clang::S
             }else{
 
             //insert to specialized classes
-            RecursiveNumaTyper::specializedClasses.insert({fields->getType()->getAsCXXRecordDecl(), nodeID});
+            RecursiveNumaTyper::specializedClasses.push_back({fields->getType()->getAsCXXRecordDecl(), nodeID});
 
             constructSpecialization(Context, fields->getType()->getAsCXXRecordDecl(), nodeID);
             }
@@ -695,6 +708,11 @@ void RecursiveNumaTyper::run(const clang::ast_matchers::MatchFinder::MatchResult
         return;
 
     addAllSpecializations(result.Context);
+    //print all specializations
+    llvm::outs() << "Specialized classes at the begining:\n";
+    for(auto it = specializedClasses.begin(); it != specializedClasses.end(); ++it){
+        llvm::outs() << it->first->getNameAsString() << " " << it->second << "\n";
+    }
     if(result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->isThisDeclarationADefinition()){   
         if(!result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getBody()->children().empty()){
             auto fnBody = result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getBody();
@@ -730,6 +748,8 @@ void RecursiveNumaTyper::run(const clang::ast_matchers::MatchFinder::MatchResult
                     // llvm::outs() << "About to specialize  " << CXXRD->getNameAsString() << "\n";
                     FirstTempArg = CXXRD;
                     SecondTempArg = TemplateArgs[1].getAsIntegral().getExtValue();
+                    llvm::outs() << "FirstTempArg is " << FirstTempArg->getNameAsString() << "\n";
+                    llvm::outs() << "SecondTempArg is " << SecondTempArg << "\n";
                     specializeClass(result.Context,FirstTempArg,SecondTempArg);
                 }
             }

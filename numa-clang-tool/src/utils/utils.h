@@ -37,11 +37,11 @@ namespace utils
         explicit NewExprInBinaryOperatorVisitor(clang::ASTContext *Context) : Context(Context) {}
         bool VisitBinaryOperator(BinaryOperator *BO)
         {
-            if (const Expr *LHS = BO->getLHS()) {
-                if (const CXXNewExpr *NewExpr = dyn_cast<CXXNewExpr>(LHS->IgnoreParenImpCasts())) {
-                    llvm::outs() << "Found CXXNewExpr in BinaryOperator LHS\n";
-                }
-            }
+            // if (const Expr *LHS = BO->getLHS()) {
+            //     if (const CXXNewExpr *NewExpr = dyn_cast<CXXNewExpr>(LHS->IgnoreParenImpCasts())) {
+            //         llvm::outs() << "Found CXXNewExpr in BinaryOperator LHS\n";
+            //     }
+            // }
             if (const Expr *RHS = BO->getRHS()) {
                 if (const CXXNewExpr *NewExpr = dyn_cast<CXXNewExpr>(RHS->IgnoreParenImpCasts())) {
                     llvm::outs() << "Found CXXNewExpr in BinaryOperator RHS\n";
