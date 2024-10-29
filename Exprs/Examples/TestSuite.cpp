@@ -123,6 +123,7 @@ void numa_Queue_init(int num_DS, int num_threads){
 		Queue_lk1[i] = new mutex();
 	}
 	pthread_barrier_init(&QueueBar, NULL, num_threads);
+	QueueOps0 = 0;
 }
 
 void numa_BST_init(int num_DS, int num_threads){
@@ -151,6 +152,7 @@ void numa_BST_init(int num_DS, int num_threads){
 		BST_lk1[i] = new mutex();
 	}
 	pthread_barrier_init(&BSTBar, NULL, num_threads);
+	BSTOps0 = 0;
 }
 
 void numa_LL_init(int num_DS, int num_threads){
@@ -179,6 +181,7 @@ void numa_LL_init(int num_DS, int num_threads){
 		LL_lk1[i] = new mutex();
 	}
 	pthread_barrier_init(&LLBar, NULL, num_threads);
+	LLOps0 = 0;
 }
 
 
