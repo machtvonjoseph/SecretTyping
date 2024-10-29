@@ -124,6 +124,7 @@ void numa_Queue_init(int num_DS, int num_threads){
 	}
 	pthread_barrier_init(&QueueBar, NULL, num_threads);
 	QueueOps0 = 0;
+	QueueOps1 = 0;
 }
 
 void numa_BST_init(int num_DS, int num_threads){
@@ -153,6 +154,7 @@ void numa_BST_init(int num_DS, int num_threads){
 	}
 	pthread_barrier_init(&BSTBar, NULL, num_threads);
 	BSTOps0 = 0;
+	BSTOps1 = 0;
 }
 
 void numa_LL_init(int num_DS, int num_threads){
@@ -182,6 +184,7 @@ void numa_LL_init(int num_DS, int num_threads){
 	}
 	pthread_barrier_init(&LLBar, NULL, num_threads);
 	LLOps0 = 0;
+	LLOps1 = 0;
 }
 
 
