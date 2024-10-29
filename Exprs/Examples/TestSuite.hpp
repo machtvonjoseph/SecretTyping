@@ -30,7 +30,7 @@ void sync_init(int num_threads);
  * (pop, push, ctor, dtor, display)
  * 
  */
-void* StackTest(int t_id, int duration, int node);
+void* StackTest(int t_id, int duration, int node, int64_t num_DS, int num_threads);
 
 /*!
  * \brief Test function for the Stack classes
@@ -39,7 +39,7 @@ void* StackTest(int t_id, int duration, int node);
  * (pop, push, ctor, dtor, display)
  * 
  */
-void* QueueTest(int t_id, int duration, int node);
+void* QueueTest(int t_id, int duration, int node, int64_t num_DS, int num_threads);
 
 /*!
  * \brief Test function for the Stack classes
@@ -48,7 +48,7 @@ void* QueueTest(int t_id, int duration, int node);
  * (pop, push, ctor, dtor, display)
  * 
  */
-void* BinarySearchTest(int t_id, int duration, int node);
+void* BinarySearchTest(int t_id, int duration, int node, int64_t num_DS, int num_threads);
 
 /*!
  * \brief Test function for the Stack classes
@@ -57,7 +57,7 @@ void* BinarySearchTest(int t_id, int duration, int node);
  * (pop, push, ctor, dtor, display)
  * 
  */
-void* LinkedListTest(int t_id, int duration, int node);
+void* LinkedListTest(int t_id, int duration, int node, int64_t num_DS, int num_threads);
 
 void global_cleanup();
 

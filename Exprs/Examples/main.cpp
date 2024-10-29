@@ -46,12 +46,14 @@ int main(int argc, char *argv[])
         switch (opt) {
             case 't':
                 num_threads = std::stoi(optarg);
+				if(num_threads % 2 != 0){cout<<"Number of threads must be even"<<endl; return 1;}
                 break;
             case 'd':
                 duration = std::stoi(optarg);
                 break;
             case 'n':
-                num_DS = std::stoi(optarg);        
+                num_DS = std::stoi(optarg);    
+				if(num_DS % 2 != 0){cout<<"Number of Data Structures must be even"<<endl; return 1;}
                 break;
 			case 0:
 				if (std::string(long_options[option_index].name) == "DS_name") {
@@ -78,16 +80,16 @@ int main(int argc, char *argv[])
 	if(DS_name == "stack"){
 		cout<<"Testing Stack"<<endl;
 		numa_Stack_init(num_DS, num_threads);
-		for(int i=0; i < num_threads/2; i++){
+		for(int i=0; i < num_threads; i++){
 			int node = 0;
-			thread0[i] = new thread_numa<0>(StackTest,i, duration, node);
+			thread0[i] = new thread_numa<0>(StackTest,i, duration, node, num_DS/2, num_threads);
 		}
 		for(int i=0; i < num_threads/2; i++){
 			int node = 1;
-			thread1[i] = new thread_numa<1>(StackTest,i, duration, node);
+			thread1[i] = new thread_numa<1>(StackTest,i, duration, node, num_DS/2, num_threads);
 		}
 
-		for(int i=0; i < num_threads/2; i++){
+		for(int i=0; i < num_threads; i++){
 			thread0[i]->join();
 		}
 
@@ -101,11 +103,11 @@ int main(int argc, char *argv[])
 		numa_Queue_init(num_DS);
 		for(int i=0; i < num_threads/2; i++){
 			int node = 0;
-			thread0[i] = new thread_numa<0>(QueueTest,i, duration, node);
+			thread0[i] = new thread_numa<0>(QueueTest,i, duration, node, num_DS/2, num_threads);
 		}
 		for(int i=0; i < num_threads/2; i++){
 			int node = 1;
-			thread1[i] = new thread_numa<1>(QueueTest,i, duration, node);
+			thread1[i] = new thread_numa<1>(QueueTest,i, duration, node, num_DS/2, num_threads);
 		}
 
 		for(int i=0; i < num_threads/2; i++){
@@ -121,11 +123,11 @@ int main(int argc, char *argv[])
 		numa_BST_init(num_DS);
 		for(int i=0; i < num_threads/2; i++){
 			int node = 0;
-			thread0[i] = new thread_numa<0>(BinarySearchTest,i, duration, node);
+			thread0[i] = new thread_numa<0>(BinarySearchTest,i, duration, node, num_DS/2, num_threads);
 		}
 		for(int i=0; i < num_threads/2; i++){
 			int node = 1;
-			thread1[i] = new thread_numa<1>(BinarySearchTest,i, duration, node);
+			thread1[i] = new thread_numa<1>(BinarySearchTest,i, duration, node, num_DS/2, num_threads);
 		}
 
 		for(int i=0; i < num_threads/2; i++){
@@ -141,11 +143,11 @@ int main(int argc, char *argv[])
 		numa_LL_init(num_DS);
 		for(int i=0; i < num_threads/2; i++){
 			int node = 0;
-			thread0[i] = new thread_numa<0>(LinkedListTest,i, duration, node);
+			thread0[i] = new thread_numa<0>(LinkedListTest,i, duration, node, num_DS/2, num_threads);
 		}
 		for(int i=0; i < num_threads/2; i++){
 			int node = 1;
-			thread1[i] = new thread_numa<1>(LinkedListTest,i, duration, node);
+			thread1[i] = new thread_numa<1>(LinkedListTest,i, duration, node, num_DS/2, num_threads);
 		}
 
 		for(int i=0; i < num_threads/2; i++){
@@ -159,53 +161,5 @@ int main(int argc, char *argv[])
 	else{
 		cout<<"Invalid Data Structure"<<endl;
 	}
-
-
-
-	// int num_threads = std::stoi(argv[1]);
-	// std::vector <thread_numa<0>*> thread0;
-
-	
-	// std::cout << "---------------------------------------------" << std::endl;
-	// std::cout << "Welcome to the Multi Threaded Test Suite for Data Structures" << std::endl;
-
-	// std::cout << "Initializing Test Suite with " << num_threads << " threads." << std::endl;
-	// thread0.resize(num_threads);
-
-	// DS_init();
-	// sync_init(num_threads);
-	
-	// for(int i=0; i < num_threads; i++){
-	// 	thread0[i] = new thread_numa<0>(StackTest,i, num_threads);
-	// }
-
-	// for(int i=0; i < num_threads; i++){
-	// 	thread0[i]->join();
-	// }
-
-	// for(int i=0; i < num_threads; i++){
-	// 	thread0[i] = new thread_numa<0>(QueueTest,i, num_threads);
-	// }
-
-	// for(int i=0; i < num_threads; i++){
-	// 	thread0[i]->join();
-	// }
-
-	// for(int i=0; i < num_threads; i++){
-	// 	thread0[i] = new thread_numa<0>(BinarySearchTest,i, num_threads);
-	// }
-
-	// for(int i=0; i < num_threads; i++){
-	// 	thread0[i]->join();
-	// }
-
-	// for(int i=0; i < num_threads; i++){
-	// 	thread0[i] = new thread_numa<0>(LinkedListTest,i, num_threads);
-	// }
-
-	// for(int i=0; i < num_threads; i++){
-	// 	thread0[i]->join();
-	// }
-
-	// global_cleanup();
+	global_cleanup();
 }

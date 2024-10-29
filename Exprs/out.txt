@@ -1,0 +1,47 @@
+Number of threads: 4
+Duration: 1
+Number of Data Structures: 20
+DS name: stack
+Testing Stack
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+numa constructor called
+Only thread 1 will print this.
+Final StackOps: 11229854
