@@ -97,7 +97,7 @@ void numa_Stack_init(int num_DS, int num_threads){
 	printLK = new std::mutex();
 }
 
-void numa_Queue_init(int num_DS){
+void numa_Queue_init(int num_DS, int num_threads){
 	std::vector<numa<Queue,0>*> Queues0;
 	Queues0.resize(num_DS);
 	for(int i = 0; i < num_DS; i++)
@@ -122,9 +122,10 @@ void numa_Queue_init(int num_DS){
 	{
 		Queue_lk1[i] = new mutex();
 	}
+	pthread_barrier_init(&QueueBar, NULL, num_threads);
 }
 
-void numa_BST_init(int num_DS){
+void numa_BST_init(int num_DS, int num_threads){
 	std::vector<numa<BinarySearchTree,0>*> BSTs0;
 	BSTs0.resize(num_DS);
 	for(int i = 0; i < num_DS; i++)
@@ -149,9 +150,10 @@ void numa_BST_init(int num_DS){
 	{
 		BST_lk1[i] = new mutex();
 	}
+	pthread_barrier_init(&BSTBar, NULL, num_threads);
 }
 
-void numa_LL_init(int num_DS){
+void numa_LL_init(int num_DS, int num_threads){
 	std::vector<numa<LinkedList,0>*> LLs0;
 	LLs0.resize(num_DS);
 	for(int i = 0; i < num_DS; i++)
@@ -176,6 +178,7 @@ void numa_LL_init(int num_DS){
 	{
 		LL_lk1[i] = new mutex();
 	}
+	pthread_barrier_init(&LLBar, NULL, num_threads);
 }
 
 

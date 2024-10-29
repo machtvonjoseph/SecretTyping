@@ -18,9 +18,9 @@ using namespace std;
 
 void DS_init();
 void numa_Stack_init(int num_DS, int num_threads);
-void numa_Queue_init(int num_DS);
-void numa_BST_init(int num_DS);
-void numa_LL_init(int num_DS);
+void numa_Queue_init(int num_DS, int num_threads);
+void numa_BST_init(int num_DS, int num_threads);
+void numa_LL_init(int num_DS, int num_threads);
 void sync_init(int num_threads);
 
 /*!
