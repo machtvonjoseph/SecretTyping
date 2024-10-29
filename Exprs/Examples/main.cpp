@@ -80,7 +80,7 @@ int main(int argc, char *argv[])
 	if(DS_name == "stack"){
 		cout<<"Testing Stack"<<endl;
 		numa_Stack_init(num_DS/2, num_threads);
-		for(int i=0; i < num_threads; i++){
+		for(int i=0; i < num_threads/2; i++){
 			int node = 0;
 			thread0[i] = new thread_numa<0>(StackTest,i, duration, node, num_DS/2, num_threads);
 		}
