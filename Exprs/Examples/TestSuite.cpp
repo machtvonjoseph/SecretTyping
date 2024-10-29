@@ -73,7 +73,6 @@ void numa_Stack_init(int num_DS, int num_threads){
 		Stacks0[i] = new numa<Stack,0>();
 	}
 	
-	std::vector<numa<Stack,1>*> Stacks1;
 	Stacks1.resize(num_DS);
 	for(int i = 0; i < num_DS; i++)
 	{
@@ -98,14 +97,12 @@ void numa_Stack_init(int num_DS, int num_threads){
 }
 
 void numa_Queue_init(int num_DS, int num_threads){
-	std::vector<numa<Queue,0>*> Queues0;
 	Queues0.resize(num_DS);
 	for(int i = 0; i < num_DS; i++)
 	{
 		Queues0[i] = new numa<Queue,0>();
 	}
 	
-	std::vector<numa<Queue,1>*> Queues1;
 	Queues1.resize(num_DS);
 	for(int i = 0; i < num_DS; i++)
 	{
@@ -128,14 +125,12 @@ void numa_Queue_init(int num_DS, int num_threads){
 }
 
 void numa_BST_init(int num_DS, int num_threads){
-	std::vector<numa<BinarySearchTree,0>*> BSTs0;
 	BSTs0.resize(num_DS);
 	for(int i = 0; i < num_DS; i++)
 	{
 		BSTs0[i] = new numa<BinarySearchTree,0>();
 	}
 	
-	std::vector<numa<BinarySearchTree,1>*> BSTs1;
 	BSTs1.resize(num_DS);
 	for(int i = 0; i < num_DS; i++)
 	{
@@ -158,14 +153,12 @@ void numa_BST_init(int num_DS, int num_threads){
 }
 
 void numa_LL_init(int num_DS, int num_threads){
-	std::vector<numa<LinkedList,0>*> LLs0;
 	LLs0.resize(num_DS);
 	for(int i = 0; i < num_DS; i++)
 	{
 		LLs0[i] = new numa<LinkedList,0>();
 	}
 	
-	std::vector<numa<LinkedList,1>*> LLs1;
 	LLs1.resize(num_DS);
 	for(int i = 0; i < num_DS; i++)
 	{
@@ -309,24 +302,23 @@ void* QueueTest(int tid, int duration, int node, int64_t num_DS, int num_threads
 			}
 			else
 			{
-				for(int i =0; i < Queues1.size(); i++)
-				{
-					Queue_lk1[i]->lock();
-					int val = Queues1[i]->del();
+				for(int QueueIndex = tid; QueueIndex < Queues1.size(); QueueIndex+=num_threads){
+					Queue_lk1[QueueIndex]->lock();
+					int val = Queues1[QueueIndex]->del();
 					QueueOps1++;
-					Queue_lk1[i]->unlock();
+					Queue_lk1[QueueIndex]->unlock();
 				}
 			}
 		}
-	}
 
-	pthread_barrier_wait(&QueueBar);
-	if(tid == 1 && node==0)
-	{	// startTime = chrono::high_resolution_clock::now();
-		std::cout << "Only thread "<< tid << " will print this." << std::endl;
-		std::cout << "Final QueueOps: " << QueueOps0+QueueOps1 << std::endl;
+		pthread_barrier_wait(&QueueBar);
+		if(tid == 1 && node==0)
+		{	// startTime = chrono::high_resolution_clock::now();
+			std::cout << "Only thread "<< tid << " will print this." << std::endl;
+			std::cout << "Final QueueOps: " << QueueOps0+QueueOps1 << std::endl;
+		}
+		pthread_barrier_wait(&QueueBar);
 	}
-	pthread_barrier_wait(&QueueBar);
 }
 
 

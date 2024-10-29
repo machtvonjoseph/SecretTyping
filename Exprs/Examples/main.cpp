@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
 
 	if(DS_name == "stack"){
 		cout<<"Testing Stack"<<endl;
-		numa_Stack_init(num_DS, num_threads);
+		numa_Stack_init(num_DS/2, num_threads);
 		for(int i=0; i < num_threads; i++){
 			int node = 0;
 			thread0[i] = new thread_numa<0>(StackTest,i, duration, node, num_DS/2, num_threads);
@@ -100,7 +100,7 @@ int main(int argc, char *argv[])
 
 	else if(DS_name == "queue"){
 		cout<<"Testing Queue"<<endl;
-		numa_Queue_init(num_DS,num_threads);
+		numa_Queue_init(num_DS/2,num_threads);
 		for(int i=0; i < num_threads/2; i++){
 			int node = 0;
 			thread0[i] = new thread_numa<0>(QueueTest,i, duration, node, num_DS/2, num_threads);
@@ -120,7 +120,7 @@ int main(int argc, char *argv[])
 
 	else if(DS_name == "bst"){
 		cout<<"Testing Binary Search Tree"<<endl;
-		numa_BST_init(num_DS,num_threads);
+		numa_BST_init(num_DS/2,num_threads);
 		for(int i=0; i < num_threads/2; i++){
 			int node = 0;
 			thread0[i] = new thread_numa<0>(BinarySearchTest,i, duration, node, num_DS/2, num_threads);
@@ -140,7 +140,7 @@ int main(int argc, char *argv[])
 
 	else if(DS_name == "ll"){
 		cout<<"Testing Linked List"<<endl;
-		numa_LL_init(num_DS,num_threads);
+		numa_LL_init(num_DS/2,num_threads);
 		for(int i=0; i < num_threads/2; i++){
 			int node = 0;
 			thread0[i] = new thread_numa<0>(LinkedListTest,i, duration, node, num_DS/2, num_threads);
