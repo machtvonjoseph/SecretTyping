@@ -97,12 +97,15 @@ void numa_Stack_init(int num_DS, int num_threads){
 }
 
 void numa_Queue_init(int num_DS, int num_threads){
+	std::cout << "Queue init" << std::endl;
+	std::cout<<"num_DS :"<< num_DS << std::endl;
+	std::cout<<"num_threads :"<< num_threads << std::endl;
 	Queues0.resize(num_DS);
 	for(int i = 0; i < num_DS; i++)
 	{
 		Queues0[i] = new numa<Queue,0>();
 	}
-	
+	std::cout << "Queue 0 initialized" << std::endl;
 	Queues1.resize(num_DS);
 	for(int i = 0; i < num_DS; i++)
 	{
@@ -122,6 +125,8 @@ void numa_Queue_init(int num_DS, int num_threads){
 	pthread_barrier_init(&QueueBar, NULL, num_threads);
 	QueueOps0 = 0;
 	QueueOps1 = 0;
+	printLK = new std::mutex();
+	std::cout << "Queue init done" << std::endl;
 }
 
 void numa_BST_init(int num_DS, int num_threads){
@@ -194,7 +199,7 @@ void* StackTest(int tid, int duration, int node, int64_t num_DS, int num_threads
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dist(0, 1);
-
+	std::cout << "Thread " << tid << " about to start working on node id"<<node << std::endl;
 	if(node == 0){
 		auto startTimer = std::chrono::steady_clock::now();
 		auto endTimer = startTimer + std::chrono::seconds(duration);
@@ -204,6 +209,9 @@ void* StackTest(int tid, int duration, int node, int64_t num_DS, int num_threads
 				for(int stackIndex = tid; stackIndex < Stacks0.size(); stackIndex+=num_threads){
 					Stack_lk0[stackIndex]->lock();
 					Stacks0[stackIndex]->push(1);
+					printLK->lock();
+					std::cout << "Thread " << tid << " adding to Stack " << stackIndex << std::endl;
+					printLK->unlock();
 					StackOps0++;
 					Stack_lk0[stackIndex]->unlock();
 				}
@@ -230,6 +238,9 @@ void* StackTest(int tid, int duration, int node, int64_t num_DS, int num_threads
 				for(int stackIndex = tid; stackIndex < Stacks1.size(); stackIndex+=num_threads){
 					Stack_lk1[stackIndex]->lock();
 					Stacks1[stackIndex]->push(1);
+					printLK->lock();
+					std::cout << "Thread " << tid << " adding to Stack " << stackIndex << std::endl;
+					printLK->unlock();
 					StackOps1++;
 					Stack_lk1[stackIndex]->unlock();
 				}
@@ -257,8 +268,18 @@ void* StackTest(int tid, int duration, int node, int64_t num_DS, int num_threads
 }
 
 void* QueueTest(int tid, int duration, int node, int64_t num_DS, int num_threads)
-{
+{	
 	pthread_barrier_wait(&QueueBar);
+	if(tid == 1 && node==0)
+	{
+		printLK->lock();
+		std::cout << "Thread " << tid << " gonna start working" << std::endl;
+		printLK->unlock();
+	}	
+	pthread_barrier_wait(&QueueBar);		
+	// printLK->lock();
+	// std::cout << "Thread " << tid << " gonna start working" << std::endl;
+	// printLK->unlock();	
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dist(0, 1);
@@ -267,10 +288,16 @@ void* QueueTest(int tid, int duration, int node, int64_t num_DS, int num_threads
 		auto startTimer = std::chrono::steady_clock::now();
 		auto endTimer = startTimer + std::chrono::seconds(duration);
 		while (std::chrono::steady_clock::now() < endTimer) {
+			printLK->lock();
+			cout << "Thread " << tid << " is working on node " << node << endl;
+			printLK->unlock();
 			if(dist(gen) == 0)
 			{
 				for(int QueueIndex = tid; QueueIndex < Queues0.size(); QueueIndex+=num_threads){
 					Queue_lk0[QueueIndex]->lock();
+					printLK->lock();
+					std::cout << "Thread " << tid << " adding to Queue " << QueueIndex << std::endl;
+					printLK->unlock();
 					Queues0[QueueIndex]->add(1);
 					QueueOps0++;
 					Queue_lk0[QueueIndex]->unlock();
@@ -280,6 +307,9 @@ void* QueueTest(int tid, int duration, int node, int64_t num_DS, int num_threads
 			{
 				for(int QueueIndex = tid; QueueIndex < Queues0.size(); QueueIndex+=num_threads){
 					Queue_lk0[QueueIndex]->lock();
+					printLK->lock();
+					std::cout << "Thread " << tid << " adding to Queue " << QueueIndex << std::endl;
+					printLK->unlock();
 					int val = Queues0[QueueIndex]->del();
 					QueueOps0++;
 					Queue_lk0[QueueIndex]->unlock();
@@ -287,10 +317,14 @@ void* QueueTest(int tid, int duration, int node, int64_t num_DS, int num_threads
 			}
 		}
 	}
+
 	else {
 		auto startTimer = std::chrono::steady_clock::now();
 		auto endTimer = startTimer + std::chrono::seconds(duration);
 		while (std::chrono::steady_clock::now() < endTimer) {
+			printLK->lock();
+			cout << "Thread " << tid << " is working on node " << node << endl;
+			printLK->unlock();
 			if(dist(gen) == 0)
 			{
 				for(int QueueIndex = tid; QueueIndex < Queues1.size(); QueueIndex+=num_threads){
@@ -309,7 +343,7 @@ void* QueueTest(int tid, int duration, int node, int64_t num_DS, int num_threads
 					Queue_lk1[QueueIndex]->unlock();
 				}
 			}
-		}
+	}
 
 		pthread_barrier_wait(&QueueBar);
 		if(tid == 1 && node==0)

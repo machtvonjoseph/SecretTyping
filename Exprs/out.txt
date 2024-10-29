@@ -1,47 +1,876 @@
 Number of threads: 4
 Duration: 1
 Number of Data Structures: 20
-DS name: stack
-Testing Stack
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-numa constructor called
-Only thread 1 will print this.
-Final StackOps: 11229854
+DS name: queue
+Testing Queue
+Queue init
+num_DS :10
+num_threads :4
+Queue 0 initialized
+Queue init done
+about to spawn threads
+Thread0 spawned
+Thread1 spawned
+Joining thread 0
+Thread 1 gonna start working
+Thread 1 is working on node 0
+Thread 1 adding to Queue 1
+Thread 2 is working on node 1
+Thread 2 is working on node 1
+Thread 2 is working on node 1
+Thread 2 is working on node 1
+Thread 0 is working on node 0
+Thread 3 is working on node 1
+Thread 0 adding to Queue 0
+Thread 1 adding to Queue 3
+Thread 1 adding to Queue 5
+Thread 1 adding to Queue 7
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6
+Thread 0 adding to Queue 8
+Thread 0 is working on node 0
+Thread 0 adding to Queue 0
+Thread 0 adding to Queue 2
+Thread 0 adding to Queue 4
+Thread 0 adding to Queue 6

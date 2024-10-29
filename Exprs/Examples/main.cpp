@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
         switch (opt) {
             case 't':
                 num_threads = std::stoi(optarg);
-				if(num_threads % 2 != 0){cout<<"Number of threads must be even"<<endl; return 1;}
+				// if(num_threads % 2 != 0){cout<<"Number of threads must be even"<<endl; return 1;}
                 break;
             case 'd':
                 duration = std::stoi(optarg);
@@ -82,18 +82,22 @@ int main(int argc, char *argv[])
 		numa_Stack_init(num_DS/2, num_threads);
 		for(int i=0; i < num_threads/2; i++){
 			int node = 0;
-			thread0[i] = new thread_numa<0>(StackTest,i, duration, node, num_DS/2, num_threads);
+			int tid = i;
+			std::cout<< "Thread" << tid << " spawned" << std::endl;
+			thread0[i] = new thread_numa<0>(StackTest,tid, duration, node, num_DS/2, num_threads/2);
 		}
 		for(int i=0; i < num_threads/2; i++){
 			int node = 1;
-			thread1[i] = new thread_numa<1>(StackTest,i, duration, node, num_DS/2, num_threads);
+			int tid = i + num_threads/2;
+			std::cout<< "Thread" << tid << " spawned" << std::endl;
+			thread1[i] = new thread_numa<1>(StackTest,tid, duration, node, num_DS/2, num_threads/2);
 		}
 
-		for(int i=0; i < num_threads; i++){
+		for(int i=0; i < thread0.size(); i++){
 			thread0[i]->join();
 		}
 
-		for(int i=0; i < num_threads/2; i++){
+		for(int i=0; i < thread1.size(); i++){
 			thread1[i]->join();
 		}
 	}
@@ -101,19 +105,25 @@ int main(int argc, char *argv[])
 	else if(DS_name == "queue"){
 		cout<<"Testing Queue"<<endl;
 		numa_Queue_init(num_DS/2,num_threads);
+		cout<<"about to spawn threads"<<endl;
 		for(int i=0; i < num_threads/2; i++){
 			int node = 0;
-			thread0[i] = new thread_numa<0>(QueueTest,i, duration, node, num_DS/2, num_threads);
+			int tid = i;
+			thread0[i] = new thread_numa<0>(QueueTest,tid, duration, node, num_DS/2, num_threads/2);
+			std::cout<< "Thread" << i << " spawned" << std::endl;
 		}
 		for(int i=0; i < num_threads/2; i++){
 			int node = 1;
-			thread1[i] = new thread_numa<1>(QueueTest,i, duration, node, num_DS/2, num_threads);
+			int tid = i + num_threads/2;
+			thread1[i] = new thread_numa<1>(QueueTest,tid , duration, node, num_DS/2, num_threads/2);
+			
 		}
 
-		for(int i=0; i < num_threads/2; i++){
+		for(int i=0; i < thread0.size(); i++){
+			cout<<"Joining thread "<<i<<endl;
 			thread0[i]->join();
 		}
-		for(int i=0; i < num_threads/2; i++){
+		for(int i=0; i < thread1.size()/2; i++){
 			thread1[i]->join();
 		}
 	}
@@ -123,17 +133,19 @@ int main(int argc, char *argv[])
 		numa_BST_init(num_DS/2,num_threads);
 		for(int i=0; i < num_threads/2; i++){
 			int node = 0;
-			thread0[i] = new thread_numa<0>(BinarySearchTest,i, duration, node, num_DS/2, num_threads);
+			int tid = i;
+			thread0[i] = new thread_numa<0>(BinarySearchTest,tid, duration, node, num_DS/2, num_threads/2);
 		}
 		for(int i=0; i < num_threads/2; i++){
 			int node = 1;
-			thread1[i] = new thread_numa<1>(BinarySearchTest,i, duration, node, num_DS/2, num_threads);
+			int tid = i + num_threads/2;
+			thread1[i] = new thread_numa<1>(BinarySearchTest,tid, duration, node, num_DS/2, num_threads/2);
 		}
 
-		for(int i=0; i < num_threads/2; i++){
+		for(int i=0; i < thread0.size(); i++){
 			thread0[i]->join();
 		}
-		for(int i=0; i < num_threads/2; i++){
+		for(int i=0; i < thread1.size(); i++){
 			thread1[i]->join();
 		}
 	}
@@ -143,17 +155,19 @@ int main(int argc, char *argv[])
 		numa_LL_init(num_DS/2,num_threads);
 		for(int i=0; i < num_threads/2; i++){
 			int node = 0;
-			thread0[i] = new thread_numa<0>(LinkedListTest,i, duration, node, num_DS/2, num_threads);
+			int tid = i;
+			thread0[i] = new thread_numa<0>(LinkedListTest,tid, duration, node, num_DS/2, num_threads);
 		}
 		for(int i=0; i < num_threads/2; i++){
 			int node = 1;
-			thread1[i] = new thread_numa<1>(LinkedListTest,i, duration, node, num_DS/2, num_threads);
+			int tid = i + num_threads/2;
+			thread1[i] = new thread_numa<1>(LinkedListTest,tid, duration, node, num_DS/2, num_threads);
 		}
 
-		for(int i=0; i < num_threads/2; i++){
+		for(int i=0; i < thread0.size(); i++){
 			thread0[i]->join();
 		}
-		for(int i=0; i < num_threads/2; i++){
+		for(int i=0; i < thread1.size(); i++){
 			thread1[i]->join();
 		}
 	}
