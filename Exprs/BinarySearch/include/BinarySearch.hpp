@@ -110,6 +110,10 @@ public:
 
 	void postOrder(BinaryNode *node);
 
+	void update(int data);
+
+	void remove(int data);
+
 };
 
 BinarySearchTree::BinarySearchTree() : root(NULL)
@@ -120,6 +124,54 @@ BinarySearchTree::BinarySearchTree() : root(NULL)
 BinarySearchTree::~BinarySearchTree()
 {
 	root = NULL;
+}
+
+void BinarySearchTree::update(int data)
+{
+	if(root == NULL)
+	{
+		return;
+	}
+	BinaryNode *current = root;
+	BinaryNode *parent;
+	while(current != NULL)
+	{
+		if(current->getData() == data)
+		{
+			return;
+		}
+		if(data < current->getData())
+		{
+			current = current->getLeftChild();
+		}else
+		{
+			current = current->getRightChild();
+		}
+	}
+}
+
+void BinarySearchTree::remove(int data)
+{
+	if(root == NULL)
+	{
+		return;
+	}
+	BinaryNode *current = root;
+	BinaryNode *parent;
+	while(current != NULL)
+	{
+		if(current->getData() == data)
+		{
+			return;
+		}
+		if(data < current->getData())
+		{
+			current = current->getLeftChild();
+		}else
+		{
+			current = current->getRightChild();
+		}
+	}
 }
 
 void BinarySearchTree::insert(int data)

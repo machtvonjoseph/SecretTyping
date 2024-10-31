@@ -21,10 +21,17 @@
 #define NUMA_NODES 4
 using namespace std;
 
-int64_t num_DS;
-int num_threads;
-int duration;
-string DS_name;
+
+std::string thread_config;
+std::string DS_config;
+int64_t num_DS = 0;
+int num_threads = 0;
+int duration = 0;
+std::string DS_name;
+
+
+extern int64_t ops0;
+extern int64_t ops1;
 
 
 
@@ -32,180 +39,457 @@ int main(int argc, char *argv[])
 {
 
 	    // Define long options
-    static struct option long_options[] = {
-        {"threads", required_argument, 0, 't'},
-        {"duration", required_argument, 0, 'd'},
-        {"num_DS", required_argument, 0, 'n'},  // Long option without short equivalent
-		{"DS_name", required_argument, 0, 0},
-        {0, 0, 0, 0}
-    };
+	static struct option long_options[] = {
+		{"th_config", required_argument, nullptr, 'c'},     // --th_config=NUMA/REGULAR
+		{"DS_config", required_argument, nullptr, 'd'},     // --DS_config=NUMA/REGULAR
+		{"DS_name", required_argument, nullptr, 's'},       // --DS_name=STACK/QUEUE
+		{"num_DS", required_argument, nullptr, 'n'},        // -n
+		{"num_threads", required_argument, nullptr, 't'},   // -t
+		{"duration", required_argument, nullptr, 'D'},      // -d
+		{nullptr, 0, nullptr, 0}                            // End of array
+	};
 
+ int opt;
     int option_index = 0;
-    int opt;
-    while ((opt = getopt_long(argc, argv, "t:d:n:", long_options, &option_index)) != -1) {
+
+    while ((opt = getopt_long(argc, argv, "n:t:D:", long_options, &option_index)) != -1) {
         switch (opt) {
-            case 't':
+            case 'c':  // --th_config option
+                thread_config = optarg;             
+                break;
+            case 'd':  // --DS_config option
+                DS_config = optarg;
+                break;
+            case 'n':  // -n option for num_DS
+                num_DS = std::stoll(optarg);
+                break;
+            case 't':  // -t option for num_threads
                 num_threads = std::stoi(optarg);
                 break;
-            case 'd':
+            case 'D':  // -D option for duration
                 duration = std::stoi(optarg);
                 break;
-            case 'n':
-                num_DS = std::stoi(optarg);        
+            case 's':  // --DS_name option
+                DS_name = optarg;
                 break;
-			case 0:
-				if (std::string(long_options[option_index].name) == "DS_name") {
-					DS_name = std::string(optarg);
-				}
-				break;
-            default:
-                std::cerr << "Usage: " << argv[0] << " -t <num_threads> -d <duration> -n <number of Data Structures> --DS= <data-structure>\n";
+            case '?':  // Unknown option
+                std::cerr << "Unknown option or missing argument.\n";
                 return 1;
+            default:
+                break;
         }
     }
+    std::cout << "Final configuration:\n";
+    std::cout << "Thread Config: " << thread_config << "\n";
+    std::cout << "DS Config: " << DS_config << "\n";
+    std::cout << "Number of DS: " << num_DS << "\n";
+    std::cout << "Number of Threads: " << num_threads << "\n";
+    std::cout << "Duration: " << duration << "\n";
+    std::cout << "DS Name: " << DS_name << "\n";
 
-	cout<<"Number of threads: "<<num_threads<<endl;
-	cout<<"Duration: "<<duration<<endl;
-	cout<<"Number of Data Structures: "<<num_DS<<endl;
-	cout<<"DS name: "<<DS_name<<endl;
+	std::vector <thread_numa<0>*> numa_thread0;
+	std::vector <thread_numa<1>*> numa_thread1;
+	std::vector <thread*> regular_thread0;
+	std::vector <thread*> regular_thread1;
 
-	std::vector <thread_numa<0>*> thread0;
-	std::vector <thread_numa<1>*> thread1;
-
-	thread0.resize(num_threads);
-	thread1.resize(num_threads);
+	numa_thread0.resize(num_threads);
+	numa_thread1.resize(num_threads);
+	regular_thread0.resize(num_threads);
+	regular_thread1.resize(num_threads);
 
 	if(DS_name == "stack"){
 		cout<<"Testing Stack"<<endl;
-		numa_Stack_init(num_DS, num_threads);
+		numa_Stack_init(DS_config, num_DS/2, num_threads);
+
 		for(int i=0; i < num_threads/2; i++){
 			int node = 0;
-			thread0[i] = new thread_numa<0>(StackTest,i, duration, node);
+			int tid = i;
+			if(thread_config == "numa"){
+				std::cout<< "Thread" << tid << " spawned on numa node 0 threads" << std::endl;
+				numa_thread0[i] = new thread_numa<0>(StackTest, tid, duration, node, num_DS/2, num_threads/2);
+			}
+			else if(thread_config== "regular"){
+				std::cout<< "Thread" << tid << " spawned from regular thread pool 0" << std::endl;
+				regular_thread0[i] = new thread(StackTest, tid, duration, node, num_DS/2, num_threads/2);
+			}
+			else{
+				// if(i%2==0){
+				// 	std::cout<< "Thread" << tid << " is even and is spawned on numa node 0 threads" << std::endl;
+				// 	numa_thread0[i] = new thread_numa<0>(StackTest, tid, duration, node, num_DS/2, num_threads/2);
+				// }
+				// else{
+				// 	std::cout<< "Thread" << tid << " is odd and is spawned on numa node 0 threads" << std::endl;
+				// 	numa_thread0[i] = new thread(StackTest, tid, duration, node, num_DS/2, num_threads/2);
+				// }
+			}
 		}
 		for(int i=0; i < num_threads/2; i++){
 			int node = 1;
-			thread1[i] = new thread_numa<1>(StackTest,i, duration, node);
+			int tid = i + num_threads/2;
+
+			if(thread_config == "numa"){
+				std::cout<< "Thread" << tid << " spawned on numa node 1 threads" << std::endl;
+				numa_thread1[i] = new thread_numa<1>(StackTest, tid, duration, node, num_DS/2, num_threads/2);
+			}
+			else if(thread_config== "regular"){
+				std::cout<< "Thread" << tid << " spawned from regular thread pool 1" << std::endl;
+				regular_thread1[i] = new thread(StackTest, tid, duration, node, num_DS/2, num_threads/2);
+			}
+			else{
+				// if(i%2==0){
+				// 	std::cout<< "Thread" << tid << " is even and is spawned on numa node 1 threads" << std::endl;
+				// 	numa_thread1[i] = new thread_numa<1>(StackTest, tid, duration, node, num_DS/2, num_threads/2);
+				// }
+				// else{
+				// 	std::cout<< "Thread" << tid << " is odd and is spawned from numa node 1 threads" << std::endl;
+				// 	numa_thread1[i] = new thread_numa<1>(StackTest, tid, duration, node, num_DS/2, num_threads/2);
+				// }
+			}
 		}
 
-		for(int i=0; i < num_threads/2; i++){
-			thread0[i]->join();
+		if(thread_config == "numa"){
+			for(int i=0; i < num_threads/2; i++){
+				if(numa_thread0[i] == nullptr){
+					std::cout << "Thread " << i << " is null" << std::endl;
+					continue;
+				}
+				numa_thread0[i]->join();
+			}
+			for(int i=0; i < num_threads/2; i++){
+				if(numa_thread1[i] == nullptr){
+					std::cout << "Thread " << i << " is null" << std::endl;
+					continue;
+				}
+				numa_thread1[i]->join();
+			}
+		}
+		else if(thread_config == "regular"){
+			for(int i=0; i < regular_thread0.size(); i++){
+				if(regular_thread0[i] == nullptr){
+					std::cout << "Thread " << i << " is null" << std::endl;
+					continue;
+				}
+				regular_thread0[i]->join();
+			}
+			for(int i=0; i < regular_thread1.size(); i++){
+				if(regular_thread1[i] == nullptr){
+					std::cout << "Thread " << i << " is null" << std::endl;
+					continue;
+				}
+				regular_thread1[i]->join();
+			}
+		}
+		else{
+			for(int i=0; i < numa_thread0.size(); i++){
+				if(numa_thread0[i] == nullptr){
+					std::cout << "Thread " << i << " is null" << std::endl;
+					continue;
+				}
+				numa_thread0[i]->join();
+			}
+			for(int i=0; i < numa_thread1.size(); i++){
+				if(numa_thread1[i] == nullptr){
+					std::cout << "Thread " << i << " is null" << std::endl;
+					continue;
+				}
+				numa_thread1[i]->join();
+			}
 		}
 
-		for(int i=0; i < num_threads/2; i++){
-			thread1[i]->join();
-		}
+		std::cout << "Stack operations on pool 0: " << ops0 << std::endl;
+		std::cout << "Stack operations on pool 1: " << ops1 << std::endl;
+		std::cout << "Total operations: " << ops0 + ops1 << std::endl;
 	}
 
 	else if(DS_name == "queue"){
 		cout<<"Testing Queue"<<endl;
-		numa_Queue_init(num_DS);
+		numa_Queue_init(DS_config,num_DS/2,num_threads);
 		for(int i=0; i < num_threads/2; i++){
 			int node = 0;
-			thread0[i] = new thread_numa<0>(QueueTest,i, duration, node);
+			int tid = i;
+			if(thread_config == "numa"){
+				numa_thread0[i] = new thread_numa<0>(QueueTest,tid, duration, node, num_DS/2, num_threads/2);
+			}
+			else if(thread_config == "regular"){
+				regular_thread0[i] = new thread(QueueTest,tid, duration, node, num_DS/2, num_threads/2);
+			}
+			else{
+				// if(i%2==0){
+				// 	numa_thread0[i] = new thread_numa<0>(QueueTest,tid, duration, node, num_DS/2, num_threads/2);
+				// }
+				// else{
+				// 	numa_thread0[i] = new thread(QueueTest,tid, duration, node, num_DS/2, num_threads/2);
+				// }
+			}
 		}
 		for(int i=0; i < num_threads/2; i++){
 			int node = 1;
-			thread1[i] = new thread_numa<1>(QueueTest,i, duration, node);
+			int tid = i + num_threads/2;
+			if(thread_config == "numa"){
+				numa_thread1[i] = new thread_numa<1>(QueueTest,tid , duration, node, num_DS/2, num_threads/2);
+			}
+			else if(thread_config == "regular"){
+				regular_thread1[i] = new thread(QueueTest,tid , duration, node, num_DS/2, num_threads/2);
+			}
+			else{
+				// if(i%2==0){
+				// 	numa_thread1[i] = new thread_numa<1>(QueueTest,tid , duration, node, num_DS/2, num_threads/2);
+				// }
+				// else{
+				// 	numa_thread1[i] = new thread(QueueTest,tid , duration, node, num_DS/2, num_threads/2);
+				// }
+			}
 		}
 
-		for(int i=0; i < num_threads/2; i++){
-			thread0[i]->join();
+		if(thread_config == "numa"){
+			
+			for(int i=0; i < numa_thread0.size(); i++){
+				if(numa_thread0[i] == nullptr){
+					std::cout << "Thread " << i << " is null" << std::endl;
+					continue;
+				}
+				numa_thread0[i]->join();
+			}
+			for(int i=0; i < numa_thread1.size(); i++){
+				if(numa_thread1[i] == nullptr){
+					std::cout << "Thread " << i << " is null" << std::endl;
+					continue;
+				}
+				numa_thread1[i]->join();
+			}
 		}
-		for(int i=0; i < num_threads/2; i++){
-			thread1[i]->join();
+
+		else if(thread_config == "regular"){
+			for(int i=0; i < regular_thread0.size(); i++){
+				if(regular_thread0[i] == nullptr){
+					std::cout << "Thread " << i << " is null" << std::endl;
+					continue;
+				}
+				regular_thread0[i]->join();
+			}
+			for(int i=0; i < regular_thread1.size(); i++){
+				if(regular_thread1[i] == nullptr){
+					std::cout << "Thread " << i << " is null" << std::endl;
+					continue;
+				}
+				regular_thread1[i]->join();
+			}
 		}
+		else{
+			for(int i=0; i < numa_thread0.size(); i++){
+				if(numa_thread0[i] == nullptr){
+					std::cout << "Thread " << i << " is null" << std::endl;
+					continue;
+				}
+				numa_thread0[i]->join();
+			}
+			for(int i=0; i < numa_thread1.size(); i++){
+				if(numa_thread1[i] == nullptr){
+					std::cout << "Thread " << i << " is null" << std::endl;
+					continue;
+				}
+				numa_thread1[i]->join();
+			}
+		}
+
+		std::cout << "Queue operations on pool 0: " << ops0 << std::endl;
+		std::cout << "Queue operations on pool 1: " << ops1 << std::endl;
+		std::cout << "Total operations: " << ops0 + ops1 << std::endl;
 	}
+
+
 
 	else if(DS_name == "bst"){
 		cout<<"Testing Binary Search Tree"<<endl;
-		numa_BST_init(num_DS);
+		numa_BST_init(DS_config, num_DS/2, num_threads);
 		for(int i=0; i < num_threads/2; i++){
 			int node = 0;
-			thread0[i] = new thread_numa<0>(BinarySearchTest,i, duration, node);
+			int tid = i;
+			if(thread_config == "numa"){
+				numa_thread0[i] = new thread_numa<0>(BinarySearchTest,tid, duration, node, num_DS/2, num_threads/2);
+			}
+			else if(thread_config == "regular"){
+				regular_thread0[i] = new thread(BinarySearchTest,tid, duration, node, num_DS/2, num_threads/2);
+			}
+			else{
+				// if(i%2==0){
+				// 	numa_thread0[i] = new thread_numa<0>(BinarySearchTest,tid, duration, node, num_DS/2, num_threads/2);
+				// }
+				// else{
+				// 	numa_thread0[i] = new thread(BinarySearchTest,tid, duration, node, num_DS/2, num_threads/2);
+				// }
+			}
 		}
 		for(int i=0; i < num_threads/2; i++){
 			int node = 1;
-			thread1[i] = new thread_numa<1>(BinarySearchTest,i, duration, node);
+			int tid = i + num_threads/2;
+			if(thread_config == "numa"){
+				numa_thread1[i] = new thread_numa<1>(BinarySearchTest,tid, duration, node, num_DS/2, num_threads/2);
+			}
+			else if(thread_config == "regular"){
+				regular_thread1[i] = new thread(BinarySearchTest,tid, duration, node, num_DS/2, num_threads/2);
+			}
+			else{
+				// if(i%2==0){
+				// 	numa_thread1[i] = new thread_numa<1>(BinarySearchTest,tid, duration, node, num_DS/2, num_threads/2);
+				// }
+				// else{
+				// 	numa_thread1[i] = new thread(BinarySearchTest,tid, duration, node, num_DS/2, num_threads/2);
+				// }
+			}
 		}
 
-		for(int i=0; i < num_threads/2; i++){
-			thread0[i]->join();
+		if(thread_config == "numa"){
+			for(int i=0; i < num_threads/2; i++){
+				if(numa_thread0[i] == nullptr){
+					std::cout << "Thread " << i << " is null" << std::endl;
+					continue;
+				}
+				numa_thread0[i]->join();
+			}
+			for(int i=0; i < num_threads/2; i++){
+				if(numa_thread1[i] == nullptr){
+					std::cout << "Thread " << i << " is null" << std::endl;
+					continue;
+				}
+				numa_thread1[i]->join();
+			}
 		}
-		for(int i=0; i < num_threads/2; i++){
-			thread1[i]->join();
+		else if(thread_config == "regular"){
+			for(int i=0; i < regular_thread0.size(); i++){
+				if(regular_thread0[i] == nullptr){
+					std::cout << "Thread " << i << " is null" << std::endl;
+					continue;
+				}
+				regular_thread0[i]->join();
+			}
+			for(int i=0; i < regular_thread1.size(); i++){
+				if(regular_thread1[i] == nullptr){
+					std::cout << "Thread " << i << " is null" << std::endl;
+					continue;
+				}
+				regular_thread1[i]->join();
+			}
 		}
+		else{
+			for(int i=0; i < numa_thread0.size(); i++){
+				if(numa_thread0[i] == nullptr){
+					std::cout << "Thread " << i << " is null" << std::endl;
+					continue;
+				}
+				numa_thread0[i]->join();
+			}
+			for(int i=0; i < numa_thread1.size(); i++){
+				if(numa_thread1[i] == nullptr){
+					std::cout << "Thread " << i << " is null" << std::endl;
+					continue;
+				}
+				numa_thread1[i]->join();
+			}
+		}
+
+		std::cout << "Binary Search Tree operations on pool 0: " << ops0 << std::endl;
+		std::cout << "Binary Search Tree operations on pool 1: " << ops1 << std::endl;
+		std::cout << "Total operations: " << ops0 + ops1 << std::endl;
 	}
-
 	else if(DS_name == "ll"){
 		cout<<"Testing Linked List"<<endl;
-		numa_LL_init(num_DS);
+		numa_LL_init(DS_config, num_DS/2, num_threads);
 		for(int i=0; i < num_threads/2; i++){
 			int node = 0;
-			thread0[i] = new thread_numa<0>(LinkedListTest,i, duration, node);
+			int tid = i;
+			if(thread_config == "numa"){
+				numa_thread0[i] = new thread_numa<0>(LinkedListTest,tid, duration, node, num_DS/2, num_threads);
+			}
+			else if(thread_config == "regular"){
+				regular_thread0[i] = new thread(LinkedListTest,tid, duration, node, num_DS/2, num_threads);
+			}
+			else{
+				// if(i%2==0){
+				// 	numa_thread0[i] = new thread_numa<0>(LinkedListTest,tid, duration, node, num_DS/2, num_threads);
+				// }
+				// else{
+				// 	numa_thread0[i] = new thread(LinkedListTest,tid, duration, node, num_DS/2, num_threads);
+				// }
+			}
 		}
 		for(int i=0; i < num_threads/2; i++){
 			int node = 1;
-			thread1[i] = new thread_numa<1>(LinkedListTest,i, duration, node);
+			int tid = i + num_threads/2;
+			if(thread_config == "numa"){
+				numa_thread1[i] = new thread_numa<1>(LinkedListTest,tid, duration, node, num_DS/2, num_threads);
+			}
+			else if(thread_config == "regular"){
+				regular_thread1[i] = new thread(LinkedListTest,tid, duration, node, num_DS/2, num_threads);
+			}
+			else{
+				// if(i%2==0){
+				// 	numa_thread1[i] = new thread_numa<1>(LinkedListTest,tid, duration, node, num_DS/2, num_threads);
+				// }
+				// else{
+				// 	numa_thread1[i] = new thread(LinkedListTest,tid, duration, node, num_DS/2, num_threads);
+				// }
+			}
 		}
 
-		for(int i=0; i < num_threads/2; i++){
-			thread0[i]->join();
+		if(thread_config == "numa"){
+			for(int i=0; i < numa_thread0.size(); i++){
+				if(numa_thread0[i] == nullptr){
+					std::cout << "Thread " << i << " is null" << std::endl;
+					continue;
+				}
+				numa_thread0[i]->join();
+			}
+			for(int i=0; i < numa_thread1.size(); i++){
+				if(numa_thread1[i] == nullptr){
+					std::cout << "Thread " << i << " is null" << std::endl;
+					continue;
+				}
+				numa_thread1[i]->join();
+			}
 		}
-		for(int i=0; i < num_threads/2; i++){
-			thread1[i]->join();
+
+
+		else if(thread_config == "regular"){
+			for(int i=0; i < regular_thread0.size(); i++){
+				if(regular_thread0[i] == nullptr){
+					std::cout << "Thread " << i << " is null" << std::endl;
+					continue;
+				}
+				regular_thread0[i]->join();
+			}
+			for(int i=0; i < regular_thread1.size(); i++){
+				if(regular_thread1[i] == nullptr){
+					std::cout << "Thread " << i << " is null" << std::endl;
+					continue;
+				}
+				regular_thread1[i]->join();
+			}
 		}
+		else{
+			for(int i=0; i < numa_thread0.size(); i++){
+				if(numa_thread0[i] == nullptr){
+					std::cout << "Thread " << i << " is null" << std::endl;
+					continue;
+				}
+				numa_thread0[i]->join();
+			}
+			for(int i=0; i < numa_thread1.size(); i++){
+				if(numa_thread1[i] == nullptr){
+					std::cout << "Thread " << i << " is null" << std::endl;
+					continue;
+				}
+				numa_thread1[i]->join();
+			}
+		}
+
+		std::cout << "Linked List operations on pool 0: " << ops0 << std::endl;
+		std::cout << "Linked List operations on pool 1: " << ops1 << std::endl;
+		std::cout << "Total operations: " << ops0 + ops1 << std::endl;
 	}
-
+	
 	else{
 		cout<<"Invalid Data Structure"<<endl;
 	}
-
-
-
-	// int num_threads = std::stoi(argv[1]);
-	// std::vector <thread_numa<0>*> thread0;
-
-	
-	// std::cout << "---------------------------------------------" << std::endl;
-	// std::cout << "Welcome to the Multi Threaded Test Suite for Data Structures" << std::endl;
-
-	// std::cout << "Initializing Test Suite with " << num_threads << " threads." << std::endl;
-	// thread0.resize(num_threads);
-
-	// DS_init();
-	// sync_init(num_threads);
-	
-	// for(int i=0; i < num_threads; i++){
-	// 	thread0[i] = new thread_numa<0>(StackTest,i, num_threads);
-	// }
-
-	// for(int i=0; i < num_threads; i++){
-	// 	thread0[i]->join();
-	// }
-
-	// for(int i=0; i < num_threads; i++){
-	// 	thread0[i] = new thread_numa<0>(QueueTest,i, num_threads);
-	// }
-
-	// for(int i=0; i < num_threads; i++){
-	// 	thread0[i]->join();
-	// }
-
-	// for(int i=0; i < num_threads; i++){
-	// 	thread0[i] = new thread_numa<0>(BinarySearchTest,i, num_threads);
-	// }
-
-	// for(int i=0; i < num_threads; i++){
-	// 	thread0[i]->join();
-	// }
-
-	// for(int i=0; i < num_threads; i++){
-	// 	thread0[i] = new thread_numa<0>(LinkedListTest,i, num_threads);
-	// }
-
-	// for(int i=0; i < num_threads; i++){
-	// 	thread0[i]->join();
-	// }
-
-	// global_cleanup();
+	global_cleanup();
 }

@@ -59,6 +59,7 @@ public:
 std::string utils::getNumaAllocatorCode(std::string classDecl, std::string nodeID){
  return R"(public: 
     static void* operator new(std::size_t sz){
+        // cout<<"doing numa allocation \n";
 		 void* p = numa_alloc_onnode(sz * sizeof()"+classDecl+R"(), )"+ nodeID +R"();
         if (p == nullptr) {
             throw std::bad_alloc();
@@ -75,6 +76,7 @@ std::string utils::getNumaAllocatorCode(std::string classDecl, std::string nodeI
     }
 
     static void operator delete(void* ptr){
+        // cout<<"doing numa free \n";
 		numa_free(ptr, 1 * sizeof()"+classDecl+R"());
     }
 
@@ -83,6 +85,24 @@ std::string utils::getNumaAllocatorCode(std::string classDecl, std::string nodeI
     }
 )";
 }
+
+std::string extractTypeoutOfNuma(const std::string& input) {
+    // Find the start and end of the "Type" substring within "numa<Type,NodeID>"
+    size_t start = input.find('<');
+    size_t comma = input.find(',');
+    size_t end = input.find('>');
+
+    // Check if all necessary symbols are present
+    if (start != std::string::npos && comma != std::string::npos && end != std::string::npos && start < comma && comma < end) {
+        // Extract the substring representing "Type"
+        return input.substr(start + 1, comma - start - 1);
+    }
+    // If format is incorrect, return an empty string or handle the error
+    return "";
+}
+
+
+
 
 RecursiveNumaTyper::RecursiveNumaTyper(clang::ASTContext &context, clang::Rewriter &rewriter)
     : Transformer(context, rewriter)
@@ -231,6 +251,21 @@ void RecursiveNumaTyper::extractNumaDecls(clang::Stmt* fnBody, ASTContext *Conte
         for(auto newExpr: NewExprInBinaryOperatorVisitor.getBinaryOperators()){
             if(newExpr){
                 llvm::outs() << "new expression is "<< newExpr->getType().getAsString() << "\n";
+                
+                std::string extractedType = extractTypeoutOfNuma(newExpr->getType().getAsString());
+                //get location of the new expression
+                SourceLocation Loc = newExpr->getBeginLoc();
+                //get the file ID
+                fileIDs.push_back(rewriter.getSourceMgr().getFileID(Loc));
+                // reinterpret_cast<newType*>(newExpr)
+                rewriter.InsertTextBefore(Loc, "reinterpret_cast<"+extractedType+"*>(");
+                //get the end location of the new expression
+                SourceLocation EndLoc = newExpr->getEndLoc();
+                //insert the closing bracket
+                rewriter.InsertTextAfter(EndLoc, ")");
+                llvm::outs() << "Done casting new expression\n";
+
+
                 numaDeclTable.push_back(newExpr);
             }
         }

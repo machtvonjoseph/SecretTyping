@@ -1,3 +1,4 @@
+#pragma once
 #ifndef _QUEUE_HPP_
 #define _QUEUE_HPP_
 
@@ -93,6 +94,11 @@ int Queue::del()
 	front = front->getLink();
 	int data = temp->getData();
 	delete temp;
+
+	if(front == NULL)
+	{
+		rear = NULL;
+	}
 
 	return data;
 

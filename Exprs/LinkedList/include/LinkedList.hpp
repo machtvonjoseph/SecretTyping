@@ -172,7 +172,7 @@ int LinkedList::removeHead()
 {
 	if(head == NULL)
 	{
-		std::cout << "LinkedList Empty!!" << std::endl;
+		//std::cout << "LinkedList Empty!!" << std::endl;
 		return -1;
 	}
 	Node *temp = head;
@@ -255,7 +255,6 @@ int LinkedList::removeTail()
 	 */
 	if(head == NULL)
 	{
-		std::cout << "LinkedList Empty!!" << std::endl;
 		return -1;
 	}
 
@@ -318,7 +317,7 @@ void LinkedList::display()
 {
 	if(head == NULL)
 	{
-		std::cout << "LinkedList Empty!!" << std::endl;
+		//std::cout << "LinkedList Empty!!" << std::endl;
 		return;
 	}
 

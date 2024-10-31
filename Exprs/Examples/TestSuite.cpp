@@ -24,39 +24,35 @@
 #include <pthread.h>
 #include <map>
 
-std::vector<numa<Stack,0>*> Stacks0;
-std::vector<numa<Stack,1>*> Stacks1;
-int64_t StackOps0;
-int64_t StackOps1;
+
+std::vector<Stack*> Stacks0;
+std::vector<Stack*> Stacks1;
+int64_t ops0=0;
+int64_t ops1=0;
 std::vector<mutex*> Stack_lk0;
 std::vector<mutex*> Stack_lk1;
-pthread_barrier_t StackBar;
-std::mutex* printLK;
+pthread_barrier_t bar ;
 
-std::vector<numa<Queue,0>*> Queues0;
-std::vector<numa<Queue,1>*> Queues1;
-int64_t QueueOps0;
-int64_t QueueOps1;
+std::mutex* printLK;
+std::mutex* globalLK;
+
+
+
+std::vector<Queue*> Queues0;
+std::vector<Queue*> Queues1;
 std::vector<mutex*> Queue_lk0;
 std::vector<mutex*> Queue_lk1;
-pthread_barrier_t QueueBar;
 
 
-std::vector<numa<BinarySearchTree,0>*> BSTs0;
-std::vector<numa<BinarySearchTree,1>*> BSTs1;
-int64_t BSTOps0;
-int64_t BSTOps1;
+std::vector<BinarySearchTree*> BSTs0;
+std::vector<BinarySearchTree*> BSTs1;
 std::vector<mutex*> BST_lk0;
 std::vector<mutex*> BST_lk1;
-pthread_barrier_t BSTBar;
 
-std::vector<numa<LinkedList,0>*> LLs0;
-std::vector<numa<LinkedList,1>*> LLs1;
-int64_t LLOps0;
-int64_t LLOps1;
+std::vector<LinkedList*> LLs0;
+std::vector<LinkedList*> LLs1;
 std::vector<mutex*> LL_lk0;
 std::vector<mutex*> LL_lk1;
-pthread_barrier_t LLBar;
 
 
 
@@ -66,17 +62,31 @@ pthread_barrier_t LLBar;
 
 
 
-void numa_Stack_init(int num_DS, int num_threads){
+void numa_Stack_init(std::string DS_config, int num_DS, int num_threads){
 	Stacks0.resize(num_DS);
 	for(int i = 0; i < num_DS; i++)
 	{
-		Stacks0[i] = new numa<Stack,0>();
+		if(DS_config=="numa"){
+			cout<<"Initializing node 0 numa stack pool"<<endl;
+			Stacks0[i] = new numa<Stack,0>();
+		}
+		else{
+			cout<<"Initializing first regular stack pool"<<endl;
+			Stacks0[i] = new Stack();
+		}
 	}
 	
 	Stacks1.resize(num_DS);
 	for(int i = 0; i < num_DS; i++)
 	{
-		Stacks1[i] = new numa<Stack,1>();
+		if(DS_config=="numa"){
+			cout<<"Initializing node 1 numa stack pool"<<endl;
+			Stacks1[i] = new numa<Stack,1>();
+		}
+		else{
+			cout<<"Initializing second regular stack pool"<<endl;
+			Stacks1[i] = new Stack();
+		}
 	}
 
 	Stack_lk0.resize(num_DS);
@@ -89,27 +99,35 @@ void numa_Stack_init(int num_DS, int num_threads){
 	{
 		Stack_lk1[i] = new mutex();
 	}
-	pthread_barrier_init(&StackBar, NULL, num_threads);
-	StackOps0 = 0;
-	StackOps1 = 0;
+	pthread_barrier_init(&bar, NULL, num_threads);
+	ops0 = 0;
+	ops1 = 0;
 	
 	printLK = new std::mutex();
+	globalLK = new std::mutex();
 }
 
-void numa_Queue_init(int num_DS, int num_threads){
-	std::cout << "Queue init" << std::endl;
-	std::cout<<"num_DS :"<< num_DS << std::endl;
-	std::cout<<"num_threads :"<< num_threads << std::endl;
+void numa_Queue_init(std::string DS_config, int num_DS, int num_threads){
 	Queues0.resize(num_DS);
 	for(int i = 0; i < num_DS; i++)
 	{
-		Queues0[i] = new numa<Queue,0>();
+		if(DS_config=="numa"){
+			Queues0[i] = new numa<Queue,0>();
+		}
+		else{
+			Queues0[i] = new Queue();
+		}
 	}
-	std::cout << "Queue 0 initialized" << std::endl;
+	
 	Queues1.resize(num_DS);
 	for(int i = 0; i < num_DS; i++)
 	{
-		Queues1[i] = new numa<Queue,1>();
+		if(DS_config=="numa"){
+			Queues1[i] = new numa<Queue,1>();
+		}
+		else{
+			Queues1[i] = new Queue();
+		}
 	}
 
 	Queue_lk0.resize(num_DS);
@@ -122,52 +140,35 @@ void numa_Queue_init(int num_DS, int num_threads){
 	{
 		Queue_lk1[i] = new mutex();
 	}
-	pthread_barrier_init(&QueueBar, NULL, num_threads);
-	QueueOps0 = 0;
-	QueueOps1 = 0;
-	printLK = new std::mutex();
-	std::cout << "Queue init done" << std::endl;
-}
-
-void numa_BST_init(int num_DS, int num_threads){
-	BSTs0.resize(num_DS);
-	for(int i = 0; i < num_DS; i++)
-	{
-		BSTs0[i] = new numa<BinarySearchTree,0>();
-	}
+	pthread_barrier_init(&bar, NULL, num_threads);
+	ops0 = 0;
+	ops1 = 0;
 	
-	BSTs1.resize(num_DS);
-	for(int i = 0; i < num_DS; i++)
-	{
-		BSTs1[i] = new numa<BinarySearchTree,1>();
-	}
-
-	BST_lk0.resize(num_DS);
-	for(int i = 0; i < num_DS; i++)
-	{
-		BST_lk0[i] = new mutex();
-	}
-	BST_lk1.resize(num_DS);
-	for(int i = 0; i < num_DS; i++)
-	{
-		BST_lk1[i] = new mutex();
-	}
-	pthread_barrier_init(&BSTBar, NULL, num_threads);
-	BSTOps0 = 0;
-	BSTOps1 = 0;
+	printLK = new std::mutex();
+	globalLK = new std::mutex();
 }
 
-void numa_LL_init(int num_DS, int num_threads){
+void numa_LL_init(std::string DS_config, int num_DS, int num_threads){
 	LLs0.resize(num_DS);
 	for(int i = 0; i < num_DS; i++)
 	{
-		LLs0[i] = new numa<LinkedList,0>();
+		if(DS_config=="numa"){
+			LLs0[i] = new numa<LinkedList,0>();
+		}
+		else{
+			LLs0[i] = new LinkedList();
+		}
 	}
 	
 	LLs1.resize(num_DS);
 	for(int i = 0; i < num_DS; i++)
 	{
-		LLs1[i] = new numa<LinkedList,1>();
+		if(DS_config=="numa"){
+			LLs1[i] = new numa<LinkedList,1>();
+		}
+		else{
+			LLs1[i] = new LinkedList();
+		}
 	}
 
 	LL_lk0.resize(num_DS);
@@ -180,13 +181,147 @@ void numa_LL_init(int num_DS, int num_threads){
 	{
 		LL_lk1[i] = new mutex();
 	}
-	pthread_barrier_init(&LLBar, NULL, num_threads);
-	LLOps0 = 0;
-	LLOps1 = 0;
+	pthread_barrier_init(&bar, NULL, num_threads);
+	ops0 = 0;
+	ops1 = 0;
+	
+	printLK = new std::mutex();
+	globalLK = new std::mutex();
 }
 
 
-void* StackTest(int tid, int duration, int node, int64_t num_DS, int num_threads)
+void numa_BST_init(std::string DS_config, int num_DS, int num_threads){
+	BSTs0.resize(num_DS);
+	for(int i = 0; i < num_DS; i++)
+	{
+		if(DS_config=="numa"){
+			BSTs0[i] = new numa<BinarySearchTree,0>();
+		}
+		else{
+			BSTs0[i] = new BinarySearchTree();
+		}
+	}
+	
+	BSTs1.resize(num_DS);
+	for(int i = 0; i < num_DS; i++)
+	{
+		if(DS_config=="numa"){
+			BSTs1[i] = new numa<BinarySearchTree,1>();
+		}
+		else{
+			BSTs1[i] = new BinarySearchTree();
+		}
+	}
+
+	BST_lk0.resize(num_DS);
+	for(int i = 0; i < num_DS; i++)
+	{
+		BST_lk0[i] = new mutex();
+	}
+	BST_lk1.resize(num_DS);
+	for(int i = 0; i < num_DS; i++)
+	{
+		BST_lk1[i] = new mutex();
+	}
+
+	std::mt19937 gen(123);
+	std::uniform_int_distribution<> dist1(0, BSTs0.size()-1);
+	std::uniform_int_distribution<> dist2(0, BSTs1.size()-1);
+
+	//Prefill in 50 % of the tree randomly with value 1
+	for(int i = 0; i < num_DS/2; i++)
+	{
+		int ds = dist1(gen);
+		BST_lk0[ds]->lock();
+		BSTs0[ds]->insert(dist1(gen));
+		BST_lk0[ds]->unlock();
+	}
+
+	for(int i = 0; i < num_DS/2; i++)
+	{
+		int ds = dist2(gen);
+		BST_lk1[ds]->lock();
+		BSTs1[ds]->insert(dist2(gen));
+		BST_lk1[ds]->unlock();
+	}
+	
+
+	pthread_barrier_init(&bar, NULL, num_threads);
+	ops0 = 0;
+	ops1 = 0;
+	
+	printLK = new std::mutex();
+	globalLK = new std::mutex();
+}
+
+void StackTest(int tid,  int duration, int node, int64_t num_DS, int num_threads)
+{	
+	#ifdef DEBUG
+	if(tid == 1 && node==0)
+	{	// startTime = chrono::high_resolution_clock::now();
+		std::cout << "Only thread "<< tid << " will print this." << std::endl;
+
+	}		
+	#endif
+
+	pthread_barrier_wait(&bar);
+    std::mt19937 gen(123);
+    std::uniform_int_distribution<> dist(0, Stacks0.size()-1);
+	//std::cout << "Thread " << tid << " about to start working on node id"<<node << std::endl;
+	int ops = 0;
+	auto startTimer = std::chrono::steady_clock::now();
+	auto endTimer = startTimer + std::chrono::seconds(duration);
+	while (std::chrono::steady_clock::now() < endTimer) {
+		int ds = dist(gen);
+		int op = dist(gen)%2;
+		
+		if(node==0){
+			if(op == 0)
+			{
+				Stack_lk0[ds]->lock();
+				Stacks0[ds]->push(1);
+				Stack_lk0[ds]->unlock();
+			}
+			else
+			{
+				Stack_lk0[ds]->lock();
+				int val= Stacks0[ds]->pop();
+				Stack_lk0[ds]->unlock();
+			}
+		}
+		else{
+			if(op == 0)
+			{
+				Stack_lk1[ds]->lock();
+				Stacks1[ds]->push(1);
+				Stack_lk1[ds]->unlock();
+			}
+			else
+			{
+				Stack_lk1[ds]->lock();
+				int val= Stacks1[ds]->pop();
+				Stack_lk1[ds]->unlock();
+			}
+		}
+		ops++;
+	}
+
+
+	globalLK->lock();
+	if(node==0)
+	{
+		ops0 += ops;
+	}
+	else
+	{
+		ops1 += ops;
+	}
+	globalLK->unlock();
+
+	pthread_barrier_wait(&bar);
+}
+
+void QueueTest(int tid, int duration, int node, int64_t num_DS, int num_threads)
 {	
 	#ifdef DEBUG
 	if(tid == 1 && node==0)
@@ -195,318 +330,211 @@ void* StackTest(int tid, int duration, int node, int64_t num_DS, int num_threads
 	}		
 	#endif
 
-	pthread_barrier_wait(&StackBar);
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dist(0, 1);
-	std::cout << "Thread " << tid << " about to start working on node id"<<node << std::endl;
-	if(node == 0){
-		auto startTimer = std::chrono::steady_clock::now();
-		auto endTimer = startTimer + std::chrono::seconds(duration);
-		while (std::chrono::steady_clock::now() < endTimer) {
-			if(dist(gen) == 0)
-			{
-				for(int stackIndex = tid; stackIndex < Stacks0.size(); stackIndex+=num_threads){
-					Stack_lk0[stackIndex]->lock();
-					Stacks0[stackIndex]->push(1);
-					printLK->lock();
-					std::cout << "Thread " << tid << " adding to Stack " << stackIndex << std::endl;
-					printLK->unlock();
-					StackOps0++;
-					Stack_lk0[stackIndex]->unlock();
-				}
-			}
-			else
-			{
-				for(int stackIndex = tid; stackIndex < Stacks0.size(); stackIndex+=num_threads){
-					Stack_lk0[stackIndex]->lock();
-					int val= Stacks0[stackIndex]->pop();
-					StackOps0++;
-					Stack_lk0[stackIndex]->unlock();
-	
-				}
-			}
-		}
-	}
-	
-	else {
-		auto startTimer = std::chrono::steady_clock::now();
-		auto endTimer = startTimer + std::chrono::seconds(duration);
-		while (std::chrono::steady_clock::now() < endTimer) {
-			if(dist(gen) == 0)
-			{
-				for(int stackIndex = tid; stackIndex < Stacks1.size(); stackIndex+=num_threads){
-					Stack_lk1[stackIndex]->lock();
-					Stacks1[stackIndex]->push(1);
-					printLK->lock();
-					std::cout << "Thread " << tid << " adding to Stack " << stackIndex << std::endl;
-					printLK->unlock();
-					StackOps1++;
-					Stack_lk1[stackIndex]->unlock();
-				}
-			}
-			else
-			{
-				for(int stackIndex = tid; stackIndex < Stacks1.size(); stackIndex+=num_threads){
-					Stack_lk1[stackIndex]->lock();
-					int val= Stacks1[stackIndex]->pop();
-					StackOps1++;
-					Stack_lk1[stackIndex]->unlock();
-				}
-			}
-		}
+	pthread_barrier_wait(&bar);
+	std::mt19937 gen(123);
+	std::uniform_int_distribution<> dist(0, Queues0.size()-1);
+	//std::cout << "Thread " << tid << " about to start working on node id"<<node << std::endl;
+	int ops = 0;
+	auto startTimer = std::chrono::steady_clock::now();
+	auto endTimer = startTimer + std::chrono::seconds(duration);
+	while (std::chrono::steady_clock::now() < endTimer) {
+		int ds = dist(gen);
+		int op = dist(gen)%2;
 		
+		if(node==0){
+			if(op == 0)
+			{
+				Queue_lk0[ds]->lock();
+				Queues0[ds]->add(ds);
+				Queue_lk0[ds]->unlock();
+			}
+			else
+			{
+				Queue_lk0[ds]->lock();
+				int val= Queues0[ds]->del();
+				Queue_lk0[ds]->unlock();
+			}
+		}
+		else{
+			if(op == 0)
+			{
+				Queue_lk1[ds]->lock();
+				Queues1[ds]->add(ds);
+				Queue_lk1[ds]->unlock();
+			}
+			else
+			{
+				Queue_lk1[ds]->lock();
+				int val= Queues1[ds]->del();
+				Queue_lk1[ds]->unlock();
+			}
+		}
+		ops++;
 	}
 
-	pthread_barrier_wait(&StackBar);
-	if(tid == 1 && node==0)
-	{	// startTime = chrono::high_resolution_clock::now();
-		std::cout << "Only thread "<< tid << " will print this." << std::endl;
-		std::cout << "Final StackOps: " << StackOps0+StackOps1 << std::endl;
-	}	
-	pthread_barrier_wait(&StackBar);
-}
-
-void* QueueTest(int tid, int duration, int node, int64_t num_DS, int num_threads)
-{	
-	pthread_barrier_wait(&QueueBar);
-	if(tid == 1 && node==0)
+	globalLK->lock();
+	if(node==0)
 	{
-		printLK->lock();
-		std::cout << "Thread " << tid << " gonna start working" << std::endl;
-		printLK->unlock();
-	}	
-	pthread_barrier_wait(&QueueBar);		
-	// printLK->lock();
-	// std::cout << "Thread " << tid << " gonna start working" << std::endl;
-	// printLK->unlock();	
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> dist(0, 1);
-
-	if(node == 0){
-		auto startTimer = std::chrono::steady_clock::now();
-		auto endTimer = startTimer + std::chrono::seconds(duration);
-		while (std::chrono::steady_clock::now() < endTimer) {
-			printLK->lock();
-			cout << "Thread " << tid << " is working on node " << node << endl;
-			printLK->unlock();
-			if(dist(gen) == 0)
-			{
-				for(int QueueIndex = tid; QueueIndex < Queues0.size(); QueueIndex+=num_threads){
-					Queue_lk0[QueueIndex]->lock();
-					printLK->lock();
-					std::cout << "Thread " << tid << " adding to Queue " << QueueIndex << std::endl;
-					printLK->unlock();
-					Queues0[QueueIndex]->add(1);
-					QueueOps0++;
-					Queue_lk0[QueueIndex]->unlock();
-				}
-			}
-			else
-			{
-				for(int QueueIndex = tid; QueueIndex < Queues0.size(); QueueIndex+=num_threads){
-					Queue_lk0[QueueIndex]->lock();
-					printLK->lock();
-					std::cout << "Thread " << tid << " adding to Queue " << QueueIndex << std::endl;
-					printLK->unlock();
-					int val = Queues0[QueueIndex]->del();
-					QueueOps0++;
-					Queue_lk0[QueueIndex]->unlock();
-				}
-			}
-		}
+		ops0 += ops;
 	}
-
-	else {
-		auto startTimer = std::chrono::steady_clock::now();
-		auto endTimer = startTimer + std::chrono::seconds(duration);
-		while (std::chrono::steady_clock::now() < endTimer) {
-			printLK->lock();
-			cout << "Thread " << tid << " is working on node " << node << endl;
-			printLK->unlock();
-			if(dist(gen) == 0)
-			{
-				for(int QueueIndex = tid; QueueIndex < Queues1.size(); QueueIndex+=num_threads){
-					Queue_lk1[QueueIndex]->lock();
-					Queues1[QueueIndex]->add(1);
-					QueueOps1++;
-					Queue_lk1[QueueIndex]->unlock();
-				}
-			}
-			else
-			{
-				for(int QueueIndex = tid; QueueIndex < Queues1.size(); QueueIndex+=num_threads){
-					Queue_lk1[QueueIndex]->lock();
-					int val = Queues1[QueueIndex]->del();
-					QueueOps1++;
-					Queue_lk1[QueueIndex]->unlock();
-				}
-			}
+	else
+	{
+		ops1 += ops;
 	}
+	globalLK->unlock();
 
-		pthread_barrier_wait(&QueueBar);
-		if(tid == 1 && node==0)
-		{	// startTime = chrono::high_resolution_clock::now();
-			std::cout << "Only thread "<< tid << " will print this." << std::endl;
-			std::cout << "Final QueueOps: " << QueueOps0+QueueOps1 << std::endl;
-		}
-		pthread_barrier_wait(&QueueBar);
-	}
+	pthread_barrier_wait(&bar);
 }
 
 
-
-void* BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_threads)
-{
-	pthread_barrier_wait(&BSTBar);
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> dist(0, 1);
-
-	if(node == 0){
-		auto startTimer = std::chrono::steady_clock::now();
-		auto endTimer = startTimer + std::chrono::seconds(duration);
-		while (std::chrono::steady_clock::now() < endTimer) {
-			if(dist(gen) == 0)
-			{
-				for(int BSTIndex = tid; BSTIndex < BSTs0.size(); BSTIndex+=num_threads){
-					BST_lk0[BSTIndex]->lock();
-					BSTs0[BSTIndex]->insert(1);
-					BSTOps0++;
-					BST_lk0[BSTIndex]->unlock();
-				}
-			}
-			else
-			{
-				for(int BSTIndex = tid; BSTIndex < BSTs0.size(); BSTIndex+=num_threads){
-					BST_lk0[BSTIndex]->lock();
-					bool val = BSTs0[BSTIndex]->lookup(1);
-					BSTOps0++;
-					BST_lk0[BSTIndex]->unlock();
-				}
-			}
-		}
-	}
-	else {
-		auto startTimer = std::chrono::steady_clock::now();
-		auto endTimer = startTimer + std::chrono::seconds(duration);
-		while (std::chrono::steady_clock::now() < endTimer) {
-			if(dist(gen) == 0)
-			{
-				for(int BSTIndex = tid; BSTIndex < BSTs1.size(); BSTIndex+=num_threads){
-					BST_lk1[BSTIndex]->lock();
-					BSTs1[BSTIndex]->insert(1);
-					BSTOps1++;
-					BST_lk1[BSTIndex]->unlock();
-				}
-			}
-			else
-			{
-				for(int BSTIndex = tid; BSTIndex < BSTs1.size(); BSTIndex+=num_threads){
-					BST_lk1[BSTIndex]->lock();
-					bool val = BSTs1[BSTIndex]->lookup(1);
-					BSTOps1++;
-					BST_lk1[BSTIndex]->unlock();
-				}
-			}
-			
-		}
-	}
-
-	pthread_barrier_wait(&BSTBar);
+void LinkedListTest(int tid, int duration, int node, int64_t num_DS, int num_threads)
+{	
+	#ifdef DEBUG
 	if(tid == 1 && node==0)
 	{	// startTime = chrono::high_resolution_clock::now();
 		std::cout << "Only thread "<< tid << " will print this." << std::endl;
-		std::cout << "Final BSTOps: " << BSTOps0+BSTOps1 << std::endl;
-	}
-	pthread_barrier_wait(&BSTBar);
-}
+	}		
+	#endif
 
-void* LinkedListTest(int tid, int duration, int node, int64_t num_DS, int num_threads)
-{
-	pthread_barrier_wait(&LLBar);
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> dist(0, 1);
-
-	if(node == 0){
-		auto startTimer = std::chrono::steady_clock::now();
-		auto endTimer = startTimer + std::chrono::seconds(duration);
-		while (std::chrono::steady_clock::now() < endTimer) {
-			if(dist(gen) == 0)
+	pthread_barrier_wait(&bar);
+	std::mt19937 gen(123);
+	std::uniform_int_distribution<> dist(0, LLs0.size()-1);
+	std::uniform_int_distribution<> opDist(1, 100);
+	//std::cout << "Thread " << tid << " about to start working on node id"<<node << std::endl;
+	int ops = 0;
+	auto startTimer = std::chrono::steady_clock::now();
+	auto endTimer = startTimer + std::chrono::seconds(duration);
+	while (std::chrono::steady_clock::now() < endTimer) {
+		int ds = dist(gen);
+		int op = dist(gen)%2;
+		if(node==0){
+			if(op == 0)
 			{
-				for(int LLIndex = tid; LLIndex < LLs0.size(); LLIndex+=2){
-					LL_lk0[LLIndex]->lock();
-					LLs0[LLIndex]->append(1);
-					LLOps0++;
-					LL_lk0[LLIndex]->unlock();
-				}
-			}
-			else if(dist(gen) == 1)
-			{
-				for(int LLIndex = tid; LLIndex < LLs0.size(); LLIndex+=num_threads){
-					LL_lk0[LLIndex]->lock();
-					int val = LLs0[LLIndex]->removeHead();
-					LLOps0++;
-					LL_lk0[LLIndex]->unlock();
-				}
+				LL_lk0[ds]->lock();
+				LLs0[ds]->append(ds);
+				LL_lk0[ds]->unlock();
 			}
 			else
 			{
-				for(int LLIndex = tid; LLIndex < LLs0.size(); LLIndex+=num_threads){
-					LL_lk0[LLIndex]->lock();
-					bool val = LLs0[LLIndex]->lookUp(1);
-					LLOps0++;
-					LL_lk0[LLIndex]->unlock();
-				}
+				LL_lk0[ds]->lock();
+				LLs0[ds]->removeHead();
+				LL_lk0[ds]->unlock();
 			}
 		}
-	}
-	else {
-		auto startTimer = std::chrono::steady_clock::now();
-		auto endTimer = startTimer + std::chrono::seconds(duration);
-		while (std::chrono::steady_clock::now() < endTimer) {
-			if(dist(gen) == 0)
+		else{
+			if(op == 0)
 			{
-				for(int LLIndex = tid; LLIndex < LLs1.size(); LLIndex+=num_threads){
-					LL_lk1[LLIndex]->lock();
-					LLs1[LLIndex]->append(1);
-					LLOps1++;
-					LL_lk1[LLIndex]->unlock();
-				}
+				LL_lk1[ds]->lock();
+				LLs1[ds]->append(ds);
+				LL_lk1[ds]->unlock();
 			}
-			else if(dist(gen)==1)
+			else
 			{
-				for(int LLIndex = tid; LLIndex < LLs1.size(); LLIndex+=num_threads){
-					LL_lk1[LLIndex]->lock();
-					int val = LLs1[LLIndex]->removeHead();
-					LLOps1++;
-					LL_lk1[LLIndex]->unlock();
-				}
-			}
-			else {
-				for(int LLIndex = tid; LLIndex < LLs1.size(); LLIndex+=num_threads){
-					LL_lk1[LLIndex]->lock();
-					bool val = LLs1[LLIndex]->lookUp(1);
-					LLOps1++;
-					LL_lk1[LLIndex]->unlock();
-				}
+				LL_lk1[ds]->lock();
+				LLs1[ds]->removeHead();
+				LL_lk1[ds]->unlock();
 			}
 		}
+		ops++;
 	}
-	pthread_barrier_wait(&LLBar);
+
+	globalLK->lock();
+	if(node==0)
+	{
+		ops0 += ops;
+	}
+	else
+	{
+		ops1 += ops;
+	}
+
+	globalLK->unlock();
+
+	pthread_barrier_wait(&bar);
+}
+
+void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_threads)
+{	
+	#ifdef DEBUG
 	if(tid == 1 && node==0)
 	{	// startTime = chrono::high_resolution_clock::now();
 		std::cout << "Only thread "<< tid << " will print this." << std::endl;
-		std::cout << "Final LLOps: " << LLOps0+LLOps1 << std::endl;
+	}		
+	#endif
+
+	pthread_barrier_wait(&bar);
+	std::mt19937 gen(123);
+	std::uniform_int_distribution<> dist(0, BSTs0.size()-1);
+	std::uniform_int_distribution<> opDist(1, 100);
+	//std::cout << "Thread " << tid << " about to start working on node id"<<node << std::endl;
+	int ops = 0;
+	auto startTimer = std::chrono::steady_clock::now();
+	auto endTimer = startTimer + std::chrono::seconds(duration);
+	while (std::chrono::steady_clock::now() < endTimer) {
+		int ds = dist(gen);
+		if(node==0){
+			if(opDist(gen)<=40)
+			{
+				BST_lk0[ds]->lock();
+				BSTs0[ds]->lookup(1);
+				BST_lk0[ds]->unlock();
+			}
+			else if(opDist(gen)<=80){
+				BST_lk0[ds]->lock();
+				BSTs0[ds]->update(ds);
+				BST_lk0[ds]->unlock();
+			}
+			else if(opDist(gen)<=90){
+				BST_lk0[ds]->lock();
+				BSTs0[ds]->insert(ds);
+				BST_lk0[ds]->unlock();
+			}
+			else{
+				BST_lk0[ds]->lock();
+				BSTs0[ds]->remove(ds);
+				BST_lk0[ds]->unlock();
+			}
+		}
+		else{
+			if(opDist(gen)<=40)
+			{
+				BST_lk1[ds]->lock();
+				BSTs1[ds]->lookup(ds);
+				BST_lk1[ds]->unlock();
+			}
+			else if(opDist(gen)<=80){
+				BST_lk1[ds]->lock();
+				BSTs1[ds]->update(ds);
+				BST_lk1[ds]->unlock();
+			}
+			else if(opDist(gen)<=90){
+				BST_lk1[ds]->lock();
+				BSTs1[ds]->insert(ds);
+				BST_lk1[ds]->unlock();
+			}
+			else{
+				BST_lk1[ds]->lock();
+				BSTs1[ds]->remove(ds);
+				BST_lk1[ds]->unlock();
+			}
+		}
+		ops++;
 	}
-	pthread_barrier_wait(&LLBar);
+
+	globalLK->lock();
+	if(node==0)
+	{
+		ops0 += ops;
+	}
+	else
+	{
+		ops1 += ops;
+	}
+	globalLK->unlock();
+
+	pthread_barrier_wait(&bar);
+
 }
-
-
-
-
 
 
 
@@ -520,8 +548,6 @@ void global_cleanup(){
 		delete Stacks1[i];
 	}
 
-	pthread_barrier_destroy(&StackBar);
-
 	for(int i = 0; i < Queues0.size(); i++)
 	{
 		delete Queues0[i];
@@ -530,7 +556,6 @@ void global_cleanup(){
 	{
 		delete Queues1[i];
 	}
-	pthread_barrier_destroy(&QueueBar);
 
 	for(int i = 0; i < BSTs0.size(); i++)
 	{
@@ -540,11 +565,9 @@ void global_cleanup(){
 	{
 		delete BSTs1[i];
 	}
-	pthread_barrier_destroy(&BSTBar);
 
 	for(int i = 0; i < LLs0.size(); i++)
 	{
 		delete LLs0[i];
 	}
-	pthread_barrier_destroy(&LLBar);
 }

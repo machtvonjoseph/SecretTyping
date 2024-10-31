@@ -4,7 +4,7 @@
  * \date 10/28/2012
  *
  */
-
+#pragma once
 #ifndef _STACK_HPP_
 #define _STACK_HPP_
 

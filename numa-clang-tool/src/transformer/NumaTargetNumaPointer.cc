@@ -46,8 +46,12 @@ void NumaTargetNumaPointer::start(){
        
     using namespace clang::ast_matchers;
     MatchFinder templateSpecializationFinder;
+    // MatchFinder BinaryOperatorFinder;
     auto templateSpecializationDeclMatcher = classTemplateSpecializationDecl().bind("templateSpecializationDecl");
+    // auto binaryOperatorMatcher = binaryOperator().bind("assignOp");
     templateSpecializationFinder.addMatcher(templateSpecializationDeclMatcher, this);
+    // BinaryOperatorFinder.addMatcher(binaryOperatorMatcher, this);
+    // BinaryOperatorFinder.matchAST(context);
     templateSpecializationFinder.matchAST(context);
     return;
 }
@@ -68,6 +72,7 @@ void NumaTargetNumaPointer::introspectMethods(CXXMethodDecl* method,const clang:
                         if(CXXNewExprVisitor.TraverseStmt(assignment)){
                             for(auto CXXNewExpr : CXXNewExprVisitor.getCXXNewExprs()){
                                 if(CXXNewExpr){
+                                    llvm::outs()<<"KIDUS KIDUS KIDUS numa type to be casted is "<< CXXNewExpr->getType().getAsString() <<"\n";
                                     llvm::outs()<<"This new expression comes from a member variable assignment. Now calling castNewExprOCE\n";
                                     castNewExprOCE(CXXNewExpr, memberExpr,  FoundType, FoundInt, rewriteLocation, result, RecursiveNumaTyper);
                                 }
@@ -91,6 +96,7 @@ void NumaTargetNumaPointer::introspectMethods(CXXMethodDecl* method,const clang:
                         if(CXXNewExprVisitor.TraverseStmt(declStmt)){
                             for(auto CXXNewExpr : CXXNewExprVisitor.getCXXNewExprs()){
                                 if(CXXNewExpr){
+                                    llvm::outs()<<"KIDUS KIDUS KIDUS numa type to be casted is "<< CXXNewExpr->getType().getAsString() <<"\n";
                                     castNewExprDecls(CXXNewExpr, varDecl,  FoundType, FoundInt, rewriteLocation, result, RecursiveNumaTyper);
                                 }
                                 CXXNewExprVisitor.clearCXXNewExprs();
@@ -199,9 +205,18 @@ void NumaTargetNumaPointer::run(const clang::ast_matchers::MatchFinder::MatchRes
     if(result.Nodes.getNodeAs<ClassTemplateSpecializationDecl>("templateSpecializationDecl")->getNameAsString().empty())
         return;
 
+
+
     for(auto &specialization : RecursiveNumaTyperobj.getSpecializedClasses()){
         llvm::outs() << "Specialized Class: " << specialization.first->getNameAsString() << " NodeID: " << specialization.second << "\n";
     }
+
+    // const BinaryOperator *AssignOp = result.Nodes.getNodeAs<BinaryOperator>("assignOp"); 
+    //     //print the binary operator
+    // if(AssignOp){
+    // llvm::outs() << "Found Binary Operator: " << AssignOp->getOpcodeStr() << "\n";
+    // }
+
 
     const auto *TemplateDecl = result.Nodes.getNodeAs<ClassTemplateSpecializationDecl>("templateSpecializationDecl")->getSpecializedTemplate();
             //check if its numa

@@ -7,9 +7,10 @@
 #include <vector>
 #include <memory>
 #include <numa.h>
+#include <thread>
 
 template <int NodeID>
-class thread_numa {
+class thread_numa : public std::thread {
 public:
     using thread_type = std::thread;
 

@@ -31,10 +31,14 @@ mutex* LL_lk;
 
 
 
-numa<Stack,0> *stack;
-numa<Queue,0> *queue;
-numa<BinarySearchTree,0> *bst;
-numa<LinkedList,0> *ll;
+// numa<Stack,0> *stack;
+// numa<Queue,0> *queue;
+// numa<BinarySearchTree,0> *bst;
+// numa<LinkedList,0> *ll;
+Stack *stack;
+Queue *queue;
+BinarySearchTree *bst;
+LinkedList *ll;
 pthread_barrier_t bar;
 
 chrono::high_resolution_clock::time_point startTime;

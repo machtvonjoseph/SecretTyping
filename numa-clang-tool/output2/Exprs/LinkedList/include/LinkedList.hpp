@@ -153,6 +153,7 @@ template<>
 class numa<LinkedList,0>{
 public: 
     static void* operator new(std::size_t sz){
+        // cout<<"doing numa allocation \n";
 		 void* p = numa_alloc_onnode(sz * sizeof(LinkedList), 0);
         if (p == nullptr) {
             throw std::bad_alloc();
@@ -169,6 +170,7 @@ public:
     }
 
     static void operator delete(void* ptr){
+        // cout<<"doing numa free \n";
 		numa_free(ptr, 1 * sizeof(LinkedList));
     }
 
@@ -195,7 +197,6 @@ virtual ~numa()
 }
 virtual int removeHead(){
     if (this->head == __null) {
-        std::cout << "LinkedList Empty!!" << std::endl;
         return -1;
     }
     Node *temp = this->head;
@@ -256,7 +257,6 @@ virtual void insertAfter(int existData, int newData){
 }
 virtual int removeTail(){
     if (this->head == __null) {
-        std::cout << "LinkedList Empty!!" << std::endl;
         return -1;
     }
     Node *current = this->head;
@@ -307,7 +307,6 @@ virtual void insertAtIndex(int index, int newData){
 }
 virtual void display(){
     if (this->head == __null) {
-        std::cout << "LinkedList Empty!!" << std::endl;
         return;
     }
     Node *temp = this->head;
@@ -345,6 +344,7 @@ template<>
 class numa<LinkedList,1>{
 public: 
     static void* operator new(std::size_t sz){
+        // cout<<"doing numa allocation \n";
 		 void* p = numa_alloc_onnode(sz * sizeof(LinkedList), 1);
         if (p == nullptr) {
             throw std::bad_alloc();
@@ -361,6 +361,7 @@ public:
     }
 
     static void operator delete(void* ptr){
+        // cout<<"doing numa free \n";
 		numa_free(ptr, 1 * sizeof(LinkedList));
     }
 
@@ -387,7 +388,6 @@ virtual ~numa()
 }
 virtual int removeHead(){
     if (this->head == __null) {
-        std::cout << "LinkedList Empty!!" << std::endl;
         return -1;
     }
     Node *temp = this->head;
@@ -448,7 +448,6 @@ virtual void insertAfter(int existData, int newData){
 }
 virtual int removeTail(){
     if (this->head == __null) {
-        std::cout << "LinkedList Empty!!" << std::endl;
         return -1;
     }
     Node *current = this->head;
@@ -499,7 +498,6 @@ virtual void insertAtIndex(int index, int newData){
 }
 virtual void display(){
     if (this->head == __null) {
-        std::cout << "LinkedList Empty!!" << std::endl;
         return;
     }
     Node *temp = this->head;
@@ -557,7 +555,7 @@ int LinkedList::removeHead()
 {
 	if(head == NULL)
 	{
-		std::cout << "LinkedList Empty!!" << std::endl;
+		//std::cout << "LinkedList Empty!!" << std::endl;
 		return -1;
 	}
 	Node *temp = head;
@@ -640,7 +638,6 @@ int LinkedList::removeTail()
 	 */
 	if(head == NULL)
 	{
-		std::cout << "LinkedList Empty!!" << std::endl;
 		return -1;
 	}
 
@@ -703,7 +700,7 @@ void LinkedList::display()
 {
 	if(head == NULL)
 	{
-		std::cout << "LinkedList Empty!!" << std::endl;
+		//std::cout << "LinkedList Empty!!" << std::endl;
 		return;
 	}
 

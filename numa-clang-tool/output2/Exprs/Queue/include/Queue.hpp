@@ -1,4 +1,5 @@
 #include "numatype.hpp"
+#pragma once
 #ifndef _QUEUE_HPP_
 #define _QUEUE_HPP_
 
@@ -70,6 +71,7 @@ template<>
 class numa<Queue,0>{
 public: 
     static void* operator new(std::size_t sz){
+        // cout<<"doing numa allocation \n";
 		 void* p = numa_alloc_onnode(sz * sizeof(Queue), 0);
         if (p == nullptr) {
             throw std::bad_alloc();
@@ -86,6 +88,7 @@ public:
     }
 
     static void operator delete(void* ptr){
+        // cout<<"doing numa free \n";
 		numa_free(ptr, 1 * sizeof(Queue));
     }
 
@@ -116,6 +119,9 @@ virtual int del(){
     this->front = this->front->getLink();
     int data = temp->getData();
     delete temp;
+    if (this->front == __null) {
+        this->rear = __null;
+    }
     return data;
 }
 virtual void add(int initData){
@@ -150,6 +156,7 @@ template<>
 class numa<Queue,1>{
 public: 
     static void* operator new(std::size_t sz){
+        // cout<<"doing numa allocation \n";
 		 void* p = numa_alloc_onnode(sz * sizeof(Queue), 1);
         if (p == nullptr) {
             throw std::bad_alloc();
@@ -166,6 +173,7 @@ public:
     }
 
     static void operator delete(void* ptr){
+        // cout<<"doing numa free \n";
 		numa_free(ptr, 1 * sizeof(Queue));
     }
 
@@ -196,6 +204,9 @@ virtual int del(){
     this->front = this->front->getLink();
     int data = temp->getData();
     delete temp;
+    if (this->front == __null) {
+        this->rear = __null;
+    }
     return data;
 }
 virtual void add(int initData){
@@ -254,6 +265,11 @@ int Queue::del()
 	front = front->getLink();
 	int data = temp->getData();
 	delete temp;
+
+	if(front == NULL)
+	{
+		rear = NULL;
+	}
 
 	return data;
 

@@ -1,4 +1,5 @@
 #include "numatype.hpp"
+#pragma once
 #ifndef _NODE_HPP_
 #define _NODE_HPP_
 

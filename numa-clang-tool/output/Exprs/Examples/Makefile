@@ -16,17 +16,15 @@ else
 endif
 
 
-$(EXE): $(OBJS)
-	$(CC) $(OBJS) -o $(EXE) 
 
 $(EXE): $(OBJS)
 	$(CC) $(OBJS) $(LINK_FLAGS) -o $(EXE) 
 
 main.o: 
-	$(CC) -c -g -std=c++20  -pthread $(INC_DIRS) $(FLAGS) -D_NODE_HPP=1 main.cpp
+	$(CC) -c -g -O3 -std=c++20  -pthread $(INC_DIRS) $(FLAGS) -D_NODE_HPP=1 main.cpp
 
 TestSuite.o: TestSuite.hpp TestSuite.cpp
-	$(CC) -c -O0 -std=c++20  -pthread $(INC_DIRS) $(FLAGS) -g TestSuite.cpp 
+	$(CC) -c -O3 -std=c++20  -pthread $(INC_DIRS) $(FLAGS) -g TestSuite.cpp 
 
 clean:
 	rm *.o $(EXE)

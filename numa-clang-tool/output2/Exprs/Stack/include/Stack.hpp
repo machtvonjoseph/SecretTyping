@@ -5,7 +5,7 @@
  * \date 10/28/2012
  *
  */
-
+#pragma once
 #ifndef _STACK_HPP_
 #define _STACK_HPP_
 
@@ -90,6 +90,7 @@ template<>
 class numa<Stack,0>{
 public: 
     static void* operator new(std::size_t sz){
+        // cout<<"doing numa allocation \n";
 		 void* p = numa_alloc_onnode(sz * sizeof(Stack), 0);
         if (p == nullptr) {
             throw std::bad_alloc();
@@ -106,6 +107,7 @@ public:
     }
 
     static void operator delete(void* ptr){
+        // cout<<"doing numa free \n";
 		numa_free(ptr, 1 * sizeof(Stack));
     }
 
@@ -176,6 +178,7 @@ template<>
 class numa<Stack,1>{
 public: 
     static void* operator new(std::size_t sz){
+        // cout<<"doing numa allocation \n";
 		 void* p = numa_alloc_onnode(sz * sizeof(Stack), 1);
         if (p == nullptr) {
             throw std::bad_alloc();
@@ -192,6 +195,7 @@ public:
     }
 
     static void operator delete(void* ptr){
+        // cout<<"doing numa free \n";
 		numa_free(ptr, 1 * sizeof(Stack));
     }
 

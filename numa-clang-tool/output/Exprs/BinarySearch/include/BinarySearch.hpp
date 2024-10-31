@@ -111,12 +111,17 @@ public:
 
 	virtual void postOrder(BinaryNode *node);
 
+	virtual void update(int data);
+
+	virtual void remove(int data);
+
 };
 
 template<>
 class numa<BinarySearchTree,0>{
 public: 
     static void* operator new(std::size_t sz){
+        // cout<<"doing numa allocation \n";
 		 void* p = numa_alloc_onnode(sz * sizeof(BinarySearchTree), 0);
         if (p == nullptr) {
             throw std::bad_alloc();
@@ -133,6 +138,7 @@ public:
     }
 
     static void operator delete(void* ptr){
+        // cout<<"doing numa free \n";
 		numa_free(ptr, 1 * sizeof(BinarySearchTree));
     }
 
@@ -228,6 +234,42 @@ virtual void postOrder(BinaryNode * node){
     if (node->getRightChild() != __null)
         this->postOrder(node->getRightChild());
     std::cout << " " << node->getData() << " ";
+}
+virtual void update(int data){
+    if (this->root == __null) {
+        return;
+    }
+    BinaryNode *current = this->root;
+    BinaryNode *parent;
+    while (current != __null)
+        {
+            if (current->getData() == data) {
+                return;
+            }
+            if (data < current->getData()) {
+                current = current->getLeftChild();
+            } else {
+                current = current->getRightChild();
+            }
+        }
+}
+virtual void remove(int data){
+    if (this->root == __null) {
+        return;
+    }
+    BinaryNode *current = this->root;
+    BinaryNode *parent;
+    while (current != __null)
+        {
+            if (current->getData() == data) {
+                return;
+            }
+            if (data < current->getData()) {
+                current = current->getLeftChild();
+            } else {
+                current = current->getRightChild();
+            }
+        }
 }
 private:
 numa<BinaryNode*,0> root;
@@ -237,6 +279,7 @@ template<>
 class numa<BinarySearchTree,1>{
 public: 
     static void* operator new(std::size_t sz){
+        // cout<<"doing numa allocation \n";
 		 void* p = numa_alloc_onnode(sz * sizeof(BinarySearchTree), 1);
         if (p == nullptr) {
             throw std::bad_alloc();
@@ -253,6 +296,7 @@ public:
     }
 
     static void operator delete(void* ptr){
+        // cout<<"doing numa free \n";
 		numa_free(ptr, 1 * sizeof(BinarySearchTree));
     }
 
@@ -348,6 +392,42 @@ virtual void postOrder(BinaryNode * node){
     if (node->getRightChild() != __null)
         this->postOrder(node->getRightChild());
     std::cout << " " << node->getData() << " ";
+}
+virtual void update(int data){
+    if (this->root == __null) {
+        return;
+    }
+    BinaryNode *current = this->root;
+    BinaryNode *parent;
+    while (current != __null)
+        {
+            if (current->getData() == data) {
+                return;
+            }
+            if (data < current->getData()) {
+                current = current->getLeftChild();
+            } else {
+                current = current->getRightChild();
+            }
+        }
+}
+virtual void remove(int data){
+    if (this->root == __null) {
+        return;
+    }
+    BinaryNode *current = this->root;
+    BinaryNode *parent;
+    while (current != __null)
+        {
+            if (current->getData() == data) {
+                return;
+            }
+            if (data < current->getData()) {
+                current = current->getLeftChild();
+            } else {
+                current = current->getRightChild();
+            }
+        }
 }
 private:
 numa<BinaryNode*,1> root;
@@ -361,6 +441,54 @@ BinarySearchTree::BinarySearchTree() : root(NULL)
 BinarySearchTree::~BinarySearchTree()
 {
 	root = NULL;
+}
+
+void BinarySearchTree::update(int data)
+{
+	if(root == NULL)
+	{
+		return;
+	}
+	BinaryNode *current = root;
+	BinaryNode *parent;
+	while(current != NULL)
+	{
+		if(current->getData() == data)
+		{
+			return;
+		}
+		if(data < current->getData())
+		{
+			current = current->getLeftChild();
+		}else
+		{
+			current = current->getRightChild();
+		}
+	}
+}
+
+void BinarySearchTree::remove(int data)
+{
+	if(root == NULL)
+	{
+		return;
+	}
+	BinaryNode *current = root;
+	BinaryNode *parent;
+	while(current != NULL)
+	{
+		if(current->getData() == data)
+		{
+			return;
+		}
+		if(data < current->getData())
+		{
+			current = current->getLeftChild();
+		}else
+		{
+			current = current->getRightChild();
+		}
+	}
 }
 
 void BinarySearchTree::insert(int data)

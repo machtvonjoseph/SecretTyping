@@ -1,4 +1,5 @@
 #include "numatype.hpp"
+#pragma once
 #ifndef _NODE_HPP_
 #define _NODE_HPP_
 
@@ -26,6 +27,7 @@ template<>
 class numa<Node,0>{
 public: 
     static void* operator new(std::size_t sz){
+        // cout<<"doing numa allocation \n";
 		 void* p = numa_alloc_onnode(sz * sizeof(Node), 0);
         if (p == nullptr) {
             throw std::bad_alloc();
@@ -42,6 +44,7 @@ public:
     }
 
     static void operator delete(void* ptr){
+        // cout<<"doing numa free \n";
 		numa_free(ptr, 1 * sizeof(Node));
     }
 
@@ -83,6 +86,7 @@ template<>
 class numa<Node,1>{
 public: 
     static void* operator new(std::size_t sz){
+        // cout<<"doing numa allocation \n";
 		 void* p = numa_alloc_onnode(sz * sizeof(Node), 1);
         if (p == nullptr) {
             throw std::bad_alloc();
@@ -99,6 +103,7 @@ public:
     }
 
     static void operator delete(void* ptr){
+        // cout<<"doing numa free \n";
 		numa_free(ptr, 1 * sizeof(Node));
     }
 
