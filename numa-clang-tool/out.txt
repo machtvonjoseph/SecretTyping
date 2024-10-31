@@ -1,9 +1,6 @@
-Running Exprs
+Running DS
 file hash value: 1
 Calling template arg transformer
-Specialized classes at the begining:
-Specialized classes at the begining:
-Specialized classes at the begining:
 Specialized classes at the begining:
 Specialized classes at the begining:
 Specialized classes at the begining:
@@ -17,26 +14,11 @@ Found CXXNewExpr in BinaryOperator RHS
 Found CXXNewExpr in BinaryOperator RHS
 Found CXXNewExpr in BinaryOperator RHS
 Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
 Found binary operator
 Get all the file names in rewriter source manager
-Output File Name: /home/kidus/NUMATyping/numa-clang-tool/output/Exprs/Examples/TestSuite.hpp
+Output File Name: /home/kidus/NUMATyping/numa-clang-tool/output/numa-mt-Data-Structures/Examples/TestSuite.hpp
 file hash value: 1
 Calling template arg transformer
-Specialized classes at the begining:
-Specialized classes at the begining:
-Specialized classes at the begining:
 Specialized classes at the begining:
 Specialized classes at the begining:
 Specialized classes at the begining:
@@ -149,15 +131,7 @@ Specialized classes at the begining:
 Specialized classes at the begining:
 Specialized classes at the begining:
 Specialized classes at the begining:
-Specialized classes at the begining:
-Specialized classes at the begining:
 Processing Function : ~BinarySearchTree
-Found binary operator
-Specialized classes at the begining:
-Processing Function : update
-Found binary operator
-Specialized classes at the begining:
-Processing Function : remove
 Found binary operator
 Specialized classes at the begining:
 Processing Function : insert
@@ -196,7 +170,6 @@ Specialized classes at the begining:
 Processing Function : getLength
 Found binary operator
 Specialized classes at the begining:
-Specialized classes at the begining:
 Processing Function : LinkedList
 Found binary operator
 Specialized classes at the begining:
@@ -224,22 +197,29 @@ Specialized classes at the begining:
 Processing Function : display
 Found binary operator
 Specialized classes at the begining:
-Processing Function : lookUp
-Found binary operator
-Specialized classes at the begining:
-Processing Function : numa_Stack_init
+Processing Function : DS_init
 Found CXXNewExpr in BinaryOperator RHS
+The RHS expression isCXXNewExpr
+The LHS type is numa<Stack, 0> *
 Found CXXNewExpr in BinaryOperator RHS
+The RHS expression isCXXNewExpr
+The LHS type is numa<Queue, 0> *
 Found CXXNewExpr in BinaryOperator RHS
+The RHS expression isImplicitCastExpr
+The LHS type is BinarySearchTree *
 Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
+The RHS expression isImplicitCastExpr
+The LHS type is LinkedList *
 Found binary operator
 new expression is numa<Stack, 0> *
+left expression is numa<Stack, 0> *
+new expression is numa<Queue, 0> *
+left expression is numa<Queue, 0> *
+new expression is numa<BinarySearchTree, 0> *
+left expression is BinarySearchTree *
 Done casting new expression
-new expression is numa<Stack, 1> *
+new expression is numa<LinkedList, 0> *
+left expression is LinkedList *
 Done casting new expression
 FirstTempArg is Stack
 SecondTempArg is 0
@@ -249,315 +229,139 @@ FirstTempArg from specialzeClassStack and SecondTempArg from specialize class is
 Specialized classes:
 Stack 0
 About to specialize Stack as numa
-FirstTempArg is Stack
-SecondTempArg is 1
-Size of specialized classes is 1
-Size of specialized classes is 2
-FirstTempArg from specialzeClassStack and SecondTempArg from specialize class is 1
-Specialized classes:
-Stack 0
-Stack 1
-About to specialize Stack as numa
-Specialized classes at the begining:
-Stack 0
-Stack 1
-Processing Function : numa_Queue_init
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found binary operator
-new expression is numa<Queue, 0> *
-Done casting new expression
-new expression is numa<Queue, 1> *
-Done casting new expression
-FirstTempArg is Stack
-SecondTempArg is 0
-FirstTempArg is Stack
-SecondTempArg is 1
 FirstTempArg is Queue
 SecondTempArg is 0
+Size of specialized classes is 1
 Size of specialized classes is 2
-Size of specialized classes is 3
 FirstTempArg from specialzeClassQueue and SecondTempArg from specialize class is 0
 Specialized classes:
 Stack 0
-Stack 1
 Queue 0
 About to specialize Queue as numa
-FirstTempArg is Queue
-SecondTempArg is 1
-Size of specialized classes is 3
-Size of specialized classes is 4
-FirstTempArg from specialzeClassQueue and SecondTempArg from specialize class is 1
-Specialized classes:
-Stack 0
-Stack 1
-Queue 0
-Queue 1
-About to specialize Queue as numa
-Specialized classes at the begining:
-Stack 0
-Stack 1
-Queue 0
-Queue 1
-Processing Function : numa_LL_init
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found binary operator
-new expression is numa<LinkedList, 0> *
-Done casting new expression
-new expression is numa<LinkedList, 1> *
-Done casting new expression
-FirstTempArg is Stack
-SecondTempArg is 0
-FirstTempArg is Stack
-SecondTempArg is 1
-FirstTempArg is Queue
-SecondTempArg is 0
-FirstTempArg is Queue
-SecondTempArg is 1
-FirstTempArg is LinkedList
-SecondTempArg is 0
-Size of specialized classes is 4
-Size of specialized classes is 5
-FirstTempArg from specialzeClassLinkedList and SecondTempArg from specialize class is 0
-Specialized classes:
-Stack 0
-Stack 1
-Queue 0
-Queue 1
-LinkedList 0
-About to specialize LinkedList as numa
-FirstTempArg is LinkedList
-SecondTempArg is 1
-Size of specialized classes is 5
-Size of specialized classes is 6
-FirstTempArg from specialzeClassLinkedList and SecondTempArg from specialize class is 1
-Specialized classes:
-Stack 0
-Stack 1
-Queue 0
-Queue 1
-LinkedList 0
-LinkedList 1
-About to specialize LinkedList as numa
-Specialized classes at the begining:
-Stack 0
-Stack 1
-Queue 0
-Queue 1
-LinkedList 0
-LinkedList 1
-Processing Function : numa_BST_init
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found CXXNewExpr in BinaryOperator RHS
-Found binary operator
-new expression is numa<BinarySearchTree, 0> *
-Done casting new expression
-new expression is numa<BinarySearchTree, 1> *
-Done casting new expression
-FirstTempArg is Stack
-SecondTempArg is 0
-FirstTempArg is Stack
-SecondTempArg is 1
-FirstTempArg is Queue
-SecondTempArg is 0
-FirstTempArg is Queue
-SecondTempArg is 1
-FirstTempArg is LinkedList
-SecondTempArg is 0
-FirstTempArg is LinkedList
-SecondTempArg is 1
 FirstTempArg is BinarySearchTree
 SecondTempArg is 0
-Size of specialized classes is 6
-Size of specialized classes is 7
+Size of specialized classes is 2
+Size of specialized classes is 3
 FirstTempArg from specialzeClassBinarySearchTree and SecondTempArg from specialize class is 0
 Specialized classes:
 Stack 0
-Stack 1
 Queue 0
-Queue 1
-LinkedList 0
-LinkedList 1
 BinarySearchTree 0
 About to specialize BinarySearchTree as numa
-FirstTempArg is BinarySearchTree
-SecondTempArg is 1
-Size of specialized classes is 7
-Size of specialized classes is 8
-FirstTempArg from specialzeClassBinarySearchTree and SecondTempArg from specialize class is 1
+FirstTempArg is LinkedList
+SecondTempArg is 0
+Size of specialized classes is 3
+Size of specialized classes is 4
+FirstTempArg from specialzeClassLinkedList and SecondTempArg from specialize class is 0
 Specialized classes:
 Stack 0
-Stack 1
 Queue 0
-Queue 1
-LinkedList 0
-LinkedList 1
 BinarySearchTree 0
-BinarySearchTree 1
-About to specialize BinarySearchTree as numa
+LinkedList 0
+About to specialize LinkedList as numa
 Specialized classes at the begining:
 Stack 0
-Stack 1
 Queue 0
-Queue 1
-LinkedList 0
-LinkedList 1
 BinarySearchTree 0
-BinarySearchTree 1
+LinkedList 0
+Processing Function : sync_init
+Found CXXNewExpr in BinaryOperator RHS
+Found CXXNewExpr in BinaryOperator RHS
+Found CXXNewExpr in BinaryOperator RHS
+Found CXXNewExpr in BinaryOperator RHS
+Found binary operator
+FirstTempArg is Stack
+SecondTempArg is 0
+FirstTempArg is Queue
+SecondTempArg is 0
+FirstTempArg is BinarySearchTree
+SecondTempArg is 0
+FirstTempArg is LinkedList
+SecondTempArg is 0
+Specialized classes at the begining:
+Stack 0
+Queue 0
+BinarySearchTree 0
+LinkedList 0
 Processing Function : StackTest
 Found binary operator
 FirstTempArg is Stack
 SecondTempArg is 0
-FirstTempArg is Stack
-SecondTempArg is 1
 FirstTempArg is Queue
 SecondTempArg is 0
-FirstTempArg is Queue
-SecondTempArg is 1
-FirstTempArg is LinkedList
-SecondTempArg is 0
-FirstTempArg is LinkedList
-SecondTempArg is 1
 FirstTempArg is BinarySearchTree
 SecondTempArg is 0
-FirstTempArg is BinarySearchTree
-SecondTempArg is 1
+FirstTempArg is LinkedList
+SecondTempArg is 0
 Specialized classes at the begining:
 Stack 0
-Stack 1
 Queue 0
-Queue 1
-LinkedList 0
-LinkedList 1
 BinarySearchTree 0
-BinarySearchTree 1
+LinkedList 0
 Processing Function : QueueTest
 Found binary operator
 FirstTempArg is Stack
 SecondTempArg is 0
-FirstTempArg is Stack
-SecondTempArg is 1
 FirstTempArg is Queue
 SecondTempArg is 0
-FirstTempArg is Queue
-SecondTempArg is 1
-FirstTempArg is LinkedList
-SecondTempArg is 0
-FirstTempArg is LinkedList
-SecondTempArg is 1
 FirstTempArg is BinarySearchTree
 SecondTempArg is 0
-FirstTempArg is BinarySearchTree
-SecondTempArg is 1
+FirstTempArg is LinkedList
+SecondTempArg is 0
 Specialized classes at the begining:
 Stack 0
-Stack 1
 Queue 0
-Queue 1
-LinkedList 0
-LinkedList 1
 BinarySearchTree 0
-BinarySearchTree 1
-Processing Function : LinkedListTest
-Found binary operator
-FirstTempArg is Stack
-SecondTempArg is 0
-FirstTempArg is Stack
-SecondTempArg is 1
-FirstTempArg is Queue
-SecondTempArg is 0
-FirstTempArg is Queue
-SecondTempArg is 1
-FirstTempArg is LinkedList
-SecondTempArg is 0
-FirstTempArg is LinkedList
-SecondTempArg is 1
-FirstTempArg is BinarySearchTree
-SecondTempArg is 0
-FirstTempArg is BinarySearchTree
-SecondTempArg is 1
-Specialized classes at the begining:
-Stack 0
-Stack 1
-Queue 0
-Queue 1
 LinkedList 0
-LinkedList 1
-BinarySearchTree 0
-BinarySearchTree 1
 Processing Function : BinarySearchTest
 Found binary operator
 FirstTempArg is Stack
 SecondTempArg is 0
-FirstTempArg is Stack
-SecondTempArg is 1
 FirstTempArg is Queue
 SecondTempArg is 0
-FirstTempArg is Queue
-SecondTempArg is 1
-FirstTempArg is LinkedList
-SecondTempArg is 0
-FirstTempArg is LinkedList
-SecondTempArg is 1
 FirstTempArg is BinarySearchTree
 SecondTempArg is 0
-FirstTempArg is BinarySearchTree
-SecondTempArg is 1
+FirstTempArg is LinkedList
+SecondTempArg is 0
 Specialized classes at the begining:
 Stack 0
-Stack 1
 Queue 0
-Queue 1
-LinkedList 0
-LinkedList 1
 BinarySearchTree 0
-BinarySearchTree 1
+LinkedList 0
+Processing Function : LinkedListTest
+Found binary operator
+FirstTempArg is Stack
+SecondTempArg is 0
+FirstTempArg is Queue
+SecondTempArg is 0
+FirstTempArg is BinarySearchTree
+SecondTempArg is 0
+FirstTempArg is LinkedList
+SecondTempArg is 0
+Specialized classes at the begining:
+Stack 0
+Queue 0
+BinarySearchTree 0
+LinkedList 0
 Processing Function : global_cleanup
 Found binary operator
 FirstTempArg is Stack
 SecondTempArg is 0
-FirstTempArg is Stack
-SecondTempArg is 1
 FirstTempArg is Queue
 SecondTempArg is 0
-FirstTempArg is Queue
-SecondTempArg is 1
-FirstTempArg is LinkedList
-SecondTempArg is 0
-FirstTempArg is LinkedList
-SecondTempArg is 1
 FirstTempArg is BinarySearchTree
 SecondTempArg is 0
-FirstTempArg is BinarySearchTree
-SecondTempArg is 1
+FirstTempArg is LinkedList
+SecondTempArg is 0
 Get all the file names in rewriter source manager
-Output File Name: /home/kidus/NUMATyping/numa-clang-tool/output/Exprs/Examples/TestSuite.hpp
-Output File Name: output/Exprs/Node/include/Node.hpp
-Output File Name: output/Exprs/LinkedList/include/LinkedList.hpp
-Output File Name: /home/kidus/NUMATyping/numa-clang-tool/output/Exprs/Examples/TestSuite.cpp
-Output File Name: output/Exprs/Stack/include/Stack.hpp
-Output File Name: output/Exprs/BinarySearch/include/BinarySearch.hpp
-Output File Name: output/Exprs/Queue/include/Queue.hpp
-Output File Name: output/Exprs/BinarySearch/include/BinaryNode.hpp
+Output File Name: output/numa-mt-Data-Structures/Stack/include/Stack.hpp
+Output File Name: output/numa-mt-Data-Structures/BinarySearch/include/BinarySearch.hpp
+Output File Name: /home/kidus/NUMATyping/numa-clang-tool/output/numa-mt-Data-Structures/Examples/TestSuite.cpp
+Output File Name: output/numa-mt-Data-Structures/Node/include/Node.hpp
+Output File Name: output/numa-mt-Data-Structures/LinkedList/include/LinkedList.hpp
+Output File Name: output/numa-mt-Data-Structures/BinarySearch/include/BinaryNode.hpp
+Output File Name: output/numa-mt-Data-Structures/Queue/include/Queue.hpp
+Output File Name: /home/kidus/NUMATyping/numa-clang-tool/output/numa-mt-Data-Structures/Examples/TestSuite.hpp
 file hash value: 1
 Calling template arg transformer from cast consumer
 Get all the file names in rewriter source manager
@@ -566,35 +370,19 @@ Calling template arg transformer from cast consumer
 The type is Stack
 The integral is 0
 Adding Stack and 0 to the specialized classes
-The type is Stack
-The integral is 1
-Adding Stack and 1 to the specialized classes
 The type is Queue
 The integral is 0
 Adding Queue and 0 to the specialized classes
-The type is Queue
-The integral is 1
-Adding Queue and 1 to the specialized classes
 The type is BinarySearchTree
 The integral is 0
 Adding BinarySearchTree and 0 to the specialized classes
-The type is BinarySearchTree
-The integral is 1
-Adding BinarySearchTree and 1 to the specialized classes
 The type is LinkedList
 The integral is 0
 Adding LinkedList and 0 to the specialized classes
-The type is LinkedList
-The integral is 1
-Adding LinkedList and 1 to the specialized classes
 Specialized Class: Stack NodeID: 0
-Specialized Class: Stack NodeID: 1
 Specialized Class: Queue NodeID: 0
-Specialized Class: Queue NodeID: 1
 Specialized Class: BinarySearchTree NodeID: 0
-Specialized Class: BinarySearchTree NodeID: 1
 Specialized Class: LinkedList NodeID: 0
-Specialized Class: LinkedList NodeID: 1
 The template class name is numa
 Found CXXRecordDecl: Stack
 The integral is 0
@@ -622,18 +410,14 @@ KIDUS KIDUS KIDUS numa type to be casted is Node *
 New Type: Node
 VarDecl Type: Node *
 Specializing Node and 0
-Size of specialized classes is 8
-Size of specialized classes is 9
+Size of specialized classes is 4
+Size of specialized classes is 5
 FirstTempArg from specialzeClassNode and SecondTempArg from specialize class is 0
 Specialized classes:
 Stack 0
-Stack 1
 Queue 0
-Queue 1
 BinarySearchTree 0
-BinarySearchTree 1
 LinkedList 0
-LinkedList 1
 Node 0
 About to specialize Node as numa
   Initializes member is written
@@ -646,75 +430,10 @@ VarDecl Name: temp
 Gonna introspect the method operator= of the class Stack that is specialized in numa class
 Gonna introspect the method numa of the class Stack that is specialized in numa class
 Specialized Class: Stack NodeID: 0
-Specialized Class: Stack NodeID: 1
 Specialized Class: Queue NodeID: 0
-Specialized Class: Queue NodeID: 1
 Specialized Class: BinarySearchTree NodeID: 0
-Specialized Class: BinarySearchTree NodeID: 1
 Specialized Class: LinkedList NodeID: 0
-Specialized Class: LinkedList NodeID: 1
 Specialized Class: Node NodeID: 0
-The template class name is numa
-Found CXXRecordDecl: Stack
-The integral is 1
-Gonna introspect the method operator new of the class Stack that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: p
-Gonna introspect the method operator new[] of the class Stack that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: p
-Gonna introspect the method operator delete of the class Stack that is specialized in numa class
-Gonna introspect the method operator delete[] of the class Stack that is specialized in numa class
-Gonna introspect the method numa of the class Stack that is specialized in numa class
-Gonna introspect the method ~numa of the class Stack that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: temp
-Gonna introspect the method pop of the class Stack that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: retN
-VarDecl found from inside the visitor
-VarDecl Name: data
-Gonna introspect the method push of the class Stack that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: newN
-KIDUS KIDUS KIDUS numa type to be casted is Node *
-New Type: Node
-VarDecl Type: Node *
-Specializing Node and 1
-Size of specialized classes is 9
-Size of specialized classes is 10
-FirstTempArg from specialzeClassNode and SecondTempArg from specialize class is 1
-Specialized classes:
-Stack 0
-Stack 1
-Queue 0
-Queue 1
-BinarySearchTree 0
-BinarySearchTree 1
-LinkedList 0
-LinkedList 1
-Node 0
-Node 1
-About to specialize Node as numa
-  Initializes member is written
-  Initializes member is member
-Gonna introspect the method display of the class Stack that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: i
-VarDecl found from inside the visitor
-VarDecl Name: temp
-Gonna introspect the method operator= of the class Stack that is specialized in numa class
-Gonna introspect the method numa of the class Stack that is specialized in numa class
-Specialized Class: Stack NodeID: 0
-Specialized Class: Stack NodeID: 1
-Specialized Class: Queue NodeID: 0
-Specialized Class: Queue NodeID: 1
-Specialized Class: BinarySearchTree NodeID: 0
-Specialized Class: BinarySearchTree NodeID: 1
-Specialized Class: LinkedList NodeID: 0
-Specialized Class: LinkedList NodeID: 1
-Specialized Class: Node NodeID: 0
-Specialized Class: Node NodeID: 1
 The template class name is numa
 Found CXXRecordDecl: Queue
 The integral is 0
@@ -757,66 +476,10 @@ VarDecl Name: temp
 Gonna introspect the method operator= of the class Queue that is specialized in numa class
 Gonna introspect the method numa of the class Queue that is specialized in numa class
 Specialized Class: Stack NodeID: 0
-Specialized Class: Stack NodeID: 1
 Specialized Class: Queue NodeID: 0
-Specialized Class: Queue NodeID: 1
 Specialized Class: BinarySearchTree NodeID: 0
-Specialized Class: BinarySearchTree NodeID: 1
 Specialized Class: LinkedList NodeID: 0
-Specialized Class: LinkedList NodeID: 1
 Specialized Class: Node NodeID: 0
-Specialized Class: Node NodeID: 1
-The template class name is numa
-Found CXXRecordDecl: Queue
-The integral is 1
-Gonna introspect the method operator new of the class Queue that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: p
-Gonna introspect the method operator new[] of the class Queue that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: p
-Gonna introspect the method operator delete of the class Queue that is specialized in numa class
-Gonna introspect the method operator delete[] of the class Queue that is specialized in numa class
-Gonna introspect the method numa of the class Queue that is specialized in numa class
-Gonna introspect the method ~numa of the class Queue that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: temp
-VarDecl found from inside the visitor
-VarDecl Name: data
-Gonna introspect the method del of the class Queue that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: temp
-VarDecl found from inside the visitor
-VarDecl Name: data
-Gonna introspect the method add of the class Queue that is specialized in numa class
-KIDUS KIDUS KIDUS numa type to be casted is Node *
-This new expression comes from a member variable assignment. Now calling castNewExprOCE
-New Type: Node
-MemberExpr Type: numa<Node *, 1>
-MemberExpr Type is numa but NewType is not
-Type replaced
-Specialization for Node and 1 already exists.
-VarDecl found from inside the visitor
-VarDecl Name: newNode
-KIDUS KIDUS KIDUS numa type to be casted is Node *
-New Type: Node
-VarDecl Type: Node *
-Specialization for Node and 1 already exists.
-Gonna introspect the method display of the class Queue that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: temp
-Gonna introspect the method operator= of the class Queue that is specialized in numa class
-Gonna introspect the method numa of the class Queue that is specialized in numa class
-Specialized Class: Stack NodeID: 0
-Specialized Class: Stack NodeID: 1
-Specialized Class: Queue NodeID: 0
-Specialized Class: Queue NodeID: 1
-Specialized Class: BinarySearchTree NodeID: 0
-Specialized Class: BinarySearchTree NodeID: 1
-Specialized Class: LinkedList NodeID: 0
-Specialized Class: LinkedList NodeID: 1
-Specialized Class: Node NodeID: 0
-Specialized Class: Node NodeID: 1
 The template class name is numa
 Found CXXRecordDecl: BinarySearchTree
 The integral is 0
@@ -837,20 +500,15 @@ KIDUS KIDUS KIDUS numa type to be casted is BinaryNode *
 New Type: BinaryNode
 VarDecl Type: BinaryNode *
 Specializing BinaryNode and 0
-Size of specialized classes is 10
-Size of specialized classes is 11
+Size of specialized classes is 5
+Size of specialized classes is 6
 FirstTempArg from specialzeClassBinaryNode and SecondTempArg from specialize class is 0
 Specialized classes:
 Stack 0
-Stack 1
 Queue 0
-Queue 1
 BinarySearchTree 0
-BinarySearchTree 1
 LinkedList 0
-LinkedList 1
 Node 0
-Node 1
 BinaryNode 0
 About to specialize BinaryNode as numa
   Initializes member is written
@@ -880,117 +538,14 @@ Gonna introspect the method inOrderPrint of the class BinarySearchTree that is s
 Gonna introspect the method inOrder of the class BinarySearchTree that is specialized in numa class
 Gonna introspect the method preOrder of the class BinarySearchTree that is specialized in numa class
 Gonna introspect the method postOrder of the class BinarySearchTree that is specialized in numa class
-Gonna introspect the method update of the class BinarySearchTree that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: current
-VarDecl found from inside the visitor
-VarDecl Name: parent
-Gonna introspect the method remove of the class BinarySearchTree that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: current
-VarDecl found from inside the visitor
-VarDecl Name: parent
 Gonna introspect the method operator= of the class BinarySearchTree that is specialized in numa class
 Gonna introspect the method numa of the class BinarySearchTree that is specialized in numa class
 Specialized Class: Stack NodeID: 0
-Specialized Class: Stack NodeID: 1
 Specialized Class: Queue NodeID: 0
-Specialized Class: Queue NodeID: 1
 Specialized Class: BinarySearchTree NodeID: 0
-Specialized Class: BinarySearchTree NodeID: 1
 Specialized Class: LinkedList NodeID: 0
-Specialized Class: LinkedList NodeID: 1
 Specialized Class: Node NodeID: 0
-Specialized Class: Node NodeID: 1
 Specialized Class: BinaryNode NodeID: 0
-The template class name is numa
-Found CXXRecordDecl: BinarySearchTree
-The integral is 1
-Gonna introspect the method operator new of the class BinarySearchTree that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: p
-Gonna introspect the method operator new[] of the class BinarySearchTree that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: p
-Gonna introspect the method operator delete of the class BinarySearchTree that is specialized in numa class
-Gonna introspect the method operator delete[] of the class BinarySearchTree that is specialized in numa class
-Gonna introspect the method numa of the class BinarySearchTree that is specialized in numa class
-Gonna introspect the method ~numa of the class BinarySearchTree that is specialized in numa class
-Gonna introspect the method insert of the class BinarySearchTree that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: leaf
-KIDUS KIDUS KIDUS numa type to be casted is BinaryNode *
-New Type: BinaryNode
-VarDecl Type: BinaryNode *
-Specializing BinaryNode and 1
-Size of specialized classes is 11
-Size of specialized classes is 12
-FirstTempArg from specialzeClassBinaryNode and SecondTempArg from specialize class is 1
-Specialized classes:
-Stack 0
-Stack 1
-Queue 0
-Queue 1
-BinarySearchTree 0
-BinarySearchTree 1
-LinkedList 0
-LinkedList 1
-Node 0
-Node 1
-BinaryNode 0
-BinaryNode 1
-About to specialize BinaryNode as numa
-  Initializes member is written
-  Initializes member is member
-  Initializes member is written
-  Initializes member is member
-  Initializes member is written
-  Initializes member is member
-  Initializes member is written
-  Initializes member is member
-  Initializes member is written
-  Initializes member is member
-  Initializes member is written
-  Initializes member is member
-VarDecl found from inside the visitor
-VarDecl Name: current
-VarDecl found from inside the visitor
-VarDecl Name: parent
-Gonna introspect the method lookup of the class BinarySearchTree that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: current
-VarDecl found from inside the visitor
-VarDecl Name: parent
-Gonna introspect the method postOrderPrint of the class BinarySearchTree that is specialized in numa class
-Gonna introspect the method preOrderPrint of the class BinarySearchTree that is specialized in numa class
-Gonna introspect the method inOrderPrint of the class BinarySearchTree that is specialized in numa class
-Gonna introspect the method inOrder of the class BinarySearchTree that is specialized in numa class
-Gonna introspect the method preOrder of the class BinarySearchTree that is specialized in numa class
-Gonna introspect the method postOrder of the class BinarySearchTree that is specialized in numa class
-Gonna introspect the method update of the class BinarySearchTree that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: current
-VarDecl found from inside the visitor
-VarDecl Name: parent
-Gonna introspect the method remove of the class BinarySearchTree that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: current
-VarDecl found from inside the visitor
-VarDecl Name: parent
-Gonna introspect the method operator= of the class BinarySearchTree that is specialized in numa class
-Gonna introspect the method numa of the class BinarySearchTree that is specialized in numa class
-Specialized Class: Stack NodeID: 0
-Specialized Class: Stack NodeID: 1
-Specialized Class: Queue NodeID: 0
-Specialized Class: Queue NodeID: 1
-Specialized Class: BinarySearchTree NodeID: 0
-Specialized Class: BinarySearchTree NodeID: 1
-Specialized Class: LinkedList NodeID: 0
-Specialized Class: LinkedList NodeID: 1
-Specialized Class: Node NodeID: 0
-Specialized Class: Node NodeID: 1
-Specialized Class: BinaryNode NodeID: 0
-Specialized Class: BinaryNode NodeID: 1
 The template class name is numa
 Found CXXRecordDecl: LinkedList
 The integral is 0
@@ -1078,119 +633,12 @@ Gonna introspect the method display of the class LinkedList that is specialized 
 VarDecl found from inside the visitor
 VarDecl Name: temp
 Gonna introspect the method getLength of the class LinkedList that is specialized in numa class
-Gonna introspect the method lookUp of the class LinkedList that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: temp
-Gonna introspect the method operator= of the class LinkedList that is specialized in numa class
-Gonna introspect the method numa of the class LinkedList that is specialized in numa class
-Specialized Class: Stack NodeID: 0
-Specialized Class: Stack NodeID: 1
-Specialized Class: Queue NodeID: 0
-Specialized Class: Queue NodeID: 1
-Specialized Class: BinarySearchTree NodeID: 0
-Specialized Class: BinarySearchTree NodeID: 1
-Specialized Class: LinkedList NodeID: 0
-Specialized Class: LinkedList NodeID: 1
-Specialized Class: Node NodeID: 0
-Specialized Class: Node NodeID: 1
-Specialized Class: BinaryNode NodeID: 0
-Specialized Class: BinaryNode NodeID: 1
-The template class name is numa
-Found CXXRecordDecl: LinkedList
-The integral is 1
-Gonna introspect the method operator new of the class LinkedList that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: p
-Gonna introspect the method operator new[] of the class LinkedList that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: p
-Gonna introspect the method operator delete of the class LinkedList that is specialized in numa class
-Gonna introspect the method operator delete[] of the class LinkedList that is specialized in numa class
-Gonna introspect the method numa of the class LinkedList that is specialized in numa class
-Gonna introspect the method ~numa of the class LinkedList that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: temp
-Gonna introspect the method removeHead of the class LinkedList that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: temp
-VarDecl found from inside the visitor
-VarDecl Name: data
-Gonna introspect the method append of the class LinkedList that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: newNode
-KIDUS KIDUS KIDUS numa type to be casted is Node *
-New Type: Node
-VarDecl Type: Node *
-Specialization for Node and 1 already exists.
-VarDecl found from inside the visitor
-VarDecl Name: temp
-VarDecl found from inside the visitor
-VarDecl Name: newNode
-KIDUS KIDUS KIDUS numa type to be casted is Node *
-New Type: Node
-VarDecl Type: Node *
-Specialization for Node and 1 already exists.
-Gonna introspect the method prepend of the class LinkedList that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: newNode
-KIDUS KIDUS KIDUS numa type to be casted is Node *
-New Type: Node
-VarDecl Type: Node *
-Specialization for Node and 1 already exists.
-Gonna introspect the method insertAfter of the class LinkedList that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: newNode
-KIDUS KIDUS KIDUS numa type to be casted is Node *
-New Type: Node
-VarDecl Type: Node *
-Specialization for Node and 1 already exists.
-VarDecl found from inside the visitor
-VarDecl Name: temp
-VarDecl found from inside the visitor
-VarDecl Name: newNode
-KIDUS KIDUS KIDUS numa type to be casted is Node *
-New Type: Node
-VarDecl Type: Node *
-Specialization for Node and 1 already exists.
-Gonna introspect the method removeTail of the class LinkedList that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: current
-VarDecl found from inside the visitor
-VarDecl Name: prev
-VarDecl found from inside the visitor
-VarDecl Name: data
-Gonna introspect the method insertAtIndex of the class LinkedList that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: newNode
-KIDUS KIDUS KIDUS numa type to be casted is Node *
-New Type: Node
-VarDecl Type: Node *
-Specialization for Node and 1 already exists.
-VarDecl found from inside the visitor
-VarDecl Name: temp
-VarDecl found from inside the visitor
-VarDecl Name: prev
-VarDecl found from inside the visitor
-VarDecl Name: i
-VarDecl found from inside the visitor
-VarDecl Name: newNode
-KIDUS KIDUS KIDUS numa type to be casted is Node *
-New Type: Node
-VarDecl Type: Node *
-Specialization for Node and 1 already exists.
-Gonna introspect the method display of the class LinkedList that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: temp
-Gonna introspect the method getLength of the class LinkedList that is specialized in numa class
-Gonna introspect the method lookUp of the class LinkedList that is specialized in numa class
-VarDecl found from inside the visitor
-VarDecl Name: temp
 Gonna introspect the method operator= of the class LinkedList that is specialized in numa class
 Gonna introspect the method numa of the class LinkedList that is specialized in numa class
 Get all the file names in rewriter source manager
-Output File Name: output2/Exprs/BinarySearch/include/BinarySearch.hpp
-Output File Name: output2/Exprs/BinarySearch/include/BinaryNode.hpp
-Output File Name: output2/Exprs/Node/include/Node.hpp
-Output File Name: output2/Exprs/LinkedList/include/LinkedList.hpp
-Output File Name: output2/Exprs/Queue/include/Queue.hpp
-Output File Name: output2/Exprs/Stack/include/Stack.hpp
+Output File Name: output2/numa-mt-Data-Structures/LinkedList/include/LinkedList.hpp
+Output File Name: output2/numa-mt-Data-Structures/BinarySearch/include/BinaryNode.hpp
+Output File Name: output2/numa-mt-Data-Structures/BinarySearch/include/BinarySearch.hpp
+Output File Name: output2/numa-mt-Data-Structures/Stack/include/Stack.hpp
+Output File Name: output2/numa-mt-Data-Structures/Queue/include/Queue.hpp
+Output File Name: output2/numa-mt-Data-Structures/Node/include/Node.hpp

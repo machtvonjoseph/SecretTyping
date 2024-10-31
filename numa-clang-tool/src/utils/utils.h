@@ -48,20 +48,27 @@ namespace utils
                     //if newexprs type  is numa, then push to CXXNewExprs
                     if (NewExpr->getType().getAsString().substr(0, 4).compare("numa") == 0)
                     {
-                        CXXNewExprs.push_back(NewExpr);
+                        llvm::outs() << "The RHS expression is" << RHS->getStmtClassName() << "\n";
+                        const Expr *LHS = BO->getLHS();
+                        QualType LHSType = LHS->getType();
+                        llvm::outs() << "The LHS type is " << LHSType.getAsString() << "\n";
+                        CXXNewExprs.insert({NewExpr,LHSType});
                     }
 
                 }
             }
+            //get LHS
+
+            
             return true; // Continue traversal
             //BinaryOperators.push_back(BO);
             //return true;
         }
         
-        std::vector<const CXXNewExpr *> getBinaryOperators() { return CXXNewExprs; }
+        std::map<const CXXNewExpr *, QualType> getBinaryOperators() { return CXXNewExprs; }
         void clearBinaryOperators() { CXXNewExprs.clear(); }
     private:
-        std::vector<const CXXNewExpr *> CXXNewExprs;
+        std::map<const CXXNewExpr *, QualType> CXXNewExprs;
         ASTContext *Context;
     };
 

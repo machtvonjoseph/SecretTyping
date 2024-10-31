@@ -249,25 +249,29 @@ void RecursiveNumaTyper::extractNumaDecls(clang::Stmt* fnBody, ASTContext *Conte
     if(NewExprInBinaryOperatorVisitor.TraverseStmt(fnBody)){
         llvm::outs() << "Found binary operator\n";
         for(auto newExpr: NewExprInBinaryOperatorVisitor.getBinaryOperators()){
-            if(newExpr){
-                llvm::outs() << "new expression is "<< newExpr->getType().getAsString() << "\n";
+                llvm::outs() << "new expression is "<< newExpr.first->getType().getAsString() << "\n";
+                //print the left hand sign of the binary operator
+                llvm::outs() << "left expression is "<< newExpr.second.getAsString()<< "\n";
                 
-                std::string extractedType = extractTypeoutOfNuma(newExpr->getType().getAsString());
-                //get location of the new expression
-                SourceLocation Loc = newExpr->getBeginLoc();
-                //get the file ID
-                fileIDs.push_back(rewriter.getSourceMgr().getFileID(Loc));
-                // reinterpret_cast<newType*>(newExpr)
-                rewriter.InsertTextBefore(Loc, "reinterpret_cast<"+extractedType+"*>(");
-                //get the end location of the new expression
-                SourceLocation EndLoc = newExpr->getEndLoc();
-                //insert the closing bracket
-                rewriter.InsertTextAfter(EndLoc, ")");
-                llvm::outs() << "Done casting new expression\n";
+                if(newExpr.first->getType().getAsString() != newExpr.second.getAsString()){
+                   
+                    
+                    std::string extractedType = extractTypeoutOfNuma(newExpr.first->getType().getAsString());
+                    //get location of the new expression
+                    SourceLocation Loc = newExpr.first->getBeginLoc();
+                    //get the file ID
+                    fileIDs.push_back(rewriter.getSourceMgr().getFileID(Loc));
+                    // reinterpret_cast<newType*>(newExpr)
+                    rewriter.InsertTextBefore(Loc, "reinterpret_cast<"+extractedType+"*>(");
+                    //get the end location of the new expression
+                    SourceLocation EndLoc = newExpr.first->getEndLoc();
+                    //insert the closing bracket
+                    rewriter.InsertTextAfter(EndLoc, ")");
+                    llvm::outs() << "Done casting new expression\n";
+                }
 
-
-                numaDeclTable.push_back(newExpr);
-            }
+                numaDeclTable.push_back(newExpr.first);
+            
         }
         NewExprInBinaryOperatorVisitor.clearBinaryOperators();
     }
