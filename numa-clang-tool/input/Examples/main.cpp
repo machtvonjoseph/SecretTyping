@@ -15,8 +15,8 @@
 #include <vector>
 #include "numatype.hpp"
 #include "numathreads.hpp"
-#include <cmath>
 #include <getopt.h>
+#include <cmath>
 
 
 #define NUMA_NODES 4
@@ -65,7 +65,10 @@ int main(int argc, char *argv[])
                 num_DS = std::pow(2,std::stoll(optarg));
                 break;
             case 't':  // -t option for num_threads
-                num_threads = std::pow(2,std::stoll(optarg));
+				if(std::stoi(optarg) > 4){ 
+					cout<<"Number of threads cannot exceed 2^4"<<endl;
+				}
+                num_threads = std::pow(2,std::stoi(optarg));
                 break;
             case 'D':  // -D option for duration
                 duration = std::stoi(optarg);
