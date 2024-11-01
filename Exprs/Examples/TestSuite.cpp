@@ -67,11 +67,11 @@ void numa_Stack_init(std::string DS_config, int num_DS, int num_threads){
 	for(int i = 0; i < num_DS; i++)
 	{
 		if(DS_config=="numa"){
-			cout<<"Initializing node 0 numa stack pool"<<endl;
+			//cout<<"Initializing node 0 numa stack pool"<<endl;
 			Stacks0[i] = new numa<Stack,0>();
 		}
 		else{
-			cout<<"Initializing first regular stack pool"<<endl;
+			//cout<<"Initializing first regular stack pool"<<endl;
 			Stacks0[i] = new Stack();
 		}
 	}
@@ -80,11 +80,11 @@ void numa_Stack_init(std::string DS_config, int num_DS, int num_threads){
 	for(int i = 0; i < num_DS; i++)
 	{
 		if(DS_config=="numa"){
-			cout<<"Initializing node 1 numa stack pool"<<endl;
+			//cout<<"Initializing node 1 numa stack pool"<<endl;
 			Stacks1[i] = new numa<Stack,1>();
 		}
 		else{
-			cout<<"Initializing second regular stack pool"<<endl;
+			//cout<<"Initializing second regular stack pool"<<endl;
 			Stacks1[i] = new Stack();
 		}
 	}
@@ -146,6 +146,7 @@ void numa_Queue_init(std::string DS_config, int num_DS, int num_threads){
 	
 	printLK = new std::mutex();
 	globalLK = new std::mutex();
+	std::cout<<"Queue initialized"<<std::endl;
 }
 
 void numa_LL_init(std::string DS_config, int num_DS, int num_threads){
@@ -329,10 +330,13 @@ void QueueTest(int tid, int duration, int node, int64_t num_DS, int num_threads)
 		std::cout << "Only thread "<< tid << " will print this." << std::endl;
 	}		
 	#endif
+	globalLK->lock();
+	std::cout<<"Random number bounded"<<endl;
+	globalLK->unlock();
 
-	pthread_barrier_wait(&bar);
 	std::mt19937 gen(123);
 	std::uniform_int_distribution<> dist(0, Queues0.size()-1);
+
 	//std::cout << "Thread " << tid << " about to start working on node id"<<node << std::endl;
 	int ops = 0;
 	auto startTimer = std::chrono::steady_clock::now();

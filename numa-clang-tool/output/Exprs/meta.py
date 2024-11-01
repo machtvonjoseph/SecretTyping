@@ -39,9 +39,10 @@ def parseCommandLine():
 	parser.add_argument("--printOnly", action="store_true",dest="printOnly",help="show commands, but don't actually execute them", default = False)
 	(options, remains) = parser.parse_known_args()
 
-	print ("Metas "), options.metas
-	print ("Remaining arguments (passed to command) "), remains
+	# print ("Metas "), options.metas
+	# print ("Remaining arguments (passed to command) "), remains
 
+	print("Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, Op0, Op1, TotalOps")
 	for meta in options.metas:
 		idx = meta.find(":")
 		if(idx==-1):
@@ -108,7 +109,7 @@ if __name__ == "__main__":
 	# iterate over metaDict for all combos
 	combos = [""]
 	nextCombos = []
-	for opt, vals in metaDict.iteritems():
+	for opt, vals in metaDict.items():
 		for s in combos:
 			for v in vals:
 				nextCombos.append(s+' '+opt+' '+v)
@@ -126,7 +127,7 @@ if __name__ == "__main__":
 		print ("These commands would be run if --printOnly flag was dropped:")
 
 	for command in commands:
-		print (command)
+		#print (command)
 		if(not options.printOnly):
 			result = os.system(command)
 			if(result!=0):
