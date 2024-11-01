@@ -156,6 +156,7 @@ public:
         // cout<<"doing numa allocation \n";
 		 void* p = numa_alloc_onnode(sz * sizeof(LinkedList), 0);
         if (p == nullptr) {
+            cout<<"allocation failed\n";
             throw std::bad_alloc();
         }
         return p;
@@ -164,6 +165,7 @@ public:
     static void* operator new[](std::size_t sz){
 		 void* p = numa_alloc_onnode(sz * sizeof(LinkedList), 0);
         if (p == nullptr) {
+            cout<<"allocation failed\n";
             throw std::bad_alloc();
         }
         return p;
@@ -347,6 +349,7 @@ public:
         // cout<<"doing numa allocation \n";
 		 void* p = numa_alloc_onnode(sz * sizeof(LinkedList), 1);
         if (p == nullptr) {
+            cout<<"allocation failed\n";
             throw std::bad_alloc();
         }
         return p;
@@ -355,6 +358,7 @@ public:
     static void* operator new[](std::size_t sz){
 		 void* p = numa_alloc_onnode(sz * sizeof(LinkedList), 1);
         if (p == nullptr) {
+            cout<<"allocation failed\n";
             throw std::bad_alloc();
         }
         return p;

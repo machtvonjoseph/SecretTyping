@@ -63,10 +63,10 @@ int main(int argc, char *argv[])
                 DS_config = optarg;
                 break;
             case 'n':  // -n option for num_DS
-                num_DS = std::pow(2,std::stoll(optarg));
+                num_DS = std::stoll(optarg);
                 break;
             case 't':  // -t option for num_threads
-                num_threads = std::pow(2,std::stoll(optarg));
+                num_threads = std::stoll(optarg);
                 break;
             case 'D':  // -D option for duration
                 duration = std::stoi(optarg);
@@ -207,7 +207,7 @@ int main(int argc, char *argv[])
 				regular_thread0[i] = new thread(QueueTest,tid, duration, node, num_DS/2, num_threads/2);
 			}
 			else{
-				numa_thread0[i] = new thread_numa<0>(StackTest, tid, duration, i%2, num_DS/2, num_threads/2);
+				numa_thread0[i] = new thread_numa<0>(QueueTest, tid, duration, i%2, num_DS/2, num_threads/2);
 			}
 		}
 		for(int i=0; i < num_threads/2; i++){
@@ -220,7 +220,7 @@ int main(int argc, char *argv[])
 				regular_thread1[i] = new thread(QueueTest,tid , duration, node, num_DS/2, num_threads/2);
 			}
 			else{
-				numa_thread1[i] = new thread_numa<1>(StackTest, tid, duration, i%2, num_DS/2, num_threads/2);
+				numa_thread1[i] = new thread_numa<1>(QueueTest, tid, duration, i%2, num_DS/2, num_threads/2);
 			}
 		}
 

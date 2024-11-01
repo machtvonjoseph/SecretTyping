@@ -35,7 +35,7 @@ def run_command(command):
 def run_command_and_redirect_output(command, output_file):
     try:
         # Run the command as a shell process
-        with open(output_file, 'w') as file:
+        with open(output_file, 'a') as file:
             result = subprocess.run(command, shell=True, check=True, text=True, stdout=file)
             print("Command output:", result.stdout)
     except subprocess.CalledProcessError as e:
@@ -65,13 +65,17 @@ if __name__ == "__main__":
     clang_tool_output= f"./numa-clang-tool/output2/{args.exprName}"
     experiment_output= f"./Output/"
     
-    create_file(f"./Result/", f"{args.exprName}.csv")
+    # create_file(f"./Result/", f"{args.exprName}.csv")
 
-    # Clear the output folder
-    clear_file(f"./Result/{args.exprName}.csv")
+    # # Clear the output folder
+    # clear_file(f"./Result/{args.exprName}.csv")
     # Copy the folder
     #print(f"Copying folder from {experiment_folder} to {clang_tool_input}")
     # copy_folder(experiment_folder, clang_tool_input)
+    run_command("echo Stack Results >> ./Result/stack.csv")
+    run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, Op0, Op1, TotalOps >> ./Result/stack.csv")
+    
+    
     command = f"cp -rf ./{args.exprName} {clang_tool_input}"
     run_command(command)
 
@@ -91,9 +95,11 @@ if __name__ == "__main__":
     
     run_command(command)
     
-    command = "cd ./Output && python3 meta.py ./Examples/bin/DSExample --meta n:1...4 --meta t:1...4 --meta D:2 --meta DS_name:stack:bst:ll --meta th_config:numa:regular:split --meta DS_config:numa:regular"
+    command = "cd ./Output && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:stack --meta th_config:numa:regular:split --meta DS_config:numa:regular "
     
-    run_command_and_redirect_output(command, f"./Result/{args.exprName}.csv")
+
+
+    run_command_and_redirect_output(command, f"./Result/stack.csv")
     
     
     

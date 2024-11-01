@@ -42,7 +42,7 @@ def parseCommandLine():
 	# print ("Metas "), options.metas
 	# print ("Remaining arguments (passed to command) "), remains
 
-	print("Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, Op0, Op1, TotalOps")
+	# print("Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, Op0, Op1, TotalOps")
 	for meta in options.metas:
 		idx = meta.find(":")
 		if(idx==-1):

@@ -60,16 +60,18 @@ std::string utils::getNumaAllocatorCode(std::string classDecl, std::string nodeI
  return R"(public: 
     static void* operator new(std::size_t sz){
         // cout<<"doing numa allocation \n";
-		 void* p = numa_alloc_onnode(sz * sizeof()"+classDecl+R"(), )"+ nodeID +R"();
+		 void* p = numa_alloc_onnode(sz* sizeof()"+classDecl+R"(), )"+ nodeID +R"();
         if (p == nullptr) {
+            std::cout<<"allocation failed\n";
             throw std::bad_alloc();
         }
         return p;
     }
 
     static void* operator new[](std::size_t sz){
-		 void* p = numa_alloc_onnode(sz * sizeof()"+classDecl+R"(), )"+ nodeID +R"();
+		 void* p = numa_alloc_onnode(sz* sizeof()"+classDecl+R"(), )"+ nodeID +R"();
         if (p == nullptr) {
+            std::cout<<"allocation failed\n";
             throw std::bad_alloc();
         }
         return p;

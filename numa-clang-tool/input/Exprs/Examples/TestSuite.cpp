@@ -146,7 +146,6 @@ void numa_Queue_init(std::string DS_config, int num_DS, int num_threads){
 	
 	printLK = new std::mutex();
 	globalLK = new std::mutex();
-	std::cout<<"Queue initialized"<<std::endl;
 }
 
 void numa_LL_init(std::string DS_config, int num_DS, int num_threads){
@@ -331,7 +330,6 @@ void QueueTest(int tid, int duration, int node, int64_t num_DS, int num_threads)
 	}		
 	#endif
 	globalLK->lock();
-	std::cout<<"Random number bounded"<<endl;
 	globalLK->unlock();
 
 	std::mt19937 gen(123);
