@@ -59,8 +59,13 @@ public:
 std::string utils::getNumaAllocatorCode(std::string classDecl, std::string nodeID){
  return R"(public: 
     static void* operator new(std::size_t sz){
-        // cout<<"doing numa allocation \n";
-		 void* p = numa_alloc_onnode(sz* sizeof()"+classDecl+R"(), )"+ nodeID +R"();
+        void* p;
+        #ifdef UMF
+            p= umf_alloc()"+ nodeID + R"( ,sizeof()"+classDecl +R"(),alignof()"+ classDecl + R"());
+        #else
+            p = numa_alloc_onnode(sz* sizeof()"+classDecl+R"(), )"+ nodeID +R"();
+        #endif
+        
         if (p == nullptr) {
             std::cout<<"allocation failed\n";
             throw std::bad_alloc();
@@ -69,7 +74,13 @@ std::string utils::getNumaAllocatorCode(std::string classDecl, std::string nodeI
     }
 
     static void* operator new[](std::size_t sz){
-		 void* p = numa_alloc_onnode(sz* sizeof()"+classDecl+R"(), )"+ nodeID +R"();
+        void* p;
+        #ifdef UMF
+            p= umf_alloc()"+ nodeID + R"( ,sizeof()"+classDecl +R"(),alignof()"+ classDecl + R"());
+        #else
+            p = numa_alloc_onnode(sz* sizeof()"+classDecl+R"(), )"+ nodeID +R"();
+        #endif
+        
         if (p == nullptr) {
             std::cout<<"allocation failed\n";
             throw std::bad_alloc();
@@ -79,11 +90,20 @@ std::string utils::getNumaAllocatorCode(std::string classDecl, std::string nodeI
 
     static void operator delete(void* ptr){
         // cout<<"doing numa free \n";
-		numa_free(ptr, 1 * sizeof()"+classDecl+R"());
+        #ifdef UMF
+			umf_free()"+ nodeID +R"();
+		#else
+		    numa_free(ptr, 1 * sizeof()"+classDecl+R"());
+        #endif
     }
 
     static void operator delete[](void* ptr){
-		numa_free(ptr, 1 * sizeof()"+classDecl+R"());
+		// cout<<"doing numa free \n";
+        #ifdef UMF
+			umf_free()"+ nodeID +R"();
+		#else
+		    numa_free(ptr, 1 * sizeof()"+classDecl+R"());
+        #endif
     }
 )";
 }

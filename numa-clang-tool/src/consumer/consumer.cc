@@ -61,14 +61,34 @@ void NumaConsumer::includeNumaHeader(clang::ASTContext &context){
         const FileEntry *FE = it->first;
         if(FE){
             FileID FID= context.getSourceManager().getOrCreateFileID(it->first, SrcMgr::CharacteristicKind::C_User);
-    
+            //print all the file names
+            llvm::outs() << "FROM INCLUDE NUMA HEADER File Name: " << it->first.getName() << "\n";
+            //skip if file name is testsuite.hpp
+            if(it->first.getName().find("/home/kidus/NUMATyping/numa-clang-tool/input/Exprs/Examples/TestSuite.hpp") != std::string::npos){
+                llvm::outs() << "Skipping :" << it->first.getName() << "\n";
+                continue;
+            }
+            std::string includeheaders = R"(#ifdef UMF 
+	                #include "numatype.hpp"
+	                #include <umf/mempolicy.h>
+	                #include <umf/memspace.h>
+                    #include "utils_examples.h"
+                    #include "umf_numa_allocator.hpp"
+                    #include <numa.h>
+                    #include <numaif.h>
+                    #include <stdio.h>
+                    #include <string.h>
+                #endif
+                #include "numatype.hpp"
+                )";
 
             // Skip invalid or built-in files
             if (FID.isInvalid() || FID == context.getSourceManager().getMainFileID())
             continue;
 
             // Insert the include directive at the beginning of each file
-            rewriter.InsertTextBefore( context.getSourceManager().getLocForStartOfFile(FID),"#include \"numatype.hpp\"\n");
+            rewriter.InsertTextBefore( context.getSourceManager().getLocForStartOfFile(FID),includeheaders);
+
         }
     }
 }

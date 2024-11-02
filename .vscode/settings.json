@@ -107,7 +107,9 @@
         "stop_token": "cpp",
         "thread": "cpp",
         "*.def": "cpp",
-        "syncstream": "cpp"
+        "syncstream": "cpp",
+        "utils_examples.h": "c",
+        "mempolicy.h": "c"
     },
-    "cmake.sourceDirectory": "/home/kidus/NUMATyping/llvm-pass/llvm-project/libcxxabi"
+    "cmake.sourceDirectory": "/home/kidus/NUMATyping/unified-memory-framework/examples/basic"
 }

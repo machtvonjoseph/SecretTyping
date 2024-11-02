@@ -1,4 +1,3 @@
-#include "numatype.hpp"
 #pragma once
 #ifndef _NODE_HPP_
 #define _NODE_HPP_
@@ -14,135 +13,13 @@ public:
 	{}
 	Node(int initData);
 	Node(int, Node*);
-	virtual Node *getLink();
-	virtual void setLink(Node *n);
+	Node *getLink();
+	void setLink(Node *n);
 
-	virtual int getData();
-	virtual void setData(int n);
+	int getData();
+	void setData(int n);
 
-	virtual ~Node();
-};
-
-template<>
-class numa<Node,0>{
-public: 
-    static void* operator new(std::size_t sz){
-        // cout<<"doing numa allocation \n";
-		 void* p = numa_alloc_onnode(sz * sizeof(Node), 0);
-        if (p == nullptr) {
-            cout<<"allocation failed\n";
-            throw std::bad_alloc();
-        }
-        return p;
-    }
-
-    static void* operator new[](std::size_t sz){
-		 void* p = numa_alloc_onnode(sz * sizeof(Node), 0);
-        if (p == nullptr) {
-            cout<<"allocation failed\n";
-            throw std::bad_alloc();
-        }
-        return p;
-    }
-
-    static void operator delete(void* ptr){
-        // cout<<"doing numa free \n";
-		numa_free(ptr, 1 * sizeof(Node));
-    }
-
-    static void operator delete[](void* ptr){
-		numa_free(ptr, 1 * sizeof(Node));
-    }
-public:
-numa (): data(0){
-}
-numa (int initData){
-    this->data = initData;
-}
-numa (int initData, Node * node){
-    this->data = initData;
-    this->link = node;
-}
-virtual Node * getLink(){
-    return this->link;
-}
-virtual void setLink(Node * n){
-    this->link = n;
-}
-virtual int getData(){
-    return this->data;
-}
-virtual void setData(int n){
-    this->data = n;
-}
-virtual ~numa()
-{
-	link = nullptr;
-}
-private:
-numa<int,0> data;
-numa<Node*,0> link;
-};
-
-template<>
-class numa<Node,1>{
-public: 
-    static void* operator new(std::size_t sz){
-        // cout<<"doing numa allocation \n";
-		 void* p = numa_alloc_onnode(sz * sizeof(Node), 1);
-        if (p == nullptr) {
-            cout<<"allocation failed\n";
-            throw std::bad_alloc();
-        }
-        return p;
-    }
-
-    static void* operator new[](std::size_t sz){
-		 void* p = numa_alloc_onnode(sz * sizeof(Node), 1);
-        if (p == nullptr) {
-            cout<<"allocation failed\n";
-            throw std::bad_alloc();
-        }
-        return p;
-    }
-
-    static void operator delete(void* ptr){
-        // cout<<"doing numa free \n";
-		numa_free(ptr, 1 * sizeof(Node));
-    }
-
-    static void operator delete[](void* ptr){
-		numa_free(ptr, 1 * sizeof(Node));
-    }
-public:
-numa (): data(0){
-}
-numa (int initData){
-    this->data = initData;
-}
-numa (int initData, Node * node){
-    this->data = initData;
-    this->link = node;
-}
-virtual Node * getLink(){
-    return this->link;
-}
-virtual void setLink(Node * n){
-    this->link = n;
-}
-virtual int getData(){
-    return this->data;
-}
-virtual void setData(int n){
-    this->data = n;
-}
-virtual ~numa()
-{
-	link = nullptr;
-}
-private:
-numa<int,1> data;
-numa<Node*,1> link;
+	~Node();
 };
 
 

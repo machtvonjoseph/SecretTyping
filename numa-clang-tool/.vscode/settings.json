@@ -70,6 +70,8 @@
         "cinttypes": "cpp",
         "typeinfo": "cpp",
         "variant": "cpp",
-        "ranges": "cpp"
+        "ranges": "cpp",
+        "barrier": "cpp",
+        "syncstream": "cpp"
     }
 }

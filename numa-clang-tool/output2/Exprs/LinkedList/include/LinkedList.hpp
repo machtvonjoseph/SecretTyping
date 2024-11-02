@@ -1,4 +1,3 @@
-#include "numatype.hpp"
 #ifndef _LINKEDLIST_HPP_
 #define _LINKEDLIST_HPP_
 
@@ -42,7 +41,7 @@ public:
 	 *
 	 * \sa LinkedList::del()
 	 */
-	virtual ~LinkedList();
+	~LinkedList();
 
 	/*!
 	 * \brief Function for removing a single LinkedList node
@@ -53,7 +52,7 @@ public:
 	 *
 	 * \return The data from the removed node.
 	 */
-	virtual int removeHead();
+	int removeHead();
 
 	/*!
 	 * \brief append function for adding LinkedList variables to the end of the list
@@ -66,7 +65,7 @@ public:
 	 * 	LinkedList::prepend() is returned from immediately.
 	 */
 
-	virtual void append(int data);
+	void append(int data);
 
 	/*!
 	 * \brief prepend function for adding LinkedList variables to the beginning of the list
@@ -79,7 +78,7 @@ public:
 	 * 	LinkedList::prepend() is returned from immediately.
 	 */
 
-	virtual void prepend(int data);
+	void prepend(int data);
 
 
 	/*!
@@ -93,7 +92,7 @@ public:
 	 * \note To avoid Memory Allocation issues, if allocation fails (i.e. overflow)
 	 	LinkedList::insertAfter() is returned from immediately.
 	 */
-	virtual void insertAfter(int existData, int newData);
+	void insertAfter(int existData, int newData);
 
 
 	/*!
@@ -105,7 +104,7 @@ public:
 	 * \return The value deleted from the list.
 	 */
 
-	virtual int removeTail();
+	int removeTail();
 
 
 	/*!
@@ -120,7 +119,7 @@ public:
 	 	LinkedList::insertAfter() is returned from immediately.
 	 */
 
-	virtual void insertAtIndex(int index, int newData);
+	void insertAtIndex(int index, int newData);
 
 
 
@@ -130,7 +129,7 @@ public:
 	 * This function iterates over and prints each node in the LinkedList.
 	 * The first node printed is the top Node.
 	 */
-	virtual void display();
+	void display();
 
 	/*!
 	 * \brief A function to return the <b>length</b> of the list.
@@ -140,399 +139,13 @@ public:
 	 *
 	 */
 
-	virtual int getLength(){ return length; }
+	int getLength(){ return length; }
 
-	virtual bool lookUp(int data);
+	bool lookUp(int data);
 	
 	
 
 
-};
-
-template<>
-class numa<LinkedList,0>{
-public: 
-    static void* operator new(std::size_t sz){
-        // cout<<"doing numa allocation \n";
-		 void* p = numa_alloc_onnode(sz * sizeof(LinkedList), 0);
-        if (p == nullptr) {
-            cout<<"allocation failed\n";
-            throw std::bad_alloc();
-        }
-        return p;
-    }
-
-    static void* operator new[](std::size_t sz){
-		 void* p = numa_alloc_onnode(sz * sizeof(LinkedList), 0);
-        if (p == nullptr) {
-            cout<<"allocation failed\n";
-            throw std::bad_alloc();
-        }
-        return p;
-    }
-
-    static void operator delete(void* ptr){
-        // cout<<"doing numa free \n";
-		numa_free(ptr, 1 * sizeof(LinkedList));
-    }
-
-    static void operator delete[](void* ptr){
-		numa_free(ptr, 1 * sizeof(LinkedList));
-    }
-public:
-numa (){
-    this->head = __null;
-    this->tail = __null;
-    this->length = 0;
-}
-virtual ~numa()
-{
-	Node *temp = head;
-	while(temp != NULL)
-	{
-		head = head->getLink();
-		delete temp;
-		temp = head;
-		length--;
-	}
-	temp = NULL;
-}
-virtual int removeHead(){
-    if (this->head == __null) {
-        return -1;
-    }
-    Node *temp = this->head;
-    this->head = this->head->getLink();
-    int data = temp->getData();
-    delete temp;
-    temp = __null;
-    this->length--;
-    return data;
-}
-virtual void append(int data){
-    if (this->head == __null) {
-        Node *newNode = reinterpret_cast<Node*>(new numa<Node,0>(data));
-        newNode->setLink(__null);
-        this->head = newNode;
-        this->length++;
-        return;
-    }
-    Node *temp = this->head;
-    while (true)
-        {
-            if (temp->getLink() == __null) {
-                Node *newNode = reinterpret_cast<Node*>(new numa<Node,0>(data));
-                newNode->setLink(__null);
-                temp->setLink(newNode);
-                this->length++;
-                return;
-            }
-            temp = temp->getLink();
-        }
-}
-virtual void prepend(int data){
-    Node *newNode = reinterpret_cast<Node*>(new numa<Node,0>(data));
-    newNode->setLink(this->head);
-    this->head = newNode;
-    this->length++;
-}
-virtual void insertAfter(int existData, int newData){
-    if (this->head == __null) {
-        Node *newNode = reinterpret_cast<Node*>(new numa<Node,0>(newData));
-        newNode->setLink(__null);
-        this->head = newNode;
-        this->length++;
-        return;
-    }
-    Node *temp = this->head;
-    while (temp != __null)
-        {
-            if (temp->getData() == existData) {
-                Node *newNode = reinterpret_cast<Node*>(new numa<Node,0>(newData));
-                newNode->setLink(temp->getLink());
-                temp->setLink(newNode);
-                this->length++;
-                return;
-            }
-            temp = temp->getLink();
-        }
-}
-virtual int removeTail(){
-    if (this->head == __null) {
-        return -1;
-    }
-    Node *current = this->head;
-    Node *prev = __null;
-    while (current != __null)
-        {
-            if (current->getLink() == __null) {
-                int data = current->getData();
-                prev->setLink(__null);
-                delete current;
-                this->length--;
-                current = __null;
-                return data;
-            }
-            prev = current;
-            current = current->getLink();
-        }
-    return -2;
-}
-virtual void insertAtIndex(int index, int newData){
-    if (index + 1 > this->length) {
-        std::cout << "Index too large." << std::endl;
-        return;
-    }
-    if (this->head == __null) {
-        Node *newNode = reinterpret_cast<Node*>(new numa<Node,0>(newData));
-        newNode->setLink(__null);
-        this->head = newNode;
-        this->length++;
-        return;
-    }
-    Node *temp = this->head;
-    Node *prev = __null;
-    int i = 0;
-    while (temp != __null)
-        {
-            if (i == index) {
-                Node *newNode = reinterpret_cast<Node*>(new numa<Node,0>(newData));
-                newNode->setLink(temp);
-                prev->setLink(newNode);
-                this->length++;
-                return;
-            }
-            i++;
-            prev = temp;
-            temp = temp->getLink();
-        }
-}
-virtual void display(){
-    if (this->head == __null) {
-        return;
-    }
-    Node *temp = this->head;
-    while (temp != __null)
-        {
-            if (temp == this->head) {
-                std::cout << "HEAD ";
-                ;
-            }
-            std::cout << temp->getData() << std::endl;
-            temp = temp->getLink();
-        }
-}
-virtual int getLength(){
-    return this->length;
-}
-virtual bool lookUp(int data){
-    Node *temp = this->head;
-    while (temp != __null)
-        {
-            if (temp->getData() == data) {
-                return true;
-            }
-            temp = temp->getLink();
-        }
-    return false;
-}
-private:
-numa<Node*,0> head;
-numa<Node*,0> tail;
-numa<int,0> length;
-};
-
-template<>
-class numa<LinkedList,1>{
-public: 
-    static void* operator new(std::size_t sz){
-        // cout<<"doing numa allocation \n";
-		 void* p = numa_alloc_onnode(sz * sizeof(LinkedList), 1);
-        if (p == nullptr) {
-            cout<<"allocation failed\n";
-            throw std::bad_alloc();
-        }
-        return p;
-    }
-
-    static void* operator new[](std::size_t sz){
-		 void* p = numa_alloc_onnode(sz * sizeof(LinkedList), 1);
-        if (p == nullptr) {
-            cout<<"allocation failed\n";
-            throw std::bad_alloc();
-        }
-        return p;
-    }
-
-    static void operator delete(void* ptr){
-        // cout<<"doing numa free \n";
-		numa_free(ptr, 1 * sizeof(LinkedList));
-    }
-
-    static void operator delete[](void* ptr){
-		numa_free(ptr, 1 * sizeof(LinkedList));
-    }
-public:
-numa (){
-    this->head = __null;
-    this->tail = __null;
-    this->length = 0;
-}
-virtual ~numa()
-{
-	Node *temp = head;
-	while(temp != NULL)
-	{
-		head = head->getLink();
-		delete temp;
-		temp = head;
-		length--;
-	}
-	temp = NULL;
-}
-virtual int removeHead(){
-    if (this->head == __null) {
-        return -1;
-    }
-    Node *temp = this->head;
-    this->head = this->head->getLink();
-    int data = temp->getData();
-    delete temp;
-    temp = __null;
-    this->length--;
-    return data;
-}
-virtual void append(int data){
-    if (this->head == __null) {
-        Node *newNode = reinterpret_cast<Node*>(new numa<Node,1>(data));
-        newNode->setLink(__null);
-        this->head = newNode;
-        this->length++;
-        return;
-    }
-    Node *temp = this->head;
-    while (true)
-        {
-            if (temp->getLink() == __null) {
-                Node *newNode = reinterpret_cast<Node*>(new numa<Node,1>(data));
-                newNode->setLink(__null);
-                temp->setLink(newNode);
-                this->length++;
-                return;
-            }
-            temp = temp->getLink();
-        }
-}
-virtual void prepend(int data){
-    Node *newNode = reinterpret_cast<Node*>(new numa<Node,1>(data));
-    newNode->setLink(this->head);
-    this->head = newNode;
-    this->length++;
-}
-virtual void insertAfter(int existData, int newData){
-    if (this->head == __null) {
-        Node *newNode = reinterpret_cast<Node*>(new numa<Node,1>(newData));
-        newNode->setLink(__null);
-        this->head = newNode;
-        this->length++;
-        return;
-    }
-    Node *temp = this->head;
-    while (temp != __null)
-        {
-            if (temp->getData() == existData) {
-                Node *newNode = reinterpret_cast<Node*>(new numa<Node,1>(newData));
-                newNode->setLink(temp->getLink());
-                temp->setLink(newNode);
-                this->length++;
-                return;
-            }
-            temp = temp->getLink();
-        }
-}
-virtual int removeTail(){
-    if (this->head == __null) {
-        return -1;
-    }
-    Node *current = this->head;
-    Node *prev = __null;
-    while (current != __null)
-        {
-            if (current->getLink() == __null) {
-                int data = current->getData();
-                prev->setLink(__null);
-                delete current;
-                this->length--;
-                current = __null;
-                return data;
-            }
-            prev = current;
-            current = current->getLink();
-        }
-    return -2;
-}
-virtual void insertAtIndex(int index, int newData){
-    if (index + 1 > this->length) {
-        std::cout << "Index too large." << std::endl;
-        return;
-    }
-    if (this->head == __null) {
-        Node *newNode = reinterpret_cast<Node*>(new numa<Node,1>(newData));
-        newNode->setLink(__null);
-        this->head = newNode;
-        this->length++;
-        return;
-    }
-    Node *temp = this->head;
-    Node *prev = __null;
-    int i = 0;
-    while (temp != __null)
-        {
-            if (i == index) {
-                Node *newNode = reinterpret_cast<Node*>(new numa<Node,1>(newData));
-                newNode->setLink(temp);
-                prev->setLink(newNode);
-                this->length++;
-                return;
-            }
-            i++;
-            prev = temp;
-            temp = temp->getLink();
-        }
-}
-virtual void display(){
-    if (this->head == __null) {
-        return;
-    }
-    Node *temp = this->head;
-    while (temp != __null)
-        {
-            if (temp == this->head) {
-                std::cout << "HEAD ";
-                ;
-            }
-            std::cout << temp->getData() << std::endl;
-            temp = temp->getLink();
-        }
-}
-virtual int getLength(){
-    return this->length;
-}
-virtual bool lookUp(int data){
-    Node *temp = this->head;
-    while (temp != __null)
-        {
-            if (temp->getData() == data) {
-                return true;
-            }
-            temp = temp->getLink();
-        }
-    return false;
-}
-private:
-numa<Node*,1> head;
-numa<Node*,1> tail;
-numa<int,1> length;
 };
 
 LinkedList::LinkedList()
