@@ -66,7 +66,7 @@ void NumaConsumer::includeNumaHeader(clang::ASTContext &context){
             llvm::outs() << "FROM INCLUDE NUMA HEADER File Name: " << it->first.getName() << "\n";
             //skip if file name is testsuite.hpp
             std::string home = std::getenv("HOME");
-            if(it->first.getName().find(home+"/home/kidus/NUMATyping/numa-clang-tool/input/Exprs/Examples/TestSuite.hpp") != std::string::npos){
+            if(it->first.getName().find(home+"/NUMATyping/numa-clang-tool/input/Exprs/Examples/TestSuite.hpp") != std::string::npos){
                 llvm::outs() << "Skipping :" << it->first.getName() << "\n";
                 continue;
             }
