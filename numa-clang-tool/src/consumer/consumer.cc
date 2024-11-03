@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include "llvm/Support/WithColor.h"
+#include <cstdlib>
 NumaConsumer::NumaConsumer(clang::Rewriter& TheReWriter, clang::ASTContext* context)
 {
     rewriter = TheReWriter;
@@ -64,7 +65,8 @@ void NumaConsumer::includeNumaHeader(clang::ASTContext &context){
             //print all the file names
             llvm::outs() << "FROM INCLUDE NUMA HEADER File Name: " << it->first.getName() << "\n";
             //skip if file name is testsuite.hpp
-            if(it->first.getName().find("/home/kidus/NUMATyping/numa-clang-tool/input/Exprs/Examples/TestSuite.hpp") != std::string::npos){
+            std::string home = std::getenv("HOME");
+            if(it->first.getName().find(home+"/home/kidus/NUMATyping/numa-clang-tool/input/Exprs/Examples/TestSuite.hpp") != std::string::npos){
                 llvm::outs() << "Skipping :" << it->first.getName() << "\n";
                 continue;
             }
