@@ -196,7 +196,7 @@ public:
     static void operator delete(void* ptr){
         // cout<<"doing numa free \n";
         #ifdef UMF
-			umf_free(0);
+			umf_free(0,ptr);
 		#else
 		    numa_free(ptr, 1 * sizeof(LinkedList));
         #endif
@@ -205,7 +205,7 @@ public:
     static void operator delete[](void* ptr){
 		// cout<<"doing numa free \n";
         #ifdef UMF
-			umf_free(0);
+			umf_free(0,ptr);
 		#else
 		    numa_free(ptr, 1 * sizeof(LinkedList));
         #endif
@@ -409,7 +409,7 @@ public:
     static void operator delete(void* ptr){
         // cout<<"doing numa free \n";
         #ifdef UMF
-			umf_free(1);
+			umf_free(1,ptr);
 		#else
 		    numa_free(ptr, 1 * sizeof(LinkedList));
         #endif
@@ -418,7 +418,7 @@ public:
     static void operator delete[](void* ptr){
 		// cout<<"doing numa free \n";
         #ifdef UMF
-			umf_free(1);
+			umf_free(1,ptr);
 		#else
 		    numa_free(ptr, 1 * sizeof(LinkedList));
         #endif

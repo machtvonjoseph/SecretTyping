@@ -11,7 +11,9 @@ UMF_INC_DIRS=
 
 
 EXE=./bin/DSExample
+TESTEXE=./bin/st_test
 OBJS=main.o TestSuite.o
+TESTOBJS=st_test.o
 
 UMF =
 FLAGS = 
@@ -23,20 +25,29 @@ endif
 
 ifeq ($(UMF), 1)
     LINK_FLAGS += -lhwloc -lnuma -lrt -ldl -ljemalloc  $(HOME_DIR)/NUMATyping/unified-memory-framework/build/lib/libumf.a $(HOME_DIR)/NUMATyping/unified-memory-framework/build/lib/libjemalloc_pool.a
+	
     UMF_INC_DIRS+= -I$(HOME_DIR)/NUMATyping/unified-memory-framework/src/utils -I$(HOME_DIR)/NUMATyping/unified-memory-framework/include -I$(HOME_DIR)/NUMATyping/unified-memory-framework/examples/common -I$(HOME_DIR)/NUMATyping/unified-memory-framework/src -I$(HOME_DIR)/NUMATyping/unified-memory-framework/src/ravl -I$(HOME_DIR)/NUMATyping/unified-memory-framework/src/critnib -I$(HOME_DIR)/NUMATyping/unified-memory-framework/src/provider -I$(HOME_DIR)/NUMATyping/unified-memory-framework/src/memspaces -I$(HOME_DIR)/NUMATyping/unified-memory-framework/src/memtargets -DUMF
 endif
 
-$(EXE): $(OBJS)
-	$(CC) $(OBJS) -o $(EXE) 
+# $(EXE): $(OBJS)
+# 	$(CC) $(OBJS) -o $(EXE) 
+all: $(EXE) $(TESTEXE)
+
+$(TESTEXE): $(TESTOBJS)
+	$(CC) $(TESTOBJS) $(INC_DIRS) $(LINK_FLAGS) -o $(TESTEXE)
 
 $(EXE): $(OBJS)
 	$(CC) $(OBJS) $(LINK_FLAGS) -o $(EXE) 
 
 main.o: 
-	$(CC) -c  -g -std=c++20  -pthread $(INC_DIRS) $(UMF_INC_DIRS) $(FLAGS) -D_NODE_HPP=1 main.cpp
+	$(CC) -c -O3 -g -std=c++20  -pthread $(INC_DIRS) $(UMF_INC_DIRS) $(FLAGS) -D_NODE_HPP=1 main.cpp
 
 TestSuite.o: TestSuite.hpp TestSuite.cpp
-	$(CC) -c  -std=c++20  -pthread $(INC_DIRS) $(UMF_INC_DIRS) $(FLAGS) -g TestSuite.cpp 
+	$(CC) -c  -O3 -g -std=c++20  -pthread $(INC_DIRS) $(UMF_INC_DIRS) $(FLAGS)  TestSuite.cpp 
+
+st_test.o: st_test.cpp
+	$(CC) -c -O3 -g -std=c++20  -pthread $(INC_DIRS) $(UMF_INC_DIRS) $(FLAGS)  st_test.cpp
+
 
 clean:
 	rm *.o $(EXE)

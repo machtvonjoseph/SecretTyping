@@ -25,6 +25,10 @@ typedef struct umf_jemalloc_pool_params_t {
 
 umf_memory_pool_ops_t *umfJemallocPoolOps(void);
 
+extern __thread int arena_spin;
+extern __thread int thread_id;
+int tid();
+
 #ifdef __cplusplus
 }
 #endif

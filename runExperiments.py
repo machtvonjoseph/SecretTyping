@@ -59,8 +59,9 @@ def create_file(directory, filename):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Copy folder and run a command with an additional argument.")
     parser.add_argument("exprName", type=str, help="experimentName to be run on the src to src tool")
+    parser.add_argument('--DS', type=str, required=True, help="Specify the data structure name")
     parser.add_argument('--UMF', action='store_true', help="Enable verbose mode")
-
+    parser.add_argument('--verbose', action='store_true', help="Enable verbose mode")
     
     args = parser.parse_args()
 
@@ -71,8 +72,10 @@ if __name__ == "__main__":
     experiment_output= f"./Output/{args.exprName}/"
     
     run_command("echo Stack Results >> ./Result/stack.csv")
-    run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, Op0, Op1, TotalOps >> ./Result/stack.csv")
-    
+    run_command("echo Queue Results >> ./Result/queue.csv")
+    run_command("echo LL Results >> ./Result/ll.csv")
+    run_command("echo BST Results >> ./Result/bst.csv")
+
     
     command = f"cp -rf ./{args.exprName} {clang_tool_input}"
     run_command(command)
@@ -84,22 +87,54 @@ if __name__ == "__main__":
     run_command(command)
     
     copy_folder(clang_tool_output, experiment_output)
+        
+    run_command(f"chmod -R 777 ./Output/{args.exprName}/")
     
     command = f"cd ./Output/{args.exprName}/ && make clean"
     
     run_command(command)
-    
-    run_command(f"chmod 777 ./Output/{args.exprName}/*")
+
     
     if(args.UMF):
+        run_command("echo Stack Results (UMF) >> ./Result/stack.csv")
+        run_command("echo Queue Results (UMF) >> ./Result/queue.csv")
+        run_command("echo LL Results (UMF)>> ./Result/ll.csv")
+        run_command("echo BST Results (UMF)>> ./Result/bst.csv")
+
         command = f"cd ./Output/{args.exprName}/ && make UMF=1"
     else:
         command = f"cd ./Output/{args.exprName}/ && make "
     
     run_command(command)
+    if(args.verbose):
+        run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, Op0, Op1, TotalOps >> ./Result/stack.csv")
+    else:
+        run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration ")
     
-    command = f"./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:stack --meta th_config:numa:regular:split --meta DS_config:numa:regular "
     
+    
+    if (args.DS == "stack"):
+        if (args.verbose):
+            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:stack --meta th_config:numa:regular:split --meta DS_config:numa:regular "
+        else:
+            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:stack --meta th_config:numa:regular:split --meta DS_config:numa:regular >> ../../Result/stack.csv"
+    elif (args.DS == "queue"):
+        if (args.verbose):
+            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:queue --meta th_config:numa:regular:split --meta DS_config:numa:regular "
+        else:
+            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:queue --meta th_config:numa:regular:split --meta DS_config:numa:regular >> ../../Result/stack.csv"
+    elif (args.DS == "ll"):
+        if (args.verbose):
+            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:ll --meta th_config:numa:regular:split --meta DS_config:numa:regular "
+        else:
+            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:ll --meta th_config:numa:regular:split --meta DS_config:numa:regular >> ../../Result/stack.csv"
+    elif (args.DS == "bst"):
+        if (args.verbose):
+            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:bst --meta th_config:numa:regular:split --meta DS_config:numa:regular "
+        else:
+            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:bst --meta th_config:numa:regular:split --meta DS_config:numa:regular >> ../../Result/stack.csv"
+          
+
     run_command(command)
 
     # run_command_and_redirect_output(command, f"./Result/stack.csv")

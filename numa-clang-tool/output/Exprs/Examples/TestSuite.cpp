@@ -24,6 +24,7 @@
 #include <pthread.h>
 #include <map>
 
+#define MEGABYTE 1048576
 
 std::vector<Stack*> Stacks0;
 std::vector<Stack*> Stacks1;
@@ -54,15 +55,47 @@ std::vector<LinkedList*> LLs1;
 std::vector<mutex*> LL_lk0;
 std::vector<mutex*> LL_lk1;
 
-
+struct prefill_percentage{
+	float write;
+	float read;
+	float remove;
+	float update;
+};
 
 // chrono::high_resolution_clock::time_point startTimer;
 // chrono::high_resolution_clock::time_point endTimer;
 
+void global_init(int num_threads){
+	pthread_barrier_init(&bar, NULL, num_threads);
+	ops0 = 0;
+	ops1 = 0;
+	
+	printLK = new std::mutex();
+	globalLK = new std::mutex();
+}
+
+
+void singleThreadedStackInit(int num_DS, bool isNuma){
+	Stacks0.resize(num_DS);
+	if(isNuma){
+		cout<<"Initializing numa stack pool"<<endl;
+		for(int i = 0; i < num_DS; i++)
+		{
+			Stacks0[i] = reinterpret_cast<Stack*>(new numa<Stack,0>());
+		}
+	}
+	else{
+		cout<<"Initializing regular stack pool"<<endl;
+		for(int i = 0; i < num_DS; i++)
+		{
+			Stacks0[i] = new Stack();
+		}
+	}
+}
 
 
 
-void numa_Stack_init(std::string DS_config, int num_DS, int num_threads){
+void numa_Stack_init(std::string DS_config, int num_DS, bool prefill, prefill_percentage &percentages){
 	Stacks0.resize(num_DS);
 	for(int i = 0; i < num_DS; i++)
 	{
@@ -99,15 +132,38 @@ void numa_Stack_init(std::string DS_config, int num_DS, int num_threads){
 	{
 		Stack_lk1[i] = new mutex();
 	}
-	pthread_barrier_init(&bar, NULL, num_threads);
-	ops0 = 0;
-	ops1 = 0;
-	
-	printLK = new std::mutex();
-	globalLK = new std::mutex();
+
+	if(prefill){
+		std::mt19937 gen(123);
+		std::uniform_int_distribution<> dist1(0, Stacks0.size()-1);
+		std::uniform_int_distribution<> dist2(0, Stacks0.size()-1);
+		std::uniform_int_distribution<> dist3(100, 200);
+		//Prefill in 50 % of the Stacks with random number of nodes (0-200) number of nodes
+		for(int i = 0; i < num_DS/int(percentages.write) ; i++)
+		{
+			int ds = dist1(gen);
+			for(int j=0; j < dist3(gen); j++)
+			{
+				Stack_lk0[ds]->lock();
+				Stacks0[ds]->push(ds);
+				Stack_lk0[ds]->unlock();
+			}
+		}
+		for(int i = 0; i < num_DS/int(percentages.write) ; i++)
+		{
+			int ds = dist2(gen);
+			for(int j=0; j < dist3(gen); j++)
+			{
+				Stack_lk1[ds]->lock();
+				Stacks1[ds]->push(ds);
+				Stack_lk1[ds]->unlock();
+			}
+		}
+		std::cout<<"Prefilled " <<num_DS/int(percentages.write) <<" stacks with " << dist3(gen) << " nodes each"<<std::endl;	
+	}
 }
 
-void numa_Queue_init(std::string DS_config, int num_DS, int num_threads){
+void numa_Queue_init(std::string DS_config, int num_DS, bool prefill, prefill_percentage &percentages){
 	Queues0.resize(num_DS);
 	for(int i = 0; i < num_DS; i++)
 	{
@@ -140,15 +196,37 @@ void numa_Queue_init(std::string DS_config, int num_DS, int num_threads){
 	{
 		Queue_lk1[i] = new mutex();
 	}
-	pthread_barrier_init(&bar, NULL, num_threads);
-	ops0 = 0;
-	ops1 = 0;
-	
-	printLK = new std::mutex();
-	globalLK = new std::mutex();
+
+	if(prefill){
+		std::mt19937 gen(123);
+		std::uniform_int_distribution<> dist1(0, Queues0.size()-1);
+		std::uniform_int_distribution<> dist2(0, Queues0.size()-1);
+		std::uniform_int_distribution<> dist3(100, 200);
+		int ds3 = dist3(gen);
+		//Prefill in 50 % of the Queue with random number of nodes (0-200) number of nodes
+		for(int i = 0; i < num_DS/int(percentages.write) ; i++){
+			int ds = dist1(gen);
+			for(int j=0; j < dist3(gen); j++)
+			{
+				Queue_lk0[ds]->lock();
+				Queues0[ds]->add(ds);
+				Queue_lk0[ds]->unlock();
+			}
+		}
+		for(int i = 0; i < num_DS/int(percentages.write) ; i++){
+			int ds = dist2(gen);
+			for(int j=0; j < dist3(gen); j++)
+			{
+				Queue_lk1[ds]->lock();
+				Queues1[ds]->add(ds);
+				Queue_lk1[ds]->unlock();
+			}
+		}
+		std::cout<<"Prefilled " <<num_DS/int(percentages.write) <<" queue with " << ds3 << " nodes each"<<std::endl;		
+	}
 }
 
-void numa_LL_init(std::string DS_config, int num_DS, int num_threads){
+void numa_LL_init(std::string DS_config, int num_DS, bool prefill, prefill_percentage &percentages){
 	LLs0.resize(num_DS);
 	for(int i = 0; i < num_DS; i++)
 	{
@@ -181,16 +259,40 @@ void numa_LL_init(std::string DS_config, int num_DS, int num_threads){
 	{
 		LL_lk1[i] = new mutex();
 	}
-	pthread_barrier_init(&bar, NULL, num_threads);
-	ops0 = 0;
-	ops1 = 0;
-	
-	printLK = new std::mutex();
-	globalLK = new std::mutex();
+
+	if(prefill){
+		std::mt19937 gen(123);
+		std::uniform_int_distribution<> dist1(0, LLs0.size()-1);
+		std::uniform_int_distribution<> dist2(0, LLs1.size()-1);
+		std::uniform_int_distribution<> dist3(100, 200);
+		int ds3 = dist3(gen);
+		//Prefill in 50 % of the Stacks with random number of nodes (0-200) number of nodes
+		for(int i = 0; i < num_DS/int(percentages.write) ; i++)
+		{
+			int ds = dist1(gen);
+			for(int j=0; j < dist3(gen); j++)
+			{
+				LL_lk0[ds]->lock();
+				LLs0[ds]->append(ds);
+				LL_lk0[ds]->unlock();
+			}
+		}	
+		for(int i = 0; i < num_DS/int(percentages.write) ; i++)
+		{
+			int ds = dist2(gen);
+			for(int j=0; j < dist3(gen); j++)
+			{
+				LL_lk1[ds]->lock();
+				LLs1[ds]->append(ds);
+				LL_lk1[ds]->unlock();
+			}
+		}
+		std::cout<<"Prefilled " <<num_DS/int(percentages.write) <<" ll with " << dist3(gen) << " nodes each"<<std::endl;	
+	}
 }
 
 
-void numa_BST_init(std::string DS_config, int num_DS, int num_threads){
+void numa_BST_init(std::string DS_config, int num_DS, bool prefill, prefill_percentage &percentages){
 	BSTs0.resize(num_DS);
 	for(int i = 0; i < num_DS; i++)
 	{
@@ -227,34 +329,54 @@ void numa_BST_init(std::string DS_config, int num_DS, int num_threads){
 	std::mt19937 gen(123);
 	std::uniform_int_distribution<> dist1(0, BSTs0.size()-1);
 	std::uniform_int_distribution<> dist2(0, BSTs1.size()-1);
-
+	std::uniform_int_distribution<> dist3(100, 200);
 	//Prefill in 50 % of the tree randomly with value 1
-	for(int i = 0; i < num_DS/2; i++)
+	for(int i = 0; i < num_DS/2 ; i++)
 	{
 		int ds = dist1(gen);
 		BST_lk0[ds]->lock();
-		BSTs0[ds]->insert(dist1(gen));
+		BSTs0[ds]->insert(ds);
 		BST_lk0[ds]->unlock();
-	}
 
-	for(int i = 0; i < num_DS/2; i++)
+	}
+	for(int i = 0; i < num_DS/2 ; i++)
 	{
 		int ds = dist2(gen);
 		BST_lk1[ds]->lock();
-		BSTs1[ds]->insert(dist2(gen));
+		BSTs1[ds]->insert(ds);
 		BST_lk1[ds]->unlock();
-	}
-	
 
-	pthread_barrier_init(&bar, NULL, num_threads);
-	ops0 = 0;
-	ops1 = 0;
-	
-	printLK = new std::mutex();
-	globalLK = new std::mutex();
+	}
+		std::cout<<"Prefilled " <<num_DS/int(percentages.write) <<" bsts with " << dist3(gen) << " nodes each"<<std::endl;	
+
 }
 
-void StackTest(int tid,  int duration, int node, int64_t num_DS, int num_threads)
+void singleThreadedStackTest(int duration, int64_t num_DS){
+	std::mt19937 gen(123);
+	std::uniform_int_distribution<> dist(0, Stacks0.size()-1);
+	//std::cout << "Thread " << tid << " about to start working on node id"<<node << std::endl;
+	int ops = 0;
+	auto startTimer = std::chrono::steady_clock::now();
+	auto endTimer = startTimer + std::chrono::seconds(duration);
+	while (std::chrono::steady_clock::now() < endTimer) {
+		int ds = dist(gen);
+		int op = dist(gen)%2;
+		
+			if(op == 0){
+				Stacks0[ds]->push(1);
+				ops++;
+			}
+			else{
+				int val= Stacks0[ds]->pop();
+				ops++;
+			}
+	}
+
+	std::cout << "OPS FOR SINGLE THREAD IS: " << ops << std::endl;
+}
+
+
+void StackTest(int tid,  int duration, int node, int64_t num_DS, int num_threads, int crossover)
 {	
 	#ifdef DEBUG
 	if(tid == 1 && node==0)
@@ -264,9 +386,18 @@ void StackTest(int tid,  int duration, int node, int64_t num_DS, int num_threads
 	}		
 	#endif
 
+	// globalLK->lock();
+	// bool tcache;
+	// size_t sz = sizeof(bool);
+	// mallctl("thread.tcache.enabled", &tcache, &sz, NULL, 0);
+	// printf("Thread cache enabled: %s\n", tcache ? "yes" : "no");
+	// globalLK->unlock();
+	
 	pthread_barrier_wait(&bar);
     std::mt19937 gen(123);
     std::uniform_int_distribution<> dist(0, Stacks0.size()-1);
+	std::uniform_int_distribution<> xDist(1, 100);
+	
 	//std::cout << "Thread " << tid << " about to start working on node id"<<node << std::endl;
 	int ops = 0;
 	auto startTimer = std::chrono::steady_clock::now();
@@ -274,33 +405,60 @@ void StackTest(int tid,  int duration, int node, int64_t num_DS, int num_threads
 	while (std::chrono::steady_clock::now() < endTimer) {
 		int ds = dist(gen);
 		int op = dist(gen)%2;
-		
+		int x = xDist(gen);
 		if(node==0){
 			if(op == 0)
 			{
-				Stack_lk0[ds]->lock();
-				Stacks0[ds]->push(1);
-				Stack_lk0[ds]->unlock();
+				if(x < crossover){
+					Stack_lk1[ds]->lock();
+					Stacks1[ds]->push(ds);
+					Stack_lk1[ds]->unlock();
+				}else{
+					Stack_lk0[ds]->lock();
+					Stacks0[ds]->push(ds);
+					Stack_lk0[ds]->unlock();
+				}
 			}
 			else
 			{
-				Stack_lk0[ds]->lock();
-				int val= Stacks0[ds]->pop();
-				Stack_lk0[ds]->unlock();
+				if(x < crossover){
+					Stack_lk1[ds]->lock();
+					int val= Stacks1[ds]->pop();
+					Stack_lk1[ds]->unlock();
+				}
+				else{
+					Stack_lk0[ds]->lock();
+					int val= Stacks0[ds]->pop();
+					Stack_lk0[ds]->unlock();
+				}
 			}
 		}
 		else{
 			if(op == 0)
 			{
-				Stack_lk1[ds]->lock();
-				Stacks1[ds]->push(1);
-				Stack_lk1[ds]->unlock();
+				if(x < crossover){
+					Stack_lk0[ds]->lock();
+					Stacks0[ds]->push(ds);
+					Stack_lk0[ds]->unlock();
+				}
+				else{
+					Stack_lk1[ds]->lock();
+					Stacks1[ds]->push(ds);
+					Stack_lk1[ds]->unlock();
+				}
 			}
 			else
 			{
-				Stack_lk1[ds]->lock();
-				int val= Stacks1[ds]->pop();
-				Stack_lk1[ds]->unlock();
+				if(x < crossover){
+					Stack_lk0[ds]->lock();
+					int val= Stacks0[ds]->pop();
+					Stack_lk0[ds]->unlock();
+				}
+				else{
+					Stack_lk1[ds]->lock();
+					int val= Stacks1[ds]->pop();
+					Stack_lk1[ds]->unlock();
+				}
 			}
 		}
 		ops++;
@@ -321,7 +479,7 @@ void StackTest(int tid,  int duration, int node, int64_t num_DS, int num_threads
 	pthread_barrier_wait(&bar);
 }
 
-void QueueTest(int tid, int duration, int node, int64_t num_DS, int num_threads)
+void QueueTest(int tid, int duration, int node, int64_t num_DS, int num_threads, int crossover)
 {	
 	#ifdef DEBUG
 	if(tid == 1 && node==0)
@@ -329,46 +487,74 @@ void QueueTest(int tid, int duration, int node, int64_t num_DS, int num_threads)
 		std::cout << "Only thread "<< tid << " will print this." << std::endl;
 	}		
 	#endif
-	globalLK->lock();
-	globalLK->unlock();
-
 	std::mt19937 gen(123);
-	std::uniform_int_distribution<> dist(0, Queues0.size()-1);
+	std::uniform_int_distribution<> dist1(0, Queues0.size()-1);
+	std::uniform_int_distribution<> xDist(1, 100);
+
+
 
 	//std::cout << "Thread " << tid << " about to start working on node id"<<node << std::endl;
 	int ops = 0;
 	auto startTimer = std::chrono::steady_clock::now();
 	auto endTimer = startTimer + std::chrono::seconds(duration);
 	while (std::chrono::steady_clock::now() < endTimer) {
-		int ds = dist(gen);
-		int op = dist(gen)%2;
-		
+		int ds = dist1(gen);
+		int op = dist1(gen)%2;
+		int x = xDist(gen);
+
 		if(node==0){
 			if(op == 0)
 			{
-				Queue_lk0[ds]->lock();
-				Queues0[ds]->add(ds);
-				Queue_lk0[ds]->unlock();
+				if(x < crossover){
+					Queue_lk1[ds]->lock();
+					Queues1[ds]->add(ds);
+					Queue_lk1[ds]->unlock();
+				}else{
+					Queue_lk0[ds]->lock();
+					Queues0[ds]->add(ds);
+					Queue_lk0[ds]->unlock();
+				}
 			}
 			else
 			{
-				Queue_lk0[ds]->lock();
-				int val= Queues0[ds]->del();
-				Queue_lk0[ds]->unlock();
+				if(x < crossover){
+					Queue_lk1[ds]->lock();
+					int val= Queues1[ds]->del();
+					Queue_lk1[ds]->unlock();
+				}
+				else{
+					Queue_lk0[ds]->lock();
+					int val= Queues0[ds]->del();
+					Queue_lk0[ds]->unlock();
+				}
 			}
 		}
 		else{
 			if(op == 0)
 			{
-				Queue_lk1[ds]->lock();
-				Queues1[ds]->add(ds);
-				Queue_lk1[ds]->unlock();
+				if(x < crossover){
+					Queue_lk0[ds]->lock();
+					Queues0[ds]->add(ds);
+					Queue_lk0[ds]->unlock();
+				}
+				else{
+					Queue_lk1[ds]->lock();
+					Queues1[ds]->add(ds);
+					Queue_lk1[ds]->unlock();
+				}
 			}
 			else
 			{
-				Queue_lk1[ds]->lock();
-				int val= Queues1[ds]->del();
-				Queue_lk1[ds]->unlock();
+				if(x < crossover){
+					Queue_lk0[ds]->lock();
+					int val= Queues0[ds]->del();
+					Queue_lk0[ds]->unlock();
+				}
+				else{
+					Queue_lk1[ds]->lock();
+					int val= Queues1[ds]->del();
+					Queue_lk1[ds]->unlock();
+				}
 			}
 		}
 		ops++;
@@ -389,7 +575,7 @@ void QueueTest(int tid, int duration, int node, int64_t num_DS, int num_threads)
 }
 
 
-void LinkedListTest(int tid, int duration, int node, int64_t num_DS, int num_threads)
+void LinkedListTest(int tid, int duration, int node, int64_t num_DS, int num_threads, int crossover)
 {	
 	#ifdef DEBUG
 	if(tid == 1 && node==0)
@@ -402,6 +588,7 @@ void LinkedListTest(int tid, int duration, int node, int64_t num_DS, int num_thr
 	std::mt19937 gen(123);
 	std::uniform_int_distribution<> dist(0, LLs0.size()-1);
 	std::uniform_int_distribution<> opDist(1, 100);
+	std::uniform_int_distribution<> xDist(1, 100);
 	//std::cout << "Thread " << tid << " about to start working on node id"<<node << std::endl;
 	int ops = 0;
 	auto startTimer = std::chrono::steady_clock::now();
@@ -409,32 +596,60 @@ void LinkedListTest(int tid, int duration, int node, int64_t num_DS, int num_thr
 	while (std::chrono::steady_clock::now() < endTimer) {
 		int ds = dist(gen);
 		int op = dist(gen)%2;
+		int x = xDist(gen);
 		if(node==0){
 			if(op == 0)
 			{
-				LL_lk0[ds]->lock();
-				LLs0[ds]->append(ds);
-				LL_lk0[ds]->unlock();
+				if(x < crossover){
+					LL_lk1[ds]->lock();
+					LLs1[ds]->append(ds);
+					LL_lk1[ds]->unlock();
+				}else{
+					LL_lk0[ds]->lock();
+					LLs0[ds]->append(ds);
+					LL_lk0[ds]->unlock();
+				}
 			}
 			else
 			{
-				LL_lk0[ds]->lock();
-				LLs0[ds]->removeHead();
-				LL_lk0[ds]->unlock();
+				if(x < crossover){
+					LL_lk1[ds]->lock();
+					LLs1[ds]->removeHead();
+					LL_lk1[ds]->unlock();
+				}
+				else{
+					LL_lk0[ds]->lock();
+					LLs0[ds]->removeHead();
+					LL_lk0[ds]->unlock();
+				}
 			}
 		}
 		else{
 			if(op == 0)
 			{
-				LL_lk1[ds]->lock();
-				LLs1[ds]->append(ds);
-				LL_lk1[ds]->unlock();
+				if(x < crossover){
+					LL_lk0[ds]->lock();
+					LLs0[ds]->append(ds);
+					LL_lk0[ds]->unlock();
+				}
+				else{
+					LL_lk1[ds]->lock();
+					LLs1[ds]->append(ds);
+					LL_lk1[ds]->unlock();
+				}
 			}
 			else
 			{
-				LL_lk1[ds]->lock();
-				LLs1[ds]->removeHead();
-				LL_lk1[ds]->unlock();
+				if(x < crossover){
+					LL_lk0[ds]->lock();
+					LLs0[ds]->removeHead();
+					LL_lk0[ds]->unlock();
+				}
+				else{
+					LL_lk1[ds]->lock();
+					LLs1[ds]->removeHead();
+					LL_lk1[ds]->unlock();
+				}
 			}
 		}
 		ops++;
@@ -455,7 +670,7 @@ void LinkedListTest(int tid, int duration, int node, int64_t num_DS, int num_thr
 	pthread_barrier_wait(&bar);
 }
 
-void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_threads)
+void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_threads, int crossover)
 {	
 	#ifdef DEBUG
 	if(tid == 1 && node==0)
@@ -468,8 +683,10 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 	std::mt19937 gen(123);
 	std::uniform_int_distribution<> dist(0, BSTs0.size()-1);
 	std::uniform_int_distribution<> opDist(1, 100);
+	std::uniform_int_distribution<> xDist(1, 100);
 	//std::cout << "Thread " << tid << " about to start working on node id"<<node << std::endl;
 	int ops = 0;
+	int x = xDist(gen);
 	auto startTimer = std::chrono::steady_clock::now();
 	auto endTimer = startTimer + std::chrono::seconds(duration);
 	while (std::chrono::steady_clock::now() < endTimer) {
@@ -477,47 +694,95 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 		if(node==0){
 			if(opDist(gen)<=40)
 			{
-				BST_lk0[ds]->lock();
-				BSTs0[ds]->lookup(1);
-				BST_lk0[ds]->unlock();
+				if(x < crossover){
+					BST_lk1[ds]->lock();
+					BSTs1[ds]->lookup(1);
+					BST_lk1[ds]->unlock();
+				}else{
+					BST_lk0[ds]->lock();
+					BSTs0[ds]->lookup(1);
+					BST_lk0[ds]->unlock();
+				}
 			}
 			else if(opDist(gen)<=80){
-				BST_lk0[ds]->lock();
-				BSTs0[ds]->update(ds);
-				BST_lk0[ds]->unlock();
+				if(x < crossover){
+					BST_lk1[ds]->lock();
+					BSTs1[ds]->update(ds);
+					BST_lk1[ds]->unlock();
+				}else{
+					BST_lk0[ds]->lock();
+					BSTs0[ds]->update(ds);
+					BST_lk0[ds]->unlock();
+				}
 			}
 			else if(opDist(gen)<=90){
-				BST_lk0[ds]->lock();
-				BSTs0[ds]->insert(ds);
-				BST_lk0[ds]->unlock();
+				if(x < crossover){
+					BST_lk1[ds]->lock();
+					BSTs1[ds]->insert(ds);
+					BST_lk1[ds]->unlock();
+				}else{
+					BST_lk0[ds]->lock();
+					BSTs0[ds]->insert(ds);
+					BST_lk0[ds]->unlock();
+				}
 			}
 			else{
-				BST_lk0[ds]->lock();
-				BSTs0[ds]->remove(ds);
-				BST_lk0[ds]->unlock();
+				if(x<crossover){
+					BST_lk1[ds]->lock();
+					BSTs1[ds]->remove(ds);
+					BST_lk1[ds]->unlock();
+				}else{
+					BST_lk0[ds]->lock();
+					BSTs0[ds]->remove(ds);
+					BST_lk0[ds]->unlock();
+				}
 			}
 		}
 		else{
 			if(opDist(gen)<=40)
 			{
-				BST_lk1[ds]->lock();
-				BSTs1[ds]->lookup(ds);
-				BST_lk1[ds]->unlock();
+				if(x<crossover){
+					BST_lk0[ds]->lock();
+					BSTs0[ds]->lookup(1);
+					BST_lk0[ds]->unlock();
+				}else{
+					BST_lk1[ds]->lock();
+					BSTs1[ds]->lookup(1);
+					BST_lk1[ds]->unlock();
+				}
 			}
 			else if(opDist(gen)<=80){
-				BST_lk1[ds]->lock();
-				BSTs1[ds]->update(ds);
-				BST_lk1[ds]->unlock();
+				if(x<crossover){
+					BST_lk0[ds]->lock();
+					BSTs0[ds]->update(ds);
+					BST_lk0[ds]->unlock();
+				}else{
+					BST_lk1[ds]->lock();
+					BSTs1[ds]->update(ds);
+					BST_lk1[ds]->unlock();
+				}
 			}
 			else if(opDist(gen)<=90){
-				BST_lk1[ds]->lock();
-				BSTs1[ds]->insert(ds);
-				BST_lk1[ds]->unlock();
+				if(x<crossover){
+					BST_lk0[ds]->lock();
+					BSTs0[ds]->insert(ds);
+					BST_lk0[ds]->unlock();
+				}else{
+					BST_lk1[ds]->lock();
+					BSTs1[ds]->insert(ds);
+					BST_lk1[ds]->unlock();
+				}
 			}
 			else{
-				BST_lk1[ds]->lock();
-				BSTs1[ds]->remove(ds);
-				BST_lk1[ds]->unlock();
+				if(x<crossover){
+					BST_lk0[ds]->lock();
+					BSTs0[ds]->remove(ds);
+					BST_lk0[ds]->unlock();
+				}else{
+					BST_lk1[ds]->lock();
+					BSTs1[ds]->remove(ds);
+					BST_lk1[ds]->unlock();
+				}
 			}
 		}
 		ops++;

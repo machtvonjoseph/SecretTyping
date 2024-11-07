@@ -34,8 +34,14 @@ void NumaConsumer::WriteOutput(clang::SourceManager &SM){
                     // llvm::outs() << "Skipping numaLib/numatype.hpp\n";
                     continue;
                 }
+                if(it->first.getName().find("include/umf/") != std::string::npos){
+                    // llvm::outs() << "Skipping include/umf/\n";
+                    continue;
+                }
+
 
                 std::string fileName = (std::string)it->first.getName();
+                llvm::outs()<<"WORKNEH FILE TO BE WRITTEN: "<<fileName<<"\n";
                 std::string outputFileName = fileName.replace(fileName.find("input"), 5, "output");
                 llvm::outs() << "Output File Name: " << outputFileName << "\n";
                 //if directory doesn't exist create it

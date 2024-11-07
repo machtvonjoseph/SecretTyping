@@ -2,10 +2,11 @@
 #pragma once
 #include <umf/mempolicy.h>
 #include <umf/memspace.h>
-
+#include <jemalloc/jemalloc.h>
 #include <umf/pools/pool_jemalloc.h>
-#include <stdbool.h>
 
+#include <stdbool.h>
+#include <cassert>
 #ifndef _WIN32
 #include <unistd.h>
 #endif
@@ -22,10 +23,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdexcept>
-#include "utils_examples.h"
+
 #include <mutex>
 
-
+#include <iostream>
 
 // Function to create a memory provider which allocates memory from the specified NUMA node
 // by using umfMemspaceCreateFromNumaArray
@@ -77,6 +78,7 @@ static std::mutex umf_lock[NUM_NODES];
 
 __attribute__((constructor))
 void umf_alloc_init() {
+    void* ptr = NULL;
     umf_memspace_handle_t hMemspace= NULL;
     umf_mempolicy_handle_t hPolicy = NULL;
     for (unsigned i = 0; i < NUM_NODES; ++i) {
@@ -96,22 +98,43 @@ void umf_alloc_init() {
         if(pool != UMF_RESULT_SUCCESS){
             throw std::runtime_error("Could not create pool");
         }
-
         umfMempolicyDestroy(hPolicy);
         umfMemspaceDestroy(hMemspace);
+        // size_t sz;
+        // unsigned narenas;
+        // bool tcache;
+        // size_t tcache_max;
+    
+        // sz = sizeof(unsigned);
+        // printf("sz: %zu\n", sz);  
+        // mallctl("opt.narenas", &narenas, &sz, NULL, 0);
+       
+        // mallctl("opt.tcache_max", &tcache_max, &sz, NULL, 0);
+        // printf("Number of arenas: %u\n", narenas);
+        // printf("Thread cache enabled: %s\n", tcache ? "yes" : "no");
+        // printf("Thread cache max: %zu\n", tcache_max);
+
+        // ptr = umfPoolAlignedMalloc(jemalloc_pool[i], 100*1024*1024, sizeof(char));
+        // printf("Allocated %u bytes\n", 100*1024*1024);
+        // if(ptr == NULL){
+        //     throw std::runtime_error("Could not allocate pool");
+        // }
+        // for(int j = 0; j < 100*1024*1024; j+=4096){
+        //     ((char*)ptr)[j] = 'a';
+        // }
+        // if(umfPoolFree(jemalloc_pool[i], ptr) != UMF_RESULT_SUCCESS){
+        //     throw std::runtime_error("Could not free pool");
+        // }
     }
-
-
 }
 
 
 void* umf_alloc(unsigned NodeId, size_t size, size_t allign){
     // umf_lock[NodeId].lock();
     void *ptr = NULL;
-    ptr = umfPoolAlignedMalloc(jemalloc_pool[NodeId], size, allign);
-    if(ptr == NULL){
-        throw std::bad_alloc();
-    }
+    ptr = umfPoolMalloc(jemalloc_pool[NodeId], size);
+    // printf("Allocated %u bytes\n", size);
+    assert(ptr && "Could not allocate pool");
     //umf_result_t ret = umfMemoryProviderAlloc(NUMA_HANDLES[NodeId], size, allign, &ptr);
     // umf_lock[NodeId].unlock();
     // if (ret==UMF_RESULT_SUCCESS){
@@ -120,9 +143,7 @@ void* umf_alloc(unsigned NodeId, size_t size, size_t allign){
     return ptr;
 }
 
-void umf_free(unsigned NodeId){
-    if(umfPoolFree(jemalloc_pool[NodeId], NULL) != UMF_RESULT_SUCCESS){
-        throw std::runtime_error("Could not free pool");
-    }
+void umf_free(unsigned NodeId,void* ptr){
+    umfPoolFree(jemalloc_pool[NodeId], ptr);
     //umfMemoryProviderDestroy(NUMA_HANDLES[NodeId]);
 }

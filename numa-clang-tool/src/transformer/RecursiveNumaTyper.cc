@@ -91,7 +91,7 @@ std::string utils::getNumaAllocatorCode(std::string classDecl, std::string nodeI
     static void operator delete(void* ptr){
         // cout<<"doing numa free \n";
         #ifdef UMF
-			umf_free()"+ nodeID +R"();
+			umf_free()"+ nodeID +R"(,ptr);
 		#else
 		    numa_free(ptr, 1 * sizeof()"+classDecl+R"());
         #endif
@@ -100,7 +100,7 @@ std::string utils::getNumaAllocatorCode(std::string classDecl, std::string nodeI
     static void operator delete[](void* ptr){
 		// cout<<"doing numa free \n";
         #ifdef UMF
-			umf_free()"+ nodeID +R"();
+			umf_free()"+ nodeID +R"(,ptr);
 		#else
 		    numa_free(ptr, 1 * sizeof()"+classDecl+R"());
         #endif
@@ -270,6 +270,7 @@ void RecursiveNumaTyper::extractNumaDecls(clang::Stmt* fnBody, ASTContext *Conte
 
     if(NewExprInBinaryOperatorVisitor.TraverseStmt(fnBody)){
         llvm::outs() << "Found binary operator\n";
+        llvm::outs() << "size of binary operators "<< NewExprInBinaryOperatorVisitor.getBinaryOperators().size() << "\n";
         for(auto newExpr: NewExprInBinaryOperatorVisitor.getBinaryOperators()){
                 llvm::outs() << "new expression is "<< newExpr.first->getType().getAsString() << "\n";
                 //print the left hand sign of the binary operator
