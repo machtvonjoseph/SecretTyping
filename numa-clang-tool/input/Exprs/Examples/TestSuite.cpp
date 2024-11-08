@@ -11,7 +11,7 @@
 #include "Queue.hpp"
 #include "BinarySearch.hpp"
 #include "LinkedList.hpp"
-#include "numatype.hpp"
+// #include "numatype.hpp"
 #include <random>
 #include <iostream>
 #include <thread>
@@ -23,6 +23,7 @@
 #include <cstdlib>
 #include <pthread.h>
 #include <map>
+#include "umf_numa_allocator.hpp"
 
 #define MEGABYTE 1048576
 
@@ -30,6 +31,10 @@ std::vector<Stack*> Stacks0;
 std::vector<Stack*> Stacks1;
 int64_t ops0=0;
 int64_t ops1=0;
+
+char* Arrays0;
+char* Arrays1;
+
 std::vector<mutex*> Stack_lk0;
 std::vector<mutex*> Stack_lk1;
 pthread_barrier_t bar ;
@@ -55,6 +60,9 @@ std::vector<LinkedList*> LLs1;
 std::vector<mutex*> LL_lk0;
 std::vector<mutex*> LL_lk1;
 
+mutex* Array_Lk0;
+mutex* Array_Lk1;
+
 struct prefill_percentage{
 	float write;
 	float read;
@@ -72,7 +80,10 @@ void global_init(int num_threads){
 	
 	printLK = new std::mutex();
 	globalLK = new std::mutex();
+	Array_Lk0 = new mutex();
+	Array_Lk1 = new mutex();
 }
+
 
 
 void singleThreadedStackInit(int num_DS, bool isNuma){
@@ -94,6 +105,27 @@ void singleThreadedStackInit(int num_DS, bool isNuma){
 }
 
 
+
+void numa_array_init(std::string DS_config, int size, bool prefill, prefill_percentage &percentages){
+	if(DS_config=="numa"){	
+		Arrays0 = (char*)umf_alloc(0, sizeof(char)* size, alignof(char));
+	}
+	else{
+		Arrays0 = new char[size];
+	}
+	if(DS_config=="numa"){	
+		Arrays1 = (char*)umf_alloc(1, sizeof(char)* size, alignof(char));
+	}
+	else{
+		Arrays1 = new char[size];
+	}
+	if(prefill){
+		for(int i = 0; i < size/int(percentages.write); i++){
+			Arrays0[i] = 'a';
+			Arrays1[i] = 'a';
+		}
+	}
+}
 
 void numa_Stack_init(std::string DS_config, int num_DS, bool prefill, prefill_percentage &percentages){
 	Stacks0.resize(num_DS);
@@ -142,7 +174,7 @@ void numa_Stack_init(std::string DS_config, int num_DS, bool prefill, prefill_pe
 		for(int i = 0; i < num_DS/int(percentages.write) ; i++)
 		{
 			int ds = dist1(gen);
-			for(int j=0; j < dist3(gen); j++)
+			for(int j=0; j < 200*1024; j++)
 			{
 				Stack_lk0[ds]->lock();
 				Stacks0[ds]->push(ds);
@@ -152,14 +184,14 @@ void numa_Stack_init(std::string DS_config, int num_DS, bool prefill, prefill_pe
 		for(int i = 0; i < num_DS/int(percentages.write) ; i++)
 		{
 			int ds = dist2(gen);
-			for(int j=0; j < dist3(gen); j++)
+			for(int j=0; j < 200*1024; j++)
 			{
 				Stack_lk1[ds]->lock();
 				Stacks1[ds]->push(ds);
 				Stack_lk1[ds]->unlock();
 			}
 		}
-		std::cout<<"Prefilled " <<num_DS/int(percentages.write) <<" stacks with " << dist3(gen) << " nodes each"<<std::endl;	
+	// 	std::cout<<"Prefilled " <<num_DS/int(percentages.write) <<" stacks with " << 200*1024 << " nodes each"<<std::endl;	
 	}
 }
 
@@ -206,7 +238,7 @@ void numa_Queue_init(std::string DS_config, int num_DS, bool prefill, prefill_pe
 		//Prefill in 50 % of the Queue with random number of nodes (0-200) number of nodes
 		for(int i = 0; i < num_DS/int(percentages.write) ; i++){
 			int ds = dist1(gen);
-			for(int j=0; j < dist3(gen); j++)
+			for(int j=0; j < 2000*1024; j++)
 			{
 				Queue_lk0[ds]->lock();
 				Queues0[ds]->add(ds);
@@ -215,14 +247,14 @@ void numa_Queue_init(std::string DS_config, int num_DS, bool prefill, prefill_pe
 		}
 		for(int i = 0; i < num_DS/int(percentages.write) ; i++){
 			int ds = dist2(gen);
-			for(int j=0; j < dist3(gen); j++)
+			for(int j=0; j < 2000*1024; j++)
 			{
 				Queue_lk1[ds]->lock();
 				Queues1[ds]->add(ds);
 				Queue_lk1[ds]->unlock();
 			}
 		}
-		std::cout<<"Prefilled " <<num_DS/int(percentages.write) <<" queue with " << ds3 << " nodes each"<<std::endl;		
+		//std::cout<<"Prefilled " <<num_DS/int(percentages.write) <<" queue with " << ds3 << " nodes each"<<std::endl;		
 	}
 }
 
@@ -297,7 +329,7 @@ void numa_BST_init(std::string DS_config, int num_DS, bool prefill, prefill_perc
 	for(int i = 0; i < num_DS; i++)
 	{
 		if(DS_config=="numa"){
-			BSTs0[i] = new numa<BinarySearchTree,0>();
+			BSTs0[i] =new numa<BinarySearchTree,0>();
 		}
 		else{
 			BSTs0[i] = new BinarySearchTree();
@@ -373,6 +405,43 @@ void singleThreadedStackTest(int duration, int64_t num_DS){
 	}
 
 	std::cout << "OPS FOR SINGLE THREAD IS: " << ops << std::endl;
+}
+
+
+
+void ArrayTest(int tid,  int duration, int node, int64_t num_DS, int num_threads, int crossover){
+
+	int ops = 0;
+	auto startTimer = std::chrono::steady_clock::now();
+	auto endTimer = startTimer + std::chrono::seconds(duration);
+	while (std::chrono::steady_clock::now() < endTimer) {
+		int x = 0;
+		if(node==0){
+			Array_Lk0->lock();
+			Arrays0[x] = 1;
+			Array_Lk0->unlock();
+			
+		}
+		else{
+			Array_Lk1->lock();
+			Arrays1[x] = 1;
+			Array_Lk1->unlock();
+		}
+		ops++;
+	}
+
+	globalLK->lock();
+	if(node==0)
+	{
+		ops0 += ops;
+	}
+	else
+	{
+		ops1 += ops;
+	}
+	globalLK->unlock();
+
+	pthread_barrier_wait(&bar);
 }
 
 
@@ -806,35 +875,35 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 
 
 void global_cleanup(){
-	for(int i = 0; i < Stacks0.size(); i++)
-	{
-		delete Stacks0[i];
-	}
-	for(int i = 0; i < Stacks1.size(); i++)
-	{
-		delete Stacks1[i];
-	}
+	// for(int i = 0; i < Stacks0.size(); i++)
+	// {
+	// 	delete Stacks0[i];
+	// }
+	// for(int i = 0; i < Stacks1.size(); i++)
+	// {
+	// 	delete Stacks1[i];
+	// }
 
-	for(int i = 0; i < Queues0.size(); i++)
-	{
-		delete Queues0[i];
-	}
-	for(int i = 0; i < Queues1.size(); i++)
-	{
-		delete Queues1[i];
-	}
+	// for(int i = 0; i < Queues0.size(); i++)
+	// {
+	// 	delete Queues0[i];
+	// }
+	// for(int i = 0; i < Queues1.size(); i++)
+	// {
+	// 	delete Queues1[i];
+	// }
 
-	for(int i = 0; i < BSTs0.size(); i++)
-	{
-		delete BSTs0[i];
-	}
-	for(int i = 0; i < BSTs1.size(); i++)
-	{
-		delete BSTs1[i];
-	}
+	// for(int i = 0; i < BSTs0.size(); i++)
+	// {
+	// 	delete BSTs0[i];
+	// }
+	// for(int i = 0; i < BSTs1.size(); i++)
+	// {
+	// 	delete BSTs1[i];
+	// }
 
-	for(int i = 0; i < LLs0.size(); i++)
-	{
-		delete LLs0[i];
-	}
+	// for(int i = 0; i < LLs0.size(); i++)
+	// {
+	// 	delete LLs0[i];
+	// }
 }

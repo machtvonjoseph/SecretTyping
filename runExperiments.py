@@ -5,7 +5,7 @@ import subprocess
 import sys
 import argparse
 from pathlib import Path
-
+#threads we want to run for = t:4:8:12:16:20:24:28:32:36:40
 def copy_folder(src_folder, dest_folder):
     try:
         # Copy the folder from source to destination
@@ -39,7 +39,7 @@ def run_command(command):
 def run_command_and_redirect_output(command, output_file):
     try:
         # Run the command as a shell process
-        with open(output_file, 'a') as file:
+        with open(output_file, 'w') as file:
             result = subprocess.run(command, shell=True, check=True, text=True, stdout=file)
             print("Command output:", result.stdout)
     except subprocess.CalledProcessError as e:
@@ -81,8 +81,8 @@ if __name__ == "__main__":
     run_command(command)
 
     # Command to be run after copying (you can modify this as needed)
-    command = f"cd numa-clang-tool && ./run.sh {args.exprName}"  # Example command
-
+    command = f"cd numa-clang-tool && sudo ./run.sh {args.exprName}"  # Example command
+    print(command)
     # Run the command
     run_command(command)
     
@@ -90,7 +90,7 @@ if __name__ == "__main__":
         
     run_command(f"chmod -R 777 ./Output/{args.exprName}/")
     
-    command = f"cd ./Output/{args.exprName}/ && make clean"
+    command = f"cd ./Output/{args.exprName}/ && sudo  make clean"
     
     run_command(command)
 
@@ -107,34 +107,39 @@ if __name__ == "__main__":
     
     run_command(command)
     if(args.verbose):
-        run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, Op0, Op1, TotalOps >> ./Result/stack.csv")
+        run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover, Op0, Op1, TotalOps ")
     else:
-        run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration ")
+        run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover, Op0, Op1, TotalOps >> ./Result/stack.csv")
+        run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover, Op0, Op1, TotalOps >> ./Result/queue.csv")
+        run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover, Op0, Op1, TotalOps >> ./Result/ll.csv")
+        run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover, Op0, Op1, TotalOps >> ./Result/bst.csv")
+        
+        
     
     
     
     if (args.DS == "stack"):
         if (args.verbose):
-            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:stack --meta th_config:numa:regular:split --meta DS_config:numa:regular "
+            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:1024 --meta t:40 --meta D:5 --meta DS_name:stack --meta th_config:numa:regular:split --meta DS_config:numa:regular --meta x:20:10 --prefill=1,0,0,0"
         else:
-            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:stack --meta th_config:numa:regular:split --meta DS_config:numa:regular >> ../../Result/stack.csv"
+            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:1024 --meta t:40 --meta D:5 --meta DS_name:stack --meta th_config:numa:regular:split --meta DS_config:numa:regular --meta x:20:10 --prefill=1,0,0,0>> ../../Result/stack.csv"
     elif (args.DS == "queue"):
         if (args.verbose):
-            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:queue --meta th_config:numa:regular:split --meta DS_config:numa:regular "
+            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:1024 --meta t:40 --meta D:5 --meta DS_name:queue --meta th_config:numa:regular:split --meta DS_config:numa:regular --meta x:20:10 --prefill=1,0,0,0 "
         else:
-            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:queue --meta th_config:numa:regular:split --meta DS_config:numa:regular >> ../../Result/stack.csv"
+            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:1024 --meta t:40 --meta D:5 --meta DS_name:queue --meta th_config:numa:regular:split --meta DS_config:numa:regular --meta x:20:10 --prefill=1,0,0,0 >> ../../Result/queue.csv"
     elif (args.DS == "ll"):
         if (args.verbose):
-            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:ll --meta th_config:numa:regular:split --meta DS_config:numa:regular "
+            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:ll --meta th_config:numa:regular:split --meta DS_config:numa:regular --meta x:0:10 "
         else:
-            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:ll --meta th_config:numa:regular:split --meta DS_config:numa:regular >> ../../Result/stack.csv"
+            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:ll --meta th_config:numa:regular:split --meta DS_config:numa:regular --meta x:0:10 >> ../../Result/stack.csv"
     elif (args.DS == "bst"):
         if (args.verbose):
-            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:bst --meta th_config:numa:regular:split --meta DS_config:numa:regular "
+            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:bst --meta th_config:numa:regular:split --meta DS_config:numa:regular --meta x:0:10 "
         else:
             command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:bst --meta th_config:numa:regular:split --meta DS_config:numa:regular >> ../../Result/stack.csv"
           
-
+    print("command is ", command)
     run_command(command)
 
     # run_command_and_redirect_output(command, f"./Result/stack.csv")

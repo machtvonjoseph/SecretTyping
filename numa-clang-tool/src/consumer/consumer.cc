@@ -35,7 +35,7 @@ void NumaConsumer::WriteOutput(clang::SourceManager &SM){
                     continue;
                 }
                 if(it->first.getName().find("include/umf/") != std::string::npos){
-                    // llvm::outs() << "Skipping include/umf/\n";
+                    llvm::outs() << "Skipping include/umf/\n";
                     continue;
                 }
 
@@ -72,10 +72,19 @@ void NumaConsumer::includeNumaHeader(clang::ASTContext &context){
             llvm::outs() << "FROM INCLUDE NUMA HEADER File Name: " << it->first.getName() << "\n";
             //skip if file name is testsuite.hpp
             std::string home = std::getenv("HOME");
-            if(it->first.getName().find(home+"/NUMATyping/numa-clang-tool/input/Exprs/Examples/TestSuite.hpp") != std::string::npos){
+            if(it->first.getName().find("TestSuite.hpp") != std::string::npos){
                 llvm::outs() << "Skipping :" << it->first.getName() << "\n";
                 continue;
             }
+            if(it->first.getName().find("umf/") != std::string::npos){
+                    llvm::outs() << "Skipping include/umf/\n";
+                    continue;
+                }
+            if(it->first.getName().find("umf_numa_allocator.hpp") != std::string::npos){
+                llvm::outs() << "Skipping umf_numa_allocator.hpp\n";
+                continue;
+            }
+
             std::string includeheaders = R"(#ifdef UMF 
 	                #include "numatype.hpp"
 	                #include <umf/mempolicy.h>

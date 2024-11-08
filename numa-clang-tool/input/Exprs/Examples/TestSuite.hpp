@@ -31,6 +31,7 @@ void global_init(int num_threads);
 void singleThreadedStackTest(int duration, int64_t num_DS);
 void singleThreadedStackInit(int num_DS, bool isNuma);
 void warmUpPool();
+void numa_array_init(std::string DS_config, int size, bool prefill, prefill_percentage &percentages);
 void numa_Stack_init(std::string DS_config, int num_DS, bool prefill, prefill_percentage &percentages);
 void numa_Queue_init(std::string DS_config, int num_DS, bool prefill, prefill_percentage &percentages);
 void numa_BST_init(std::string DS_config, int num_DS, bool prefill, prefill_percentage &percentages);
@@ -44,6 +45,9 @@ void sync_init(int num_threads);
  * (pop, push, ctor, dtor, display)
  * 
  */
+
+void ArrayTest(int t_id, int duration, int node, int64_t num_DS, int num_threads, int crossover);
+
 void StackTest(int t_id, int duration, int node, int64_t num_DS, int num_threads, int crossover);
 
 void QueueTest(int t_id, int duration, int node, int64_t num_DS, int num_threads, int crossover);
@@ -51,32 +55,6 @@ void QueueTest(int t_id, int duration, int node, int64_t num_DS, int num_threads
 void BinarySearchTest(int t_id, int duration, int node, int64_t num_DS, int num_threads, int crossover);
 
 void LinkedListTest(int t_id, int duration, int node, int64_t num_DS, int num_threads, int crossover);
-// /*!
-//  * \brief Test function for the Stack classes
-//  * 
-//  * Invokes the functions of the Stack class 
-//  * (pop, push, ctor, dtor, display)
-//  * 
-//  */
-// void* QueueTest(int t_id, int duration, int node, int64_t num_DS, int num_threads);
-
-// /*!
-//  * \brief Test function for the Stack classes
-//  * 
-//  * Invokes the functions of the Stack class 
-//  * (pop, push, ctor, dtor, display)
-//  * 
-//  */
-// void* BinarySearchTest(int t_id, int duration, int node, int64_t num_DS, int num_threads);
-
-// /*!
-//  * \brief Test function for the Stack classes
-//  * 
-//  * Invokes the functions of the Stack class 
-//  * (pop, push, ctor, dtor, display)
-//  * 
-//  */
-// void* LinkedListTest(int t_id, int duration, int node, int64_t num_DS, int num_threads);
 
 void global_cleanup();
 

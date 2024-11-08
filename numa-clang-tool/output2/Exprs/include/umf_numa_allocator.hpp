@@ -1,5 +1,8 @@
 
 #pragma once
+#ifndef _UMF_NUMA_ALLOCATOR_HPP_
+#define _UMF_NUMA_ALLOCATOR_HPP_
+
 #include <umf/mempolicy.h>
 #include <umf/memspace.h>
 #include <jemalloc/jemalloc.h>
@@ -147,3 +150,4 @@ void umf_free(unsigned NodeId,void* ptr){
     umfPoolFree(jemalloc_pool[NodeId], ptr);
     //umfMemoryProviderDestroy(NUMA_HANDLES[NodeId]);
 }
+#endif

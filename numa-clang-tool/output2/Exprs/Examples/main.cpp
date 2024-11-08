@@ -190,8 +190,86 @@ int main(int argc, char *argv[])
     // }
 
 	// singleThreadedStackTest(duration, num_DS);
+	// std::cout<<"percentage write = "<< percentages.write <<std::endl;
+	if(DS_name == "array"){
+		numa_array_init(DS_config, num_DS/2, prefill_set, percentages);
 
-	if(DS_name == "stack"){
+		for(int i=0; i < num_threads/2; i++){
+			int node = 0;
+			int tid = i;
+			if(thread_config == "numa"){
+				numa_thread0[i] = new thread_numa<0>(ArrayTest, tid, duration, node, num_DS/2, num_threads/2, crossover);
+			}
+			else if(thread_config == "regular"){
+				regular_thread0[i] = new thread(ArrayTest, tid, duration, node, num_DS/2, num_threads/2, crossover);
+			}
+			else{
+				numa_thread0[i] = new thread_numa<0>(ArrayTest, tid, duration, i%2, num_DS/2, num_threads/2, crossover);
+			}
+		}
+
+		for(int i=0; i < num_threads/2; i++){
+			int node = 1;
+			int tid = i + num_threads/2;
+			if(thread_config == "numa"){
+				numa_thread1[i] = new thread_numa<1>(ArrayTest, tid, duration, node, num_DS/2, num_threads/2, crossover);
+			}
+			else if(thread_config == "regular"){
+				regular_thread1[i] = new thread(ArrayTest, tid, duration, node, num_DS/2, num_threads/2, crossover);
+			}
+			else{
+				numa_thread1[i] = new thread_numa<1>(ArrayTest, tid, duration, i%2, num_DS/2, num_threads/2, crossover);
+			}
+		}
+
+		if(thread_config == "numa"){
+			for(int i=0; i < num_threads/2; i++){
+				if(numa_thread0[i] == nullptr){
+					continue;
+				}
+				numa_thread0[i]->join();
+			}
+			for(int i=0; i < num_threads/2; i++){
+				if(numa_thread1[i] == nullptr){
+					continue;
+				}
+				numa_thread1[i]->join();
+			}
+		}
+		else if(thread_config == "regular"){
+			for(int i=0; i < regular_thread0.size(); i++){
+				if(regular_thread0[i] == nullptr){
+					continue;
+				}
+				regular_thread0[i]->join();
+			}
+			for(int i=0; i < regular_thread1.size(); i++){
+				if(regular_thread1[i] == nullptr){
+					continue;
+				}
+				regular_thread1[i]->join();
+			}
+		}
+		else{
+			for(int i=0; i < numa_thread0.size(); i++){
+				if(numa_thread0[i] == nullptr){
+					continue;
+				}
+				numa_thread0[i]->join();
+			}
+			for(int i=0; i < numa_thread1.size(); i++){
+				if(numa_thread1[i] == nullptr){
+					continue;
+				}
+				numa_thread1[i]->join();
+			}
+		}
+
+		std::cout << ops0 << ", ";
+		std::cout << ops1 << ", ";
+		std::cout << ops0 + ops1 << "\n";
+	}
+	else if(DS_name == "stack"){
 		numa_Stack_init(DS_config, num_DS/2, prefill_set, percentages);
 
 		for(int i=0; i < num_threads/2; i++){
