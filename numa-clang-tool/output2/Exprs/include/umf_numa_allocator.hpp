@@ -135,7 +135,8 @@ void umf_alloc_init() {
 void* umf_alloc(unsigned NodeId, size_t size, size_t allign){
     // umf_lock[NodeId].lock();
     void *ptr = NULL;
-    ptr = umfPoolMalloc(jemalloc_pool[NodeId], size);
+    //ptr = umfPoolMalloc(jemalloc_pool[NodeId], size);
+    ptr = umfFastJemallocMalloc(jemalloc_pool[NodeId], size);
     // printf("Allocated %u bytes\n", size);
     assert(ptr && "Could not allocate pool");
     //umf_result_t ret = umfMemoryProviderAlloc(NUMA_HANDLES[NodeId], size, allign, &ptr);
@@ -147,7 +148,9 @@ void* umf_alloc(unsigned NodeId, size_t size, size_t allign){
 }
 
 void umf_free(unsigned NodeId,void* ptr){
-    umfPoolFree(jemalloc_pool[NodeId], ptr);
+    if(umfFastJemallocFree(jemalloc_pool[NodeId], ptr) != UMF_RESULT_SUCCESS){
+        throw std::runtime_error("Could not free pool");
+    }
     //umfMemoryProviderDestroy(NUMA_HANDLES[NodeId]);
 }
 #endif
