@@ -130,14 +130,14 @@ if __name__ == "__main__":
             command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:1024 --meta t:40 --meta D:5 --meta DS_name:queue --meta th_config:numa:regular:split --meta DS_config:numa:regular --meta x:20:10 --prefill=1,0,0,0 >> ../../Result/queue.csv"
     elif (args.DS == "ll"):
         if (args.verbose):
-            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:ll --meta th_config:numa:regular:split --meta DS_config:numa:regular --meta x:0:10 "
+            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:1024 --meta t:40 --meta D:5 --meta DS_name:ll --meta th_config:numa:regular:split --meta DS_config:numa:regular --meta x:20:10 --prefill=1,0,0,0"
         else:
-            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:ll --meta th_config:numa:regular:split --meta DS_config:numa:regular --meta x:0:10 >> ../../Result/stack.csv"
+            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:ll --meta th_config:numa:regular:split --meta DS_config:numa:regular --meta x:0:10 >> ../../Result/ll.csv"
     elif (args.DS == "bst"):
         if (args.verbose):
-            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:bst --meta th_config:numa:regular:split --meta DS_config:numa:regular --meta x:0:10 "
+            command =f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:20:40 --meta D:5 --meta DS_name:bst --meta th_config:numa:regular:split --meta DS_config:numa:regular --meta x:20:10 --prefill=1,0,0,0"
         else:
-            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:bst --meta th_config:numa:regular:split --meta DS_config:numa:regular >> ../../Result/stack.csv"
+            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:20:40 --meta D:5 --meta DS_name:bst --meta th_config:numa:regular:split --meta DS_config:numa:regular --meta x:20:10 >> ../../Result/bst.csv"
           
     print("command is ", command)
     run_command(command)

@@ -589,4 +589,5 @@ int main(int argc, char *argv[])
 		cout<<"Invalid Data Structure"<<endl;
 	}
 	global_cleanup();
+	cout<<endl;
 }

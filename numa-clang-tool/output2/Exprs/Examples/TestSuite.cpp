@@ -238,20 +238,16 @@ void numa_Queue_init(std::string DS_config, int num_DS, bool prefill, prefill_pe
 		//Prefill in 50 % of the Queue with random number of nodes (0-200) number of nodes
 		for(int i = 0; i < num_DS/int(percentages.write) ; i++){
 			int ds = dist1(gen);
-			for(int j=0; j < 2000*1024; j++)
+			for(int j=0; j < 40*1024*1024; j++)
 			{
-				Queue_lk0[ds]->lock();
-				Queues0[ds]->add(ds);
-				Queue_lk0[ds]->unlock();
+				Queues0[ds]->add(j);
 			}
 		}
 		for(int i = 0; i < num_DS/int(percentages.write) ; i++){
 			int ds = dist2(gen);
-			for(int j=0; j < 2000*1024; j++)
+			for(int j=0; j < 40*1024*1024; j++)
 			{
-				Queue_lk1[ds]->lock();
-				Queues1[ds]->add(ds);
-				Queue_lk1[ds]->unlock();
+				Queues1[ds]->add(j);
 			}
 		}
 		//std::cout<<"Prefilled " <<num_DS/int(percentages.write) <<" queue with " << ds3 << " nodes each"<<std::endl;		
@@ -361,25 +357,28 @@ void numa_BST_init(std::string DS_config, int num_DS, bool prefill, prefill_perc
 	std::mt19937 gen(123);
 	std::uniform_int_distribution<> dist1(0, BSTs0.size()-1);
 	std::uniform_int_distribution<> dist2(0, BSTs1.size()-1);
-	std::uniform_int_distribution<> dist3(100, 200);
+	std::uniform_int_distribution<> dist3(0,  400*1024);
 	//Prefill in 50 % of the tree randomly with value 1
 	for(int i = 0; i < num_DS/2 ; i++)
 	{
-		int ds = dist1(gen);
-		BST_lk0[ds]->lock();
-		BSTs0[ds]->insert(ds);
-		BST_lk0[ds]->unlock();
+		
+		for(int j=0; j < 40*1024; j++)
+		{
+			int ds = dist3(gen);
+			BSTs0[i]->insert(j);
+		}
 
 	}
 	for(int i = 0; i < num_DS/2 ; i++)
 	{
-		int ds = dist2(gen);
-		BST_lk1[ds]->lock();
-		BSTs1[ds]->insert(ds);
-		BST_lk1[ds]->unlock();
+		for(int j=0; j < 40*1024; j++)
+		{
+			int ds = dist3(gen);
+			BSTs1[i]->insert(j);
+		}
 
 	}
-		std::cout<<"Prefilled " <<num_DS/int(percentages.write) <<" bsts with " << dist3(gen) << " nodes each"<<std::endl;	
+		// std::cout<<"Prefilled " <<num_DS/int(percentages.write) <<" bsts with " << dist3(gen) << " nodes each"<<std::endl;	
 
 }
 
@@ -559,10 +558,6 @@ void QueueTest(int tid, int duration, int node, int64_t num_DS, int num_threads,
 	std::mt19937 gen(123);
 	std::uniform_int_distribution<> dist1(0, Queues0.size()-1);
 	std::uniform_int_distribution<> xDist(1, 100);
-
-
-
-	//std::cout << "Thread " << tid << " about to start working on node id"<<node << std::endl;
 	int ops = 0;
 	auto startTimer = std::chrono::steady_clock::now();
 	auto endTimer = startTimer + std::chrono::seconds(duration);
@@ -753,6 +748,7 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 	std::uniform_int_distribution<> dist(0, BSTs0.size()-1);
 	std::uniform_int_distribution<> opDist(1, 100);
 	std::uniform_int_distribution<> xDist(1, 100);
+	std::uniform_int_distribution<> keyDist(0,80*1024);
 	//std::cout << "Thread " << tid << " about to start working on node id"<<node << std::endl;
 	int ops = 0;
 	int x = xDist(gen);
@@ -760,49 +756,50 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 	auto endTimer = startTimer + std::chrono::seconds(duration);
 	while (std::chrono::steady_clock::now() < endTimer) {
 		int ds = dist(gen);
+		int key = keyDist(gen);
 		if(node==0){
 			if(opDist(gen)<=40)
 			{
 				if(x < crossover){
 					BST_lk1[ds]->lock();
-					BSTs1[ds]->lookup(1);
+					BSTs1[ds]->lookup(key);
 					BST_lk1[ds]->unlock();
 				}else{
 					BST_lk0[ds]->lock();
-					BSTs0[ds]->lookup(1);
+					BSTs0[ds]->lookup(key);
 					BST_lk0[ds]->unlock();
 				}
 			}
 			else if(opDist(gen)<=80){
 				if(x < crossover){
 					BST_lk1[ds]->lock();
-					BSTs1[ds]->update(ds);
+					BSTs1[ds]->update(key);
 					BST_lk1[ds]->unlock();
 				}else{
 					BST_lk0[ds]->lock();
-					BSTs0[ds]->update(ds);
+					BSTs0[ds]->update(key);
 					BST_lk0[ds]->unlock();
 				}
 			}
 			else if(opDist(gen)<=90){
 				if(x < crossover){
 					BST_lk1[ds]->lock();
-					BSTs1[ds]->insert(ds);
+					BSTs1[ds]->insert(key);
 					BST_lk1[ds]->unlock();
 				}else{
 					BST_lk0[ds]->lock();
-					BSTs0[ds]->insert(ds);
+					BSTs0[ds]->insert(key);
 					BST_lk0[ds]->unlock();
 				}
 			}
 			else{
 				if(x<crossover){
 					BST_lk1[ds]->lock();
-					BSTs1[ds]->remove(ds);
+					BSTs1[ds]->remove(key);
 					BST_lk1[ds]->unlock();
 				}else{
 					BST_lk0[ds]->lock();
-					BSTs0[ds]->remove(ds);
+					BSTs0[ds]->remove(key);
 					BST_lk0[ds]->unlock();
 				}
 			}
@@ -812,44 +809,44 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 			{
 				if(x<crossover){
 					BST_lk0[ds]->lock();
-					BSTs0[ds]->lookup(1);
+					BSTs0[ds]->lookup(key);
 					BST_lk0[ds]->unlock();
 				}else{
 					BST_lk1[ds]->lock();
-					BSTs1[ds]->lookup(1);
+					BSTs1[ds]->lookup(key);
 					BST_lk1[ds]->unlock();
 				}
 			}
 			else if(opDist(gen)<=80){
 				if(x<crossover){
 					BST_lk0[ds]->lock();
-					BSTs0[ds]->update(ds);
+					BSTs0[ds]->update(key);
 					BST_lk0[ds]->unlock();
 				}else{
 					BST_lk1[ds]->lock();
-					BSTs1[ds]->update(ds);
+					BSTs1[ds]->update(key);
 					BST_lk1[ds]->unlock();
 				}
 			}
 			else if(opDist(gen)<=90){
 				if(x<crossover){
 					BST_lk0[ds]->lock();
-					BSTs0[ds]->insert(ds);
+					BSTs0[ds]->insert(key);
 					BST_lk0[ds]->unlock();
 				}else{
 					BST_lk1[ds]->lock();
-					BSTs1[ds]->insert(ds);
+					BSTs1[ds]->insert(key);
 					BST_lk1[ds]->unlock();
 				}
 			}
 			else{
 				if(x<crossover){
 					BST_lk0[ds]->lock();
-					BSTs0[ds]->remove(ds);
+					BSTs0[ds]->remove(key);
 					BST_lk0[ds]->unlock();
 				}else{
 					BST_lk1[ds]->lock();
-					BSTs1[ds]->remove(ds);
+					BSTs1[ds]->remove(key);
 					BST_lk1[ds]->unlock();
 				}
 			}
