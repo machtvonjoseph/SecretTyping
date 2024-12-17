@@ -33,6 +33,7 @@ int duration = 0;
 std::string DS_name;
 bool prefill_set = false;
 int crossover = 0;
+int keyspace = 80000;
 
 struct prefill_percentage{
 	float write;
@@ -95,13 +96,14 @@ int main(int argc, char *argv[])
 		{"duration", required_argument, nullptr, 'D'},      // -d
 		{"prefill", optional_argument, nullptr, 'p'},       // -p
 		{"crossover", optional_argument, nullptr, 'x'},       // -x
+		{"keyspace", required_argument, nullptr, 'k'},      // -k
 		{nullptr, 0, nullptr, 0}                            // End of array
 	};
 
  int opt;
     int option_index = 0;
 
-    while ((opt = getopt_long(argc, argv, "n:t:D:x:", long_options, &option_index)) != -1) {
+    while ((opt = getopt_long(argc, argv, "n:t:D:x:k:", long_options, &option_index)) != -1) {
         switch (opt) {
             case 'c':  // --th_config option
                 thread_config = optarg;             
@@ -135,7 +137,11 @@ int main(int argc, char *argv[])
 				}
 				break;
 				//read values separated by a comma into prefill struct
-
+			case 'k':
+				if(optarg){
+					keyspace = std::stoi(optarg);
+				}
+				break;
             case '?':  // Unknown option
                 std::cerr << "Unknown option or missing argument.\n";
                 return 1;
@@ -160,6 +166,7 @@ int main(int argc, char *argv[])
 	std::cout<<DS_config << ", ";
 	std::cout<<duration << ", ";
 	std::cout<<crossover<<", ";
+	std::cout<<keyspace<<", ";
 
 	numa_thread0.resize(num_threads);
 	numa_thread1.resize(num_threads);
@@ -430,32 +437,32 @@ int main(int argc, char *argv[])
 
 
 	else if(DS_name == "bst"){
-		numa_BST_init(DS_config, num_DS/2, prefill_set, percentages);
+		numa_BST_init(DS_config, num_DS/2, keyspace);
 		for(int i=0; i < num_threads/2; i++){
 			int node = 0;
 			int tid = i;
 			if(thread_config == "numa"){
-				numa_thread0[i] = new thread_numa<0>(BinarySearchTest,tid, duration, node, num_DS/2, num_threads/2, crossover);
+				numa_thread0[i] = new thread_numa<0>(BinarySearchTest,tid, duration, node, num_DS/2, num_threads/2, crossover, keyspace);
 			}
 			else if(thread_config == "regular"){
-				regular_thread0[i] = new thread(BinarySearchTest,tid, duration, node, num_DS/2, num_threads/2, crossover);
+				regular_thread0[i] = new thread(BinarySearchTest,tid, duration, node, num_DS/2, num_threads/2, crossover, keyspace);
 			}
 			else{
 				
-				numa_thread0[i] = new thread_numa<0>(BinarySearchTest, tid, duration, i%2, num_DS/2, num_threads/2, crossover);
+				numa_thread0[i] = new thread_numa<0>(BinarySearchTest, tid, duration, i%2, num_DS/2, num_threads/2, crossover, keyspace);
 			}
 		}
 		for(int i=0; i < num_threads/2; i++){
 			int node = 1;
 			int tid = i + num_threads/2;
 			if(thread_config == "numa"){
-				numa_thread1[i] = new thread_numa<1>(BinarySearchTest,tid, duration, node, num_DS/2, num_threads/2, crossover);
+				numa_thread1[i] = new thread_numa<1>(BinarySearchTest,tid, duration, node, num_DS/2, num_threads/2, crossover,keyspace);
 			}
 			else if(thread_config == "regular"){
-				regular_thread1[i] = new thread(BinarySearchTest,tid, duration, node, num_DS/2, num_threads/2, crossover);
+				regular_thread1[i] = new thread(BinarySearchTest,tid, duration, node, num_DS/2, num_threads/2, crossover,keyspace);
 			}
 			else{
-				numa_thread1[i] = new thread_numa<1>(BinarySearchTest, tid, duration, i%2, num_DS/2, num_threads/2, crossover);
+				numa_thread1[i] = new thread_numa<1>(BinarySearchTest, tid, duration, i%2, num_DS/2, num_threads/2, crossover, keyspace);
 			}
 		}
 

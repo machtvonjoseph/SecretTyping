@@ -320,7 +320,7 @@ void numa_LL_init(std::string DS_config, int num_DS, bool prefill, prefill_perce
 }
 
 
-void numa_BST_init(std::string DS_config, int num_DS, bool prefill, prefill_percentage &percentages){
+void numa_BST_init(std::string DS_config, int num_DS, int keyspace){
 	BSTs0.resize(num_DS);
 	for(int i = 0; i < num_DS; i++)
 	{
@@ -362,7 +362,7 @@ void numa_BST_init(std::string DS_config, int num_DS, bool prefill, prefill_perc
 	for(int i = 0; i < num_DS/2 ; i++)
 	{
 		
-		for(int j=0; j < 40*1024; j++)
+		for(int j=0; j < keyspace/2; j++)
 		{
 			int ds = dist3(gen);
 			BSTs0[i]->insert(j);
@@ -371,7 +371,7 @@ void numa_BST_init(std::string DS_config, int num_DS, bool prefill, prefill_perc
 	}
 	for(int i = 0; i < num_DS/2 ; i++)
 	{
-		for(int j=0; j < 40*1024; j++)
+		for(int j=0; j < keyspace/2; j++)
 		{
 			int ds = dist3(gen);
 			BSTs1[i]->insert(j);
@@ -734,7 +734,7 @@ void LinkedListTest(int tid, int duration, int node, int64_t num_DS, int num_thr
 	pthread_barrier_wait(&bar);
 }
 
-void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_threads, int crossover)
+void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_threads, int crossover, int keyspace)
 {	
 	#ifdef DEBUG
 	if(tid == 1 && node==0)
@@ -748,7 +748,7 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 	std::uniform_int_distribution<> dist(0, BSTs0.size()-1);
 	std::uniform_int_distribution<> opDist(1, 100);
 	std::uniform_int_distribution<> xDist(1, 100);
-	std::uniform_int_distribution<> keyDist(0,80*1024);
+	std::uniform_int_distribution<> keyDist(0,keyspace);
 	//std::cout << "Thread " << tid << " about to start working on node id"<<node << std::endl;
 	int ops = 0;
 	int x = xDist(gen);
@@ -758,30 +758,14 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 		int ds = dist(gen);
 		int key = keyDist(gen);
 		if(node==0){
-			if(opDist(gen)<=40)
+			if(opDist(gen)<=90)
 			{
-				if(x < crossover){
-					BST_lk1[ds]->lock();
-					BSTs1[ds]->lookup(key);
-					BST_lk1[ds]->unlock();
-				}else{
-					BST_lk0[ds]->lock();
-					BSTs0[ds]->lookup(key);
-					BST_lk0[ds]->unlock();
-				}
+				BST_lk0[ds]->lock();
+				BSTs0[ds]->lookup(key);
+				BST_lk0[ds]->unlock();
+			
 			}
-			else if(opDist(gen)<=80){
-				if(x < crossover){
-					BST_lk1[ds]->lock();
-					BSTs1[ds]->update(key);
-					BST_lk1[ds]->unlock();
-				}else{
-					BST_lk0[ds]->lock();
-					BSTs0[ds]->update(key);
-					BST_lk0[ds]->unlock();
-				}
-			}
-			else if(opDist(gen)<=90){
+			else {
 				if(x < crossover){
 					BST_lk1[ds]->lock();
 					BSTs1[ds]->insert(key);
@@ -789,64 +773,26 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 				}else{
 					BST_lk0[ds]->lock();
 					BSTs0[ds]->insert(key);
-					BST_lk0[ds]->unlock();
-				}
-			}
-			else{
-				if(x<crossover){
-					BST_lk1[ds]->lock();
-					BSTs1[ds]->remove(key);
-					BST_lk1[ds]->unlock();
-				}else{
-					BST_lk0[ds]->lock();
-					BSTs0[ds]->remove(key);
 					BST_lk0[ds]->unlock();
 				}
 			}
 		}
 		else{
-			if(opDist(gen)<=40)
+			if(opDist(gen)<=90)
 			{
-				if(x<crossover){
-					BST_lk0[ds]->lock();
-					BSTs0[ds]->lookup(key);
-					BST_lk0[ds]->unlock();
-				}else{
-					BST_lk1[ds]->lock();
-					BSTs1[ds]->lookup(key);
-					BST_lk1[ds]->unlock();
-				}
+				BST_lk1[ds]->lock();
+				BSTs1[ds]->lookup(key);
+				BST_lk1[ds]->unlock();
+	
 			}
-			else if(opDist(gen)<=80){
-				if(x<crossover){
-					BST_lk0[ds]->lock();
-					BSTs0[ds]->update(key);
-					BST_lk0[ds]->unlock();
-				}else{
-					BST_lk1[ds]->lock();
-					BSTs1[ds]->update(key);
-					BST_lk1[ds]->unlock();
-				}
-			}
-			else if(opDist(gen)<=90){
-				if(x<crossover){
+			else {
+				if(x < crossover){
 					BST_lk0[ds]->lock();
 					BSTs0[ds]->insert(key);
 					BST_lk0[ds]->unlock();
 				}else{
 					BST_lk1[ds]->lock();
 					BSTs1[ds]->insert(key);
-					BST_lk1[ds]->unlock();
-				}
-			}
-			else{
-				if(x<crossover){
-					BST_lk0[ds]->lock();
-					BSTs0[ds]->remove(key);
-					BST_lk0[ds]->unlock();
-				}else{
-					BST_lk1[ds]->lock();
-					BSTs1[ds]->remove(key);
 					BST_lk1[ds]->unlock();
 				}
 			}
