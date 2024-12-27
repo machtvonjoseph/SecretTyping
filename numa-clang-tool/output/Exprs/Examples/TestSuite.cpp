@@ -320,64 +320,62 @@ void numa_LL_init(std::string DS_config, int num_DS, bool prefill, prefill_perce
 }
 
 
-void numa_BST_init(std::string DS_config, int num_DS, int keyspace){
+void numa_BST_init(std::string DS_config, int num_DS, int keyspace, int node){
 	BSTs0.resize(num_DS);
-	for(int i = 0; i < num_DS; i++)
-	{
-		if(DS_config=="numa"){
-			BSTs0[i] =reinterpret_cast<BinarySearchTree*>(new numa<BinarySearchTree,0>());
+	if(node!=1){
+		for(int i = 0; i < num_DS; i++)
+		{
+			if(DS_config=="numa"){
+				BSTs0[i] =reinterpret_cast<BinarySearchTree*>(new numa<BinarySearchTree,0>());
+			}
+			else{
+				BSTs0[i] = new BinarySearchTree();
+			}
 		}
-		else{
-			BSTs0[i] = new BinarySearchTree();
-		}
-	}
-	
-	BSTs1.resize(num_DS);
-	for(int i = 0; i < num_DS; i++)
-	{
-		if(DS_config=="numa"){
-			BSTs1[i] = reinterpret_cast<BinarySearchTree*>(new numa<BinarySearchTree,1>());
-		}
-		else{
-			BSTs1[i] = new BinarySearchTree();
-		}
-	}
 
-	BST_lk0.resize(num_DS);
-	for(int i = 0; i < num_DS; i++)
-	{
-		BST_lk0[i] = new mutex();
-	}
-	BST_lk1.resize(num_DS);
-	for(int i = 0; i < num_DS; i++)
-	{
-		BST_lk1[i] = new mutex();
-	}
+		BST_lk0.resize(num_DS);
+		for(int i = 0; i < num_DS; i++)
+		{
+			BST_lk0[i] = new mutex();
+		}
 
-	std::mt19937 gen(123);
-	std::uniform_int_distribution<> dist1(0, BSTs0.size()-1);
-	std::uniform_int_distribution<> dist2(0, BSTs1.size()-1);
-	std::uniform_int_distribution<> dist3(0,  400*1024);
-	//Prefill in 50 % of the tree randomly with value 1
-	for(int i = 0; i < num_DS/2 ; i++)
-	{
+		for(int i = 0; i < num_DS/2 ; i++)
+		{	
+			for(int j=0; j < keyspace/2; j++)
+			{
+				BSTs0[i]->insert(j);
+			}
+		}
+	}
+	if(node!=0){
+		BSTs1.resize(num_DS);
+		for(int i = 0; i < num_DS; i++)
+		{
+			if(DS_config=="numa"){
+				BSTs1[i] = reinterpret_cast<BinarySearchTree*>(new numa<BinarySearchTree,1>());
+			}
+			else{
+				BSTs1[i] = new BinarySearchTree();
+			}
+		}
+
+		BST_lk1.resize(num_DS);
+		for(int i = 0; i < num_DS; i++)
+		{
+			BST_lk1[i] = new mutex();
+		}	
 		
-		for(int j=0; j < keyspace/2; j++)
+		for(int i = 0; i < num_DS/2 ; i++)
 		{
-			int ds = dist3(gen);
-			BSTs0[i]->insert(j);
-		}
+			for(int j=0; j < keyspace/2; j++)
+			{
+				BSTs1[i]->insert(j);
+			}
 
-	}
-	for(int i = 0; i < num_DS/2 ; i++)
-	{
-		for(int j=0; j < keyspace/2; j++)
-		{
-			int ds = dist3(gen);
-			BSTs1[i]->insert(j);
 		}
-
 	}
+
+
 		// std::cout<<"Prefilled " <<num_DS/int(percentages.write) <<" bsts with " << dist3(gen) << " nodes each"<<std::endl;	
 
 }

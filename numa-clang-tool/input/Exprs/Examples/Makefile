@@ -40,7 +40,7 @@ $(EXE): $(OBJS)
 	$(CC) $(OBJS) $(LINK_FLAGS) -o $(EXE) 
 
 main.o: 
-	$(CC) -c -O3 -g -std=c++20  -pthread $(INC_DIRS) $(UMF_INC_DIRS) $(FLAGS) -D_NODE_HPP=1 main.cpp
+	$(CC) -c -O3 -g -std=c++20  -pthread $(INC_DIRS) $(UMF_INC_DIRS) $(FLAGS) -D_NODE_HPP=1  -DPIN_INIT=1 main.cpp
 
 TestSuite.o: TestSuite.hpp TestSuite.cpp
 	$(CC) -c  -O3 -g -std=c++20  -pthread $(INC_DIRS) $(UMF_INC_DIRS) $(FLAGS)  TestSuite.cpp 

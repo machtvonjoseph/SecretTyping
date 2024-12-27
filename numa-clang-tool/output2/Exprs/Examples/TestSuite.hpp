@@ -34,7 +34,7 @@ void warmUpPool();
 void numa_array_init(std::string DS_config, int size, bool prefill, prefill_percentage &percentages);
 void numa_Stack_init(std::string DS_config, int num_DS, bool prefill, prefill_percentage &percentages);
 void numa_Queue_init(std::string DS_config, int num_DS, bool prefill, prefill_percentage &percentages);
-void numa_BST_init(std::string DS_config, int num_DS, int keyspace);
+void numa_BST_init(std::string DS_config, int num_DS, int keyspace, int node);
 void numa_LL_init(std::string DS_config, int num_DS, bool prefill, prefill_percentage &percentages);
 void sync_init(int num_threads);
 

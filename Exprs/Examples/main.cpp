@@ -50,6 +50,8 @@ std::vector <thread_numa<0>*> numa_thread0;
 std::vector <thread_numa<1>*> numa_thread1;
 std::vector <thread*> regular_thread0;
 std::vector <thread*> regular_thread1;
+thread_numa<0>* init_thread0;
+thread_numa<1>* init_thread1;
 
 bool parse_prefill(const std::string& optarg, prefill_percentage& percentages) {
     std::istringstream stream(optarg);
@@ -437,7 +439,22 @@ int main(int argc, char *argv[])
 
 
 	else if(DS_name == "bst"){
-		numa_BST_init(DS_config, num_DS/2, keyspace);
+		#ifdef PIN_INIT
+			init_thread0 = new thread_numa<0>(numa_BST_init, DS_config, num_DS/2, keyspace, 0);
+			init_thread1 = new thread_numa<1>(numa_BST_init, DS_config, num_DS/2, keyspace, 1);
+			if(init_thread0 != nullptr){
+				init_thread0->join();
+			}
+			
+
+			if(init_thread1 != nullptr){
+				init_thread1->join();
+			}
+		#else
+			numa_BST_init(DS_config, num_DS/2, keyspace, -1);
+		#endif
+
+		
 		for(int i=0; i < num_threads/2; i++){
 			int node = 0;
 			int tid = i;

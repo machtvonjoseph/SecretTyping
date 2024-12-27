@@ -296,3 +296,102 @@ Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, cr
 
 
 
+BST Results
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2024-12-18, 19:01:54, bst, 128, 20, numa, numa, 20, 0, 90000, PIN_INIT
+1520458, 1434472, 2954930
+2024-12-18, 19:03:55, bst, 128, 20, numa, numa, 20, 20, 90000, PIN_INIT
+1507445, 1443410, 2950855
+2024-12-18, 19:05:55, bst, 128, 20, numa, regular, 20, 0, 90000, PIN_INIT
+1474810, 1453924, 2928734
+2024-12-18, 19:07:54, bst, 128, 20, numa, regular, 20, 20, 90000, PIN_INIT
+1443686, 1428237, 2871923
+2024-12-18, 19:09:54, bst, 128, 20, regular, numa, 20, 0, 90000, PIN_INIT
+1279744, 1234840, 2514584
+2024-12-18, 19:11:54, bst, 128, 20, regular, numa, 20, 20, 90000, PIN_INIT
+1233238, 1216275, 2449513
+2024-12-18, 19:13:55, bst, 128, 20, regular, regular, 20, 0, 90000, PIN_INIT
+1184680, 1165548, 2350228
+2024-12-18, 19:15:54, bst, 128, 20, regular, regular, 20, 20, 90000, PIN_INIT
+1166548, 1179347, 2345895
+2024-12-18, 19:17:54, bst, 128, 20, split, numa, 20, 0, 90000, PIN_INIT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BST Results
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+BST Results
+BST Results
+BST Results
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2024-12-19, 17:26:36, bst, 128, 20, numa, numa, 20, 0, 90000, 1465096, 1474212, 2939308
+2024-12-19, 17:28:36, bst, 128, 20, numa, numa, 20, 20, 90000, 1458868, 1478450, 2937318
+2024-12-19, 17:30:36, bst, 128, 20, numa, regular, 20, 0, 90000, 1513783, 1468583, 2982366
+2024-12-19, 17:32:36, bst, 128, 20, numa, regular, 20, 20, 90000, 1522744, 1463009, 2985753
+2024-12-19, 17:34:35, bst, 128, 20, regular, numa, 20, 0, 90000, 1182195, 1233963, 2416158
+2024-12-19, 17:36:36, bst, 128, 20, regular, numa, 20, 20, 90000, 1203440, 1223758, 2427198
+2024-12-19, 17:38:36, bst, 128, 20, regular, regular, 20, 0, 90000, 1167116, 1188260, 2355376
+2024-12-19, 17:40:35, bst, 128, 20, regular, regular, 20, 20, 90000, 1167013, 1183518, 2350531
+2024-12-19, 17:42:34, bst, 128, 20, split, numa, 20, 0, 90000, 1191480, 1266136, 2457616
+2024-12-19, 17:44:35, bst, 128, 20, split, numa, 20, 20, 90000, 1221945, 1236770, 2458715
+2024-12-19, 17:46:35, bst, 128, 20, split, regular, 20, 0, 90000, 1225181, 1203732, 2428913
+2024-12-19, 17:48:35, bst, 128, 20, split, regular, 20, 20, 90000, 1215527, 1212412, 2427939
+2024-12-19, 17:50:35, bst, 128, 40, numa, numa, 20, 0, 90000, 1703497, 1714385, 3417882
+2024-12-19, 17:52:35, bst, 128, 40, numa, numa, 20, 20, 90000, 1705264, 1712589, 3417853
+2024-12-19, 17:54:36, bst, 128, 40, numa, regular, 20, 0, 90000, 1726585, 1716371, 3442956
+2024-12-19, 17:56:35, bst, 128, 40, numa, regular, 20, 20, 90000, 1674076, 1666257, 3340333
+2024-12-19, 17:58:34, bst, 128, 40, regular, numa, 20, 0, 90000, 1588389, 1596283, 3184672
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BST Results
+BST Results
