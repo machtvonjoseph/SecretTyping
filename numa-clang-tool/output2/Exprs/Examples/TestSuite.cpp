@@ -38,6 +38,7 @@ char* Arrays1;
 std::vector<mutex*> Stack_lk0;
 std::vector<mutex*> Stack_lk1;
 pthread_barrier_t bar ;
+pthread_barrier_t init_bar;
 
 std::mutex* printLK;
 std::mutex* globalLK;
@@ -75,8 +76,10 @@ struct prefill_percentage{
 
 void global_init(int num_threads){
 	pthread_barrier_init(&bar, NULL, num_threads);
+	pthread_barrier_init(&init_bar, NULL, 2);
 	ops0 = 0;
 	ops1 = 0;
+	
 	
 	printLK = new std::mutex();
 	globalLK = new std::mutex();
@@ -321,8 +324,12 @@ void numa_LL_init(std::string DS_config, int num_DS, bool prefill, prefill_perce
 
 
 void numa_BST_init(std::string DS_config, int num_DS, int keyspace, int node){
+
+	pthread_barrier_wait(&init_bar);
+	
 	BSTs0.resize(num_DS);
-	if(node!=1){
+	
+	if(node == 0){
 		for(int i = 0; i < num_DS; i++)
 		{
 			if(DS_config=="numa"){
@@ -347,7 +354,7 @@ void numa_BST_init(std::string DS_config, int num_DS, int keyspace, int node){
 			}
 		}
 	}
-	if(node!=0){
+	if(node == 1){
 		BSTs1.resize(num_DS);
 		for(int i = 0; i < num_DS; i++)
 		{
@@ -375,7 +382,7 @@ void numa_BST_init(std::string DS_config, int num_DS, int keyspace, int node){
 		}
 	}
 
-
+	pthread_barrier_wait(&init_bar);
 		// std::cout<<"Prefilled " <<num_DS/int(percentages.write) <<" bsts with " << dist3(gen) << " nodes each"<<std::endl;	
 
 }

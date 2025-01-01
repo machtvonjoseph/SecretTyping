@@ -112,6 +112,7 @@ int main(int argc, char *argv[])
                 break;
             case 'd':  // --DS_config option
                 DS_config = optarg;
+
                 break;
             case 'n':  // -n option for num_DS
                 num_DS = std::stoll(optarg);
@@ -157,7 +158,6 @@ int main(int argc, char *argv[])
     // Convert to time_t for extraction
     std::time_t now_time = std::chrono::system_clock::to_time_t(now);
     std::tm* local_time = std::localtime(&now_time);
-
     // Format and print the date and time
     std::cout<<std::put_time(local_time, "%Y-%m-%d") << ", ";
 	std::cout<<std::put_time(local_time, "%H:%M:%S") <<", ";
@@ -169,7 +169,7 @@ int main(int argc, char *argv[])
 	std::cout<<duration << ", ";
 	std::cout<<crossover<<", ";
 	std::cout<<keyspace<<", ";
-
+	// std::cout<<endl;
 	numa_thread0.resize(num_threads);
 	numa_thread1.resize(num_threads);
 	regular_thread0.resize(num_threads);
@@ -442,14 +442,21 @@ int main(int argc, char *argv[])
 		#ifdef PIN_INIT
 			init_thread0 = new thread_numa<0>(numa_BST_init, DS_config, num_DS/2, keyspace, 0);
 			init_thread1 = new thread_numa<1>(numa_BST_init, DS_config, num_DS/2, keyspace, 1);
+	
 			if(init_thread0 != nullptr){
 				init_thread0->join();
 			}
 			
-
 			if(init_thread1 != nullptr){
 				init_thread1->join();
 			}
+			// if(init_thread0 != nullptr){
+			// 	init_thread0->join();
+			// }
+			
+			// if(init_thread1 != nullptr){
+			// 	init_thread1->join();
+			// }
 		#else
 			numa_BST_init(DS_config, num_DS/2, keyspace, -1);
 		#endif
@@ -525,6 +532,7 @@ int main(int argc, char *argv[])
 				numa_thread1[i]->join();
 			}
 		}
+
 
 		std::cout << ops0 << ", ";
 		std::cout << ops1 <<", ";
