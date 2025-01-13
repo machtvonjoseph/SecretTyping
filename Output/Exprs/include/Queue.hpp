@@ -41,7 +41,7 @@ public:
 	 *
 	 * \sa Queue::del()
 	 */
-	~Queue();
+	virtual ~Queue();
 
 	/*!
 	 * \brief Function for removing a single Queue node
@@ -52,7 +52,7 @@ public:
 	 *
 	 * \return The data from the removed node.
 	 */
-	int del();
+	virtual int del();
 
 	/*!
 	 * \brief add function for adding Queue variables
@@ -65,7 +65,7 @@ public:
 	 	Queue::add() is returned from immediately.
 	 */
 
-	void add(int);
+	virtual void add(int);
 
 
 	/*!
@@ -74,8 +74,222 @@ public:
 	 * This function iterates over and prints each node in the Queue.
 	 * The first node printed is the top Node.
 	 */
-	void display();
+	virtual void display();
 
+};
+
+template<>
+class numa<Queue,0>{
+public: 
+    static void* operator new(std::size_t sz){
+        void* p;
+        #ifdef UMF
+            p= umf_alloc(0 ,sizeof(Queue),alignof(Queue));
+        #else
+            p = numa_alloc_onnode(sz* sizeof(Queue), 0);
+        #endif
+        
+        if (p == nullptr) {
+            std::cout<<"allocation failed\n";
+            throw std::bad_alloc();
+        }
+        return p;
+    }
+
+    static void* operator new[](std::size_t sz){
+        void* p;
+        #ifdef UMF
+            p= umf_alloc(0 ,sizeof(Queue),alignof(Queue));
+        #else
+            p = numa_alloc_onnode(sz* sizeof(Queue), 0);
+        #endif
+        
+        if (p == nullptr) {
+            std::cout<<"allocation failed\n";
+            throw std::bad_alloc();
+        }
+        return p;
+    }
+
+    static void operator delete(void* ptr){
+        // cout<<"doing numa free \n";
+        #ifdef UMF
+			umf_free(0,ptr);
+		#else
+		    numa_free(ptr, 1 * sizeof(Queue));
+        #endif
+    }
+
+    static void operator delete[](void* ptr){
+		// cout<<"doing numa free \n";
+        #ifdef UMF
+			umf_free(0,ptr);
+		#else
+		    numa_free(ptr, 1 * sizeof(Queue));
+        #endif
+    }
+public:
+numa (){
+    this->front = __null;
+    this->rear = __null;
+}
+virtual ~numa()
+{
+	while(front != NULL)
+	{
+		Node *temp = front;
+		front = front->getLink();
+		int data = temp->getData();
+		delete temp;
+	}
+
+}
+virtual int del(){
+    if (this->front == __null) {
+        return -1;
+    }
+    Node *temp = this->front;
+    this->front = this->front->getLink();
+    int data = temp->getData();
+    delete temp;
+    if (this->front == __null) {
+        this->rear = __null;
+    }
+    return data;
+}
+virtual void add(int initData){
+    if (this->front == __null) {
+        this->front = reinterpret_cast<Node*>(new numa<Node,0>(initData));
+        this->front->setLink(this->rear);
+        this->rear = this->front;
+        return;
+    }
+    Node *newNode = reinterpret_cast<Node*>(new numa<Node,0>(initData));
+    this->rear->setLink(newNode);
+    newNode->setLink(__null);
+    this->rear = newNode;
+}
+virtual void display(){
+    Node *temp = this->front;
+    while (temp != __null)
+        {
+            if (temp == this->front) {
+                std::cout << "FRONT " << std::endl;
+            }
+            std::cout << temp->getData() << std::endl;
+            temp = temp->getLink();
+        }
+}
+private:
+numa<Node*,0> front;
+numa<Node*,0> rear;
+};
+
+template<>
+class numa<Queue,1>{
+public: 
+    static void* operator new(std::size_t sz){
+        void* p;
+        #ifdef UMF
+            p= umf_alloc(1 ,sizeof(Queue),alignof(Queue));
+        #else
+            p = numa_alloc_onnode(sz* sizeof(Queue), 1);
+        #endif
+        
+        if (p == nullptr) {
+            std::cout<<"allocation failed\n";
+            throw std::bad_alloc();
+        }
+        return p;
+    }
+
+    static void* operator new[](std::size_t sz){
+        void* p;
+        #ifdef UMF
+            p= umf_alloc(1 ,sizeof(Queue),alignof(Queue));
+        #else
+            p = numa_alloc_onnode(sz* sizeof(Queue), 1);
+        #endif
+        
+        if (p == nullptr) {
+            std::cout<<"allocation failed\n";
+            throw std::bad_alloc();
+        }
+        return p;
+    }
+
+    static void operator delete(void* ptr){
+        // cout<<"doing numa free \n";
+        #ifdef UMF
+			umf_free(1,ptr);
+		#else
+		    numa_free(ptr, 1 * sizeof(Queue));
+        #endif
+    }
+
+    static void operator delete[](void* ptr){
+		// cout<<"doing numa free \n";
+        #ifdef UMF
+			umf_free(1,ptr);
+		#else
+		    numa_free(ptr, 1 * sizeof(Queue));
+        #endif
+    }
+public:
+numa (){
+    this->front = __null;
+    this->rear = __null;
+}
+virtual ~numa()
+{
+	while(front != NULL)
+	{
+		Node *temp = front;
+		front = front->getLink();
+		int data = temp->getData();
+		delete temp;
+	}
+
+}
+virtual int del(){
+    if (this->front == __null) {
+        return -1;
+    }
+    Node *temp = this->front;
+    this->front = this->front->getLink();
+    int data = temp->getData();
+    delete temp;
+    if (this->front == __null) {
+        this->rear = __null;
+    }
+    return data;
+}
+virtual void add(int initData){
+    if (this->front == __null) {
+        this->front = reinterpret_cast<Node*>(new numa<Node,1>(initData));
+        this->front->setLink(this->rear);
+        this->rear = this->front;
+        return;
+    }
+    Node *newNode = reinterpret_cast<Node*>(new numa<Node,1>(initData));
+    this->rear->setLink(newNode);
+    newNode->setLink(__null);
+    this->rear = newNode;
+}
+virtual void display(){
+    Node *temp = this->front;
+    while (temp != __null)
+        {
+            if (temp == this->front) {
+                std::cout << "FRONT " << std::endl;
+            }
+            std::cout << temp->getData() << std::endl;
+            temp = temp->getLink();
+        }
+}
+private:
+numa<Node*,1> front;
+numa<Node*,1> rear;
 };
 
 Queue::Queue()

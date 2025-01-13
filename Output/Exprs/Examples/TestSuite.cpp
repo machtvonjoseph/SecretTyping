@@ -95,7 +95,7 @@ void singleThreadedStackInit(int num_DS, bool isNuma){
 		cout<<"Initializing numa stack pool"<<endl;
 		for(int i = 0; i < num_DS; i++)
 		{
-			Stacks0[i] = reinterpret_cast<Stack*>(new numa<Stack,0>());
+			Stacks0[i] = reinterpret_cast<Stack*>(reinterpret_cast<Stack*>(new numa<Stack,0>()));
 		}
 	}
 	else{
@@ -136,7 +136,7 @@ void numa_Stack_init(std::string DS_config, int num_DS, bool prefill, prefill_pe
 	{
 		if(DS_config=="numa"){
 			//cout<<"Initializing node 0 numa stack pool"<<endl;
-			Stacks0[i] = reinterpret_cast<Stack*>(new numa<Stack,0>());
+			Stacks0[i] = reinterpret_cast<Stack*>(reinterpret_cast<Stack*>(new numa<Stack,0>()));
 		}
 		else{
 			//cout<<"Initializing first regular stack pool"<<endl;
@@ -149,7 +149,7 @@ void numa_Stack_init(std::string DS_config, int num_DS, bool prefill, prefill_pe
 	{
 		if(DS_config=="numa"){
 			//cout<<"Initializing node 1 numa stack pool"<<endl;
-			Stacks1[i] = reinterpret_cast<Stack*>(new numa<Stack,1>());
+			Stacks1[i] = reinterpret_cast<Stack*>(reinterpret_cast<Stack*>(new numa<Stack,1>()));
 		}
 		else{
 			//cout<<"Initializing second regular stack pool"<<endl;
@@ -203,7 +203,7 @@ void numa_Queue_init(std::string DS_config, int num_DS, bool prefill, prefill_pe
 	for(int i = 0; i < num_DS; i++)
 	{
 		if(DS_config=="numa"){
-			Queues0[i] = reinterpret_cast<Queue*>(new numa<Queue,0>());
+			Queues0[i] = reinterpret_cast<Queue*>(reinterpret_cast<Queue*>(new numa<Queue,0>()));
 		}
 		else{
 			Queues0[i] = new Queue();
@@ -214,7 +214,7 @@ void numa_Queue_init(std::string DS_config, int num_DS, bool prefill, prefill_pe
 	for(int i = 0; i < num_DS; i++)
 	{
 		if(DS_config=="numa"){
-			Queues1[i] = reinterpret_cast<Queue*>(new numa<Queue,1>());
+			Queues1[i] = reinterpret_cast<Queue*>(reinterpret_cast<Queue*>(new numa<Queue,1>()));
 		}
 		else{
 			Queues1[i] = new Queue();
@@ -262,7 +262,7 @@ void numa_LL_init(std::string DS_config, int num_DS, bool prefill, prefill_perce
 	for(int i = 0; i < num_DS; i++)
 	{
 		if(DS_config=="numa"){
-			LLs0[i] = reinterpret_cast<LinkedList*>(new numa<LinkedList,0>());
+			LLs0[i] = reinterpret_cast<LinkedList*>(reinterpret_cast<LinkedList*>(new numa<LinkedList,0>()));
 		}
 		else{
 			LLs0[i] = new LinkedList();
@@ -273,7 +273,7 @@ void numa_LL_init(std::string DS_config, int num_DS, bool prefill, prefill_perce
 	for(int i = 0; i < num_DS; i++)
 	{
 		if(DS_config=="numa"){
-			LLs1[i] = reinterpret_cast<LinkedList*>(new numa<LinkedList,1>());
+			LLs1[i] = reinterpret_cast<LinkedList*>(reinterpret_cast<LinkedList*>(new numa<LinkedList,1>()));
 		}
 		else{
 			LLs1[i] = new LinkedList();
@@ -333,7 +333,7 @@ void numa_BST_init(std::string DS_config, int num_DS, int keyspace, int node){
 		for(int i = 0; i < num_DS; i++)
 		{
 			if(DS_config=="numa"){
-				BSTs0[i] =reinterpret_cast<BinarySearchTree*>(new numa<BinarySearchTree,0>());
+				BSTs0[i] =reinterpret_cast<BinarySearchTree*>(reinterpret_cast<BinarySearchTree*>(new numa<BinarySearchTree,0>()));
 			}
 			else{
 				BSTs0[i] = new BinarySearchTree();
@@ -359,7 +359,7 @@ void numa_BST_init(std::string DS_config, int num_DS, int keyspace, int node){
 		for(int i = 0; i < num_DS; i++)
 		{
 			if(DS_config=="numa"){
-				BSTs1[i] = reinterpret_cast<BinarySearchTree*>(new numa<BinarySearchTree,1>());
+				BSTs1[i] = reinterpret_cast<BinarySearchTree*>(reinterpret_cast<BinarySearchTree*>(new numa<BinarySearchTree,1>()));
 			}
 			else{
 				BSTs1[i] = new BinarySearchTree();

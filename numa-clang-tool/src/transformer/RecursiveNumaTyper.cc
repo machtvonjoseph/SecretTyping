@@ -775,6 +775,8 @@ void RecursiveNumaTyper::run(const clang::ast_matchers::MatchFinder::MatchResult
     for(auto it = specializedClasses.begin(); it != specializedClasses.end(); ++it){
         llvm::outs() << it->first->getNameAsString() << " " << it->second << "\n";
     }
+
+    //Find all defined function declarations 
     if(result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->isThisDeclarationADefinition()){   
         if(!result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getBody()->children().empty()){
             auto fnBody = result.Nodes.getNodeAs<FunctionDecl>("functionDecl")->getBody();

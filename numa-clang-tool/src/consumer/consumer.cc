@@ -41,9 +41,9 @@ void NumaConsumer::WriteOutput(clang::SourceManager &SM){
 
 
                 std::string fileName = (std::string)it->first.getName();
-                llvm::outs()<<"WORKNEH FILE TO BE WRITTEN: "<<fileName<<"\n";
+                //llvm::outs()<<"WORKNEH FILE TO BE WRITTEN: "<<fileName<<"\n";
                 std::string outputFileName = fileName.replace(fileName.find("input"), 5, "output");
-                llvm::outs() << "Output File Name: " << outputFileName << "\n";
+               // llvm::outs() << "Output File Name: " << outputFileName << "\n";
                 //if directory doesn't exist create it
             
                 std::string directory = outputFileName.substr(0, outputFileName.find_last_of("/"));
@@ -69,7 +69,7 @@ void NumaConsumer::includeNumaHeader(clang::ASTContext &context){
         if(FE){
             FileID FID= context.getSourceManager().getOrCreateFileID(it->first, SrcMgr::CharacteristicKind::C_User);
             //print all the file names
-            llvm::outs() << "FROM INCLUDE NUMA HEADER File Name: " << it->first.getName() << "\n";
+            //llvm::outs() << "FROM INCLUDE NUMA HEADER File Name: " << it->first.getName() << "\n";
             //skip if file name is testsuite.hpp
             std::string home = std::getenv("HOME");
             if(it->first.getName().find("TestSuite.hpp") != std::string::npos){

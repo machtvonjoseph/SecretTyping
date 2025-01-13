@@ -31,6 +31,7 @@ using namespace clang;
 
 namespace utils
 { 
+   
     class NewExprInBinaryOperatorVisitor : public RecursiveASTVisitor<NewExprInBinaryOperatorVisitor>
     {
     public:
@@ -42,11 +43,48 @@ namespace utils
             //         llvm::outs() << "Found CXXNewExpr in BinaryOperator LHS\n";
             //     }
             // }
+           
             if (const Expr *RHS = BO->getRHS()) {
+                llvm::outs() << "KaylordFound Binary Operator: " << BO->getOpcodeStr() << "\n";
+                BO->getRHS()->dump();
+            std::string original_type;
+                if(const CXXReinterpretCastExpr *ReinterpretCastExpr = dyn_cast<CXXReinterpretCastExpr>(RHS->IgnoreParenImpCasts())){
+
+                    if(const CXXNewExpr *NewExpr = dyn_cast<CXXNewExpr>(ReinterpretCastExpr->getSubExpr()->IgnoreParenImpCasts())){
+                        llvm::outs() << "KOMAGAD found a new expr under a reinterpret cast\n";
+                        llvm::outs() << "The type is " << NewExpr->getType().getAsString() << "\n";
+                        llvm::outs() << "The allocated type is " << NewExpr->getAllocatedType().getAsString() << "\n";
+                        if ((NewExpr->getType().getAsString().substr(0, 4).compare("numa") == 0)|| (original_type.substr(0,4).compare("numa")==0))
+                        {
+                            llvm::outs() << "The RHS expression is" << RHS->getStmtClassName() << "\n";
+                            const Expr *LHS = BO->getLHS();
+                            QualType LHSType = LHS->getType();
+                            llvm::outs() << "The LHS type is " << LHSType.getAsString() << "\n";
+                            CXXNewExprs.insert({NewExpr,LHSType});
+                        }
+                    }
+                    // llvm::outs() << "FromRIKFound CXXReinterpretCastExpr in BinaryOperator RHS\n";
+                    // llvm::outs() << "FromRIKThe RHS expression is" << RHS->getStmtClassName() << "\n";
+                    // llvm::outs() << "FromRIKThe RHS type is " << ReinterpretCastExpr->getType().getAsString() << "\n";
+                    // llvm::outs() << "FROMRIKThe RHS original type is " << ReinterpretCastExpr->getSubExpr()->getType().getAsString() << "\n";
+                    // original_type = ReinterpretCastExpr->getSubExpr()->getType().getAsString();
+                }
+
+
                 if (const CXXNewExpr *NewExpr = dyn_cast<CXXNewExpr>(RHS->IgnoreParenImpCasts())) {
-                    llvm::outs() << "Found CXXNewExpr in BinaryOperator RHS\n";
+
+                    llvm::outs() << "KFound CXXNewExpr in BinaryOperator RHS\n";
+                    llvm::outs() << "KThe RHS expression is" << RHS->getStmtClassName() << "\n";
+                    llvm::outs() << "KThe RHS type is " << NewExpr->getType().getAsString() << "\n";
+                    llvm::outs() << "KThe RHS original type is " << NewExpr->getAllocatedType().getAsString() << "\n";
+                    QualType allocatedType = NewExpr->getAllocatedType();
+                    llvm::outs() << "KThe allocated type is " << allocatedType.getAsString() << "\n";
+                    allocatedType.dump();
+
+                    // CXallocatedType->getAs<CXXRecordDecl>()
+                    llvm::outs()<<"Koriginal type to be checked is either " << original_type << " or " << NewExpr->getType().getAsString() << "\n";
                     //if newexprs type  is numa, then push to CXXNewExprs
-                    if (NewExpr->getType().getAsString().substr(0, 4).compare("numa") == 0)
+                    if ((NewExpr->getType().getAsString().substr(0, 4).compare("numa") == 0)|| (original_type.substr(0,4).compare("numa")==0))
                     {
                         llvm::outs() << "The RHS expression is" << RHS->getStmtClassName() << "\n";
                         const Expr *LHS = BO->getLHS();
@@ -69,6 +107,7 @@ namespace utils
         void clearBinaryOperators() { CXXNewExprs.clear(); }
     private:
         std::map<const CXXNewExpr *, QualType> CXXNewExprs;
+        // std::string original_type;
         ASTContext *Context;
     };
 
