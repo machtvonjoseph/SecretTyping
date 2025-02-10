@@ -84,3 +84,3160 @@ Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, cr
 
 
 
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-13, 05:15:39, bst, 128, 20, numa, numa, 20, 0, 90000, 1495779, 1440843, 2936622
+2025-01-13, 05:17:39, bst, 128, 20, numa, numa, 20, 20, 90000, 1513609, 1444978, 2958587
+2025-01-13, 05:19:40, bst, 128, 20, numa, regular, 20, 0, 90000, 1494685, 1462196, 2956881
+2025-01-13, 05:21:39, bst, 128, 20, numa, regular, 20, 20, 90000, 1489575, 1453303, 2942878
+2025-01-13, 05:23:38, bst, 128, 20, regular, numa, 20, 0, 90000, 1245486, 1211583, 2457069
+2025-01-13, 05:25:39, bst, 128, 20, regular, numa, 20, 20, 90000, 1246913, 1206249, 2453162
+2025-01-13, 05:27:40, bst, 128, 20, regular, regular, 20, 0, 90000, 1204541, 1206250, 2410791
+2025-01-13, 05:29:39, bst, 128, 20, regular, regular, 20, 20, 90000, 1198495, 1208061, 2406556
+2025-01-13, 05:31:38, bst, 128, 20, split, numa, 20, 0, 90000, 1283265, 1212359, 2495624
+2025-01-13, 05:33:39, bst, 128, 20, split, numa, 20, 20, 90000, 1273378, 1207566, 2480944
+2025-01-13, 05:35:40, bst, 128, 20, split, regular, 20, 0, 90000, 1212570, 1227846, 2440416
+2025-01-13, 05:37:39, bst, 128, 20, split, regular, 20, 20, 90000, 1239761, 1200888, 2440649
+2025-01-13, 05:39:38, bst, 128, 40, numa, numa, 20, 0, 90000, 1719700, 1738874, 3458574
+2025-01-13, 05:41:39, bst, 128, 40, numa, numa, 20, 20, 90000, 1709966, 1727231, 3437197
+2025-01-13, 05:43:39, bst, 128, 40, numa, regular, 20, 0, 90000, 1751190, 1745588, 3496778
+2025-01-13, 05:45:39, bst, 128, 40, numa, regular, 20, 20, 90000, 1730418, 1712395, 3442813
+2025-01-13, 05:47:38, bst, 128, 40, regular, numa, 20, 0, 90000, 1590664, 1570466, 3161130
+2025-01-13, 05:49:39, bst, 128, 40, regular, numa, 20, 20, 90000, 1585402, 1572051, 3157453
+2025-01-13, 05:51:39, bst, 128, 40, regular, regular, 20, 0, 90000, 1470715, 1489375, 2960090
+2025-01-13, 05:53:38, bst, 128, 40, regular, regular, 20, 20, 90000, 1511433, 1552826, 3064259
+2025-01-13, 05:55:38, bst, 128, 40, split, numa, 20, 0, 90000, 1592083, 1579857, 3171940
+2025-01-13, 05:57:39, bst, 128, 40, split, numa, 20, 20, 90000, 1572305, 1558260, 3130565
+2025-01-13, 05:59:39, bst, 128, 40, split, regular, 20, 0, 90000, 1543227, 1560534, 3103761
+2025-01-13, 06:01:39, bst, 128, 40, split, regular, 20, 20, 90000, 1553041, 1552704, 3105745
+2025-01-13, 06:03:38, bst, 1024, 20, numa, numa, 20, 0, 90000, 1449463, 1381060, 2830523
+2025-01-13, 06:17:19, bst, 1024, 20, numa, numa, 20, 20, 90000, 1444536, 1365748, 2810284
+2025-01-13, 06:31:00, bst, 1024, 20, numa, regular, 20, 0, 90000, 1419841, 1379953, 2799794
+2025-01-13, 06:44:31, bst, 1024, 20, numa, regular, 20, 20, 90000, 1477708, 1379625, 2857333
+2025-01-13, 06:58:02, bst, 1024, 20, regular, numa, 20, 0, 90000, 1239444, 1259860, 2499304
+2025-01-13, 07:11:44, bst, 1024, 20, regular, numa, 20, 20, 90000, 1242695, 1260728, 2503423
+2025-01-13, 07:25:24, bst, 1024, 20, regular, regular, 20, 0, 90000, 1215560, 1271795, 2487355
+2025-01-13, 07:38:56, bst, 1024, 20, regular, regular, 20, 20, 90000, 1201714, 1267023, 2468737
+2025-01-13, 07:52:27, bst, 1024, 20, split, numa, 20, 0, 90000, 1275783, 1253997, 2529780
+2025-01-13, 08:06:07, bst, 1024, 20, split, numa, 20, 20, 90000, 1267647, 1241188, 2508835
+2025-01-13, 08:19:48, bst, 1024, 20, split, regular, 20, 0, 90000, 1246155, 1236597, 2482752
+2025-01-13, 08:33:19, bst, 1024, 20, split, regular, 20, 20, 90000, 1254676, 1196660, 2451336
+2025-01-13, 08:46:50, bst, 1024, 40, numa, numa, 20, 0, 90000, 2068732, 2098517, 4167249
+2025-01-13, 09:00:32, bst, 1024, 40, numa, numa, 20, 20, 90000, 2093517, 2136864, 4230381
+2025-01-13, 09:14:13, bst, 1024, 40, numa, regular, 20, 0, 90000, 2121681, 2127948, 4249629
+2025-01-13, 09:27:44, bst, 1024, 40, numa, regular, 20, 20, 90000, 2100465, 2090040, 4190505
+2025-01-13, 09:41:15, bst, 1024, 40, regular, numa, 20, 0, 90000, 1551722, 1560402, 3112124
+2025-01-13, 09:54:56, bst, 1024, 40, regular, numa, 20, 20, 90000, 1685840, 1675119, 3360959
+2025-01-13, 10:08:36, bst, 1024, 40, regular, regular, 20, 0, 90000, 1530368, 1564207, 3094575
+2025-01-13, 10:22:07, bst, 1024, 40, regular, regular, 20, 20, 90000, 1457997, 1556599, 3014596
+2025-01-13, 10:35:38, bst, 1024, 40, split, numa, 20, 0, 90000, 1764655, 1795435, 3560090
+2025-01-13, 10:49:18, bst, 1024, 40, split, numa, 20, 20, 90000, 1770550, 1777182, 3547732
+2025-01-13, 11:02:59, bst, 1024, 40, split, regular, 20, 0, 90000, 1381631, 1295805, 2677436
+2025-01-13, 11:16:31, bst, 1024, 40, split, regular, 20, 20, 90000, 1770309, 1724119, 3494428
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-13, 14:32:25, bst, 128, 20, numa, numa, 20, 0, 90000, 1488157, 1446698, 2934855
+2025-01-13, 14:34:26, bst, 128, 20, numa, numa, 20, 20, 90000, 1503522, 1448677, 2952199
+2025-01-13, 14:36:26, bst, 128, 20, numa, numa, 20, 100, 90000, 1410092, 1354642, 2764734
+2025-01-13, 14:38:26, bst, 128, 20, numa, regular, 20, 0, 90000, 1494813, 1474113, 2968926
+2025-01-13, 14:40:25, bst, 128, 20, numa, regular, 20, 20, 90000, 1489003, 1508265, 2997268
+2025-01-13, 14:42:24, bst, 128, 20, numa, regular, 20, 100, 90000, 1368587, 1349482, 2718069
+2025-01-13, 14:44:23, bst, 128, 20, regular, numa, 20, 0, 90000, 1311285, 1253088, 2564373
+2025-01-13, 14:46:24, bst, 128, 20, regular, numa, 20, 20, 90000, 1216717, 1229063, 2445780
+2025-01-13, 14:48:24, bst, 128, 20, regular, numa, 20, 100, 90000, 1257666, 1216718, 2474384
+2025-01-13, 14:50:25, bst, 128, 20, regular, regular, 20, 0, 90000, 1224131, 1239819, 2463950
+2025-01-13, 14:52:24, bst, 128, 20, regular, regular, 20, 20, 90000, 1179480, 1208710, 2388190
+2025-01-13, 14:54:23, bst, 128, 20, regular, regular, 20, 100, 90000, 1208214, 1231478, 2439692
+2025-01-13, 14:56:22, bst, 128, 20, split, numa, 20, 0, 90000, 1234278, 1226016, 2460294
+2025-01-13, 14:58:23, bst, 128, 20, split, numa, 20, 20, 90000, 1244251, 1213349, 2457600
+2025-01-13, 15:00:23, bst, 128, 20, split, numa, 20, 100, 90000, 1242051, 1215500, 2457551
+2025-01-13, 15:02:24, bst, 128, 20, split, regular, 20, 0, 90000, 1215567, 1207896, 2423463
+2025-01-13, 15:04:23, bst, 128, 20, split, regular, 20, 20, 90000, 1218747, 1215603, 2434350
+2025-01-13, 15:06:23, bst, 128, 20, split, regular, 20, 100, 90000, 1217013, 1189874, 2406887
+2025-01-13, 15:08:22, bst, 128, 40, numa, numa, 20, 0, 90000, 1719040, 1700520, 3419560
+2025-01-13, 15:10:23, bst, 128, 40, numa, numa, 20, 20, 90000, 1735370, 1700424, 3435794
+2025-01-13, 15:12:24, bst, 128, 40, numa, numa, 20, 100, 90000, 1682284, 1635071, 3317355
+2025-01-13, 15:14:24, bst, 128, 40, numa, regular, 20, 0, 90000, 1731235, 1725039, 3456274
+2025-01-13, 15:16:24, bst, 128, 40, numa, regular, 20, 20, 90000, 1681794, 1705751, 3387545
+2025-01-13, 15:18:23, bst, 128, 40, numa, regular, 20, 100, 90000, 1684895, 1685205, 3370100
+2025-01-13, 15:20:23, bst, 128, 40, regular, numa, 20, 0, 90000, 1563256, 1560811, 3124067
+2025-01-13, 15:22:23, bst, 128, 40, regular, numa, 20, 20, 90000, 1612449, 1605085, 3217534
+2025-01-13, 15:24:23, bst, 128, 40, regular, numa, 20, 100, 90000, 1640791, 1619905, 3260696
+2025-01-13, 15:26:24, bst, 128, 40, regular, regular, 20, 0, 90000, 1574693, 1578352, 3153045
+2025-01-13, 15:28:23, bst, 128, 40, regular, regular, 20, 20, 90000, 1530303, 1541754, 3072057
+2025-01-13, 15:30:22, bst, 128, 40, regular, regular, 20, 100, 90000, 1473760, 1494484, 2968244
+2025-01-13, 15:32:22, bst, 128, 40, split, numa, 20, 0, 90000, 1573696, 1549971, 3123667
+2025-01-13, 15:34:23, bst, 128, 40, split, numa, 20, 20, 90000, 1591058, 1574635, 3165693
+2025-01-13, 15:36:24, bst, 128, 40, split, numa, 20, 100, 90000, 1546512, 1558415, 3104927
+2025-01-13, 15:38:24, bst, 128, 40, split, regular, 20, 0, 90000, 1540308, 1527844, 3068152
+2025-01-13, 15:40:24, bst, 128, 40, split, regular, 20, 20, 90000, 1565390, 1568281, 3133671
+2025-01-13, 15:42:23, bst, 128, 40, split, regular, 20, 100, 90000, 1441418, 1446055, 2887473
+2025-01-13, 15:44:22, bst, 1024, 20, numa, numa, 20, 0, 90000, 1499111, 1396491, 2895602
+2025-01-13, 15:58:04, bst, 1024, 20, numa, numa, 20, 20, 90000, 1440535, 1434632, 2875167
+2025-01-13, 16:11:44, bst, 1024, 20, numa, numa, 20, 100, 90000, 1458246, 1375068, 2833314
+2025-01-13, 16:25:26, bst, 1024, 20, numa, regular, 20, 0, 90000, 1473782, 1392468, 2866250
+2025-01-13, 16:38:58, bst, 1024, 20, numa, regular, 20, 20, 90000, 1487414, 1398632, 2886046
+2025-01-13, 16:52:29, bst, 1024, 20, numa, regular, 20, 100, 90000, 1367252, 1305573, 2672825
+2025-01-13, 17:06:00, bst, 1024, 20, regular, numa, 20, 0, 90000, 1230200, 1216097, 2446297
+2025-01-13, 17:19:42, bst, 1024, 20, regular, numa, 20, 20, 90000, 1268757, 1274850, 2543607
+2025-01-13, 17:33:22, bst, 1024, 20, regular, numa, 20, 100, 90000, 1257860, 1253344, 2511204
+2025-01-13, 17:47:03, bst, 1024, 20, regular, regular, 20, 0, 90000, 1242773, 1181579, 2424352
+2025-01-13, 18:00:34, bst, 1024, 20, regular, regular, 20, 20, 90000, 1193357, 1223053, 2416410
+2025-01-13, 18:14:05, bst, 1024, 20, regular, regular, 20, 100, 90000, 1168854, 1174411, 2343265
+2025-01-13, 18:27:37, bst, 1024, 20, split, numa, 20, 0, 90000, 1294919, 1300515, 2595434
+2025-01-13, 18:41:17, bst, 1024, 20, split, numa, 20, 20, 90000, 1293893, 1257722, 2551615
+2025-01-13, 18:54:59, bst, 1024, 20, split, numa, 20, 100, 90000, 1297489, 1236670, 2534159
+2025-01-13, 19:08:39, bst, 1024, 20, split, regular, 20, 0, 90000, 1272926, 1242703, 2515629
+2025-01-13, 19:22:11, bst, 1024, 20, split, regular, 20, 20, 90000, 1206493, 1205703, 2412196
+2025-01-13, 19:35:43, bst, 1024, 20, split, regular, 20, 100, 90000, 1265164, 1245658, 2510822
+2025-01-13, 19:49:15, bst, 1024, 40, numa, numa, 20, 0, 90000, 2090397, 2139573, 4229970
+2025-01-13, 20:02:57, bst, 1024, 40, numa, numa, 20, 20, 90000, 2067735, 2083799, 4151534
+2025-01-13, 20:16:38, bst, 1024, 40, numa, numa, 20, 100, 90000, 2028459, 2034265, 4062724
+2025-01-13, 20:30:18, bst, 1024, 40, numa, regular, 20, 0, 90000, 2101692, 2102419, 4204111
+2025-01-13, 20:43:50, bst, 1024, 40, numa, regular, 20, 20, 90000, 2105829, 2166753, 4272582
+2025-01-13, 20:57:22, bst, 1024, 40, numa, regular, 20, 100, 90000, 2003043, 2003257, 4006300
+2025-01-13, 21:10:54, bst, 1024, 40, regular, numa, 20, 0, 90000, 1744156, 1748559, 3492715
+2025-01-13, 21:24:35, bst, 1024, 40, regular, numa, 20, 20, 90000, 1792097, 1802092, 3594189
+2025-01-13, 21:38:17, bst, 1024, 40, regular, numa, 20, 100, 90000, 1536376, 1562469, 3098845
+2025-01-13, 21:51:58, bst, 1024, 40, regular, regular, 20, 0, 90000, 1497392, 1592537, 3089929
+2025-01-13, 22:05:30, bst, 1024, 40, regular, regular, 20, 20, 90000, 1589909, 1655257, 3245166
+2025-01-13, 22:19:01, bst, 1024, 40, regular, regular, 20, 100, 90000, 1531337, 1520882, 3052219
+2025-01-13, 22:32:33, bst, 1024, 40, split, numa, 20, 0, 90000, 1791475, 1795618, 3587093
+2025-01-13, 22:46:13, bst, 1024, 40, split, numa, 20, 20, 90000, 1810043, 1774555, 3584598
+2025-01-13, 22:59:53, bst, 1024, 40, split, numa, 20, 100, 90000, 1744707, 1748677, 3493384
+2025-01-13, 23:13:34, bst, 1024, 40, split, regular, 20, 0, 90000, 1571824, 1540604, 3112428
+2025-01-13, 23:27:06, bst, 1024, 40, split, regular, 20, 20, 90000, 1588143, 1527222, 3115365
+2025-01-13, 23:40:37, bst, 1024, 40, split, regular, 20, 100, 90000, 1377263, 1331023, 2708286
+
+
+
+
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 17:39:52, bst, 128, 20, numa, numa, 20, 0, 90000, 1496409, 1446193, 2942602
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 17:41:53, bst, 128, 20, numa, numa, 20, 20, 90000, 1493761, 1444375, 2938136
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 17:43:53, bst, 128, 20, numa, numa, 20, 100, 90000, 1417452, 1362357, 2779809
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 17:45:55, bst, 128, 20, numa, regular, 20, 0, 90000, 1493921, 1477873, 2971794
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 17:47:54, bst, 128, 20, numa, regular, 20, 20, 90000, 1481841, 1468544, 2950385
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 17:49:53, bst, 128, 20, numa, regular, 20, 100, 90000, 1380102, 1366243, 2746345
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 17:51:52, bst, 128, 20, regular, numa, 20, 0, 90000, 1236142, 1214366, 2450508
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 17:53:53, bst, 128, 20, regular, numa, 20, 20, 90000, 1273320, 1234219, 2507539
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 17:55:53, bst, 128, 20, regular, numa, 20, 100, 90000, 1226297, 1210272, 2436569
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 17:57:54, bst, 128, 20, regular, regular, 20, 0, 90000, 1271954, 1279014, 2550968
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 17:59:53, bst, 128, 20, regular, regular, 20, 20, 90000, 1187865, 1199736, 2387601
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 18:01:52, bst, 128, 20, regular, regular, 20, 100, 90000, 1244361, 1208740, 2453101
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 18:03:51, bst, 128, 20, split, numa, 20, 0, 90000, 1250633, 1222380, 2473013
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 18:05:52, bst, 128, 20, split, numa, 20, 20, 90000, 1223667, 1253917, 2477584
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 18:07:52, bst, 128, 20, split, numa, 20, 100, 90000, 1246735, 1211466, 2458201
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 18:09:53, bst, 128, 20, split, regular, 20, 0, 90000, 1231297, 1224916, 2456213
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 18:11:52, bst, 128, 20, split, regular, 20, 20, 90000, 1213108, 1197489, 2410597
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 18:13:51, bst, 128, 20, split, regular, 20, 100, 90000, 1208586, 1203851, 2412437
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 18:15:51, bst, 128, 40, numa, numa, 20, 0, 90000, 1694571, 1723413, 3417984
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 18:17:51, bst, 128, 40, numa, numa, 20, 20, 90000, 1704468, 1664325, 3368793
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 18:19:52, bst, 128, 40, numa, numa, 20, 100, 90000, 1713589, 1623294, 3336883
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 18:21:53, bst, 128, 40, numa, regular, 20, 0, 90000, 1741157, 1757004, 3498161
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 18:23:52, bst, 128, 40, numa, regular, 20, 20, 90000, 1686215, 1696530, 3382745
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 18:25:51, bst, 128, 40, numa, regular, 20, 100, 90000, 1716684, 1697820, 3414504
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 18:27:51, bst, 128, 40, regular, numa, 20, 0, 90000, 1572110, 1564425, 3136535
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 18:29:51, bst, 128, 40, regular, numa, 20, 20, 90000, 1581085, 1559190, 3140275
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 18:31:52, bst, 128, 40, regular, numa, 20, 100, 90000, 1630154, 1631132, 3261286
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 18:33:53, bst, 128, 40, regular, regular, 20, 0, 90000, 1613921, 1620235, 3234156
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 18:35:52, bst, 128, 40, regular, regular, 20, 20, 90000, 1627146, 1611842, 3238988
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 18:37:52, bst, 128, 40, regular, regular, 20, 100, 90000, 1563039, 1552923, 3115962
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 18:39:51, bst, 128, 40, split, numa, 20, 0, 90000, 1556964, 1557791, 3114755
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 18:41:52, bst, 128, 40, split, numa, 20, 20, 90000, 1559030, 1560395, 3119425
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 18:43:52, bst, 128, 40, split, numa, 20, 100, 90000, 1552946, 1559269, 3112215
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 18:45:53, bst, 128, 40, split, regular, 20, 0, 90000, 1532776, 1518011, 3050787
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 18:47:52, bst, 128, 40, split, regular, 20, 20, 90000, 1531866, 1543899, 3075765
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 18:49:51, bst, 128, 40, split, regular, 20, 100, 90000, 1505657, 1518275, 3023932
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 18:51:51, bst, 1024, 20, numa, numa, 20, 0, 90000, 1457789, 1395950, 2853739
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 19:05:33, bst, 1024, 20, numa, numa, 20, 20, 90000, 1455273, 1389781, 2845054
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 19:19:15, bst, 1024, 20, numa, numa, 20, 100, 90000, 1418079, 1378464, 2796543
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 19:32:58, bst, 1024, 20, numa, regular, 20, 0, 90000, 1447830, 1401973, 2849803
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 19:46:30, bst, 1024, 20, numa, regular, 20, 20, 90000, 1420413, 1395138, 2815551
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 20:00:02, bst, 1024, 20, numa, regular, 20, 100, 90000, 1357386, 1326765, 2684151
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 20:13:33, bst, 1024, 20, regular, numa, 20, 0, 90000, 1321083, 1282745, 2603828
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 20:27:16, bst, 1024, 20, regular, numa, 20, 20, 90000, 1268975, 1240292, 2509267
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 20:40:59, bst, 1024, 20, regular, numa, 20, 100, 90000, 1225862, 1241643, 2467505
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 20:54:42, bst, 1024, 20, regular, regular, 20, 0, 90000, 1234924, 1250346, 2485270
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 21:08:13, bst, 1024, 20, regular, regular, 20, 20, 90000, 1240206, 1264835, 2505041
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 21:21:44, bst, 1024, 20, regular, regular, 20, 100, 90000, 1279807, 1264254, 2544061
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 21:35:16, bst, 1024, 20, split, numa, 20, 0, 90000, 1319520, 1254719, 2574239
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 21:48:59, bst, 1024, 20, split, numa, 20, 20, 90000, 1288157, 1296258, 2584415
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 22:02:41, bst, 1024, 20, split, numa, 20, 100, 90000, 1262914, 1226176, 2489090
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 22:16:24, bst, 1024, 20, split, regular, 20, 0, 90000, 1283983, 1201229, 2485212
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 22:29:55, bst, 1024, 20, split, regular, 20, 20, 90000, 1230230, 1214327, 2444557
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 22:43:27, bst, 1024, 20, split, regular, 20, 100, 90000, 1261288, 1202016, 2463304
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 22:56:58, bst, 1024, 40, numa, numa, 20, 0, 90000, 2079517, 2153797, 4233314
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 23:10:41, bst, 1024, 40, numa, numa, 20, 20, 90000, 2068706, 2145682, 4214388
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 23:24:22, bst, 1024, 40, numa, numa, 20, 100, 90000, 2007465, 2026568, 4034033
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 23:38:05, bst, 1024, 40, numa, regular, 20, 0, 90000, 2120182, 2111402, 4231584
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-18, 23:51:36, bst, 1024, 40, numa, regular, 20, 20, 90000, 2109658, 2079527, 4189185
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-19, 00:05:07, bst, 1024, 40, numa, regular, 20, 100, 90000, 2074705, 2035610, 4110315
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-19, 00:18:38, bst, 1024, 40, regular, numa, 20, 0, 90000, 1559327, 1550629, 3109956
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-19, 00:32:21, bst, 1024, 40, regular, numa, 20, 20, 90000, 1786234, 1771315, 3557549
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-19, 00:46:02, bst, 1024, 40, regular, numa, 20, 100, 90000, 1663043, 1674558, 3337601
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-19, 00:59:46, bst, 1024, 40, regular, regular, 20, 0, 90000, 1486951, 1465755, 2952706
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-19, 01:13:18, bst, 1024, 40, regular, regular, 20, 20, 90000, 1665369, 1684851, 3350220
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-19, 01:26:49, bst, 1024, 40, regular, regular, 20, 100, 90000, 1555424, 1479191, 3034615
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-19, 01:40:20, bst, 1024, 40, split, numa, 20, 0, 90000, 1756472, 1797544, 3554016
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-19, 01:54:03, bst, 1024, 40, split, numa, 20, 20, 90000, 1796037, 1772769, 3568806
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-19, 02:07:44, bst, 1024, 40, split, numa, 20, 100, 90000, 1761039, 1751998, 3513037
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-19, 02:21:27, bst, 1024, 40, split, regular, 20, 0, 90000, 1445010, 1528394, 2973404
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-19, 02:34:58, bst, 1024, 40, split, regular, 20, 20, 90000, 1736748, 1721373, 3458121
+Date, Time, DS, num_DS, num_threads, thread_config, DS_config, duration, crossover, keyspace, ops0, ops1, total_ops
+2025-01-19, 02:48:29, bst, 1024, 40, split, regular, 20, 100, 90000, 1699733, 1702893, 3402626
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BST Results
+BST Results
+2025-01-20, 04:28:11, bst, 128, 20, numa, numa, 20, 20, 90000, 1435260, 1419487, 2854747
+
+
+
+
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-20, 04:30:49, bst, 128, 20, numa, numa, 20, 0, 90000, 1502256, 1438090, 2940346
+2025-01-20, 04:32:50, bst, 128, 20, numa, numa, 20, 20, 90000, 1517360, 1434034, 2951394
+2025-01-20, 04:34:51, bst, 128, 20, numa, numa, 20, 100, 90000, 1405062, 1352686, 2757748
+2025-01-20, 04:36:52, bst, 128, 20, numa, regular, 20, 0, 90000, 1487319, 1469111, 2956430
+2025-01-20, 04:38:51, bst, 128, 20, numa, regular, 20, 20, 90000, 1482405, 1456351, 2938756
+2025-01-20, 04:40:50, bst, 128, 20, numa, regular, 20, 100, 90000, 1382283, 1358546, 2740829
+2025-01-20, 04:42:49, bst, 128, 20, regular, numa, 20, 0, 90000, 1243400, 1214421, 2457821
+2025-01-20, 04:44:50, bst, 128, 20, regular, numa, 20, 20, 90000, 1205785, 1196624, 2402409
+2025-01-20, 04:46:51, bst, 128, 20, regular, numa, 20, 100, 90000, 1229967, 1200371, 2430338
+2025-01-20, 04:48:52, bst, 128, 20, regular, regular, 20, 0, 90000, 1169210, 1210049, 2379259
+2025-01-20, 04:50:51, bst, 128, 20, regular, regular, 20, 20, 90000, 1217571, 1203505, 2421076
+2025-01-20, 04:52:51, bst, 128, 20, regular, regular, 20, 100, 90000, 1233964, 1227965, 2461929
+2025-01-20, 04:54:50, bst, 128, 20, split, numa, 20, 0, 90000, 1236734, 1213318, 2450052
+2025-01-20, 04:56:50, bst, 128, 20, split, numa, 20, 20, 90000, 1251316, 1208244, 2459560
+2025-01-20, 04:58:51, bst, 128, 20, split, numa, 20, 100, 90000, 1250040, 1197571, 2447611
+2025-01-20, 05:00:52, bst, 128, 20, split, regular, 20, 0, 90000, 1209853, 1192060, 2401913
+2025-01-20, 05:02:51, bst, 128, 20, split, regular, 20, 20, 90000, 1240230, 1205914, 2446144
+2025-01-20, 05:04:50, bst, 128, 20, split, regular, 20, 100, 90000, 1229354, 1222123, 2451477
+2025-01-20, 05:06:50, bst, 128, 40, numa, numa, 20, 0, 90000, 1708419, 1712531, 3420950
+2025-01-20, 05:08:51, bst, 128, 40, numa, numa, 20, 20, 90000, 1675826, 1727651, 3403477
+2025-01-20, 05:10:52, bst, 128, 40, numa, numa, 20, 100, 90000, 1678669, 1645566, 3324235
+2025-01-20, 05:12:52, bst, 128, 40, numa, regular, 20, 0, 90000, 1712608, 1731495, 3444103
+2025-01-20, 05:14:52, bst, 128, 40, numa, regular, 20, 20, 90000, 1705530, 1716228, 3421758
+2025-01-20, 05:16:51, bst, 128, 40, numa, regular, 20, 100, 90000, 1644575, 1681994, 3326569
+2025-01-20, 05:18:50, bst, 128, 40, regular, numa, 20, 0, 90000, 1632285, 1609583, 3241868
+2025-01-20, 05:20:51, bst, 128, 40, regular, numa, 20, 20, 90000, 1581683, 1566109, 3147792
+2025-01-20, 05:22:52, bst, 128, 40, regular, numa, 20, 100, 90000, 1597941, 1583297, 3181238
+2025-01-20, 05:24:53, bst, 128, 40, regular, regular, 20, 0, 90000, 1555917, 1581010, 3136927
+2025-01-20, 05:26:52, bst, 128, 40, regular, regular, 20, 20, 90000, 1492277, 1490866, 2983143
+2025-01-20, 05:28:52, bst, 128, 40, regular, regular, 20, 100, 90000, 1574061, 1560769, 3134830
+2025-01-20, 05:30:51, bst, 128, 40, split, numa, 20, 0, 90000, 1562367, 1550397, 3112764
+2025-01-20, 05:32:52, bst, 128, 40, split, numa, 20, 20, 90000, 1607658, 1586849, 3194507
+2025-01-20, 05:34:52, bst, 128, 40, split, numa, 20, 100, 90000, 1528957, 1541834, 3070791
+2025-01-20, 05:36:54, bst, 128, 40, split, regular, 20, 0, 90000, 1536160, 1540193, 3076353
+2025-01-20, 05:38:53, bst, 128, 40, split, regular, 20, 20, 90000, 1547719, 1549905, 3097624
+2025-01-20, 05:40:52, bst, 128, 40, split, regular, 20, 100, 90000, 1543479, 1537911, 3081390
+2025-01-20, 05:42:52, bst, 1024, 20, numa, numa, 20, 0, 90000, 1447572, 1395577, 2843149
+2025-01-20, 05:56:35, bst, 1024, 20, numa, numa, 20, 20, 90000, 1453363, 1441746, 2895109
+2025-01-20, 06:10:17, bst, 1024, 20, numa, numa, 20, 100, 90000, 1435164, 1336118, 2771282
+2025-01-20, 06:23:59, bst, 1024, 20, numa, regular, 20, 0, 90000, 1508382, 1415733, 2924115
+2025-01-20, 06:37:30, bst, 1024, 20, numa, regular, 20, 20, 90000, 1490908, 1410020, 2900928
+2025-01-20, 06:51:01, bst, 1024, 20, numa, regular, 20, 100, 90000, 1360032, 1316545, 2676577
+2025-01-20, 07:04:32, bst, 1024, 20, regular, numa, 20, 0, 90000, 1257248, 1282391, 2539639
+2025-01-20, 07:18:16, bst, 1024, 20, regular, numa, 20, 20, 90000, 1241758, 1229805, 2471563
+2025-01-20, 07:31:58, bst, 1024, 20, regular, numa, 20, 100, 90000, 1226915, 1228619, 2455534
+2025-01-20, 07:45:42, bst, 1024, 20, regular, regular, 20, 0, 90000, 1305098, 1291081, 2596179
+2025-01-20, 07:59:14, bst, 1024, 20, regular, regular, 20, 20, 90000, 1218039, 1246217, 2464256
+2025-01-20, 08:12:45, bst, 1024, 20, regular, regular, 20, 100, 90000, 1194361, 1237175, 2431536
+2025-01-20, 08:26:16, bst, 1024, 20, split, numa, 20, 0, 90000, 1368951, 1247575, 2616526
+2025-01-20, 08:39:59, bst, 1024, 20, split, numa, 20, 20, 90000, 1406051, 1246273, 2652324
+2025-01-20, 08:53:41, bst, 1024, 20, split, numa, 20, 100, 90000, 1301198, 1234597, 2535795
+2025-01-20, 09:07:24, bst, 1024, 20, split, regular, 20, 0, 90000, 1183918, 1173540, 2357458
+2025-01-20, 09:20:55, bst, 1024, 20, split, regular, 20, 20, 90000, 1227367, 1199450, 2426817
+2025-01-20, 09:34:26, bst, 1024, 20, split, regular, 20, 100, 90000, 1232366, 1156947, 2389313
+2025-01-20, 09:47:58, bst, 1024, 40, numa, numa, 20, 0, 90000, 2084440, 2082814, 4167254
+2025-01-20, 10:01:41, bst, 1024, 40, numa, numa, 20, 20, 90000, 2110291, 2139637, 4249928
+2025-01-20, 10:15:24, bst, 1024, 40, numa, numa, 20, 100, 90000, 2072245, 2022611, 4094856
+2025-01-20, 10:29:07, bst, 1024, 40, numa, regular, 20, 0, 90000, 2202299, 2151581, 4353880
+2025-01-20, 10:42:39, bst, 1024, 40, numa, regular, 20, 20, 90000, 2107403, 2083568, 4190971
+2025-01-20, 10:56:10, bst, 1024, 40, numa, regular, 20, 100, 90000, 2003595, 1997203, 4000798
+2025-01-20, 11:09:42, bst, 1024, 40, regular, numa, 20, 0, 90000, 1653051, 1635470, 3288521
+2025-01-20, 11:23:25, bst, 1024, 40, regular, numa, 20, 20, 90000, 1815494, 1775943, 3591437
+2025-01-20, 11:37:08, bst, 1024, 40, regular, numa, 20, 100, 90000, 1624388, 1657876, 3282264
+2025-01-20, 11:50:50, bst, 1024, 40, regular, regular, 20, 0, 90000, 1568181, 1594409, 3162590
+2025-01-20, 12:04:22, bst, 1024, 40, regular, regular, 20, 20, 90000, 1589693, 1586717, 3176410
+2025-01-20, 12:17:53, bst, 1024, 40, regular, regular, 20, 100, 90000, 1602941, 1645726, 3248667
+2025-01-20, 12:31:24, bst, 1024, 40, split, numa, 20, 0, 90000, 1791063, 1766043, 3557106
+2025-01-20, 12:45:07, bst, 1024, 40, split, numa, 20, 20, 90000, 1789444, 1777349, 3566793
+2025-01-20, 12:58:48, bst, 1024, 40, split, numa, 20, 100, 90000, 1740790, 1748962, 3489752
+2025-01-20, 13:12:32, bst, 1024, 40, split, regular, 20, 0, 90000, 1615061, 1694638, 3309699
+2025-01-20, 13:26:03, bst, 1024, 40, split, regular, 20, 20, 90000, 1737952, 1735001, 3472953
+2025-01-20, 13:39:35, bst, 1024, 40, split, regular, 20, 100, 90000, 1488410, 1494989, 2983399
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-20, 16:55:12, bst, 128, 20, numa, numa, 20, 0, 90000, 1468753, 1468600, 2937353
+2025-01-20, 16:57:13, bst, 128, 20, numa, numa, 20, 20, 90000, 1466178, 1472723, 2938901
+2025-01-20, 16:59:13, bst, 128, 20, numa, numa, 20, 100, 90000, 1377359, 1381335, 2758694
+2025-01-20, 17:01:14, bst, 128, 20, numa, regular, 20, 0, 90000, 1472756, 1476887, 2949643
+2025-01-20, 17:03:14, bst, 128, 20, numa, regular, 20, 20, 90000, 1479593, 1458299, 2937892
+2025-01-20, 17:05:13, bst, 128, 20, numa, regular, 20, 100, 90000, 1384087, 1386947, 2771034
+2025-01-20, 17:07:12, bst, 128, 20, regular, numa, 20, 0, 90000, 1198281, 1235658, 2433939
+2025-01-20, 17:09:12, bst, 128, 20, regular, numa, 20, 20, 90000, 1204456, 1246359, 2450815
+2025-01-20, 17:11:13, bst, 128, 20, regular, numa, 20, 100, 90000, 1216842, 1243395, 2460237
+2025-01-20, 17:13:13, bst, 128, 20, regular, regular, 20, 0, 90000, 1238117, 1230502, 2468619
+2025-01-20, 17:15:12, bst, 128, 20, regular, regular, 20, 20, 90000, 1282290, 1266327, 2548617
+2025-01-20, 17:17:11, bst, 128, 20, regular, regular, 20, 100, 90000, 1224823, 1196325, 2421148
+2025-01-20, 17:19:11, bst, 128, 20, split, numa, 20, 0, 90000, 1216180, 1240701, 2456881
+2025-01-20, 17:21:12, bst, 128, 20, split, numa, 20, 20, 90000, 1215084, 1238809, 2453893
+2025-01-20, 17:23:13, bst, 128, 20, split, numa, 20, 100, 90000, 1214573, 1226708, 2441281
+2025-01-20, 17:25:13, bst, 128, 20, split, regular, 20, 0, 90000, 1217144, 1206575, 2423719
+2025-01-20, 17:27:12, bst, 128, 20, split, regular, 20, 20, 90000, 1243634, 1187029, 2430663
+2025-01-20, 17:29:11, bst, 128, 20, split, regular, 20, 100, 90000, 1213413, 1180126, 2393539
+2025-01-20, 17:31:10, bst, 128, 40, numa, numa, 20, 0, 90000, 1738444, 1711589, 3450033
+2025-01-20, 17:33:11, bst, 128, 40, numa, numa, 20, 20, 90000, 1703889, 1669064, 3372953
+2025-01-20, 17:35:12, bst, 128, 40, numa, numa, 20, 100, 90000, 1693938, 1713678, 3407616
+2025-01-20, 17:37:13, bst, 128, 40, numa, regular, 20, 0, 90000, 1725421, 1693210, 3418631
+2025-01-20, 17:39:12, bst, 128, 40, numa, regular, 20, 20, 90000, 1728599, 1659761, 3388360
+2025-01-20, 17:41:11, bst, 128, 40, numa, regular, 20, 100, 90000, 1730051, 1710025, 3440076
+2025-01-20, 17:43:11, bst, 128, 40, regular, numa, 20, 0, 90000, 1631827, 1639782, 3271609
+2025-01-20, 17:45:11, bst, 128, 40, regular, numa, 20, 20, 90000, 1585556, 1585197, 3170753
+2025-01-20, 17:47:12, bst, 128, 40, regular, numa, 20, 100, 90000, 1622909, 1628528, 3251437
+2025-01-20, 17:49:13, bst, 128, 40, regular, regular, 20, 0, 90000, 1519483, 1490041, 3009524
+2025-01-20, 17:51:12, bst, 128, 40, regular, regular, 20, 20, 90000, 1539451, 1503665, 3043116
+2025-01-20, 17:53:11, bst, 128, 40, regular, regular, 20, 100, 90000, 1554669, 1518921, 3073590
+2025-01-20, 17:55:11, bst, 128, 40, split, numa, 20, 0, 90000, 1561389, 1558862, 3120251
+2025-01-20, 17:57:12, bst, 128, 40, split, numa, 20, 20, 90000, 1567954, 1566756, 3134710
+2025-01-20, 17:59:13, bst, 128, 40, split, numa, 20, 100, 90000, 1571844, 1573684, 3145528
+2025-01-20, 18:01:13, bst, 128, 40, split, regular, 20, 0, 90000, 1487269, 1503809, 2991078
+2025-01-20, 18:03:13, bst, 128, 40, split, regular, 20, 20, 90000, 1501268, 1522487, 3023755
+2025-01-20, 18:05:12, bst, 128, 40, split, regular, 20, 100, 90000, 1415552, 1433435, 2848987
+2025-01-20, 18:07:11, bst, 1024, 20, numa, numa, 20, 0, 90000, 1445850, 1399275, 2845125
+2025-01-20, 18:20:53, bst, 1024, 20, numa, numa, 20, 20, 90000, 1429367, 1426197, 2855564
+2025-01-20, 18:34:35, bst, 1024, 20, numa, numa, 20, 100, 90000, 1402121, 1340797, 2742918
+2025-01-20, 18:48:19, bst, 1024, 20, numa, regular, 20, 0, 90000, 1448348, 1359215, 2807563
+2025-01-20, 19:01:50, bst, 1024, 20, numa, regular, 20, 20, 90000, 1431107, 1410795, 2841902
+2025-01-20, 19:15:22, bst, 1024, 20, numa, regular, 20, 100, 90000, 1416774, 1320283, 2737057
+2025-01-20, 19:28:54, bst, 1024, 20, regular, numa, 20, 0, 90000, 1251695, 1245025, 2496720
+2025-01-20, 19:42:38, bst, 1024, 20, regular, numa, 20, 20, 90000, 1260705, 1281400, 2542105
+2025-01-20, 19:56:20, bst, 1024, 20, regular, numa, 20, 100, 90000, 1280717, 1321751, 2602468
+2025-01-20, 20:10:03, bst, 1024, 20, regular, regular, 20, 0, 90000, 1371219, 1323523, 2694742
+2025-01-20, 20:23:36, bst, 1024, 20, regular, regular, 20, 20, 90000, 1261886, 1303066, 2564952
+2025-01-20, 20:37:08, bst, 1024, 20, regular, regular, 20, 100, 90000, 1226342, 1228611, 2454953
+2025-01-20, 20:50:39, bst, 1024, 20, split, numa, 20, 0, 90000, 1264568, 1275280, 2539848
+2025-01-20, 21:04:23, bst, 1024, 20, split, numa, 20, 20, 90000, 1286085, 1261714, 2547799
+2025-01-20, 21:18:06, bst, 1024, 20, split, numa, 20, 100, 90000, 1249097, 1276197, 2525294
+2025-01-20, 21:31:49, bst, 1024, 20, split, regular, 20, 0, 90000, 1255693, 1237472, 2493165
+2025-01-20, 21:45:20, bst, 1024, 20, split, regular, 20, 20, 90000, 1201958, 1231627, 2433585
+2025-01-20, 21:58:52, bst, 1024, 20, split, regular, 20, 100, 90000, 1191608, 1136231, 2327839
+2025-01-20, 22:12:24, bst, 1024, 40, numa, numa, 20, 0, 90000, 2139903, 2079893, 4219796
+2025-01-20, 22:26:07, bst, 1024, 40, numa, numa, 20, 20, 90000, 2080957, 2138760, 4219717
+2025-01-20, 22:39:50, bst, 1024, 40, numa, numa, 20, 100, 90000, 2010920, 2055288, 4066208
+2025-01-20, 22:53:33, bst, 1024, 40, numa, regular, 20, 0, 90000, 2060572, 2081879, 4142451
+2025-01-20, 23:07:05, bst, 1024, 40, numa, regular, 20, 20, 90000, 2030044, 2058075, 4088119
+2025-01-20, 23:20:37, bst, 1024, 40, numa, regular, 20, 100, 90000, 2003761, 2058297, 4062058
+2025-01-20, 23:34:08, bst, 1024, 40, regular, numa, 20, 0, 90000, 1525666, 1547370, 3073036
+2025-01-20, 23:47:51, bst, 1024, 40, regular, numa, 20, 20, 90000, 1591763, 1588417, 3180180
+2025-01-21, 00:01:34, bst, 1024, 40, regular, numa, 20, 100, 90000, 1611218, 1615251, 3226469
+2025-01-21, 00:15:16, bst, 1024, 40, regular, regular, 20, 0, 90000, 1746273, 1651763, 3398036
+2025-01-21, 00:28:48, bst, 1024, 40, regular, regular, 20, 20, 90000, 1778774, 1732360, 3511134
+2025-01-21, 00:42:20, bst, 1024, 40, regular, regular, 20, 100, 90000, 1606254, 1545642, 3151896
+2025-01-21, 00:55:51, bst, 1024, 40, split, numa, 20, 0, 90000, 1797078, 1784478, 3581556
+2025-01-21, 01:09:34, bst, 1024, 40, split, numa, 20, 20, 90000, 1829165, 1777834, 3606999
+2025-01-21, 01:23:17, bst, 1024, 40, split, numa, 20, 100, 90000, 1771184, 1766317, 3537501
+2025-01-21, 01:37:00, bst, 1024, 40, split, regular, 20, 0, 90000, 1690038, 1689627, 3379665
+2025-01-21, 01:50:32, bst, 1024, 40, split, regular, 20, 20, 90000, 1622766, 1591391, 3214157
+2025-01-21, 02:04:04, bst, 1024, 40, split, regular, 20, 100, 90000, 1355397, 1420842, 2776239
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-21, 05:00:36, bst, 128, 20, numa, numa, 20, 0, 1600000, 72080, 71400, 143480
+2025-01-21, 14:25:12, bst, 128, 20, numa, numa, 20, 20, 1600000, 69851, 71890, 141741
+2025-01-21, 23:51:26, bst, 128, 20, numa, numa, 20, 100, 1600000, 71292, 70908, 142200
+2025-01-22, 09:14:52, bst, 128, 20, numa, regular, 20, 0, 1600000, 70633, 66431, 137064
+2025-01-22, 18:23:22, bst, 128, 20, numa, regular, 20, 20, 1600000, 66142, 65884, 132026
+2025-01-23, 03:32:27, bst, 128, 20, numa, regular, 20, 100, 1600000, 64696, 64313, 129009
+2025-01-23, 12:40:51, bst, 128, 20, regular, numa, 20, 0, 1600000, 61332, 63066, 124398
+2025-01-23, 22:06:08, bst, 128, 20, regular, numa, 20, 20, 1600000, 64316, 66695, 131011
+2025-01-24, 07:32:54, bst, 128, 20, regular, numa, 20, 100, 1600000, 65927, 66985, 132912
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-24, 18:06:33, bst, 128, 20, numa, numa, 20, 0, 1600000, 46797402, 44956321, 91753723
+2025-01-24, 18:07:06, bst, 128, 20, numa, numa, 20, 20, 1600000, 45382791, 45260497, 90643288
+2025-01-24, 18:07:38, bst, 128, 20, numa, numa, 20, 100, 1600000, 40909178, 41063458, 81972636
+2025-01-24, 18:08:11, bst, 128, 20, numa, regular, 20, 0, 1600000, 38213277, 37967290, 76180567
+2025-01-24, 18:08:42, bst, 128, 20, numa, regular, 20, 20, 1600000, 36950691, 37936527, 74887218
+2025-01-24, 18:09:14, bst, 128, 20, numa, regular, 20, 100, 1600000, 26572319, 25192472, 51764791
+2025-01-24, 18:09:45, bst, 128, 20, regular, numa, 20, 0, 1600000, 38084832, 39041369, 77126201
+2025-01-24, 18:10:18, bst, 128, 20, regular, numa, 20, 20, 1600000, 36913631, 37859231, 74772862
+2025-01-24, 18:10:51, bst, 128, 20, regular, numa, 20, 100, 1600000, 38087309, 38024813, 76112122
+2025-01-24, 18:11:23, bst, 128, 20, regular, regular, 20, 0, 1600000, 33057888, 32817879, 65875767
+2025-01-24, 18:11:55, bst, 128, 20, regular, regular, 20, 20, 1600000, 33196081, 33557754, 66753835
+2025-01-24, 18:12:26, bst, 128, 20, regular, regular, 20, 100, 1600000, 25184788, 23867285, 49052073
+2025-01-24, 18:12:57, bst, 128, 20, split, numa, 20, 0, 1600000, 38170846, 38779417, 76950263
+2025-01-24, 18:13:30, bst, 128, 20, split, numa, 20, 20, 1600000, 38296351, 38879909, 77176260
+2025-01-24, 18:14:03, bst, 128, 20, split, numa, 20, 100, 1600000, 37038000, 38292423, 75330423
+2025-01-24, 18:14:35, bst, 128, 20, split, regular, 20, 0, 1600000, 31551602, 32235599, 63787201
+2025-01-24, 18:15:07, bst, 128, 20, split, regular, 20, 20, 1600000, 32307227, 32266198, 64573425
+2025-01-24, 18:15:38, bst, 128, 20, split, regular, 20, 100, 1600000, 28365327, 30424089, 58789416
+2025-01-24, 18:16:10, bst, 128, 40, numa, numa, 20, 0, 1600000, 42982385, 42482889, 85465274
+2025-01-24, 18:16:43, bst, 128, 40, numa, numa, 20, 20, 1600000, 44552082, 44202443, 88754525
+2025-01-24, 18:17:16, bst, 128, 40, numa, numa, 20, 100, 1600000, 36674237, 36083804, 72758041
+2025-01-24, 18:17:48, bst, 128, 40, numa, regular, 20, 0, 1600000, 33832080, 32131453, 65963533
+2025-01-24, 18:18:20, bst, 128, 40, numa, regular, 20, 20, 1600000, 33604996, 32101135, 65706131
+2025-01-24, 18:18:51, bst, 128, 40, numa, regular, 20, 100, 1600000, 28736443, 26688586, 55425029
+2025-01-24, 18:19:23, bst, 128, 40, regular, numa, 20, 0, 1600000, 39751204, 40225562, 79976766
+2025-01-24, 18:19:56, bst, 128, 40, regular, numa, 20, 20, 1600000, 36639211, 36483051, 73122262
+2025-01-24, 18:20:28, bst, 128, 40, regular, numa, 20, 100, 1600000, 37701271, 35847572, 73548843
+2025-01-24, 18:21:01, bst, 128, 40, regular, regular, 20, 0, 1600000, 30361038, 28810018, 59171056
+2025-01-24, 18:21:32, bst, 128, 40, regular, regular, 20, 20, 1600000, 33433355, 33576291, 67009646
+2025-01-24, 18:22:04, bst, 128, 40, regular, regular, 20, 100, 1600000, 28984296, 28406073, 57390369
+2025-01-24, 18:22:36, bst, 128, 40, split, numa, 20, 0, 1600000, 38101792, 36516939, 74618731
+2025-01-24, 18:23:08, bst, 128, 40, split, numa, 20, 20, 1600000, 36821771, 37070659, 73892430
+2025-01-24, 18:23:41, bst, 128, 40, split, numa, 20, 100, 1600000, 35533323, 36985492, 72518815
+2025-01-24, 18:24:14, bst, 128, 40, split, regular, 20, 0, 1600000, 28829401, 30585139, 59414540
+2025-01-24, 18:24:45, bst, 128, 40, split, regular, 20, 20, 1600000, 29286090, 31220004, 60506094
+2025-01-24, 18:25:17, bst, 128, 40, split, regular, 20, 100, 1600000, 27621709, 30333509, 57955218
+2025-01-24, 18:25:48, bst, 1024, 20, numa, numa, 20, 0, 1600000, 50091762, 50262134, 100353896
+2025-01-24, 18:27:47, bst, 1024, 20, numa, numa, 20, 20, 1600000, 50207345, 50472235, 100679580
+2025-01-24, 18:29:46, bst, 1024, 20, numa, numa, 20, 100, 1600000, 44994551, 45492461, 90487012
+2025-01-24, 18:31:45, bst, 1024, 20, numa, regular, 20, 0, 1600000, 16823541, 17575179, 34398720
+2025-01-24, 18:33:34, bst, 1024, 20, numa, regular, 20, 20, 1600000, 16144976, 16064160, 32209136
+2025-01-24, 18:35:24, bst, 1024, 20, numa, regular, 20, 100, 1600000, 14375178, 15604006, 29979184
+2025-01-24, 18:37:14, bst, 1024, 20, regular, numa, 20, 0, 1600000, 42110596, 43649907, 85760503
+2025-01-24, 18:39:13, bst, 1024, 20, regular, numa, 20, 20, 1600000, 46469756, 42418443, 88888199
+2025-01-24, 18:41:13, bst, 1024, 20, regular, numa, 20, 100, 1600000, 40474392, 42913491, 83387883
+2025-01-24, 18:43:12, bst, 1024, 20, regular, regular, 20, 0, 1600000, 24028967, 19508987, 43537954
+2025-01-24, 18:45:02, bst, 1024, 20, regular, regular, 20, 20, 1600000, 16813436, 13758013, 30571449
+2025-01-24, 18:46:51, bst, 1024, 20, regular, regular, 20, 100, 1600000, 20882334, 18201366, 39083700
+2025-01-24, 18:48:41, bst, 1024, 20, split, numa, 20, 0, 1600000, 44042266, 43837927, 87880193
+2025-01-24, 18:50:41, bst, 1024, 20, split, numa, 20, 20, 1600000, 43565309, 43977739, 87543048
+2025-01-24, 18:52:40, bst, 1024, 20, split, numa, 20, 100, 1600000, 42866138, 43237172, 86103310
+2025-01-24, 18:54:39, bst, 1024, 20, split, regular, 20, 0, 1600000, 30079722, 30798621, 60878343
+2025-01-24, 18:56:28, bst, 1024, 20, split, regular, 20, 20, 1600000, 34145481, 32816352, 66961833
+2025-01-24, 18:58:17, bst, 1024, 20, split, regular, 20, 100, 1600000, 26051221, 26590119, 52641340
+2025-01-24, 19:00:06, bst, 1024, 40, numa, numa, 20, 0, 1600000, 51015672, 49971862, 100987534
+2025-01-24, 19:02:06, bst, 1024, 40, numa, numa, 20, 20, 1600000, 51494311, 50838694, 102333005
+2025-01-24, 19:04:06, bst, 1024, 40, numa, numa, 20, 100, 1600000, 44203106, 42196141, 86399247
+2025-01-24, 19:06:06, bst, 1024, 40, numa, regular, 20, 0, 1600000, 22832019, 22470582, 45302601
+2025-01-24, 19:07:55, bst, 1024, 40, numa, regular, 20, 20, 1600000, 23320800, 22787300, 46108100
+2025-01-24, 19:09:45, bst, 1024, 40, numa, regular, 20, 100, 1600000, 24349027, 22148282, 46497309
+2025-01-24, 19:11:34, bst, 1024, 40, regular, numa, 20, 0, 1600000, 46412874, 48171205, 94584079
+2025-01-24, 19:13:34, bst, 1024, 40, regular, numa, 20, 20, 1600000, 43072987, 50245185, 93318172
+2025-01-24, 19:15:33, bst, 1024, 40, regular, numa, 20, 100, 1600000, 44251863, 47887943, 92139806
+2025-01-24, 19:17:32, bst, 1024, 40, regular, regular, 20, 0, 1600000, 31358959, 30999772, 62358731
+2025-01-24, 19:19:21, bst, 1024, 40, regular, regular, 20, 20, 1600000, 32611077, 34669300, 67280377
+2025-01-24, 19:21:10, bst, 1024, 40, regular, regular, 20, 100, 1600000, 25056481, 23128131, 48184612
+2025-01-24, 19:23:00, bst, 1024, 40, split, numa, 20, 0, 1600000, 48307871, 45910097, 94217968
+2025-01-24, 19:25:00, bst, 1024, 40, split, numa, 20, 20, 1600000, 46247553, 48909253, 95156806
+2025-01-24, 19:26:59, bst, 1024, 40, split, numa, 20, 100, 1600000, 49122430, 43773713, 92896143
+2025-01-24, 19:28:58, bst, 1024, 40, split, regular, 20, 0, 1600000, 26494501, 29945829, 56440330
+2025-01-24, 19:30:47, bst, 1024, 40, split, regular, 20, 20, 1600000, 30778434, 33903798, 64682232
+2025-01-24, 19:32:37, bst, 1024, 40, split, regular, 20, 100, 1600000, 25916931, 28843885, 54760816
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-26, 16:12:14, bst, 128, 20, numa, numa, 20, 0, 1600000, 45450922, 44917585, 90368507
+2025-01-26, 16:12:47, bst, 128, 20, numa, numa, 20, 20, 1600000, 45110436, 45110776, 90221212
+2025-01-26, 16:13:19, bst, 128, 20, numa, numa, 20, 100, 1600000, 40799364, 40776491, 81575855
+2025-01-26, 16:13:52, bst, 128, 20, numa, regular, 20, 0, 1600000, 38571031, 39558558, 78129589
+2025-01-26, 16:14:23, bst, 128, 20, numa, regular, 20, 20, 1600000, 38186460, 37625703, 75812163
+2025-01-26, 16:14:54, bst, 128, 20, numa, regular, 20, 100, 1600000, 23683177, 23351619, 47034796
+2025-01-26, 16:15:26, bst, 128, 20, regular, numa, 20, 0, 1600000, 39352238, 37692601, 77044839
+2025-01-26, 16:15:58, bst, 128, 20, regular, numa, 20, 20, 1600000, 37913190, 38838009, 76751199
+2025-01-26, 16:16:31, bst, 128, 20, regular, numa, 20, 100, 1600000, 35715331, 38007368, 73722699
+2025-01-26, 16:17:03, bst, 128, 20, regular, regular, 20, 0, 1600000, 31365272, 30940135, 62305407
+2025-01-26, 16:17:35, bst, 128, 20, regular, regular, 20, 20, 1600000, 34954548, 35810902, 70765450
+2025-01-26, 16:18:06, bst, 128, 20, regular, regular, 20, 100, 1600000, 25920882, 23721596, 49642478
+2025-01-26, 16:18:37, bst, 128, 20, split, numa, 20, 0, 1600000, 37197434, 38960652, 76158086
+2025-01-26, 16:19:10, bst, 128, 20, split, numa, 20, 20, 1600000, 38105845, 38992577, 77098422
+2025-01-26, 16:19:43, bst, 128, 20, split, numa, 20, 100, 1600000, 37374219, 38318150, 75692369
+2025-01-26, 16:20:15, bst, 128, 20, split, regular, 20, 0, 1600000, 34575755, 34316061, 68891816
+2025-01-26, 16:20:47, bst, 128, 20, split, regular, 20, 20, 1600000, 32741182, 32431929, 65173111
+2025-01-26, 16:21:18, bst, 128, 20, split, regular, 20, 100, 1600000, 31672728, 30402228, 62074956
+2025-01-26, 16:21:50, bst, 128, 40, numa, numa, 20, 0, 1600000, 42216823, 42198473, 84415296
+2025-01-26, 16:22:22, bst, 128, 40, numa, numa, 20, 20, 1600000, 42590788, 42619496, 85210284
+2025-01-26, 16:22:55, bst, 128, 40, numa, numa, 20, 100, 1600000, 36933054, 38051454, 74984508
+2025-01-26, 16:23:28, bst, 128, 40, numa, regular, 20, 0, 1600000, 32405650, 32946044, 65351694
+2025-01-26, 16:23:59, bst, 128, 40, numa, regular, 20, 20, 1600000, 32724903, 33011125, 65736028
+2025-01-26, 16:24:31, bst, 128, 40, numa, regular, 20, 100, 1600000, 27913912, 27861930, 55775842
+2025-01-26, 16:25:02, bst, 128, 40, regular, numa, 20, 0, 1600000, 39156483, 39100415, 78256898
+2025-01-26, 16:25:35, bst, 128, 40, regular, numa, 20, 20, 1600000, 39124605, 38890886, 78015491
+2025-01-26, 16:26:08, bst, 128, 40, regular, numa, 20, 100, 1600000, 36389244, 36437660, 72826904
+2025-01-26, 16:26:40, bst, 128, 40, regular, regular, 20, 0, 1600000, 36298911, 34656034, 70954945
+2025-01-26, 16:27:12, bst, 128, 40, regular, regular, 20, 20, 1600000, 32765143, 32098755, 64863898
+2025-01-26, 16:27:43, bst, 128, 40, regular, regular, 20, 100, 1600000, 29488871, 28510187, 57999058
+2025-01-26, 16:28:15, bst, 128, 40, split, numa, 20, 0, 1600000, 38064402, 36527509, 74591911
+2025-01-26, 16:28:47, bst, 128, 40, split, numa, 20, 20, 1600000, 36024157, 38337890, 74362047
+2025-01-26, 16:29:20, bst, 128, 40, split, numa, 20, 100, 1600000, 37342380, 36061932, 73404312
+2025-01-26, 16:29:53, bst, 128, 40, split, regular, 20, 0, 1600000, 29456769, 28922538, 58379307
+2025-01-26, 16:30:24, bst, 128, 40, split, regular, 20, 20, 1600000, 29777500, 29149814, 58927314
+2025-01-26, 16:30:56, bst, 128, 40, split, regular, 20, 100, 1600000, 28988480, 28270671, 57259151
+2025-01-26, 16:31:27, bst, 1024, 20, numa, numa, 20, 0, 1600000, 50460439, 50537739, 100998178
+2025-01-26, 16:33:26, bst, 1024, 20, numa, numa, 20, 20, 1600000, 50315585, 50345085, 100660670
+2025-01-26, 16:35:25, bst, 1024, 20, numa, numa, 20, 100, 1600000, 45026441, 45110752, 90137193
+2025-01-26, 16:37:23, bst, 1024, 20, numa, regular, 20, 0, 1600000, 15733277, 16429611, 32162888
+2025-01-26, 16:39:13, bst, 1024, 20, numa, regular, 20, 20, 1600000, 15793513, 15762015, 31555528
+2025-01-26, 16:41:02, bst, 1024, 20, numa, regular, 20, 100, 1600000, 13761308, 14032349, 27793657
+2025-01-26, 16:42:52, bst, 1024, 20, regular, numa, 20, 0, 1600000, 42139445, 42578495, 84717940
+2025-01-26, 16:44:51, bst, 1024, 20, regular, numa, 20, 20, 1600000, 46896109, 43516220, 90412329
+2025-01-26, 16:46:51, bst, 1024, 20, regular, numa, 20, 100, 1600000, 43397471, 43148885, 86546356
+2025-01-26, 16:48:50, bst, 1024, 20, regular, regular, 20, 0, 1600000, 17225839, 14141279, 31367118
+2025-01-26, 16:50:39, bst, 1024, 20, regular, regular, 20, 20, 1600000, 26187656, 23154764, 49342420
+2025-01-26, 16:52:29, bst, 1024, 20, regular, regular, 20, 100, 1600000, 16917616, 14560525, 31478141
+2025-01-26, 16:54:18, bst, 1024, 20, split, numa, 20, 0, 1600000, 43645610, 43517139, 87162749
+2025-01-26, 16:56:18, bst, 1024, 20, split, numa, 20, 20, 1600000, 44035128, 43991309, 88026437
+2025-01-26, 16:58:17, bst, 1024, 20, split, numa, 20, 100, 1600000, 43069889, 43024785, 86094674
+2025-01-26, 17:00:16, bst, 1024, 20, split, regular, 20, 0, 1600000, 27911446, 29019280, 56930726
+2025-01-26, 17:02:05, bst, 1024, 20, split, regular, 20, 20, 1600000, 21572640, 20883428, 42456068
+2025-01-26, 17:03:54, bst, 1024, 20, split, regular, 20, 100, 1600000, 26048618, 26026969, 52075587
+2025-01-26, 17:05:43, bst, 1024, 40, numa, numa, 20, 0, 1600000, 50932342, 50521423, 101453765
+2025-01-26, 17:07:43, bst, 1024, 40, numa, numa, 20, 20, 1600000, 50320883, 50237668, 100558551
+2025-01-26, 17:09:43, bst, 1024, 40, numa, numa, 20, 100, 1600000, 43214266, 43697603, 86911869
+2025-01-26, 17:11:43, bst, 1024, 40, numa, regular, 20, 0, 1600000, 21976369, 22700797, 44677166
+2025-01-26, 17:13:32, bst, 1024, 40, numa, regular, 20, 20, 1600000, 22665914, 23465187, 46131101
+2025-01-26, 17:15:21, bst, 1024, 40, numa, regular, 20, 100, 1600000, 18524519, 18241155, 36765674
+2025-01-26, 17:17:11, bst, 1024, 40, regular, numa, 20, 0, 1600000, 44855901, 46670266, 91526167
+2025-01-26, 17:19:10, bst, 1024, 40, regular, numa, 20, 20, 1600000, 42536448, 46231422, 88767870
+2025-01-26, 17:21:10, bst, 1024, 40, regular, numa, 20, 100, 1600000, 46233525, 48498962, 94732487
+2025-01-26, 17:23:08, bst, 1024, 40, regular, regular, 20, 0, 1600000, 34927660, 32566902, 67494562
+2025-01-26, 17:24:57, bst, 1024, 40, regular, regular, 20, 20, 1600000, 33559470, 31255721, 64815191
+2025-01-26, 17:26:46, bst, 1024, 40, regular, regular, 20, 100, 1600000, 23029775, 21415029, 44444804
+2025-01-26, 17:28:36, bst, 1024, 40, split, numa, 20, 0, 1600000, 44936849, 44504115, 89440964
+2025-01-26, 17:30:35, bst, 1024, 40, split, numa, 20, 20, 1600000, 44538368, 47277511, 91815879
+2025-01-26, 17:32:35, bst, 1024, 40, split, numa, 20, 100, 1600000, 44292642, 42316217, 86608859
+2025-01-26, 17:34:34, bst, 1024, 40, split, regular, 20, 0, 1600000, 28570496, 27182140, 55752636
+2025-01-26, 17:36:23, bst, 1024, 40, split, regular, 20, 20, 1600000, 27427143, 27453892, 54881035
+2025-01-26, 17:38:12, bst, 1024, 40, split, regular, 20, 100, 1600000, 26893714, 26117600, 53011314
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-27, 16:12:18, bst, 128, 20, numa, numa, 20, 0, 1600000, crossover value from here is 100
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-27, 16:46:26, bst, 128, 20, numa, numa, 20, 0, 1600000, 44552609, 46443189, 90995798
+2025-01-27, 16:47:17, bst, 128, 20, numa, numa, 20, 20, 1600000, 44358964, 44953130, 89312094
+2025-01-27, 16:48:07, bst, 128, 20, numa, numa, 20, 100, 1600000, 41527806, 40255951, 81783757
+2025-01-27, 16:48:57, bst, 128, 20, numa, regular, 20, 0, 1600000, 39516808, 46059401, 85576209
+2025-01-27, 16:49:44, bst, 128, 20, numa, regular, 20, 20, 1600000, 38855483, 45545928, 84401411
+2025-01-27, 16:50:31, bst, 128, 20, numa, regular, 20, 100, 1600000, 26943936, 33034446, 59978382
+2025-01-27, 16:51:18, bst, 128, 20, regular, numa, 20, 0, 1600000, 36878223, 38893194, 75771417
+2025-01-27, 16:52:08, bst, 128, 20, regular, numa, 20, 20, 1600000, 39995447, 38612080, 78607527
+2025-01-27, 16:52:59, bst, 128, 20, regular, numa, 20, 100, 1600000, 37614690, 38838381, 76453071
+2025-01-27, 16:53:48, bst, 128, 20, regular, regular, 20, 0, 1600000, 31268018, 29611215, 60879233
+2025-01-27, 16:54:35, bst, 128, 20, regular, regular, 20, 20, 1600000, 35854455, 40189357, 76043812
+2025-01-27, 16:55:23, bst, 128, 20, regular, regular, 20, 100, 1600000, 38315388, 35073698, 73389086
+2025-01-27, 16:56:10, bst, 128, 20, split, numa, 20, 0, 1600000, 38198252, 38210160, 76408412
+2025-01-27, 16:57:00, bst, 128, 20, split, numa, 20, 20, 1600000, 38719845, 39179567, 77899412
+2025-01-27, 16:57:50, bst, 128, 20, split, numa, 20, 100, 1600000, 38698775, 37290842, 75989617
+2025-01-27, 16:58:41, bst, 128, 20, split, regular, 20, 0, 1600000, 38217660, 38750020, 76967680
+2025-01-27, 16:59:28, bst, 128, 20, split, regular, 20, 20, 1600000, 35916323, 35250503, 71166826
+2025-01-27, 17:00:15, bst, 128, 20, split, regular, 20, 100, 1600000, 32701336, 33982663, 66683999
+2025-01-27, 17:01:02, bst, 128, 40, numa, numa, 20, 0, 1600000, 41862303, 41841889, 83704192
+2025-01-27, 17:01:52, bst, 128, 40, numa, numa, 20, 20, 1600000, 41283060, 40292037, 81575097
+2025-01-27, 17:02:43, bst, 128, 40, numa, numa, 20, 100, 1600000, 37698392, 36209571, 73907963
+2025-01-27, 17:03:33, bst, 128, 40, numa, regular, 20, 0, 1600000, 35768327, 38906067, 74674394
+2025-01-27, 17:04:20, bst, 128, 40, numa, regular, 20, 20, 1600000, 36634758, 39652104, 76286862
+2025-01-27, 17:05:07, bst, 128, 40, numa, regular, 20, 100, 1600000, 31407774, 33027766, 64435540
+2025-01-27, 17:05:55, bst, 128, 40, regular, numa, 20, 0, 1600000, 36676097, 37807343, 74483440
+2025-01-27, 17:06:45, bst, 128, 40, regular, numa, 20, 20, 1600000, 33617535, 34683939, 68301474
+2025-01-27, 17:07:35, bst, 128, 40, regular, numa, 20, 100, 1600000, 38686748, 35562631, 74249379
+2025-01-27, 17:08:25, bst, 128, 40, regular, regular, 20, 0, 1600000, 37180453, 35104428, 72284881
+2025-01-27, 17:09:12, bst, 128, 40, regular, regular, 20, 20, 1600000, 32816224, 36080979, 68897203
+2025-01-27, 17:10:00, bst, 128, 40, regular, regular, 20, 100, 1600000, 32675674, 33600924, 66276598
+2025-01-27, 17:10:47, bst, 128, 40, split, numa, 20, 0, 1600000, 38455347, 36673085, 75128432
+2025-01-27, 17:11:38, bst, 128, 40, split, numa, 20, 20, 1600000, 37065392, 37158754, 74224146
+2025-01-27, 17:12:28, bst, 128, 40, split, numa, 20, 100, 1600000, 35485585, 34400410, 69885995
+2025-01-27, 17:13:18, bst, 128, 40, split, regular, 20, 0, 1600000, 38214097, 38810866, 77024963
+2025-01-27, 17:14:05, bst, 128, 40, split, regular, 20, 20, 1600000, 38091311, 34073031, 72164342
+2025-01-27, 17:14:52, bst, 128, 40, split, regular, 20, 100, 1600000, 37103927, 37150068, 74253995
+2025-01-27, 17:15:40, bst, 1024, 20, numa, numa, 20, 0, 1600000, 49958507, 51150768, 101109275
+2025-01-27, 17:19:59, bst, 1024, 20, numa, numa, 20, 20, 1600000, 49820608, 50991397, 100812005
+2025-01-27, 17:24:18, bst, 1024, 20, numa, numa, 20, 100, 1600000, 44836399, 46500293, 91336692
+2025-01-27, 17:28:38, bst, 1024, 20, numa, regular, 20, 0, 1600000, 42859236, 50300680, 93159916
+2025-01-27, 17:32:30, bst, 1024, 20, numa, regular, 20, 20, 1600000, 42819344, 50097693, 92917037
+2025-01-27, 17:36:23, bst, 1024, 20, numa, regular, 20, 100, 1600000, 34919493, 42725433, 77644926
+2025-01-27, 17:40:17, bst, 1024, 20, regular, numa, 20, 0, 1600000, 46878176, 41247311, 88125487
+2025-01-27, 17:44:37, bst, 1024, 20, regular, numa, 20, 20, 1600000, 44366627, 42633154, 86999781
+2025-01-27, 17:48:56, bst, 1024, 20, regular, numa, 20, 100, 1600000, 43150575, 44604495, 87755070
+2025-01-27, 17:53:16, bst, 1024, 20, regular, regular, 20, 0, 1600000, 36399802, 46197192, 82596994
+2025-01-27, 17:57:09, bst, 1024, 20, regular, regular, 20, 20, 1600000, 35169943, 36311973, 71481916
+2025-01-27, 18:01:03, bst, 1024, 20, regular, regular, 20, 100, 1600000, 33642831, 33334547, 66977378
+2025-01-27, 18:04:57, bst, 1024, 20, split, numa, 20, 0, 1600000, 43939630, 44873166, 88812796
+2025-01-27, 18:09:17, bst, 1024, 20, split, numa, 20, 20, 1600000, 44071671, 44793717, 88865388
+2025-01-27, 18:13:37, bst, 1024, 20, split, numa, 20, 100, 1600000, 43804139, 45361440, 89165579
+2025-01-27, 18:17:56, bst, 1024, 20, split, regular, 20, 0, 1600000, 42741247, 43039661, 85780908
+2025-01-27, 18:21:49, bst, 1024, 20, split, regular, 20, 20, 1600000, 41925821, 42239774, 84165595
+2025-01-27, 18:25:43, bst, 1024, 20, split, regular, 20, 100, 1600000, 42282312, 42407717, 84690029
+2025-01-27, 18:29:42, bst, 1024, 40, numa, numa, 20, 0, 1600000, 53295286, 53735197, 107030483
+2025-01-27, 18:34:08, bst, 1024, 40, numa, numa, 20, 20, 1600000, 53778453, 53727988, 107506441
+2025-01-27, 18:38:35, bst, 1024, 40, numa, numa, 20, 100, 1600000, 44237054, 44357383, 88594437
+2025-01-27, 18:42:56, bst, 1024, 40, numa, regular, 20, 0, 1600000, 47426480, 51089240, 98515720
+2025-01-27, 18:46:52, bst, 1024, 40, numa, regular, 20, 20, 1600000, 44673628, 48654077, 93327705
+2025-01-27, 18:50:47, bst, 1024, 40, numa, regular, 20, 100, 1600000, 38556308, 41771555, 80327863
+2025-01-27, 18:54:43, bst, 1024, 40, regular, numa, 20, 0, 1600000, 47692130, 49885166, 97577296
+2025-01-27, 18:59:04, bst, 1024, 40, regular, numa, 20, 20, 1600000, 46345583, 49500938, 95846521
+2025-01-27, 19:03:25, bst, 1024, 40, regular, numa, 20, 100, 1600000, 45862546, 50044165, 95906711
+2025-01-27, 19:07:46, bst, 1024, 40, regular, regular, 20, 0, 1600000, 29212069, 35632227, 64844296
+2025-01-27, 19:11:39, bst, 1024, 40, regular, regular, 20, 20, 1600000, 37322565, 28840446, 66163011
+2025-01-27, 19:15:34, bst, 1024, 40, regular, regular, 20, 100, 1600000, 36381778, 29693690, 66075468
+2025-01-27, 19:19:30, bst, 1024, 40, split, numa, 20, 0, 1600000, 44876539, 46550194, 91426733
+2025-01-27, 19:23:51, bst, 1024, 40, split, numa, 20, 20, 1600000, 46098802, 48461493, 94560295
+2025-01-27, 19:28:11, bst, 1024, 40, split, numa, 20, 100, 1600000, 46269989, 42307527, 88577516
+2025-01-27, 19:32:31, bst, 1024, 40, split, regular, 20, 0, 1600000, 42407398, 42415498, 84822896
+2025-01-27, 19:36:26, bst, 1024, 40, split, regular, 20, 20, 1600000, 40013426, 40339604, 80353030
+2025-01-27, 19:40:19, bst, 1024, 40, split, regular, 20, 100, 1600000, 39988887, 40521766, 80510653
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-28, 00:24:57, bst, 128, 20, numa, numa, 20, 0, 1600000, 45543434, 45360653, 90904087
+
+
+
+
+
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-28, 00:27:14, bst, 128, 20, numa, numa, 20, 0, 1600000, 46099489, 45468058, 9156754769480004, 68846796, 13832680093061668, 92454970, 185516638116784197, 115913198, 232697395
+2025-01-28, 00:29:23, bst, 128, 20, numa, numa, 20, 20, 1600000, 46250785, 45999100, 9224988569985922, 69408701, 13939462393541240, 92926055, 186467296117086142, 116811924, 233898067
+
+
+
+
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-28, 00:34:32, bst, 128, 20, numa, numa, 20, 0, 1600000, 116033235, 114951516, 230984752
+2025-01-28, 00:36:42, bst, 128, 20, numa, numa, 20, 20, 1600000, 115439573, 115299811, 230739384
+2025-01-28, 00:38:51, bst, 128, 20, numa, numa, 20, 100, 1600000, 103197478, 106035391, 209232870
+
+
+
+
+
+
+BST Results
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+BST Results
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-28, 00:57:35, bst, 128, 20, numa, numa, 20, 0, 1600000, 115664164, 116100754, 231764919
+2025-01-28, 00:59:45, bst, 128, 20, numa, numa, 20, 20, 1600000, 115660682, 116484369, 232145052
+2025-01-28, 01:01:55, bst, 128, 20, numa, numa, 20, 100, 1600000, 105625890, 105653601, 211279491
+2025-01-28, 01:04:05, bst, 128, 20, numa, regular, 20, 0, 1600000, 100036893, 102688041, 202724935
+2025-01-28, 01:06:12, bst, 128, 20, numa, regular, 20, 20, 1600000, 92591739, 94074596, 186666336
+
+
+
+
+
+
+
+
+
+
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-28, 01:09:16, bst, 128, 20, numa, numa, 20, 0, 1600000, 45301940, 45117687, 90419627
+
+
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-28, 15:59:51, bst, 128, 20, numa, numa, 20, 0, 1600000, 68382646, 69381984, 137764631
+2025-01-28, 16:00:56, bst, 128, 20, numa, numa, 20, 20, 1600000, 68385202, 69901446, 138286648
+2025-01-28, 16:02:01, bst, 128, 20, numa, numa, 20, 100, 1600000, 62927031, 62214127, 125141159
+2025-01-28, 16:03:06, bst, 128, 20, numa, regular, 20, 0, 1600000, 61096507, 62594783, 123691290
+2025-01-28, 16:04:10, bst, 128, 20, numa, regular, 20, 20, 1600000, 61113663, 62043907, 123157570
+2025-01-28, 16:05:13, bst, 128, 20, numa, regular, 20, 100, 1600000, 37399489, 38754042, 76153532
+2025-01-28, 16:06:17, bst, 128, 20, regular, numa, 20, 0, 1600000, 58282488, 59148309, 117430798
+2025-01-28, 16:07:22, bst, 128, 20, regular, numa, 20, 20, 1600000, 58689341, 60100350, 118789691
+2025-01-28, 16:08:27, bst, 128, 20, regular, numa, 20, 100, 1600000, 57893456, 57422948, 115316405
+2025-01-28, 16:09:32, bst, 128, 20, regular, regular, 20, 0, 1600000, 58799129, 58898838, 117697967
+2025-01-28, 16:10:35, bst, 128, 20, regular, regular, 20, 20, 1600000, 42400803, 41358441, 83759245
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-28, 16:12:41, bst, 128, 20, numa, numa, 20, 0, 1600000, 45085322, 45249123, 90334445
+2025-01-28, 16:13:13, bst, 128, 20, numa, numa, 20, 20, 1600000, 46068611, 46285648, 92354259
+2025-01-28, 16:13:46, bst, 128, 20, numa, numa, 20, 100, 1600000, 40874580, 42844436, 83719016
+2025-01-28, 16:14:19, bst, 128, 20, numa, regular, 20, 0, 1600000, 37371411, 37257925, 74629336
+2025-01-28, 16:14:50, bst, 128, 20, numa, regular, 20, 20, 1600000, 34745906, 34831590, 69577496
+2025-01-28, 16:15:22, bst, 128, 20, numa, regular, 20, 100, 1600000, 22645991, 22988573, 45634564
+2025-01-28, 16:15:54, bst, 128, 20, regular, numa, 20, 0, 1600000, 41261673, 38293176, 79554849
+2025-01-28, 16:16:27, bst, 128, 20, regular, numa, 20, 20, 1600000, 36473300, 39206748, 75680048
+2025-01-28, 16:17:00, bst, 128, 20, regular, numa, 20, 100, 1600000, 38991758, 37886293, 76878051
+2025-01-28, 16:17:32, bst, 128, 20, regular, regular, 20, 0, 1600000, 34659280, 38840463, 73499743
+2025-01-28, 16:18:04, bst, 128, 20, regular, regular, 20, 20, 1600000, 28152027, 26521242, 54673269
+2025-01-28, 16:18:36, bst, 128, 20, regular, regular, 20, 100, 1600000, 26595930, 23214234, 49810164
+2025-01-28, 16:19:07, bst, 128, 20, split, numa, 20, 0, 1600000, 37291155, 39120155, 76411310
+2025-01-28, 16:19:40, bst, 128, 20, split, numa, 20, 20, 1600000, 39357278, 39289879, 78647157
+2025-01-28, 16:20:13, bst, 128, 20, split, numa, 20, 100, 1600000, 38529658, 37540162, 76069820
+2025-01-28, 16:20:45, bst, 128, 20, split, regular, 20, 0, 1600000, 30747469, 30888711, 61636180
+2025-01-28, 16:21:17, bst, 128, 20, split, regular, 20, 20, 1600000, 33813570, 33691027, 67504597
+2025-01-28, 16:21:49, bst, 128, 20, split, regular, 20, 100, 1600000, 29717156, 30109889, 59827045
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-28, 16:22:54, bst, 128, 20, numa, numa, 20, 0, 1600000, 69690204, 68866951, 138557155
+2025-01-28, 16:24:00, bst, 128, 20, numa, numa, 20, 20, 1600000, 68744593, 68832979, 137577573
+2025-01-28, 16:25:05, bst, 128, 20, numa, numa, 20, 100, 1600000, 62514658, 62488910, 125003568
+2025-01-28, 16:26:10, bst, 128, 20, numa, regular, 20, 0, 1600000, 55605892, 54852787, 110458679
+2025-01-28, 16:27:13, bst, 128, 20, numa, regular, 20, 20, 1600000, 56961520, 57804197, 114765717
+2025-01-28, 16:28:17, bst, 128, 20, numa, regular, 20, 100, 1600000, 37713102, 37680552, 75393655
+2025-01-28, 16:29:20, bst, 128, 20, regular, numa, 20, 0, 1600000, 59032365, 58743440, 117775805
+2025-01-28, 16:30:25, bst, 128, 20, regular, numa, 20, 20, 1600000, 58423882, 58478476, 116902358
+2025-01-28, 16:31:30, bst, 128, 20, regular, numa, 20, 100, 1600000, 56762202, 57404902, 114167104
+2025-01-28, 16:32:35, bst, 128, 20, regular, regular, 20, 0, 1600000, 46035358, 47906507, 93941865
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-28, 16:34:37, bst, 128, 20, numa, numa, 20, 0, 1600000, 163207378, 162973619, 326180997
+2025-01-28, 16:37:52, bst, 128, 20, numa, numa, 20, 20, 1600000, 163976508, 163125698, 327102206
+2025-01-28, 16:41:06, bst, 128, 20, numa, numa, 20, 100, 1600000, 147496159, 147015674, 294511833
+2025-01-28, 16:44:21, bst, 128, 20, numa, regular, 20, 0, 1600000, 142181167, 144443496, 286624663
+2025-01-28, 16:47:31, bst, 128, 20, numa, regular, 20, 20, 1600000, 137949549, 140172064, 278121613
+2025-01-28, 16:50:41, bst, 128, 20, numa, regular, 20, 100, 1600000, 97581687, 100349111, 197930798
+2025-01-28, 16:53:51, bst, 128, 20, regular, numa, 20, 0, 1600000, 136372581, 138607118, 274979699
+2025-01-28, 16:57:06, bst, 128, 20, regular, numa, 20, 20, 1600000, 138723930, 136553649, 275277579
+2025-01-28, 17:00:21, bst, 128, 20, regular, numa, 20, 100, 1600000, 131944235, 134178540, 266122775
+2025-01-28, 17:03:36, bst, 128, 20, regular, regular, 20, 0, 1600000, 127494581, 121651942, 249146524
+2025-01-28, 17:06:45, bst, 128, 20, regular, regular, 20, 20, 1600000, 118096790, 117435504, 235532294
+2025-01-28, 17:09:56, bst, 128, 20, regular, regular, 20, 100, 1600000, 102942015, 91304900, 194246915
+2025-01-28, 17:13:06, bst, 128, 20, split, numa, 20, 0, 1600000, 136217870, 139711287, 275929158
+2025-01-28, 17:16:21, bst, 128, 20, split, numa, 20, 20, 1600000, 135338945, 137707958, 273046903
+2025-01-28, 17:19:35, bst, 128, 20, split, numa, 20, 100, 1600000, 136206593, 134795074, 271001668
+2025-01-28, 17:22:50, bst, 128, 20, split, regular, 20, 0, 1600000, 116664498, 117232625, 233897123
+2025-01-28, 17:26:00, bst, 128, 20, split, regular, 20, 20, 1600000, 118113781, 118054223, 236168004
+2025-01-28, 17:29:10, bst, 128, 20, split, regular, 20, 100, 1600000, 109479553, 106695874, 216175427
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-28, 18:26:38, bst, 128, 20, numa, numa, 20, 0, 1600000, 165989293, 163109965, 329099259
+
+
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-28, 18:31:17, bst, 128, 20, numa, numa, 20, 0, 1600000, 162113285, 163432865, 325546150
+2025-01-28, 18:34:31, bst, 128, 20, numa, numa, 20, 20, 1600000, 164377481, 161922520, 326300001
+2025-01-28, 18:37:45, bst, 128, 20, numa, numa, 20, 100, 1600000, 147272293, 148949965, 296222258
+
+
+
+
+
+
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-28, 18:48:39, bst, 128, 20, numa, numa, 20, 0, 1600000, 68910649, 68432470, 137343119
+2025-01-28, 18:49:45, bst, 128, 20, numa, numa, 20, 20, 1600000, 68479751, 68358529, 136838280
+2025-01-28, 18:50:50, bst, 128, 20, numa, numa, 20, 100, 1600000, 61210082, 61693067, 122903150
+2025-01-28, 18:51:55, bst, 128, 20, numa, regular, 20, 0, 1600000, 56606251, 56525267, 113131518
+
+
+
+
+
+
+
+
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-28, 19:04:28, bst, 128, 20, numa, numa, 20, 0, 1600000, 69069490, 68418062, 137487553
+2025-01-28, 19:05:33, bst, 128, 20, numa, numa, 20, 20, 1600000, 68785429, 68612075, 137397504
+2025-01-28, 19:06:38, bst, 128, 20, numa, numa, 20, 100, 1600000, 61833121, 62635834, 124468956
+2025-01-28, 19:07:43, bst, 128, 20, numa, regular, 20, 0, 1600000, 56142280, 56692892, 112835172
+2025-01-28, 19:08:47, bst, 128, 20, numa, regular, 20, 20, 1600000, 57154068, 57871306, 115025374
+2025-01-28, 19:09:50, bst, 128, 20, numa, regular, 20, 100, 1600000, 36513912, 36062889, 72576801
+2025-01-28, 19:10:54, bst, 128, 20, regular, numa, 20, 0, 1600000, 54863350, 59773097, 114636447
+2025-01-28, 19:11:59, bst, 128, 20, regular, numa, 20, 20, 1600000, 58214123, 56796104, 115010227
+2025-01-28, 19:13:04, bst, 128, 20, regular, numa, 20, 100, 1600000, 56960403, 57184272, 114144675
+2025-01-28, 19:14:09, bst, 128, 20, regular, regular, 20, 0, 1600000, 50549703, 51355434, 101905137
+2025-01-28, 19:15:13, bst, 128, 20, regular, regular, 20, 20, 1600000, 50941721, 48249779, 99191500
+2025-01-28, 19:16:16, bst, 128, 20, regular, regular, 20, 100, 1600000, 41543185, 37176857, 78720042
+2025-01-28, 19:17:20, bst, 128, 20, split, numa, 20, 0, 1600000, 57806246, 58257108, 116063354
+2025-01-28, 19:18:25, bst, 128, 20, split, numa, 20, 20, 1600000, 58360673, 59130903, 117491576
+2025-01-28, 19:19:30, bst, 128, 20, split, numa, 20, 100, 1600000, 57214122, 56999277, 114213399
+2025-01-28, 19:20:35, bst, 128, 20, split, regular, 20, 0, 1600000, 51503888, 50093875, 101597763
+2025-01-28, 19:21:39, bst, 128, 20, split, regular, 20, 20, 1600000, 50314261, 50429408, 100743669
+2025-01-28, 19:22:43, bst, 128, 20, split, regular, 20, 100, 1600000, 46626525, 46889756, 93516282
+2025-01-28, 19:23:46, bst, 128, 40, numa, numa, 20, 0, 1600000, 63503554, 63695274, 127198828
+2025-01-28, 19:24:52, bst, 128, 40, numa, numa, 20, 20, 1600000, 61521769, 62691042, 124212811
+2025-01-28, 19:25:57, bst, 128, 40, numa, numa, 20, 100, 1600000, 54581101, 56430657, 111011758
+2025-01-28, 19:27:03, bst, 128, 40, numa, regular, 20, 0, 1600000, 49149329, 50526893, 99676222
+2025-01-28, 19:28:07, bst, 128, 40, numa, regular, 20, 20, 1600000, 49522106, 49600915, 99123022
+2025-01-28, 19:29:11, bst, 128, 40, numa, regular, 20, 100, 1600000, 43411288, 43732226, 87143514
+2025-01-28, 19:30:14, bst, 128, 40, regular, numa, 20, 0, 1600000, 55912330, 55728449, 111640779
+2025-01-28, 19:31:20, bst, 128, 40, regular, numa, 20, 20, 1600000, 56487599, 56681971, 113169570
+2025-01-28, 19:32:25, bst, 128, 40, regular, numa, 20, 100, 1600000, 55091428, 55035527, 110126955
+2025-01-28, 19:33:30, bst, 128, 40, regular, regular, 20, 0, 1600000, 49413766, 49330660, 98744426
+2025-01-28, 19:34:34, bst, 128, 40, regular, regular, 20, 20, 1600000, 51928101, 51334795, 103262896
+2025-01-28, 19:35:37, bst, 128, 40, regular, regular, 20, 100, 1600000, 43876392, 42387255, 86263648
+2025-01-28, 19:36:41, bst, 128, 40, split, numa, 20, 0, 1600000, 56658587, 57360846, 114019433
+2025-01-28, 19:37:47, bst, 128, 40, split, numa, 20, 20, 1600000, 53103669, 53234087, 106337756
+2025-01-28, 19:38:52, bst, 128, 40, split, numa, 20, 100, 1600000, 54964517, 56050464, 111014981
+2025-01-28, 19:39:57, bst, 128, 40, split, regular, 20, 0, 1600000, 44258923, 44582266, 88841189
+2025-01-28, 19:41:01, bst, 128, 40, split, regular, 20, 20, 1600000, 44201324, 44485694, 88687018
+2025-01-28, 19:42:05, bst, 128, 40, split, regular, 20, 100, 1600000, 42996122, 42780474, 85776596
+2025-01-28, 19:43:09, bst, 1024, 20, numa, numa, 20, 0, 1600000, 75610597, 75716656, 151327253
+2025-01-28, 19:47:06, bst, 1024, 20, numa, numa, 20, 20, 1600000, 75399989, 75504826, 150904815
+2025-01-28, 19:51:03, bst, 1024, 20, numa, numa, 20, 100, 1600000, 67862690, 67984161, 135846852
+2025-01-28, 19:55:17, bst, 1024, 20, numa, regular, 20, 0, 1600000, 25256300, 25471078, 50727378
+2025-01-28, 19:59:02, bst, 1024, 20, numa, regular, 20, 20, 1600000, 25613060, 27075383, 52688443
+2025-01-28, 20:02:47, bst, 1024, 20, numa, regular, 20, 100, 1600000, 24922400, 24213686, 49136086
+2025-01-28, 20:06:33, bst, 1024, 20, regular, numa, 20, 0, 1600000, 66609726, 63644973, 130254699
+2025-01-28, 20:10:33, bst, 1024, 20, regular, numa, 20, 20, 1600000, 72039416, 59648360, 131687776
+2025-01-28, 20:14:31, bst, 1024, 20, regular, numa, 20, 100, 1600000, 65722721, 64750266, 130472987
+2025-01-28, 20:18:28, bst, 1024, 20, regular, regular, 20, 0, 1600000, 40877256, 32721786, 73599042
+2025-01-28, 20:22:13, bst, 1024, 20, regular, regular, 20, 20, 1600000, 36998703, 27067113, 64065816
+2025-01-28, 20:26:00, bst, 1024, 20, regular, regular, 20, 100, 1600000, 33788425, 27861658, 61650083
+2025-01-28, 20:29:46, bst, 1024, 20, split, numa, 20, 0, 1600000, 65856513, 65938527, 131795041
+2025-01-28, 20:33:45, bst, 1024, 20, split, numa, 20, 20, 1600000, 66042325, 65583600, 131625926
+2025-01-28, 20:37:43, bst, 1024, 20, split, numa, 20, 100, 1600000, 64491209, 64544703, 129035912
+2025-01-28, 20:41:41, bst, 1024, 20, split, regular, 20, 0, 1600000, 33932204, 33290335, 67222539
+2025-01-28, 20:45:25, bst, 1024, 20, split, regular, 20, 20, 1600000, 39166980, 39739575, 78906555
+2025-01-28, 20:49:10, bst, 1024, 20, split, regular, 20, 100, 1600000, 37769335, 38893016, 76662351
+2025-01-28, 20:52:56, bst, 1024, 40, numa, numa, 20, 0, 1600000, 76033292, 76134778, 152168070
+2025-01-28, 20:56:53, bst, 1024, 40, numa, numa, 20, 20, 1600000, 75425836, 75670304, 151096140
+2025-01-28, 21:00:52, bst, 1024, 40, numa, numa, 20, 100, 1600000, 65029956, 65731393, 130761349
+2025-01-28, 21:04:49, bst, 1024, 40, numa, regular, 20, 0, 1600000, 32002592, 31113012, 63115604
+2025-01-28, 21:08:35, bst, 1024, 40, numa, regular, 20, 20, 1600000, 29862273, 29929512, 59791786
+2025-01-28, 21:12:21, bst, 1024, 40, numa, regular, 20, 100, 1600000, 30470124, 30609460, 61079584
+2025-01-28, 21:16:07, bst, 1024, 40, regular, numa, 20, 0, 1600000, 68409278, 71221125, 139630403
+2025-01-28, 21:20:03, bst, 1024, 40, regular, numa, 20, 20, 1600000, 71154657, 70309996, 141464653
+2025-01-28, 21:24:01, bst, 1024, 40, regular, numa, 20, 100, 1600000, 65921904, 72167780, 138089684
+2025-01-28, 21:27:59, bst, 1024, 40, regular, regular, 20, 0, 1600000, 28373706, 27692311, 56066017
+2025-01-28, 21:31:44, bst, 1024, 40, regular, regular, 20, 20, 1600000, 44940910, 44440766, 89381677
+2025-01-28, 21:35:29, bst, 1024, 40, regular, regular, 20, 100, 1600000, 44620529, 41356745, 85977274
+2025-01-28, 21:39:14, bst, 1024, 40, split, numa, 20, 0, 1600000, 69006643, 70120138, 139126781
+2025-01-28, 21:43:14, bst, 1024, 40, split, numa, 20, 20, 1600000, 65615473, 70949656, 136565129
+2025-01-28, 21:47:12, bst, 1024, 40, split, numa, 20, 100, 1600000, 67427650, 65887542, 133315193
+2025-01-28, 21:51:10, bst, 1024, 40, split, regular, 20, 0, 1600000, 42828588, 44154475, 86983063
+2025-01-28, 21:54:55, bst, 1024, 40, split, regular, 20, 20, 1600000, 36850683, 35451950, 72302633
+2025-01-28, 21:58:40, bst, 1024, 40, split, regular, 20, 100, 1600000, 38828222, 38676242, 77504464
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BST Results
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-31, 02:44:38, bst, 128, 20, numa, numa, 20, 0, 1600000, 62888354, 64227972, 127116326
+
+
+
+
+
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-31, 02:47:53, bst, 128, 20, numa, numa, 20, 0, 1600000, 41775108, 42680716, 84455824
+2025-01-31, 02:49:09, bst, 128, 20, numa, numa, 20, 20, 1600000, 41738662, 42629974, 84368636
+2025-01-31, 02:50:25, bst, 128, 20, numa, numa, 20, 100, 1600000, 37685007, 38905169, 76590176
+2025-01-31, 02:51:41, bst, 128, 20, numa, regular, 20, 0, 1600000, 26399162, 39709699, 66108861
+2025-01-31, 02:52:45, bst, 128, 20, numa, regular, 20, 20, 1600000, 26877738, 40858862, 67736600
+2025-01-31, 02:53:50, bst, 128, 20, numa, regular, 20, 100, 1600000, 15739366, 28652276, 44391642
+2025-01-31, 02:54:58, bst, 128, 20, regular, numa, 20, 0, 1600000, 36792637, 35656376, 72449013
+2025-01-31, 02:56:14, bst, 128, 20, regular, numa, 20, 20, 1600000, 36191733, 36117191, 72308924
+2025-01-31, 02:57:30, bst, 128, 20, regular, numa, 20, 100, 1600000, 32997377, 35965763, 68963140
+2025-01-31, 02:58:46, bst, 128, 20, regular, regular, 20, 0, 1600000, 24471637, 26593050, 51064687
+2025-01-31, 02:59:51, bst, 128, 20, regular, regular, 20, 20, 1600000, 24615975, 24207436, 48823411
+2025-01-31, 03:00:57, bst, 128, 20, regular, regular, 20, 100, 1600000, 18494770, 18571889, 37066659
+2025-01-31, 03:02:05, bst, 128, 20, split, numa, 20, 0, 1600000, 39069884, 38961489, 78031373
+2025-01-31, 03:03:16, bst, 128, 20, split, numa, 20, 20, 1600000, 35126841, 37913857, 73040698
+2025-01-31, 03:04:32, bst, 128, 20, split, numa, 20, 100, 1600000, 34754792, 36194956, 70949748
+2025-01-31, 03:05:47, bst, 128, 20, split, regular, 20, 0, 1600000, 24613248, 24963018, 49576266
+2025-01-31, 03:06:52, bst, 128, 20, split, regular, 20, 20, 1600000, 18305690, 19149068, 37454758
+2025-01-31, 03:08:00, bst, 128, 20, split, regular, 20, 100, 1600000, 25243356, 25665212, 50908568
+2025-01-31, 03:09:05, bst, 128, 40, numa, numa, 20, 0, 1600000, 37890738, 38228691, 76119429
+2025-01-31, 03:10:21, bst, 128, 40, numa, numa, 20, 20, 1600000, 38582419, 39045042, 77627461
+2025-01-31, 03:11:37, bst, 128, 40, numa, numa, 20, 100, 1600000, 33946044, 32966642, 66912686
+2025-01-31, 03:12:53, bst, 128, 40, numa, regular, 20, 0, 1600000, 23762557, 30303132, 54065689
+2025-01-31, 03:14:01, bst, 128, 40, numa, regular, 20, 20, 1600000, 24669961, 30755151, 55425112
+2025-01-31, 03:15:09, bst, 128, 40, numa, regular, 20, 100, 1600000, 18774582, 28525224, 47299806
+2025-01-31, 03:16:17, bst, 128, 40, regular, numa, 20, 0, 1600000, 36165942, 36832000, 72997942
+2025-01-31, 03:17:33, bst, 128, 40, regular, numa, 20, 20, 1600000, 31987152, 30191627, 62178779
+2025-01-31, 03:18:49, bst, 128, 40, regular, numa, 20, 100, 1600000, 32055986, 30523830, 62579816
+2025-01-31, 03:20:04, bst, 128, 40, regular, regular, 20, 0, 1600000, 23093591, 28013107, 51106698
+2025-01-31, 03:21:13, bst, 128, 40, regular, regular, 20, 20, 1600000, 25288310, 27495201, 52783511
+2025-01-31, 03:22:21, bst, 128, 40, regular, regular, 20, 100, 1600000, 24809237, 25480965, 50290202
+2025-01-31, 03:23:29, bst, 128, 40, split, numa, 20, 0, 1600000, 34794547, 35668210, 70462757
+2025-01-31, 03:24:45, bst, 128, 40, split, numa, 20, 20, 1600000, 32411884, 34340979, 66752863
+2025-01-31, 03:26:01, bst, 128, 40, split, numa, 20, 100, 1600000, 33003984, 32034849, 65038833
+2025-01-31, 03:27:16, bst, 128, 40, split, regular, 20, 0, 1600000, 24753697, 25525373, 50279070
+2025-01-31, 03:28:24, bst, 128, 40, split, regular, 20, 20, 1600000, 23344233, 23649675, 46993908
+2025-01-31, 03:29:32, bst, 128, 40, split, regular, 20, 100, 1600000, 23232904, 23586983, 46819887
+2025-01-31, 03:30:40, bst, 1024, 20, numa, numa, 20, 0, 1600000, 44307234, 45846332, 90153566
+2025-01-31, 03:38:29, bst, 1024, 20, numa, numa, 20, 20, 1600000, 44267553, 45687704, 89955257
+2025-01-31, 03:46:07, bst, 1024, 20, numa, numa, 20, 100, 1600000, 39622063, 42174016, 81796079
+2025-01-31, 03:53:56, bst, 1024, 20, numa, regular, 20, 0, 1600000, 10784914, 22128499, 32913413
+2025-01-31, 04:00:35, bst, 1024, 20, numa, regular, 20, 20, 1600000, 11339003, 24256056, 35595059
+2025-01-31, 04:07:15, bst, 1024, 20, numa, regular, 20, 100, 1600000, 9217345, 22408668, 31626013
+2025-01-31, 04:13:55, bst, 1024, 20, regular, numa, 20, 0, 1600000, 39164230, 39667188, 78831418
+2025-01-31, 04:21:43, bst, 1024, 20, regular, numa, 20, 20, 1600000, 42825108, 37120295, 79945403
+2025-01-31, 04:29:34, bst, 1024, 20, regular, numa, 20, 100, 1600000, 39682009, 38494481, 78176490
+2025-01-31, 04:37:22, bst, 1024, 20, regular, regular, 20, 0, 1600000, 15061524, 15633890, 30695414
+2025-01-31, 04:44:01, bst, 1024, 20, regular, regular, 20, 20, 1600000, 15007482, 17035800, 32043282
+2025-01-31, 04:50:41, bst, 1024, 20, regular, regular, 20, 100, 1600000, 14144384, 17918570, 32062954
+2025-01-31, 04:57:21, bst, 1024, 20, split, numa, 20, 0, 1600000, 39897236, 38257167, 78154403
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-31, 05:09:48, bst, 128, 20, numa, numa, 20, 0, 1600000, multi threaded initialization running
+45230993, 44159256, 89390249
+2025-01-31, 05:10:59, bst, 128, 20, numa, numa, 20, 20, 1600000, multi threaded initialization running
+41848365, 42501995, 84350360
+2025-01-31, 05:12:15, bst, 128, 20, numa, numa, 20, 100, 1600000, multi threaded initialization running
+38057323, 38605895, 76663218
+2025-01-31, 05:13:30, bst, 128, 20, numa, regular, 20, 0, 1600000, multi threaded initialization running
+20842518, 33201987, 54044505
+2025-01-31, 05:14:39, bst, 128, 20, numa, regular, 20, 20, 1600000, multi threaded initialization running
+21907502, 35762141, 57669643
+2025-01-31, 05:15:48, bst, 128, 20, numa, regular, 20, 100, 1600000, multi threaded initialization running
+16466836, 30115027, 46581863
+2025-01-31, 05:16:57, bst, 128, 20, regular, numa, 20, 0, 1600000, multi threaded initialization running
+
+
+
+
+
+
+
+
+
+
+
+
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-31, 05:17:33, bst, 128, 20, numa, numa, 20, 0, 1600000, 44938316, 44764198, 89702514
+2025-01-31, 05:18:43, bst, 128, 20, numa, numa, 20, 20, 1600000, 42026961, 42457627, 84484588
+2025-01-31, 05:19:59, bst, 128, 20, numa, numa, 20, 100, 1600000, 37684125, 38554276, 76238401
+2025-01-31, 05:21:15, bst, 128, 20, numa, regular, 20, 0, 1600000, 24381812, 22595990, 46977802
+2025-01-31, 05:22:19, bst, 128, 20, numa, regular, 20, 20, 1600000, 20689284, 32763125, 53452409
+2025-01-31, 05:23:27, bst, 128, 20, numa, regular, 20, 100, 1600000, 18810894, 34421903, 53232797
+2025-01-31, 05:24:35, bst, 128, 20, regular, numa, 20, 0, 1600000, 36239612, 36200423, 72440035
+2025-01-31, 05:25:51, bst, 128, 20, regular, numa, 20, 20, 1600000, 33752904, 36633341, 70386245
+2025-01-31, 05:27:06, bst, 128, 20, regular, numa, 20, 100, 1600000, 33525492, 36838779, 70364271
+2025-01-31, 05:28:22, bst, 128, 20, regular, regular, 20, 0, 1600000, 21991576, 21494013, 43485589
+2025-01-31, 05:29:30, bst, 128, 20, regular, regular, 20, 20, 1600000, 18956488, 19974899, 38931387
+2025-01-31, 05:30:38, bst, 128, 20, regular, regular, 20, 100, 1600000, 18582470, 18621495, 37203965
+2025-01-31, 05:31:46, bst, 128, 20, split, numa, 20, 0, 1600000, 35416099, 36731067, 72147166
+2025-01-31, 05:33:02, bst, 128, 20, split, numa, 20, 20, 1600000, 35247640, 37123236, 72370876
+2025-01-31, 05:34:18, bst, 128, 20, split, numa, 20, 100, 1600000, 34725122, 36193013, 70918135
+2025-01-31, 05:35:33, bst, 128, 20, split, regular, 20, 0, 1600000, 19331546, 20124188, 39455734
+2025-01-31, 05:36:41, bst, 128, 20, split, regular, 20, 20, 1600000, 23304190, 23383885, 46688075
+2025-01-31, 05:37:46, bst, 128, 20, split, regular, 20, 100, 1600000, 19008843, 18909616, 37918459
+2025-01-31, 05:38:54, bst, 128, 40, numa, numa, 20, 0, 1600000, 42477384, 43906475, 86383859
+2025-01-31, 05:40:04, bst, 128, 40, numa, numa, 20, 20, 1600000, 38929729, 39763805, 78693534
+2025-01-31, 05:41:19, bst, 128, 40, numa, numa, 20, 100, 1600000, 35087935, 35832366, 70920301
+2025-01-31, 05:42:36, bst, 128, 40, numa, regular, 20, 0, 1600000, 24374379, 31146139, 55520518
+2025-01-31, 05:43:44, bst, 128, 40, numa, regular, 20, 20, 1600000, 24677812, 30578055, 55255867
+2025-01-31, 05:44:52, bst, 128, 40, numa, regular, 20, 100, 1600000, 19946979, 29165140, 49112119
+2025-01-31, 05:46:00, bst, 128, 40, regular, numa, 20, 0, 1600000, 37189762, 37928259, 75118021
+2025-01-31, 05:47:16, bst, 128, 40, regular, numa, 20, 20, 1600000, 35596349, 35928012, 71524361
+2025-01-31, 05:48:31, bst, 128, 40, regular, numa, 20, 100, 1600000, 35405836, 36187860, 71593696
+2025-01-31, 05:49:47, bst, 128, 40, regular, regular, 20, 0, 1600000, 27409822, 23892843, 51302665
+2025-01-31, 05:50:55, bst, 128, 40, regular, regular, 20, 20, 1600000, 24003424, 25844727, 49848151
+2025-01-31, 05:52:03, bst, 128, 40, regular, regular, 20, 100, 1600000, 24384189, 26884340, 51268529
+2025-01-31, 05:53:11, bst, 128, 40, split, numa, 20, 0, 1600000, 31907021, 32458722, 64365743
+2025-01-31, 05:54:27, bst, 128, 40, split, numa, 20, 20, 1600000, 35810635, 35678956, 71489591
+2025-01-31, 05:55:43, bst, 128, 40, split, numa, 20, 100, 1600000, 34578867, 34055793, 68634660
+2025-01-31, 05:56:54, bst, 128, 40, split, regular, 20, 0, 1600000, 24840085, 25087013, 49927098
+2025-01-31, 05:58:02, bst, 128, 40, split, regular, 20, 20, 1600000, 23511875, 23784677, 47296552
+2025-01-31, 05:59:10, bst, 128, 40, split, regular, 20, 100, 1600000, 23852485, 24434937, 48287422
+2025-01-31, 06:00:19, bst, 1024, 20, numa, numa, 20, 0, 1600000, 44323082, 45651455, 89974537
+2025-01-31, 06:08:08, bst, 1024, 20, numa, numa, 20, 20, 1600000, 44524251, 45759867, 90284118
+2025-01-31, 06:15:59, bst, 1024, 20, numa, numa, 20, 100, 1600000, 39727859, 41804906, 81532765
+2025-01-31, 06:23:48, bst, 1024, 20, numa, regular, 20, 0, 1600000, 11225090, 23376924, 34602014
+2025-01-31, 06:30:27, bst, 1024, 20, numa, regular, 20, 20, 1600000, 11048771, 23310245, 34359016
+2025-01-31, 06:37:07, bst, 1024, 20, numa, regular, 20, 100, 1600000, 8835389, 20814955, 29650344
+2025-01-31, 06:43:47, bst, 1024, 20, regular, numa, 20, 0, 1600000, 37785809, 39095652, 76881461
+2025-01-31, 06:51:37, bst, 1024, 20, regular, numa, 20, 20, 1600000, 39317277, 38587665, 77904942
+2025-01-31, 06:59:27, bst, 1024, 20, regular, numa, 20, 100, 1600000, 37756095, 41686448, 79442543
+2025-01-31, 07:07:16, bst, 1024, 20, regular, regular, 20, 0, 1600000, 14088894, 15163349, 29252243
+2025-01-31, 07:13:54, bst, 1024, 20, regular, regular, 20, 20, 1600000, 15227253, 16021689, 31248942
+2025-01-31, 07:20:34, bst, 1024, 20, regular, regular, 20, 100, 1600000, 20751919, 20223590, 40975509
+2025-01-31, 07:27:14, bst, 1024, 20, split, numa, 20, 0, 1600000, 39576284, 40536164, 80112448
+2025-01-31, 07:35:04, bst, 1024, 20, split, numa, 20, 20, 1600000, 40238923, 37999868, 78238791
+2025-01-31, 07:42:52, bst, 1024, 20, split, numa, 20, 100, 1600000, 42157037, 43371914, 85528951
+2025-01-31, 07:50:01, bst, 1024, 20, split, regular, 20, 0, 1600000, 13380776, 13510206, 26890982
+2025-01-31, 07:56:40, bst, 1024, 20, split, regular, 20, 20, 1600000, 12919216, 13989771, 26908987
+2025-01-31, 08:03:21, bst, 1024, 20, split, regular, 20, 100, 1600000, 12865946, 13128950, 25994896
+2025-01-31, 08:10:01, bst, 1024, 40, numa, numa, 20, 0, 1600000, 46248809, 46201619, 92450428
+2025-01-31, 08:17:51, bst, 1024, 40, numa, numa, 20, 20, 1600000, 51554000, 52848955, 104402955
+2025-01-31, 08:25:01, bst, 1024, 40, numa, numa, 20, 100, 1600000, 39712228, 39842497, 79554725
+2025-01-31, 08:32:50, bst, 1024, 40, numa, regular, 20, 0, 1600000, 13886845, 24645634, 38532479
+2025-01-31, 08:39:29, bst, 1024, 40, numa, regular, 20, 20, 1600000, 18291979, 28708658, 47000637
+2025-01-31, 08:45:48, bst, 1024, 40, numa, regular, 20, 100, 1600000, 11921593, 25906471, 37828064
+2025-01-31, 08:52:27, bst, 1024, 40, regular, numa, 20, 0, 1600000, 40529986, 41564607, 82094593
+2025-01-31, 09:00:18, bst, 1024, 40, regular, numa, 20, 20, 1600000, 43445431, 46963771, 90409202
+2025-01-31, 09:08:08, bst, 1024, 40, regular, numa, 20, 100, 1600000, 42741070, 45639458, 88380528
+2025-01-31, 09:15:57, bst, 1024, 40, regular, regular, 20, 0, 1600000, 22041652, 12986354, 35028006
+2025-01-31, 09:22:36, bst, 1024, 40, regular, regular, 20, 20, 1600000, 22197585, 12751052, 34948637
+2025-01-31, 09:29:16, bst, 1024, 40, regular, regular, 20, 100, 1600000, 22760755, 26961526, 49722281
+2025-01-31, 09:35:36, bst, 1024, 40, split, numa, 20, 0, 1600000, 39808012, 41811364, 81619376
+2025-01-31, 09:43:26, bst, 1024, 40, split, numa, 20, 20, 1600000, 39964586, 41284763, 81249349
+2025-01-31, 09:51:15, bst, 1024, 40, split, numa, 20, 100, 1600000, 42745708, 38970924, 81716632
+2025-01-31, 09:59:04, bst, 1024, 40, split, regular, 20, 0, 1600000, 20039606, 20070027, 40109633
+2025-01-31, 10:05:22, bst, 1024, 40, split, regular, 20, 20, 1600000, 20370386, 20308729, 40679115
+2025-01-31, 10:11:41, bst, 1024, 40, split, regular, 20, 100, 1600000, 16186698, 16829969, 33016667
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-31, 14:49:15, bst, 128, 20, numa, numa, 20, 0, 1600000, 45480337, 45729201, 91209538
+2025-01-31, 14:49:48, bst, 128, 20, numa, numa, 20, 20, 1600000, 44735748, 45392560, 90128308
+2025-01-31, 14:50:20, bst, 128, 20, numa, numa, 20, 100, 1600000, 40960403, 40755093, 81715496
+2025-01-31, 14:50:53, bst, 128, 20, numa, regular, 20, 0, 1600000, 40508989, 41386286, 81895275
+2025-01-31, 14:51:25, bst, 128, 20, numa, regular, 20, 20, 1600000, 35834650, 35523304, 71357954
+2025-01-31, 14:51:57, bst, 128, 20, numa, regular, 20, 100, 1600000, 28367353, 27849115, 56216468
+2025-01-31, 14:52:28, bst, 128, 20, regular, numa, 20, 0, 1600000, 37965352, 38097016, 76062368
+2025-01-31, 14:53:01, bst, 128, 20, regular, numa, 20, 20, 1600000, 38774788, 38990662, 77765450
+2025-01-31, 14:53:34, bst, 128, 20, regular, numa, 20, 100, 1600000, 38515647, 37993587, 76509234
+2025-01-31, 14:54:06, bst, 128, 20, regular, regular, 20, 0, 1600000, 29091350, 29012907, 58104257
+2025-01-31, 14:54:38, bst, 128, 20, regular, regular, 20, 20, 1600000, 39950072, 35756692, 75706764
+2025-01-31, 14:55:10, bst, 128, 20, regular, regular, 20, 100, 1600000, 23869323, 21009550, 44878873
+2025-01-31, 14:55:42, bst, 128, 20, split, numa, 20, 0, 1600000, 37897767, 39214095, 77111862
+2025-01-31, 14:56:14, bst, 128, 20, split, numa, 20, 20, 1600000, 38577505, 38241302, 76818807
+2025-01-31, 14:56:47, bst, 128, 20, split, numa, 20, 100, 1600000, 38116329, 37574453, 75690782
+2025-01-31, 14:57:19, bst, 128, 20, split, regular, 20, 0, 1600000, 29043069, 28473794, 57516863
+2025-01-31, 14:57:51, bst, 128, 20, split, regular, 20, 20, 1600000, 32531008, 33039747, 65570755
+2025-01-31, 14:58:23, bst, 128, 20, split, regular, 20, 100, 1600000, 29862353, 29133938, 58996291
+2025-01-31, 14:58:55, bst, 128, 40, numa, numa, 20, 0, 1600000, 40812769, 41092152, 81904921
+2025-01-31, 14:59:28, bst, 128, 40, numa, numa, 20, 20, 1600000, 40223002, 40496020, 80719022
+2025-01-31, 15:00:00, bst, 128, 40, numa, numa, 20, 100, 1600000, 35182978, 35702675, 70885653
+2025-01-31, 15:00:33, bst, 128, 40, numa, regular, 20, 0, 1600000, 33161438, 33323590, 66485028
+2025-01-31, 15:01:05, bst, 128, 40, numa, regular, 20, 20, 1600000, 32573048, 32918821, 65491869
+2025-01-31, 15:01:37, bst, 128, 40, numa, regular, 20, 100, 1600000, 27743440, 28712017, 56455457
+2025-01-31, 15:02:09, bst, 128, 40, regular, numa, 20, 0, 1600000, 37331893, 37212353, 74544246
+2025-01-31, 15:02:42, bst, 128, 40, regular, numa, 20, 20, 1600000, 38497822, 36899112, 75396934
+2025-01-31, 15:03:14, bst, 128, 40, regular, numa, 20, 100, 1600000, 37958713, 36585553, 74544266
+2025-01-31, 15:03:47, bst, 128, 40, regular, regular, 20, 0, 1600000, 32889194, 30997611, 63886805
+2025-01-31, 15:04:19, bst, 128, 40, regular, regular, 20, 20, 1600000, 30702780, 31493599, 62196379
+2025-01-31, 15:04:51, bst, 128, 40, regular, regular, 20, 100, 1600000, 28453738, 27241977, 55695715
+2025-01-31, 15:05:23, bst, 128, 40, split, numa, 20, 0, 1600000, 37121262, 37407361, 74528623
+2025-01-31, 15:05:55, bst, 128, 40, split, numa, 20, 20, 1600000, 37740103, 38441069, 76181172
+2025-01-31, 15:06:28, bst, 128, 40, split, numa, 20, 100, 1600000, 35116277, 35978313, 71094590
+2025-01-31, 15:07:01, bst, 128, 40, split, regular, 20, 0, 1600000, 30845065, 29935973, 60781038
+2025-01-31, 15:07:33, bst, 128, 40, split, regular, 20, 20, 1600000, 30303398, 29162327, 59465725
+2025-01-31, 15:08:05, bst, 128, 40, split, regular, 20, 100, 1600000, 29230487, 28574844, 57805331
+2025-01-31, 15:08:37, bst, 1024, 20, numa, numa, 20, 0, 1600000, 50196118, 50136750, 100332868
+2025-01-31, 15:10:36, bst, 1024, 20, numa, numa, 20, 20, 1600000, 49938711, 50045670, 99984381
+2025-01-31, 15:12:35, bst, 1024, 20, numa, numa, 20, 100, 1600000, 44912719, 45174454, 90087173
+2025-01-31, 15:14:35, bst, 1024, 20, numa, regular, 20, 0, 1600000, 16784795, 16653825, 33438620
+2025-01-31, 15:16:27, bst, 1024, 20, numa, regular, 20, 20, 1600000, 16802841, 17160099, 33962940
+2025-01-31, 15:18:20, bst, 1024, 20, numa, regular, 20, 100, 1600000, 15244972, 15375191, 30620163
+2025-01-31, 15:20:13, bst, 1024, 20, regular, numa, 20, 0, 1600000, 42563393, 40760558, 83323951
+2025-01-31, 15:22:12, bst, 1024, 20, regular, numa, 20, 20, 1600000, 48086670, 40960189, 89046859
+2025-01-31, 15:24:11, bst, 1024, 20, regular, numa, 20, 100, 1600000, 42040635, 43065401, 85106036
+2025-01-31, 15:26:11, bst, 1024, 20, regular, regular, 20, 0, 1600000, 26271904, 19912258, 46184162
+2025-01-31, 15:28:03, bst, 1024, 20, regular, regular, 20, 20, 1600000, 18884147, 14565489, 33449636
+2025-01-31, 15:29:56, bst, 1024, 20, regular, regular, 20, 100, 1600000, 20703575, 17322357, 38025932
+2025-01-31, 15:31:49, bst, 1024, 20, split, numa, 20, 0, 1600000, 43947380, 43930356, 87877736
+2025-01-31, 15:33:49, bst, 1024, 20, split, numa, 20, 20, 1600000, 43823453, 44013462, 87836915
+2025-01-31, 15:35:48, bst, 1024, 20, split, numa, 20, 100, 1600000, 43023206, 42800973, 85824179
+2025-01-31, 15:37:47, bst, 1024, 20, split, regular, 20, 0, 1600000, 26912380, 27050089, 53962469
+2025-01-31, 15:39:40, bst, 1024, 20, split, regular, 20, 20, 1600000, 19533306, 19807437, 39340743
+2025-01-31, 15:41:32, bst, 1024, 20, split, regular, 20, 100, 1600000, 24746333, 25151008, 49897341
+2025-01-31, 15:43:25, bst, 1024, 40, numa, numa, 20, 0, 1600000, 50146475, 49856278, 100002753
+2025-01-31, 15:45:25, bst, 1024, 40, numa, numa, 20, 20, 1600000, 50667144, 50758738, 101425882
+2025-01-31, 15:47:24, bst, 1024, 40, numa, numa, 20, 100, 1600000, 43064458, 43463971, 86528429
+2025-01-31, 15:49:24, bst, 1024, 40, numa, regular, 20, 0, 1600000, 24745032, 24884685, 49629717
+2025-01-31, 15:51:17, bst, 1024, 40, numa, regular, 20, 20, 1600000, 23620217, 24177876, 47798093
+2025-01-31, 15:53:09, bst, 1024, 40, numa, regular, 20, 100, 1600000, 17771729, 19308499, 37080228
+2025-01-31, 15:55:02, bst, 1024, 40, regular, numa, 20, 0, 1600000, 43336265, 51404618, 94740883
+2025-01-31, 15:57:02, bst, 1024, 40, regular, numa, 20, 20, 1600000, 47366523, 51025339, 98391862
+2025-01-31, 15:59:01, bst, 1024, 40, regular, numa, 20, 100, 1600000, 43324913, 46654469, 89979382
+2025-01-31, 16:01:01, bst, 1024, 40, regular, regular, 20, 0, 1600000, 19117874, 18582182, 37700056
+2025-01-31, 16:02:54, bst, 1024, 40, regular, regular, 20, 20, 1600000, 34934906, 32585076, 67519982
+2025-01-31, 16:04:46, bst, 1024, 40, regular, regular, 20, 100, 1600000, 26080258, 23541899, 49622157
+2025-01-31, 16:06:39, bst, 1024, 40, split, numa, 20, 0, 1600000, 42899895, 43574562, 86474457
+2025-01-31, 16:08:38, bst, 1024, 40, split, numa, 20, 20, 1600000, 49118657, 46275119, 95393776
+2025-01-31, 16:10:38, bst, 1024, 40, split, numa, 20, 100, 1600000, 41178799, 41874786, 83053585
+2025-01-31, 16:12:38, bst, 1024, 40, split, regular, 20, 0, 1600000, 29505231, 28459831, 57965062
+2025-01-31, 16:14:30, bst, 1024, 40, split, regular, 20, 20, 1600000, 25860429, 24957717, 50818146
+2025-01-31, 16:16:23, bst, 1024, 40, split, regular, 20, 100, 1600000, 29934158, 28872621, 58806779
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-31, 21:24:32, bst, 128, 20, numa, numa, 20, 0, 1600000, 46739239, 45536414, 92275653
+2025-01-31, 21:25:05, bst, 128, 20, numa, numa, 20, 20, 1600000, 46024627, 45234125, 91258752
+2025-01-31, 21:25:37, bst, 128, 20, numa, numa, 20, 100, 1600000, 40906717, 43138998, 84045715
+2025-01-31, 21:26:10, bst, 128, 20, numa, regular, 20, 0, 1600000, 41830231, 41491954, 83322185
+2025-01-31, 21:26:41, bst, 128, 20, numa, regular, 20, 20, 1600000, 41536854, 41032421, 82569275
+2025-01-31, 21:27:13, bst, 128, 20, numa, regular, 20, 100, 1600000, 23247192, 23253584, 46500776
+2025-01-31, 21:27:45, bst, 128, 20, regular, numa, 20, 0, 1600000, 37386034, 38722911, 76108945
+2025-01-31, 21:28:18, bst, 128, 20, regular, numa, 20, 20, 1600000, 38784497, 36377576, 75162073
+2025-01-31, 21:28:50, bst, 128, 20, regular, numa, 20, 100, 1600000, 37708636, 36761482, 74470118
+2025-01-31, 21:29:23, bst, 128, 20, regular, regular, 20, 0, 1600000, 31118023, 32306714, 63424737
+2025-01-31, 21:29:54, bst, 128, 20, regular, regular, 20, 20, 1600000, 29815125, 27310588, 57125713
+2025-01-31, 21:30:26, bst, 128, 20, regular, regular, 20, 100, 1600000, 23054045, 21704911, 44758956
+2025-01-31, 21:30:58, bst, 128, 20, split, numa, 20, 0, 1600000, 37670468, 38684186, 76354654
+2025-01-31, 21:31:31, bst, 128, 20, split, numa, 20, 20, 1600000, 38759542, 38899294, 77658836
+2025-01-31, 21:32:03, bst, 128, 20, split, numa, 20, 100, 1600000, 37060943, 38621643, 75682586
+2025-01-31, 21:32:36, bst, 128, 20, split, regular, 20, 0, 1600000, 30526613, 29738391, 60265004
+2025-01-31, 21:33:08, bst, 128, 20, split, regular, 20, 20, 1600000, 31135330, 30991805, 62127135
+2025-01-31, 21:33:39, bst, 128, 20, split, regular, 20, 100, 1600000, 30177555, 30070178, 60247733
+2025-01-31, 21:34:11, bst, 128, 40, numa, numa, 20, 0, 1600000, 42817629, 42769517, 85587146
+2025-01-31, 21:34:44, bst, 128, 40, numa, numa, 20, 20, 1600000, 41999430, 40989828, 82989258
+2025-01-31, 21:35:17, bst, 128, 40, numa, numa, 20, 100, 1600000, 37516207, 37898790, 75414997
+2025-01-31, 21:35:50, bst, 128, 40, numa, regular, 20, 0, 1600000, 31957257, 32445754, 64403011
+2025-01-31, 21:36:22, bst, 128, 40, numa, regular, 20, 20, 1600000, 32695817, 32933201, 65629018
+2025-01-31, 21:36:54, bst, 128, 40, numa, regular, 20, 100, 1600000, 27896267, 28908205, 56804472
+2025-01-31, 21:37:26, bst, 128, 40, regular, numa, 20, 0, 1600000, 36812484, 37541300, 74353784
+2025-01-31, 21:37:58, bst, 128, 40, regular, numa, 20, 20, 1600000, 36514325, 36984085, 73498410
+2025-01-31, 21:38:31, bst, 128, 40, regular, numa, 20, 100, 1600000, 37580762, 36213950, 73794712
+2025-01-31, 21:39:03, bst, 128, 40, regular, regular, 20, 0, 1600000, 33810463, 32595287, 66405750
+2025-01-31, 21:39:35, bst, 128, 40, regular, regular, 20, 20, 1600000, 31806423, 32632252, 64438675
+2025-01-31, 21:40:07, bst, 128, 40, regular, regular, 20, 100, 1600000, 29742269, 27618688, 57360957
+2025-01-31, 21:40:39, bst, 128, 40, split, numa, 20, 0, 1600000, 37821344, 35289357, 73110701
+2025-01-31, 21:41:12, bst, 128, 40, split, numa, 20, 20, 1600000, 34722413, 35792724, 70515137
+2025-01-31, 21:41:45, bst, 128, 40, split, numa, 20, 100, 1600000, 35195153, 35864682, 71059835
+2025-01-31, 21:42:17, bst, 128, 40, split, regular, 20, 0, 1600000, 30455206, 30438416, 60893622
+2025-01-31, 21:42:49, bst, 128, 40, split, regular, 20, 20, 1600000, 30811705, 30094223, 60905928
+2025-01-31, 21:43:21, bst, 128, 40, split, regular, 20, 100, 1600000, 29600807, 28310010, 57910817
+2025-01-31, 21:43:53, bst, 1024, 20, numa, numa, 20, 0, 1600000, 50365706, 50098785, 100464491
+2025-01-31, 21:45:53, bst, 1024, 20, numa, numa, 20, 20, 1600000, 50244944, 50165202, 100410146
+2025-01-31, 21:47:52, bst, 1024, 20, numa, numa, 20, 100, 1600000, 45116499, 45235997, 90352496
+2025-01-31, 21:49:51, bst, 1024, 20, numa, regular, 20, 0, 1600000, 14997544, 14906417, 29903961
+2025-01-31, 21:51:44, bst, 1024, 20, numa, regular, 20, 20, 1600000, 17081484, 16605395, 33686879
+2025-01-31, 21:53:37, bst, 1024, 20, numa, regular, 20, 100, 1600000, 14920874, 15521647, 30442521
+2025-01-31, 21:55:30, bst, 1024, 20, regular, numa, 20, 0, 1600000, 46324029, 41341119, 87665148
+2025-01-31, 21:57:29, bst, 1024, 20, regular, numa, 20, 20, 1600000, 46563374, 41314087, 87877461
+2025-01-31, 21:59:29, bst, 1024, 20, regular, numa, 20, 100, 1600000, 43889920, 43709899, 87599819
+2025-01-31, 22:01:28, bst, 1024, 20, regular, regular, 20, 0, 1600000, 26583462, 19977464, 46560926
+2025-01-31, 22:03:20, bst, 1024, 20, regular, regular, 20, 20, 1600000, 25321972, 19803313, 45125285
+2025-01-31, 22:05:14, bst, 1024, 20, regular, regular, 20, 100, 1600000, 17461475, 14340327, 31801802
+2025-01-31, 22:07:07, bst, 1024, 20, split, numa, 20, 0, 1600000, 43716264, 43524389, 87240653
+2025-01-31, 22:09:06, bst, 1024, 20, split, numa, 20, 20, 1600000, 43981685, 43723794, 87705479
+2025-01-31, 22:11:05, bst, 1024, 20, split, numa, 20, 100, 1600000, 42929140, 43047008, 85976148
+2025-01-31, 22:13:05, bst, 1024, 20, split, regular, 20, 0, 1600000, 21475606, 20843316, 42318922
+2025-01-31, 22:14:57, bst, 1024, 20, split, regular, 20, 20, 1600000, 19973472, 19320974, 39294446
+2025-01-31, 22:16:50, bst, 1024, 20, split, regular, 20, 100, 1600000, 24728174, 24752400, 49480574
+2025-01-31, 22:18:43, bst, 1024, 40, numa, numa, 20, 0, 1600000, 50385673, 50531665, 100917338
+2025-01-31, 22:20:40, bst, 1024, 40, numa, numa, 20, 20, 1600000, 50763507, 50365107, 101128614
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-01-31, 22:24:59, bst, 128, 20, numa, numa, 20, 0, 1600000, 47911924, 45686173, 93598097
+2025-01-31, 22:25:32, bst, 128, 20, numa, numa, 20, 20, 1600000, 46047643, 45536636, 91584279
+2025-01-31, 22:26:04, bst, 128, 20, numa, numa, 20, 100, 1600000, 41370446, 41167598, 82538044
+2025-01-31, 22:26:36, bst, 128, 20, numa, regular, 20, 0, 1600000, 46937519, 46613525, 93551044
+2025-01-31, 22:27:08, bst, 128, 20, numa, regular, 20, 20, 1600000, 46968782, 46749416, 93718198
+2025-01-31, 22:27:40, bst, 128, 20, numa, regular, 20, 100, 1600000, 31404858, 31112025, 62516883
+2025-01-31, 22:28:12, bst, 128, 20, regular, numa, 20, 0, 1600000, 38883636, 38977321, 77860957
+2025-01-31, 22:28:44, bst, 128, 20, regular, numa, 20, 20, 1600000, 38565668, 38510628, 77076296
+2025-01-31, 22:29:17, bst, 128, 20, regular, numa, 20, 100, 1600000, 38234778, 38265184, 76499962
+2025-01-31, 22:29:49, bst, 128, 20, regular, regular, 20, 0, 1600000, 25611633, 27558362, 53169995
+2025-01-31, 22:30:21, bst, 128, 20, regular, regular, 20, 20, 1600000, 34683967, 36490873, 71174840
+2025-01-31, 22:30:53, bst, 128, 20, regular, regular, 20, 100, 1600000, 22302531, 24489291, 46791822
+2025-01-31, 22:31:25, bst, 128, 20, split, numa, 20, 0, 1600000, 39056388, 38625154, 77681542
+2025-01-31, 22:31:57, bst, 128, 20, split, numa, 20, 20, 1600000, 39485846, 38999219, 78485065
+2025-01-31, 22:32:30, bst, 128, 20, split, numa, 20, 100, 1600000, 38427766, 37567849, 75995615
+2025-01-31, 22:33:02, bst, 128, 20, split, regular, 20, 0, 1600000, 31216307, 32112299, 63328606
+2025-01-31, 22:33:34, bst, 128, 20, split, regular, 20, 20, 1600000, 31661000, 31538756, 63199756
+2025-01-31, 22:34:06, bst, 128, 20, split, regular, 20, 100, 1600000, 32130534, 32216121, 64346655
+2025-01-31, 22:34:38, bst, 128, 40, numa, numa, 20, 0, 1600000, 40250862, 40425126, 80675988
+2025-01-31, 22:35:11, bst, 128, 40, numa, numa, 20, 20, 1600000, 42031051, 42191617, 84222668
+2025-01-31, 22:35:43, bst, 128, 40, numa, numa, 20, 100, 1600000, 36441062, 39051278, 75492340
+2025-01-31, 22:36:16, bst, 128, 40, numa, regular, 20, 0, 1600000, 38190267, 38909904, 77100171
+2025-01-31, 22:36:48, bst, 128, 40, numa, regular, 20, 20, 1600000, 39671203, 40417749, 80088952
+2025-01-31, 22:37:20, bst, 128, 40, numa, regular, 20, 100, 1600000, 30865076, 32203979, 63069055
+2025-01-31, 22:37:52, bst, 128, 40, regular, numa, 20, 0, 1600000, 37507045, 37999704, 75506749
+2025-01-31, 22:38:24, bst, 128, 40, regular, numa, 20, 20, 1600000, 36762287, 37047645, 73809932
+2025-01-31, 22:38:57, bst, 128, 40, regular, numa, 20, 100, 1600000, 36350770, 36436040, 72786810
+2025-01-31, 22:39:29, bst, 128, 40, regular, regular, 20, 0, 1600000, 36758958, 37699520, 74458478
+2025-01-31, 22:40:01, bst, 128, 40, regular, regular, 20, 20, 1600000, 37377316, 37338489, 74715805
+2025-01-31, 22:40:33, bst, 128, 40, regular, regular, 20, 100, 1600000, 28012519, 28246489, 56259008
+2025-01-31, 22:41:05, bst, 128, 40, split, numa, 20, 0, 1600000, 38362601, 37442482, 75805083
+2025-01-31, 22:41:38, bst, 128, 40, split, numa, 20, 20, 1600000, 37181015, 37398981, 74579996
+2025-01-31, 22:42:10, bst, 128, 40, split, numa, 20, 100, 1600000, 36109397, 35310357, 71419754
+2025-01-31, 22:42:43, bst, 128, 40, split, regular, 20, 0, 1600000, 29719722, 30617801, 60337523
+2025-01-31, 22:43:15, bst, 128, 40, split, regular, 20, 20, 1600000, 29695732, 30880661, 60576393
+2025-01-31, 22:43:47, bst, 128, 40, split, regular, 20, 100, 1600000, 28607555, 29617713, 58225268
+2025-01-31, 22:44:19, bst, 1024, 20, numa, numa, 20, 0, 1600000, 51046778, 50700842, 101747620
+2025-01-31, 22:46:17, bst, 1024, 20, numa, numa, 20, 20, 1600000, 51135046, 50639154, 101774200
+2025-01-31, 22:48:16, bst, 1024, 20, numa, numa, 20, 100, 1600000, 46023475, 45638070, 91661545
+2025-01-31, 22:50:15, bst, 1024, 20, numa, regular, 20, 0, 1600000, 48768914, 48156966, 96925880
+2025-01-31, 22:52:07, bst, 1024, 20, numa, regular, 20, 20, 1600000, 47167089, 47587433, 94754522
+2025-01-31, 22:54:00, bst, 1024, 20, numa, regular, 20, 100, 1600000, 24721420, 24585408, 49306828
+2025-01-31, 22:55:52, bst, 1024, 20, regular, numa, 20, 0, 1600000, 49962930, 41626990, 91589920
+2025-01-31, 22:57:51, bst, 1024, 20, regular, numa, 20, 20, 1600000, 47560262, 42458179, 90018441
+2025-01-31, 22:59:50, bst, 1024, 20, regular, numa, 20, 100, 1600000, 40164952, 45598537, 85763489
+2025-01-31, 23:01:49, bst, 1024, 20, regular, regular, 20, 0, 1600000, 17488860, 20488610, 37977470
+2025-01-31, 23:03:41, bst, 1024, 20, regular, regular, 20, 20, 1600000, 27642533, 34228788, 61871321
+2025-01-31, 23:05:34, bst, 1024, 20, regular, regular, 20, 100, 1600000, 16142414, 20801417, 36943831
+2025-01-31, 23:07:27, bst, 1024, 20, split, numa, 20, 0, 1600000, 42436210, 44862057, 87298267
+2025-01-31, 23:09:26, bst, 1024, 20, split, numa, 20, 20, 1600000, 43726097, 44210089, 87936186
+2025-01-31, 23:11:24, bst, 1024, 20, split, numa, 20, 100, 1600000, 43632578, 43107670, 86740248
+2025-01-31, 23:13:23, bst, 1024, 20, split, regular, 20, 0, 1600000, 29157432, 30530800, 59688232
+2025-01-31, 23:15:16, bst, 1024, 20, split, regular, 20, 20, 1600000, 22420948, 22121590, 44542538
+2025-01-31, 23:17:09, bst, 1024, 20, split, regular, 20, 100, 1600000, 27344827, 27092182, 54437009
+2025-01-31, 23:19:02, bst, 1024, 40, numa, numa, 20, 0, 1600000, 51308889, 50640488, 101949377
+2025-01-31, 23:21:01, bst, 1024, 40, numa, numa, 20, 20, 1600000, 51647093, 50956616, 102603709
+2025-01-31, 23:23:00, bst, 1024, 40, numa, numa, 20, 100, 1600000, 43420173, 43745278, 87165451
+2025-01-31, 23:24:58, bst, 1024, 40, numa, regular, 20, 0, 1600000, 44471982, 45753424, 90225406
+2025-01-31, 23:26:51, bst, 1024, 40, numa, regular, 20, 20, 1600000, 46059282, 45805135, 91864417
+2025-01-31, 23:28:44, bst, 1024, 40, numa, regular, 20, 100, 1600000, 30874484, 30679006, 61553490
+2025-01-31, 23:30:36, bst, 1024, 40, regular, numa, 20, 0, 1600000, 51628971, 52184405, 103813376
+2025-01-31, 23:32:36, bst, 1024, 40, regular, numa, 20, 20, 1600000, 49125687, 50701132, 99826819
+2025-01-31, 23:34:34, bst, 1024, 40, regular, numa, 20, 100, 1600000, 48690724, 47277601, 95968325
+2025-01-31, 23:36:33, bst, 1024, 40, regular, regular, 20, 0, 1600000, 35866864, 36353934, 72220798
+2025-01-31, 23:38:25, bst, 1024, 40, regular, regular, 20, 20, 1600000, 33787114, 35395223, 69182337
+2025-01-31, 23:40:18, bst, 1024, 40, regular, regular, 20, 100, 1600000, 25598145, 29383315, 54981460
+2025-01-31, 23:42:11, bst, 1024, 40, split, numa, 20, 0, 1600000, 44087463, 45427409, 89514872
+2025-01-31, 23:44:10, bst, 1024, 40, split, numa, 20, 20, 1600000, 47894416, 50047437, 97941853
+2025-01-31, 23:46:09, bst, 1024, 40, split, numa, 20, 100, 1600000, 48473207, 45422164, 93895371
+2025-01-31, 23:48:08, bst, 1024, 40, split, regular, 20, 0, 1600000, 27698485, 27339441, 55037926
+2025-01-31, 23:50:01, bst, 1024, 40, split, regular, 20, 20, 1600000, 24824353, 24399361, 49223714
+2025-01-31, 23:51:54, bst, 1024, 40, split, regular, 20, 100, 1600000, 27063953, 27346358, 54410311
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BST Results
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps
+2025-02-10, 15:30:49, bst, 128, 20, numa, numa, 20, 0, 1600000, 46203104, 45342577, 91545681
+
+

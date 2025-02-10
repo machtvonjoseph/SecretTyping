@@ -34,7 +34,7 @@ void warmUpPool();
 void numa_array_init(std::string DS_config, int size, bool prefill, prefill_percentage &percentages);
 void numa_Stack_init(std::string DS_config, int num_DS, bool prefill, prefill_percentage &percentages);
 void numa_Queue_init(std::string DS_config, int num_DS, bool prefill, prefill_percentage &percentages);
-void numa_BST_init(std::string DS_config, int num_DS, int keyspace, int node);
+void numa_BST_init(std::string DS_config, int num_DS, int keyspace, int node, int crossover);
 void numa_LL_init(std::string DS_config, int num_DS, bool prefill, prefill_percentage &percentages);
 void sync_init(int num_threads);
 
@@ -48,6 +48,11 @@ void sync_init(int num_threads);
 
 void ArrayTest(int t_id, int duration, int node, int64_t num_DS, int num_threads, int crossover);
 
+
+void numa_BST_single_init(std::string DS_config, int num_DS, int keyspace, int node, int crossover);
+
+void main_BST_test(int duration,  int64_t num_DS, int num_threads, int crossover, int keyspace);
+
 void StackTest(int t_id, int duration, int node, int64_t num_DS, int num_threads, int crossover);
 
 void QueueTest(int t_id, int duration, int node, int64_t num_DS, int num_threads, int crossover);
@@ -58,4 +63,4 @@ void LinkedListTest(int t_id, int duration, int node, int64_t num_DS, int num_th
 
 void global_cleanup();
 
-#endif //_TESTSUITE_HPP_
+#endif 

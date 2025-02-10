@@ -79,15 +79,12 @@ void global_init(int num_threads){
 	pthread_barrier_init(&init_bar, NULL, 2);
 	ops0 = 0;
 	ops1 = 0;
-	
-	
+
 	printLK = new std::mutex();
 	globalLK = new std::mutex();
 	Array_Lk0 = new mutex();
 	Array_Lk1 = new mutex();
 }
-
-
 
 void singleThreadedStackInit(int num_DS, bool isNuma){
 	Stacks0.resize(num_DS);
@@ -106,7 +103,6 @@ void singleThreadedStackInit(int num_DS, bool isNuma){
 		}
 	}
 }
-
 
 
 void numa_array_init(std::string DS_config, int size, bool prefill, prefill_percentage &percentages){
@@ -323,67 +319,164 @@ void numa_LL_init(std::string DS_config, int num_DS, bool prefill, prefill_perce
 }
 
 
-void numa_BST_init(std::string DS_config, int num_DS, int keyspace, int node){
-
-	pthread_barrier_wait(&init_bar);
-	
+void numa_BST_single_init(std::string DS_config, int num_DS, int keyspace, int node, int crossover){
 	BSTs0.resize(num_DS);
+	BSTs1.resize(num_DS);
+	BST_lk0.resize(num_DS);
+	BST_lk1.resize(num_DS);
+
+	std::mt19937 gen(123);
+	std::uniform_int_distribution<> xDist(1, 100);
+	std::uniform_int_distribution<> dist(0, keyspace/2);
+	for(int i = 0; i < num_DS; i++)
+	{
+		int x = xDist(gen);
+		
+		if(DS_config=="numa"){
+			BSTs0[i] = reinterpret_cast<BinarySearchTree*>(new numa<BinarySearchTree,0>());
+			BSTs1[i] = reinterpret_cast<BinarySearchTree*>(new numa<BinarySearchTree,1>());
+		}
+		else{
+			BSTs0[i] = new BinarySearchTree();
+			BSTs1[i] = new BinarySearchTree();
+		}
+	}
+
+	
+	for(int i = 0; i < num_DS; i++)
+	{
+		BST_lk0[i] = new mutex();
+		BST_lk1[i] = new mutex();
+	}	
+
+	
+	for(int i = 0; i < num_DS/2 ; i++)
+	{
+		for(int j=0; j < keyspace/2; j++)
+		{
+			BSTs0[i]->insert(dist(gen));
+			BSTs1[i]->insert(dist(gen));
+		}
+	}	
+
+}
+
+void numa_BST_init(std::string DS_config, int num_DS, int keyspace, int node, int crossover){
+	pthread_barrier_wait(&init_bar);
+	crossover = -1;
+	//std::cout<<"crossover value from here is "<<crossover<<std::endl;
+	if(node==0 ){
+	
+		BSTs0.resize(num_DS);
+		BSTs1.resize(num_DS);
+		BST_lk0.resize(num_DS);
+		BST_lk1.resize(num_DS);
+	}
+	pthread_barrier_wait(&init_bar);
+	std::mt19937 gen(123);
+	std::uniform_int_distribution<> xDist(1, 100);
+	std::uniform_int_distribution<> dist(0, keyspace/2);
 	
 	if(node == 0){
 		for(int i = 0; i < num_DS; i++)
 		{
-			if(DS_config=="numa"){
-				BSTs0[i] =reinterpret_cast<BinarySearchTree*>(new numa<BinarySearchTree,0>());
-			}
-			else{
-				BSTs0[i] = new BinarySearchTree();
+			int x = xDist(gen);
+			if(x <= crossover){
+				if(DS_config=="numa"){
+					BSTs1[i] = reinterpret_cast<BinarySearchTree*>(new numa<BinarySearchTree,1>());
+				}
+				else{
+					BSTs1[i] = new BinarySearchTree();
+				}
+			}else{
+				if(DS_config=="numa"){
+					BSTs0[i] =reinterpret_cast<BinarySearchTree*>(new numa<BinarySearchTree,0>());
+				}
+				else{
+					BSTs0[i] = new BinarySearchTree();
+				}
 			}
 		}
 
-		BST_lk0.resize(num_DS);
+		
 		for(int i = 0; i < num_DS; i++)
 		{
-			BST_lk0[i] = new mutex();
+			int x = xDist(gen);
+			if(x<=crossover){
+				BST_lk1[i] = new mutex();
+			}else{
+				BST_lk0[i] = new mutex();
+			}
 		}
 
 		for(int i = 0; i < num_DS/2 ; i++)
 		{	
-			for(int j=0; j < keyspace/2; j++)
-			{
-				BSTs0[i]->insert(j);
+			int x = xDist(gen);
+			if(x <= crossover){
+				for(int j=0; j < keyspace/2; j++)
+				{
+					BSTs1[i]->insert(dist(gen));
+				}
+			}else{
+				for(int j=0; j < keyspace/2; j++)
+				{
+					BSTs0[i]->insert(dist(gen));
+				}
 			}
 		}
 	}
+
 	if(node == 1){
-		BSTs1.resize(num_DS);
+		
 		for(int i = 0; i < num_DS; i++)
 		{
-			if(DS_config=="numa"){
-				BSTs1[i] = reinterpret_cast<BinarySearchTree*>(new numa<BinarySearchTree,1>());
-			}
-			else{
-				BSTs1[i] = new BinarySearchTree();
+			int x = xDist(gen);
+			if(x <= crossover){
+				if(DS_config=="numa"){
+					BSTs0[i] = reinterpret_cast<BinarySearchTree*>(new numa<BinarySearchTree,0>());
+				}
+				else{
+					BSTs0[i] = new BinarySearchTree();
+				}
+			}else{
+				if(DS_config=="numa"){
+					BSTs1[i] = reinterpret_cast<BinarySearchTree*>(new numa<BinarySearchTree,1>());
+				}
+				else{
+					BSTs1[i] = new BinarySearchTree();
+				}
 			}
 		}
 
-		BST_lk1.resize(num_DS);
 		for(int i = 0; i < num_DS; i++)
-		{
-			BST_lk1[i] = new mutex();
+		{	
+			int x = xDist(gen);
+			if(x<=crossover){
+				BST_lk0[i] = new mutex();
+			}else{
+				BST_lk1[i] = new mutex();
+			}
 		}	
 		
 		for(int i = 0; i < num_DS/2 ; i++)
 		{
-			for(int j=0; j < keyspace/2; j++)
-			{
-				BSTs1[i]->insert(j);
+			int x = xDist(gen);
+			if(x <= crossover){
+				for(int j=0; j < keyspace/2; j++)
+				{
+					BSTs0[i]->insert(dist(gen));
+				}
+			}else{
+				for(int j=0; j < keyspace/2; j++)
+				{
+					BSTs1[i]->insert(dist(gen));
+				}
 			}
 
 		}
 	}
 
 	pthread_barrier_wait(&init_bar);
-		// std::cout<<"Prefilled " <<num_DS/int(percentages.write) <<" bsts with " << dist3(gen) << " nodes each"<<std::endl;	
 
 }
 
@@ -749,6 +842,7 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 	#endif
 
 	pthread_barrier_wait(&bar);
+	//std::cout<<"crossover value from test is "<<crossover<<std::endl;
 	std::mt19937 gen(123);
 	std::uniform_int_distribution<> dist(0, BSTs0.size()-1);
 	std::uniform_int_distribution<> opDist(1, 100);
@@ -771,7 +865,7 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 			
 			}
 			else {
-				if(x < crossover){
+				if(x <= crossover){
 					BST_lk1[ds]->lock();
 					BSTs1[ds]->insert(key);
 					BST_lk1[ds]->unlock();
@@ -791,7 +885,7 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 	
 			}
 			else {
-				if(x < crossover){
+				if(x <= crossover){
 					BST_lk0[ds]->lock();
 					BSTs0[ds]->insert(key);
 					BST_lk0[ds]->unlock();
@@ -818,40 +912,55 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 
 	pthread_barrier_wait(&bar);
 
+
+	if(node == 0){
+		// std::cout<<"about to clean up"<<std::endl;
+		// //clean up initialize data structures again
+		// for(int i = 0; i < BSTs0.size(); i++)
+		// {
+		// 	if(BSTs0[i] != nullptr)
+		// 	{
+		// 		delete BSTs0[i];
+		// 		BSTs0[i] = nullptr;
+		// 	}
+		// 	delete BSTs0[i];
+		// }
+		// BSTs0.clear();
+		// for(int i = 0; i < BST_lk0.size(); i++)
+		// {
+		// 	if(BST_lk0[i] != nullptr)
+		// 	{
+		// 		delete BST_lk0[i];
+		// 		BST_lk0[i] = nullptr;
+		// 	}
+		// }
+		// BST_lk0.clear();
+
+		// for(int i = 0; i < BSTs1.size(); i++)
+		// {
+		// 	if(BSTs1[i] != nullptr)
+		// 	{
+		// 		delete BSTs1[i];
+		// 		BSTs1[i] = nullptr;
+		// 	}
+		// }
+		// BSTs1.clear();
+		// for(int i = 0; i < BST_lk1.size(); i++)
+		// {
+		// 	if(BST_lk1[i] != nullptr)
+		// 	{
+		// 		delete BST_lk1[i];
+		// 		BST_lk1[i] = nullptr;
+		// 	}
+		// }
+		// BST_lk1.clear();
+		// std::cout<<"just cleaned up"<<std::endl;
+	}
+	pthread_barrier_wait(&bar);
+	
 }
 
 
 
 void global_cleanup(){
-	// for(int i = 0; i < Stacks0.size(); i++)
-	// {
-	// 	delete Stacks0[i];
-	// }
-	// for(int i = 0; i < Stacks1.size(); i++)
-	// {
-	// 	delete Stacks1[i];
-	// }
-
-	// for(int i = 0; i < Queues0.size(); i++)
-	// {
-	// 	delete Queues0[i];
-	// }
-	// for(int i = 0; i < Queues1.size(); i++)
-	// {
-	// 	delete Queues1[i];
-	// }
-
-	// for(int i = 0; i < BSTs0.size(); i++)
-	// {
-	// 	delete BSTs0[i];
-	// }
-	// for(int i = 0; i < BSTs1.size(); i++)
-	// {
-	// 	delete BSTs1[i];
-	// }
-
-	// for(int i = 0; i < LLs0.size(); i++)
-	// {
-	// 	delete LLs0[i];
-	// }
 }
