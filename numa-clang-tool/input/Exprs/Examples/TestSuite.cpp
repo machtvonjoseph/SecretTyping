@@ -55,6 +55,8 @@ std::vector<BinarySearchTree*> BSTs0;
 std::vector<BinarySearchTree*> BSTs1;
 std::vector<mutex*> BST_lk0;
 std::vector<mutex*> BST_lk1;
+std::vector<mutex*> BST_reader_lk0;
+std::vector<mutex*> BST_reader_lk1;
 
 std::vector<LinkedList*> LLs0;
 std::vector<LinkedList*> LLs1;
@@ -371,6 +373,8 @@ void numa_BST_init(std::string DS_config, int num_DS, int keyspace, int node, in
 		BSTs1.resize(num_DS);
 		BST_lk0.resize(num_DS);
 		BST_lk1.resize(num_DS);
+		BST_reader_lk0.resize(num_DS);
+		BST_reader_lk1.resize(num_DS);
 	}
 	pthread_barrier_wait(&init_bar);
 	std::mt19937 gen(123);
@@ -404,8 +408,10 @@ void numa_BST_init(std::string DS_config, int num_DS, int keyspace, int node, in
 			int x = xDist(gen);
 			if(x<=crossover){
 				BST_lk1[i] = new mutex();
+				BST_reader_lk1[i] = new mutex();
 			}else{
 				BST_lk0[i] = new mutex();
+				BST_reader_lk0[i] = new mutex();
 			}
 		}
 
@@ -859,21 +865,36 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 		if(node==0){
 			if(opDist(gen)<=90)
 			{
-				BST_lk0[ds]->lock();
+				BST_reader_lk0[ds]->lock();
 				BSTs0[ds]->lookup(key);
-				BST_lk0[ds]->unlock();
+				BST_reader_lk0[ds]->unlock();
 			
 			}
 			else {
-				if(x <= crossover){
+				if(ds%2==0){
+					BST_lk0[ds]->lock();
 					BST_lk1[ds]->lock();
+					BSTs0[ds]->remove(key);
 					BSTs1[ds]->insert(key);
+					BST_lk0[ds]->unlock();
 					BST_lk1[ds]->unlock();
 				}else{
 					BST_lk0[ds]->lock();
+					BST_lk1[ds]->lock();
+					BSTs1[ds]->remove(key);
 					BSTs0[ds]->insert(key);
 					BST_lk0[ds]->unlock();
+					BST_lk1[ds]->unlock();
 				}
+				// if(x <= crossover){
+				// 	BST_lk1[ds]->lock();
+				// 	BSTs1[ds]->insert(key);
+				// 	BST_lk1[ds]->unlock();
+				// }else{
+				// 	BST_lk0[ds]->lock();
+				// 	BSTs0[ds]->insert(key);
+				// 	BST_lk0[ds]->unlock();
+				// }
 			}
 		}
 		else{
@@ -885,15 +906,32 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 	
 			}
 			else {
-				if(x <= crossover){
+				if(ds%2==0){
 					BST_lk0[ds]->lock();
+					BST_lk1[ds]->lock();
+					BSTs1[ds]->remove(key);
 					BSTs0[ds]->insert(key);
 					BST_lk0[ds]->unlock();
+					BST_lk1[ds]->unlock();
+
 				}else{
+					BST_lk0[ds]->lock();
 					BST_lk1[ds]->lock();
+					BSTs0[ds]->remove(key);
 					BSTs1[ds]->insert(key);
+					BST_lk0[ds]->unlock();
 					BST_lk1[ds]->unlock();
 				}
+
+				// if(x <= crossover){
+				// 	BST_lk0[ds]->lock();
+				// 	BSTs0[ds]->insert(key);
+				// 	BST_lk0[ds]->unlock();
+				// }else{
+				// 	BST_lk1[ds]->lock();
+				// 	BSTs1[ds]->insert(key);
+				// 	BST_lk1[ds]->unlock();
+				// }
 			}
 		}
 		ops++;
