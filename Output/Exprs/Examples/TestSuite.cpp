@@ -878,11 +878,25 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 					BSTs1[ds]->insert(key);
 					BST_lk0[ds]->unlock();
 					BST_lk1[ds]->unlock();
-				}else{
+				}else if(ds%2==1){
 					BST_lk0[ds]->lock();
 					BST_lk1[ds]->lock();
 					BSTs1[ds]->remove(key);
 					BSTs0[ds]->insert(key);
+					BST_lk0[ds]->unlock();
+					BST_lk1[ds]->unlock();
+				}else if(ds%2==2){
+					BST_lk0[ds]->lock();
+					BST_lk1[ds]->lock();
+					BSTs0[ds]->remove(key);
+					BSTs0[ds]->insert(key);
+					BST_lk0[ds]->unlock();
+					BST_lk1[ds]->unlock();
+				}else{
+					BST_lk0[ds]->lock();
+					BST_lk1[ds]->lock();
+					BSTs1[ds]->remove(key);
+					BSTs1[ds]->insert(key);
 					BST_lk0[ds]->unlock();
 					BST_lk1[ds]->unlock();
 				}
@@ -906,7 +920,7 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 	
 			}
 			else {
-				if(ds%2==0){
+				if(ds%4==0){
 					BST_lk0[ds]->lock();
 					BST_lk1[ds]->lock();
 					BSTs1[ds]->remove(key);
@@ -914,10 +928,24 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 					BST_lk0[ds]->unlock();
 					BST_lk1[ds]->unlock();
 
-				}else{
+				}else if(ds%4==1){
 					BST_lk0[ds]->lock();
 					BST_lk1[ds]->lock();
 					BSTs0[ds]->remove(key);
+					BSTs1[ds]->insert(key);
+					BST_lk0[ds]->unlock();
+					BST_lk1[ds]->unlock();
+				}else if(ds%4==2){
+					BST_lk0[ds]->lock();
+					BST_lk1[ds]->lock();
+					BSTs0[ds]->remove(key);
+					BSTs0[ds]->insert(key);
+					BST_lk0[ds]->unlock();
+					BST_lk1[ds]->unlock();
+				}else{
+					BST_lk0[ds]->lock();
+					BST_lk1[ds]->lock();
+					BSTs1[ds]->remove(key);
 					BSTs1[ds]->insert(key);
 					BST_lk0[ds]->unlock();
 					BST_lk1[ds]->unlock();
@@ -948,52 +976,6 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 	}
 	globalLK->unlock();
 
-	pthread_barrier_wait(&bar);
-
-
-	if(node == 0){
-		// std::cout<<"about to clean up"<<std::endl;
-		// //clean up initialize data structures again
-		// for(int i = 0; i < BSTs0.size(); i++)
-		// {
-		// 	if(BSTs0[i] != nullptr)
-		// 	{
-		// 		delete BSTs0[i];
-		// 		BSTs0[i] = nullptr;
-		// 	}
-		// 	delete BSTs0[i];
-		// }
-		// BSTs0.clear();
-		// for(int i = 0; i < BST_lk0.size(); i++)
-		// {
-		// 	if(BST_lk0[i] != nullptr)
-		// 	{
-		// 		delete BST_lk0[i];
-		// 		BST_lk0[i] = nullptr;
-		// 	}
-		// }
-		// BST_lk0.clear();
-
-		// for(int i = 0; i < BSTs1.size(); i++)
-		// {
-		// 	if(BSTs1[i] != nullptr)
-		// 	{
-		// 		delete BSTs1[i];
-		// 		BSTs1[i] = nullptr;
-		// 	}
-		// }
-		// BSTs1.clear();
-		// for(int i = 0; i < BST_lk1.size(); i++)
-		// {
-		// 	if(BST_lk1[i] != nullptr)
-		// 	{
-		// 		delete BST_lk1[i];
-		// 		BST_lk1[i] = nullptr;
-		// 	}
-		// }
-		// BST_lk1.clear();
-		// std::cout<<"just cleaned up"<<std::endl;
-	}
 	pthread_barrier_wait(&bar);
 	
 }

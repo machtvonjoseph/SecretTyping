@@ -19,46 +19,39 @@ public:
 
     // Constructor that takes a function and its arguments
     template <typename Func, typename... Args>
-    thread_numa(Func&& func, Args&&... args) {
+    thread_numa(Func&& func, Args&&... args): std::thread(std::forward<Func>(func), std::forward<Args>(args)...) {
         // Pin the current thread to the specified NUMA node
         
 
         // Create a thread with the provided function and arguments
-        thread_ = std::thread(std::forward<Func>(func), std::forward<Args>(args)...);
-        pin_thread_to_node(&thread_, NodeID);
+       // thread_ = std::thread(std::forward<Func>(func), std::forward<Args>(args)...);
+        pin_thread_to_node(this, NodeID);
     }
 
     // Destructor: join the thread if it is joinable
-    ~thread_numa() {
-        if (thread_.joinable()) {
-            thread_.join();
-        }
-    }
+    ~thread_numa() = default;
 
     // Delete copy constructor and copy assignment operator
     thread_numa(const thread_numa&) = delete;
     thread_numa& operator=(const thread_numa&) = delete;
 
     // Move constructor and assignment operator
-    thread_numa(thread_numa&& other) noexcept : thread_(std::move(other.thread_)) {}
+    thread_numa(thread_numa&& other) noexcept :  std::thread(other) {}
     thread_numa& operator=(thread_numa&& other) noexcept {
         if (this != &other) {
-            if (thread_.joinable()) {
-                thread_.join();
-            }
-            thread_ = std::move(other.thread_);
+            std::thread::operator=(std::move(other));  // Call base class move assignment
         }
         return *this;
     }
 
-    void join() {
-        if (thread_.joinable()) {
-            thread_.join();
-        }
-    }
+    // void join() {
+    //     if (this->joinable()) {
+    //         this->join();
+    //     }
+    // }
 
 private:
-    thread_type thread_;
+    //thread_type thread_;
     static inline std::map<int, cpu_set_t*> node_to_cpumask;
 
     static decltype(node_to_cpumask)::iterator convert_bitmask_to_cpuset(int Node_num){

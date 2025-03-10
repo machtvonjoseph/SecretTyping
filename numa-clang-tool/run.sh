@@ -2,7 +2,7 @@
 
 # Check if an argument is provided
 if [ -z "$1" ]; then
-  echo "Usage: $0 <DS|dummy>"
+  echo "Usage: $0 <DS|dummy|STExprs|Exprs>"
   exit 1
 fi
 
@@ -40,8 +40,19 @@ case "$1" in
 
     ./build/bin/clang-tool  --cast output/Exprs/Examples/main.cpp output/Exprs/Examples/TestSuite.cpp -- -I output/Exprs/include/ -I../numaLib/ -I/usr/local/lib/clang/20/include/ -lnuma
     ;;
+
+  STExprs)
+
+    echo "Running STExprs"
+    # Place the actual command for 'command2' here
+    # For example: df -h
+
+    ./build/bin/clang-tool  --numa input/STExprs/Examples/main.cpp input/STExprs/Examples/TestSuite.cpp -- -I input/STExprs/include/ -I../numaLib/ -I/usr/local/lib/clang/20/include/ -lnuma
+
+    ./build/bin/clang-tool  --cast output/STExprs/Examples/main.cpp output/STExprs/Examples/TestSuite.cpp -- -I output/STExprs/include/ -I../numaLib/ -I/usr/local/lib/clang/20/include/ -lnuma
+    ;;
   *)
-    echo "Invalid argument. Usage: $0 <DS|dummy|Exprs>"
+    echo "Invalid argument. Usage: $0 <DS|dummy|Exprs|STExprs>"
     exit 1
     ;;
 esac

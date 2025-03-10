@@ -1,0 +1,29 @@
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover, TotalOps
+2025-03-08, 15:05:47, queue, 128, 1, numa, numa, 20, 0, 226840176
+2025-03-08, 15:06:08, queue, 128, 1, numa, regular, 20, 0, 251607404
+2025-03-08, 15:06:29, queue, 128, 1, regular, numa, 20, 0, 225445998
+2025-03-08, 15:06:50, queue, 128, 1, regular, regular, 20, 0, 260205162
+2025-03-08, 15:07:11, queue, 1024, 1, numa, numa, 20, 0, 197811951
+2025-03-08, 15:07:36, queue, 1024, 1, numa, regular, 20, 0, 229949934
+2025-03-08, 15:08:00, queue, 1024, 1, regular, numa, 20, 0, 199527661
+2025-03-08, 15:08:26, queue, 1024, 1, regular, regular, 20, 0, 236598742
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover, TotalOps
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover, TotalOps
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover, TotalOps
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover, TotalOps

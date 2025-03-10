@@ -878,11 +878,25 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 					BSTs1[ds]->insert(key);
 					BST_lk0[ds]->unlock();
 					BST_lk1[ds]->unlock();
-				}else{
+				}else if(ds%2==1){
 					BST_lk0[ds]->lock();
 					BST_lk1[ds]->lock();
 					BSTs1[ds]->remove(key);
 					BSTs0[ds]->insert(key);
+					BST_lk0[ds]->unlock();
+					BST_lk1[ds]->unlock();
+				}else if(ds%2==2){
+					BST_lk0[ds]->lock();
+					BST_lk1[ds]->lock();
+					BSTs0[ds]->remove(key);
+					BSTs0[ds]->insert(key);
+					BST_lk0[ds]->unlock();
+					BST_lk1[ds]->unlock();
+				}else{
+					BST_lk0[ds]->lock();
+					BST_lk1[ds]->lock();
+					BSTs1[ds]->remove(key);
+					BSTs1[ds]->insert(key);
 					BST_lk0[ds]->unlock();
 					BST_lk1[ds]->unlock();
 				}
@@ -906,7 +920,7 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 	
 			}
 			else {
-				if(ds%2==0){
+				if(ds%4==0){
 					BST_lk0[ds]->lock();
 					BST_lk1[ds]->lock();
 					BSTs1[ds]->remove(key);
@@ -914,10 +928,24 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 					BST_lk0[ds]->unlock();
 					BST_lk1[ds]->unlock();
 
-				}else{
+				}else if(ds%4==1){
 					BST_lk0[ds]->lock();
 					BST_lk1[ds]->lock();
 					BSTs0[ds]->remove(key);
+					BSTs1[ds]->insert(key);
+					BST_lk0[ds]->unlock();
+					BST_lk1[ds]->unlock();
+				}else if(ds%4==2){
+					BST_lk0[ds]->lock();
+					BST_lk1[ds]->lock();
+					BSTs0[ds]->remove(key);
+					BSTs0[ds]->insert(key);
+					BST_lk0[ds]->unlock();
+					BST_lk1[ds]->unlock();
+				}else{
+					BST_lk0[ds]->lock();
+					BST_lk1[ds]->lock();
+					BSTs1[ds]->remove(key);
 					BSTs1[ds]->insert(key);
 					BST_lk0[ds]->unlock();
 					BST_lk1[ds]->unlock();
