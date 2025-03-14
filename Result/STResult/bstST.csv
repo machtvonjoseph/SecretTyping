@@ -1,0 +1,13 @@
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, TotalOps
+2025-03-12, 11:36:21, bst, 128, 1, numa, numa, 20, 0, 12270881
+2025-03-12, 11:36:59, bst, 128, 1, numa, regular, 20, 0, 12258171
+2025-03-12, 11:37:37, bst, 128, 1, regular, numa, 20, 0, 15211477
+2025-03-12, 11:38:15, bst, 128, 1, regular, regular, 20, 0, 15374804
+2025-03-12, 11:38:52, bst, 1024, 1, numa, numa, 20, 0, 9822955
+2025-03-12, 11:41:33, bst, 1024, 1, numa, regular, 20, 0, 9577834
+2025-03-12, 11:44:13, bst, 1024, 1, regular, numa, 20, 0, 13748951
+2025-03-12, 11:46:53, bst, 1024, 1, regular, regular, 20, 0, 13687832
+
+
+
+

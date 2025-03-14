@@ -863,7 +863,7 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 		int ds = dist(gen);
 		int key = keyDist(gen);
 		if(node==0){
-			if(opDist(gen)<=90)
+			if(opDist(gen)<=80)
 			{
 				BST_reader_lk0[ds]->lock();
 				BSTs0[ds]->lookup(key);
@@ -871,33 +871,33 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 			
 			}
 			else {
-				if(ds%2==0){
+				if(ds%4==0){
 					BST_lk0[ds]->lock();
 					BST_lk1[ds]->lock();
 					BSTs0[ds]->remove(key);
 					BSTs1[ds]->insert(key);
 					BST_lk0[ds]->unlock();
 					BST_lk1[ds]->unlock();
-				}else if(ds%2==1){
+				}else if(ds%4==1){
 					BST_lk0[ds]->lock();
 					BST_lk1[ds]->lock();
 					BSTs1[ds]->remove(key);
 					BSTs0[ds]->insert(key);
 					BST_lk0[ds]->unlock();
 					BST_lk1[ds]->unlock();
-				}else if(ds%2==2){
+				}else if(ds%4==2){
 					BST_lk0[ds]->lock();
-					BST_lk1[ds]->lock();
+					// BST_lk1[ds]->lock();
 					BSTs0[ds]->remove(key);
 					BSTs0[ds]->insert(key);
 					BST_lk0[ds]->unlock();
-					BST_lk1[ds]->unlock();
+					// BST_lk1[ds]->unlock();
 				}else{
-					BST_lk0[ds]->lock();
+					// BST_lk0[ds]->lock();
 					BST_lk1[ds]->lock();
 					BSTs1[ds]->remove(key);
 					BSTs1[ds]->insert(key);
-					BST_lk0[ds]->unlock();
+					// BST_lk0[ds]->unlock();
 					BST_lk1[ds]->unlock();
 				}
 				// if(x <= crossover){
@@ -912,7 +912,7 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 			}
 		}
 		else{
-			if(opDist(gen)<=90)
+			if(opDist(gen)<=80)
 			{
 				BST_lk1[ds]->lock();
 				BSTs1[ds]->lookup(key);
@@ -937,17 +937,17 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 					BST_lk1[ds]->unlock();
 				}else if(ds%4==2){
 					BST_lk0[ds]->lock();
-					BST_lk1[ds]->lock();
+					// BST_lk1[ds]->lock();
 					BSTs0[ds]->remove(key);
 					BSTs0[ds]->insert(key);
 					BST_lk0[ds]->unlock();
-					BST_lk1[ds]->unlock();
+					// BST_lk1[ds]->unlock();
 				}else{
-					BST_lk0[ds]->lock();
+					// BST_lk0[ds]->lock();
 					BST_lk1[ds]->lock();
 					BSTs1[ds]->remove(key);
 					BSTs1[ds]->insert(key);
-					BST_lk0[ds]->unlock();
+					// BST_lk0[ds]->unlock();
 					BST_lk1[ds]->unlock();
 				}
 

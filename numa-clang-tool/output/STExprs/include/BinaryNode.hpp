@@ -1,16 +1,4 @@
-#ifdef UMF 
-	                #include "numatype.hpp"
-	                #include <umf/mempolicy.h>
-	                #include <umf/memspace.h>
-                    #include "utils_examples.h"
-                    #include "umf_numa_allocator.hpp"
-                    #include <numa.h>
-                    #include <numaif.h>
-                    #include <stdio.h>
-                    #include <string.h>
-                #endif
-                #include "numatype.hpp"
-                #ifndef _BINARYNODE_HPP_
+#ifndef _BINARYNODE_HPP_
 #define _BINARYNODE_HPP_
 
 

@@ -68,6 +68,7 @@ private:
         for(int i =0 ; i < MAX_CPUS; ++i){
             if(numa_bitmask_isbitset(mask,(unsigned)i)){
                 CPU_SET(i, cpuset);
+             // std::cout<<Node_num<<"cpu"<<i<<std::endl;
             }
         }
         auto it = node_to_cpumask.insert({Node_num, cpuset});
@@ -86,6 +87,7 @@ private:
            it = convert_bitmask_to_cpuset(Node_num);
         }
         pthread_t pid= (pthread_t) tid->native_handle();
+        // printf("it->second %p\n", it->second);
         if(pthread_setaffinity_np(pid, CPU_ALLOC_SIZE(MAX_CPUS), it->second)){
             throw std::runtime_error("could not bind thread");
         }

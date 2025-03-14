@@ -138,7 +138,7 @@ void main_BST_test(int duration, int64_t num_DS, int num_threads, int crossover,
 			}
 			else{
 				
-				numa_thread0[i] = new thread_numa<0>(BinarySearchTest, tid, duration, i%2, num_DS/2, num_threads/2, crossover, keyspace);
+				numa_thread0[i] = new thread_numa<0>(BinarySearchTest, tid, duration, 1, num_DS/2, num_threads/2, crossover, keyspace);
 			}
 		}
 		for(int i=0; i < num_threads/2; i++){
@@ -151,7 +151,7 @@ void main_BST_test(int duration, int64_t num_DS, int num_threads, int crossover,
 				regular_thread1[i] = new thread(BinarySearchTest,tid, duration, node, num_DS/2, num_threads/2, crossover,keyspace);
 			}
 			else{
-				numa_thread1[i] = new thread_numa<1>(BinarySearchTest, tid, duration, i%2, num_DS/2, num_threads/2, crossover, keyspace);
+				numa_thread1[i] = new thread_numa<1>(BinarySearchTest, tid, duration, 0, num_DS/2, num_threads/2, crossover, keyspace);
 			}
 		}
 
@@ -286,7 +286,6 @@ int main(int argc, char *argv[])
 	std::cout<<thread_config << ", ";
 	std::cout<<DS_config << ", ";
 	std::cout<<duration << ", ";
-	std::cout<<crossover<<", ";
 	std::cout<<keyspace<<", ";
 	// std::cout<<endl;
 	numa_thread0.resize(num_threads);

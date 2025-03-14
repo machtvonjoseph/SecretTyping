@@ -186,6 +186,7 @@ void numa_LL_init(std::string DS_config, int num_DS, bool prefill, prefill_perce
 
 	std::mt19937 gen(123);
 	std::uniform_int_distribution<> dist1(0, LLs0.size()-1);
+	// std::uniform_int_distribution<> dist(0, keyspace/2);
 	//Prefill in 50 % of the Stacks with random number of nodes (0-200) number of nodes
 	for(int i = 0; i < num_DS/2 ; i++)
 	{
@@ -310,7 +311,7 @@ void StackTest(int tid,  int duration, int node, int64_t num_DS, int num_threads
 		int op = dist(gen)%2;
 		int x = xDist(gen);
 		if(node==0){
-			if(opDist(gen)<=90)
+			if(opDist(gen)<=50)
 			{
 				Stacks0[ds]->push(ds);
 			}
@@ -346,12 +347,12 @@ void QueueTest(int tid, int duration, int node, int64_t num_DS, int num_threads,
 		int ds = dist(gen);
 		int x = xDist(gen);
 		if(node==0){
-			if(opDist(gen)<=90)
+			if(opDist(gen)<=50)
 			{
 				Queues0[ds]->add(ds);
 			}
 			else {
-				Queues0[ds]->del();
+				int value = Queues0[ds]->del();
 			}
 		}
 		ops++;
@@ -407,19 +408,21 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 	std::uniform_int_distribution<> dist(0, BSTs0.size()-1);
 	std::uniform_int_distribution<> opDist(1, 100);
 	std::uniform_int_distribution<> xDist(1, 100);
+	std::uniform_int_distribution<> keyDist(0,keyspace);
 	int ops = 0;
 	auto startTimer = std::chrono::steady_clock::now();
 	auto endTimer = startTimer + std::chrono::seconds(duration);
 	while (std::chrono::steady_clock::now() < endTimer) {
 		int ds = dist(gen);
-		int x = xDist(gen);
+		int key = keyDist(gen);
 		if(node==0){
 			if(opDist(gen)<=90)
 			{
-				BSTs0[ds]->insert(x);
+				BSTs0[ds]->insert(key);
 			}
 			else {
-				BSTs0[ds]->lookup(x);
+				bool value;
+				value = BSTs0[ds]->lookup(key);
 			}
 		}
 		ops++;

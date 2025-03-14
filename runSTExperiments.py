@@ -66,7 +66,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Example source and destination directories
-    experiment_folder= f"./{args.exprName}*"
+    experiment_folder= f"./{args.exprName}"
     clang_tool_input= "./numa-clang-tool/input/"
     clang_tool_intermediate_output = f"./numa-clang-tool/output/{args.exprName}"
     clang_tool_output= f"./numa-clang-tool/output2/{args.exprName}"
@@ -101,10 +101,8 @@ if __name__ == "__main__":
     StackCommand = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:1 --meta D:20 --meta DS_name:stack --meta th_config:numa:regular --meta DS_config:numa:regular  >> ../../Result/STResult/stack.csv"
     QueueCommand = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:1 --meta D:20 --meta DS_name:queue --meta th_config:numa:regular --meta DS_config:numa:regular >> ../../Result/STResult/queue.csv"
     LLCommand = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:1 --meta D:20 --meta DS_name:ll --meta th_config:numa:regular --meta DS_config:numa:regular >> ../../Result/STResult/ll.csv"
-    BSTCommand = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:1 --meta D:20 --meta DS_name:bst:stack:queue:ll --meta th_config:numa:regular --meta DS_config:numa:regular  --meta k:1600000 >> ../../Result/STResult/bst.csv"
-
-
-    
+    BSTCommand = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:1 --meta D:20 --meta DS_name:bst --meta th_config:numa:regular --meta DS_config:numa:regular  --meta k:1600000 >> ../../Result/STResult/bst.csv"
+ 
     if(args.UMF):
         run_command("echo Stack Results (UMF) >> ./Result/stack.csv")
         run_command("echo Queue Results (UMF) >> ./Result/queue.csv")
@@ -117,12 +115,17 @@ if __name__ == "__main__":
     
     run_command(command)
     if(args.verbose):
-        run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, TotalOps ")
+        if(args.DS == "bst"):
+            run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, TotalOps")
+        else:
+            run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover, TotalOps")
     else:
-        run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover, TotalOps >> ./Result/STResult/stack.csv")
-        run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover, TotalOps >> ./Result/STResult/queue.csv")
-        run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover, TotalOps >> ./Result/STResult/ll.csv")
-        run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, TotalOps >> ./Result/STResult/bst.csv")
+        if(args.DS == "bst"):
+            run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, TotalOps >> ./Result/STResult/bst.csv")
+        else:
+            run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover, TotalOps >> ./Result/STResult/stack.csv")
+           
+        
         
     
     if (args.DS == "stack"):
@@ -153,11 +156,11 @@ if __name__ == "__main__":
             run_command(LLCommand)
     elif (args.DS == "bst"):
         if (args.verbose):
-            BSTCommand =f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:1 --meta D:20 --meta DS_name:bst:stack:queue:ll --meta th_config:numa:regular --meta DS_config:numa:regular --meta k:160000 "
+            BSTCommand =f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:1 --meta D:20 --meta DS_name:bst --meta th_config:numa:regular --meta DS_config:numa:regular --meta k:160000 "
             print("command is ", BSTCommand)
             run_command(BSTCommand)
         else:
-            BSTCommand = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:1 --meta D:20 --meta DS_name:bst:stack:queue:ll --meta th_config:numa:regular --meta DS_config:numa:regular  --meta k:1600000 >> ../../Result/STResult/bst.csv"
+            BSTCommand = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:1 --meta D:20 --meta DS_name:bst --meta th_config:numa:regular --meta DS_config:numa:regular  --meta k:1600000 >> ../../Result/STResult/bst.csv"
             print("command is ", BSTCommand)
             run_command(BSTCommand)
     

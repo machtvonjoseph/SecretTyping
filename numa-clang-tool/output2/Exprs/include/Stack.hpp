@@ -1,4 +1,16 @@
-/*! \file Stack.hpp
+#ifdef UMF 
+	                #include "numatype.hpp"
+	                #include <umf/mempolicy.h>
+	                #include <umf/memspace.h>
+                    #include "utils_examples.h"
+                    #include "umf_numa_allocator.hpp"
+                    #include <numa.h>
+                    #include <numaif.h>
+                    #include <stdio.h>
+                    #include <string.h>
+                #endif
+                #include "numatype.hpp"
+                /*! \file Stack.hpp
  * \brief Interface for a simple Stack class
  * \author Nii Mante
  * \date 10/28/2012
@@ -48,7 +60,7 @@ public:
 	 *
 	 * \sa Stack::pop()
 	 */
-	~Stack();
+	virtual ~Stack();
 
 	/*!
 	 * \brief Function for removing a single stack node
@@ -59,7 +71,7 @@ public:
 	 *
 	 * \return The data from the removed node.
 	 */
-	int pop();
+	virtual int pop();
 
 	/*!
 	 * \brief Push function for adding stack variables
@@ -71,7 +83,7 @@ public:
 	 * \note To avoid Memory Allocation issues, if allocation fails (i.e. overflow)
 	 	Stack::push() is returned from immediately.
 	 */
-	void push(int);
+	virtual void push(int);
 
 
 	/*!
@@ -80,9 +92,229 @@ public:
 	 * This function iterates over and prints each node in the stack.
 	 * The first node printed is the top Node.
 	 */
-	void display();
+	virtual void display();
 
 
+};
+
+template<>
+class numa<Stack,0>{
+public: 
+    static void* operator new(std::size_t sz){
+        void* p;
+        #ifdef UMF
+            p= umf_alloc(0 ,sizeof(Stack),alignof(Stack));
+        #else
+            p = numa_alloc_onnode(sz* sizeof(Stack), 0);
+        #endif
+        
+        if (p == nullptr) {
+            std::cout<<"allocation failed\n";
+            throw std::bad_alloc();
+        }
+        return p;
+    }
+
+    static void* operator new[](std::size_t sz){
+        void* p;
+        #ifdef UMF
+            p= umf_alloc(0 ,sizeof(Stack),alignof(Stack));
+        #else
+            p = numa_alloc_onnode(sz* sizeof(Stack), 0);
+        #endif
+        
+        if (p == nullptr) {
+            std::cout<<"allocation failed\n";
+            throw std::bad_alloc();
+        }
+        return p;
+    }
+
+    static void operator delete(void* ptr){
+        // cout<<"doing numa free \n";
+        #ifdef UMF
+			umf_free(0,ptr);
+		#else
+		    numa_free(ptr, 1 * sizeof(Stack));
+        #endif
+    }
+
+    static void operator delete[](void* ptr){
+		// cout<<"doing numa free \n";
+        #ifdef UMF
+			umf_free(0,ptr);
+		#else
+		    numa_free(ptr, 1 * sizeof(Stack));
+        #endif
+    }
+public:
+numa (){
+    this->top = __null;
+}
+virtual ~numa()
+{
+	
+	if(top == NULL)
+	{
+		return;
+	}
+	Node *temp;
+	while(top != NULL)
+	{
+		temp = top;
+		top = top->getLink();
+		delete temp;
+	}
+
+}
+virtual int pop(){
+    if (this->top == __null) {
+        return -1;
+    }
+    Node *retN = this->top;
+    this->top = this->top->getLink();
+    int data = retN->getData();
+    delete retN;
+    retN = __null;
+    return data;
+}
+virtual void push(int data){
+    Node *newN = reinterpret_cast<Node*>(new numa<Node,0>(data));
+    if (newN == __null) {
+        std::cerr << "Stack full" << std::endl;
+        return;
+    }
+    newN->setLink(this->top);
+    this->top = newN;
+}
+virtual void display(){
+    if (this->top == __null) {
+        std::cout << "Stack Empty!!" << std::endl;
+        return;
+    }
+    int i = 0;
+    Node *temp = this->top;
+    while (temp != __null)
+        {
+            if (i == 0)
+                std::cout << "TOP ";
+            std::cout << temp->getData() << std::endl;
+            temp = temp->getLink();
+            i++;
+        }
+}
+private:
+numa<Node*,0> top;
+};
+
+template<>
+class numa<Stack,1>{
+public: 
+    static void* operator new(std::size_t sz){
+        void* p;
+        #ifdef UMF
+            p= umf_alloc(1 ,sizeof(Stack),alignof(Stack));
+        #else
+            p = numa_alloc_onnode(sz* sizeof(Stack), 1);
+        #endif
+        
+        if (p == nullptr) {
+            std::cout<<"allocation failed\n";
+            throw std::bad_alloc();
+        }
+        return p;
+    }
+
+    static void* operator new[](std::size_t sz){
+        void* p;
+        #ifdef UMF
+            p= umf_alloc(1 ,sizeof(Stack),alignof(Stack));
+        #else
+            p = numa_alloc_onnode(sz* sizeof(Stack), 1);
+        #endif
+        
+        if (p == nullptr) {
+            std::cout<<"allocation failed\n";
+            throw std::bad_alloc();
+        }
+        return p;
+    }
+
+    static void operator delete(void* ptr){
+        // cout<<"doing numa free \n";
+        #ifdef UMF
+			umf_free(1,ptr);
+		#else
+		    numa_free(ptr, 1 * sizeof(Stack));
+        #endif
+    }
+
+    static void operator delete[](void* ptr){
+		// cout<<"doing numa free \n";
+        #ifdef UMF
+			umf_free(1,ptr);
+		#else
+		    numa_free(ptr, 1 * sizeof(Stack));
+        #endif
+    }
+public:
+numa (){
+    this->top = __null;
+}
+virtual ~numa()
+{
+	
+	if(top == NULL)
+	{
+		return;
+	}
+	Node *temp;
+	while(top != NULL)
+	{
+		temp = top;
+		top = top->getLink();
+		delete temp;
+	}
+
+}
+virtual int pop(){
+    if (this->top == __null) {
+        return -1;
+    }
+    Node *retN = this->top;
+    this->top = this->top->getLink();
+    int data = retN->getData();
+    delete retN;
+    retN = __null;
+    return data;
+}
+virtual void push(int data){
+    Node *newN = reinterpret_cast<Node*>(new numa<Node,1>(data));
+    if (newN == __null) {
+        std::cerr << "Stack full" << std::endl;
+        return;
+    }
+    newN->setLink(this->top);
+    this->top = newN;
+}
+virtual void display(){
+    if (this->top == __null) {
+        std::cout << "Stack Empty!!" << std::endl;
+        return;
+    }
+    int i = 0;
+    Node *temp = this->top;
+    while (temp != __null)
+        {
+            if (i == 0)
+                std::cout << "TOP ";
+            std::cout << temp->getData() << std::endl;
+            temp = temp->getLink();
+            i++;
+        }
+}
+private:
+numa<Node*,1> top;
 };
 
 

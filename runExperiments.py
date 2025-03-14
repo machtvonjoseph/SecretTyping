@@ -107,12 +107,9 @@ if __name__ == "__main__":
     
     run_command(command)
     if(args.verbose):
-        run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps ")
+        run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration,keyspace, Op0, Op1, TotalOps ")
     else:
-        run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover, Op0, Op1, TotalOps >> ./Result/stack.csv")
-        run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover, Op0, Op1, TotalOps >> ./Result/queue.csv")
-        run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover, Op0, Op1, TotalOps >> ./Result/ll.csv")
-        run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, Op0, Op1, TotalOps >> ./Result/bst.csv")
+        run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, keyspace, Op0, Op1, TotalOps >> ./Result/bst.csv")
         
     
     if (args.DS == "stack"):
@@ -132,9 +129,9 @@ if __name__ == "__main__":
             command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:ll --meta th_config:numa:regular:split --meta DS_config:numa:regular --meta x:0:10 >> ../../Result/ll.csv"
     elif (args.DS == "bst"):
         if (args.verbose):
-            command =f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:20:40 --meta D:20 --meta DS_name:bst --meta th_config:numa:regular:split --meta DS_config:numa:regular --meta x:0:20:100 --meta k:160000 --meta f:1"
+            command =f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:1024 --meta t:10 --meta D:20 --meta DS_name:bst --meta th_config:numa:regular:reverse --meta DS_config:numa:regular --meta k:160000 --meta f:1"
         else:
-            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:20:40 --meta D:20 --meta DS_name:bst --meta th_config:numa:regular:split --meta DS_config:numa:regular --meta x:0:20:100 --meta k:1600000 --meta f:1 >> ../../Result/bst.csv"
+            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:1024 --meta t:10 --meta D:20 --meta DS_name:bst --meta th_config:numa:regular:reverse --meta DS_config:numa:regular --meta k:1600000 --meta f:1 >> ../../Result/bst.csv"
           
     print("command is ", command)
     run_command(command)

@@ -1,5 +1,140 @@
 Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, TotalOps
+2025-03-11, 12:35:37, bst, 128, 1, numa, numa, 20, 0, 24505360
+2025-03-11, 12:36:15, bst, 128, 1, numa, regular, 20, 0, 24739033
+2025-03-11, 12:36:53, bst, 128, 1, regular, numa, 20, 0, 25408033
+2025-03-11, 12:37:31, bst, 128, 1, regular, regular, 20, 0, 25644777
+
+
+
+
+
+
+
+
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, TotalOps
+2025-03-11, 16:20:12, bst, 128, 1, numa, numa, 20, 0, 24353007
+2025-03-11, 16:20:50, bst, 128, 1, numa, regular, 20, 0, 24963633
+2025-03-11, 16:21:28, bst, 128, 1, regular, numa, 20, 0, 25704008
+2025-03-11, 16:22:05, bst, 128, 1, regular, regular, 20, 0, 25681884
+
+
+
+
+
+
+
+
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, TotalOps
+2025-03-11, 16:30:36, bst, 128, 1, numa, numa, 20, 0, 2758122
+2025-03-11, 16:31:13, bst, 128, 1, numa, regular, 20, 0, 2782779
+2025-03-11, 16:31:51, bst, 128, 1, regular, numa, 20, 0, 2915685
+2025-03-11, 16:32:29, bst, 128, 1, regular, regular, 20, 0, 2904395
+
+
+
+
+
+
+
+
 Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, TotalOps
 Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, TotalOps
+2025-03-11, 16:49:01, bst, 128, 1, numa, numa, 20, 0, 2886555
+2025-03-11, 16:49:39, bst, 128, 1, numa, regular, 20, 0, 2828198
+2025-03-11, 16:50:16, bst, 128, 1, regular, numa, 20, 0, 2909397
+2025-03-11, 16:50:54, bst, 128, 1, regular, regular, 20, 0, 2913577
+2025-03-11, 16:51:31, bst, 1024, 1, numa, numa, 20, 0, 5922370
+2025-03-11, 16:54:11, bst, 1024, 1, numa, regular, 20, 0, 5920257
+2025-03-11, 16:56:50, bst, 1024, 1, regular, numa, 20, 0, 6408272
+2025-03-11, 16:59:29, bst, 1024, 1, regular, regular, 20, 0, 6402906
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, TotalOps
+2025-03-12, 11:36:21, bst, 128, 1, numa, numa, 20, 0, 12270881
+2025-03-12, 11:36:59, bst, 128, 1, numa, regular, 20, 0, 12258171
+2025-03-12, 11:37:37, bst, 128, 1, regular, numa, 20, 0, 15211477
+2025-03-12, 11:38:15, bst, 128, 1, regular, regular, 20, 0, 15374804
+2025-03-12, 11:38:52, bst, 1024, 1, numa, numa, 20, 0, 9822955
+2025-03-12, 11:41:33, bst, 1024, 1, numa, regular, 20, 0, 9577834
+2025-03-12, 11:44:13, bst, 1024, 1, regular, numa, 20, 0, 13748951
+2025-03-12, 11:46:53, bst, 1024, 1, regular, regular, 20, 0, 13687832
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, TotalOps
+2025-03-13, 18:14:04, bst, 128, 1, numa, numa, 20, 0, 12476302
+2025-03-13, 18:14:42, bst, 128, 1, numa, regular, 20, 0, 12153976
+2025-03-13, 18:15:20, bst, 128, 1, regular, numa, 20, 0, 15281191
+2025-03-13, 18:15:58, bst, 128, 1, regular, regular, 20, 0, 15300943
+2025-03-13, 18:16:35, bst, 1024, 1, numa, numa, 20, 0, 9565719
+2025-03-13, 18:19:16, bst, 1024, 1, numa, regular, 20, 0, 9487760
+2025-03-13, 18:21:57, bst, 1024, 1, regular, numa, 20, 0, 13658974
+2025-03-13, 18:24:38, bst, 1024, 1, regular, regular, 20, 0, 13597713
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, crossover,keyspace, TotalOps
+2025-03-13, 18:34:18, bst, 128, 1, numa, numa, 20, 0, 14225391
+2025-03-13, 18:34:56, bst, 128, 1, numa, regular, 20, 0, 14241839
+2025-03-13, 18:35:33, bst, 128, 1, regular, numa, 20, 0, 15912216
+2025-03-13, 18:36:11, bst, 128, 1, regular, regular, 20, 0, 15919872
+2025-03-13, 18:36:48, bst, 1024, 1, numa, numa, 20, 0, 12265077
+2025-03-13, 18:39:27, bst, 1024, 1, numa, regular, 20, 0, 12256874
+2025-03-13, 18:42:06, bst, 1024, 1, regular, numa, 20, 0, 14248642
+2025-03-13, 18:44:44, bst, 1024, 1, regular, regular, 20, 0, 14162076
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
