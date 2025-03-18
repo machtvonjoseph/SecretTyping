@@ -27,7 +27,7 @@ extern struct prefill_percentage percentages;
 
 
 
-void global_init(int num_threads);
+void global_init(int num_threads, int duration, int interval);
 void singleThreadedStackTest(int duration, int64_t num_DS);
 void singleThreadedStackInit(int num_DS, bool isNuma);
 void warmUpPool();
@@ -57,7 +57,7 @@ void StackTest(int t_id, int duration, int node, int64_t num_DS, int num_threads
 
 void QueueTest(int t_id, int duration, int node, int64_t num_DS, int num_threads, int crossover);
 
-void BinarySearchTest(int t_id, int duration, int node, int64_t num_DS, int num_threads, int crossover, int keyspace);
+void BinarySearchTest(int t_id, int duration, int node, int64_t num_DS, int num_threads, int crossover, int keyspace, int interval);
 
 void LinkedListTest(int t_id, int duration, int node, int64_t num_DS, int num_threads, int crossover);
 

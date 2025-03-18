@@ -16,7 +16,7 @@ OBJS=main.o TestSuite.o
 TESTOBJS=st_test.o
 
 UMF =
-FLAGS = 
+FLAGS = -fno-omit-frame-pointer
 ifndef DEBUG
 #  FLAGS += -DEBUG
 else

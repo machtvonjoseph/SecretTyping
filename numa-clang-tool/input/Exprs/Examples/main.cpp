@@ -19,6 +19,7 @@
 #include <getopt.h>
 #include <chrono>
 #include <iomanip>
+#include <unordered_map>
 
 
 #define NUMA_NODES 4
@@ -35,7 +36,7 @@ bool prefill_set = false;
 int crossover = 0;
 int keyspace = 80000;
 int run_freq = 1;
-
+int interval =20;
 struct prefill_percentage{
 	float write;
 	float read;
@@ -46,6 +47,8 @@ struct prefill_percentage{
 
 extern int64_t ops0;
 extern int64_t ops1;
+extern std::vector<int64_t> globalOps0;
+extern std::vector<int64_t> globalOps1;
 
 std::vector <int64_t> num_ops1;
 std::vector <int64_t> num_ops0;
@@ -61,6 +64,25 @@ thread_numa<0>* init_thread0;
 thread_numa<1>* init_thread1;
 std::thread* init_thread_regular0;
 std::thread* init_thread_regular1;
+
+void print_function(int duration, int64_t ops0, int64_t ops1, int64_t totalOps){
+	auto now = std::chrono::system_clock::now();
+    std::time_t now_time = std::chrono::system_clock::to_time_t(now);
+    std::tm* local_time = std::localtime(&now_time);
+    std::cout<<std::put_time(local_time, "%Y-%m-%d") << ", ";
+	std::cout<<std::put_time(local_time, "%H:%M:%S") <<", ";
+	std::cout<<DS_name << ", ";
+	std::cout<<num_DS << ", ";
+	std::cout<<num_threads << ", ";
+	std::cout<<thread_config << ", ";
+	std::cout<<DS_config << ", ";
+	std::cout<<duration << ", ";
+	std::cout<<keyspace<<", ";
+	std::cout<<interval<<", ";
+	std::cout<<ops0 << ", ";
+	std::cout<<ops1 << ", ";
+	std::cout<<totalOps << "\n";
+}
 
 bool parse_prefill(const std::string& optarg, prefill_percentage& percentages) {
     std::istringstream stream(optarg);
@@ -131,27 +153,26 @@ void main_BST_test(int duration, int64_t num_DS, int num_threads, int crossover,
 			int node = 0;
 			int tid = i;
 			if(thread_config == "numa"){
-				numa_thread0[i] = new thread_numa<0>(BinarySearchTest,tid, duration, node, num_DS/2, num_threads/2, crossover, keyspace);
+				numa_thread0[i] = new thread_numa<0>(BinarySearchTest,tid, duration, node, num_DS/2, num_threads/2, crossover, keyspace, interval);
 			}
 			else if(thread_config == "regular"){
-				regular_thread0[i] = new thread(BinarySearchTest,tid, duration, node, num_DS/2, num_threads/2, crossover, keyspace);
+				regular_thread0[i] = new thread(BinarySearchTest,tid, duration, node, num_DS/2, num_threads/2, crossover, keyspace, interval);
 			}
 			else{
-				
-				numa_thread0[i] = new thread_numa<0>(BinarySearchTest, tid, duration, 1, num_DS/2, num_threads/2, crossover, keyspace);
+				numa_thread0[i] = new thread_numa<0>(BinarySearchTest, tid, duration, 1, num_DS/2, num_threads/2, crossover, keyspace, interval);
 			}
 		}
 		for(int i=0; i < num_threads/2; i++){
 			int node = 1;
 			int tid = i + num_threads/2;
 			if(thread_config == "numa"){
-				numa_thread1[i] = new thread_numa<1>(BinarySearchTest,tid, duration, node, num_DS/2, num_threads/2, crossover,keyspace);
+				numa_thread1[i] = new thread_numa<1>(BinarySearchTest,tid, duration, node, num_DS/2, num_threads/2, crossover,keyspace, interval);
 			}
 			else if(thread_config == "regular"){
-				regular_thread1[i] = new thread(BinarySearchTest,tid, duration, node, num_DS/2, num_threads/2, crossover,keyspace);
+				regular_thread1[i] = new thread(BinarySearchTest,tid, duration, node, num_DS/2, num_threads/2, crossover,keyspace, interval);
 			}
 			else{
-				numa_thread1[i] = new thread_numa<1>(BinarySearchTest, tid, duration, 0, num_DS/2, num_threads/2, crossover, keyspace);
+				numa_thread1[i] = new thread_numa<1>(BinarySearchTest, tid, duration, 0, num_DS/2, num_threads/2, crossover, keyspace, interval);
 			}
 		}
 
@@ -221,13 +242,14 @@ int main(int argc, char *argv[])
 		{"run_freq", optional_argument, nullptr, 'f'},       // -p
 		{"crossover", optional_argument, nullptr, 'x'},       // -x
 		{"keyspace", required_argument, nullptr, 'k'},      // -k
+		{"interval", required_argument, nullptr, 'i'},      // -i
 		{nullptr, 0, nullptr, 0}                            // End of array
 	};
 
  int opt;
     int option_index = 0;
 
-    while ((opt = getopt_long(argc, argv, "n:t:D:x:k:f:", long_options, &option_index)) != -1) {
+    while ((opt = getopt_long(argc, argv, "n:t:D:x:k:f:i:", long_options, &option_index)) != -1) {
         switch (opt) {
             case 'c':  // --th_config option
                 thread_config = optarg;             
@@ -259,6 +281,11 @@ int main(int argc, char *argv[])
 				}
 				break;
 				//read values separated by a comma into prefill struct
+			case 'i':
+				if(optarg){
+					interval = std::stoi(optarg);
+				}
+				break;
 			case 'k':
 				if(optarg){
 					keyspace = std::stoi(optarg);
@@ -272,27 +299,14 @@ int main(int argc, char *argv[])
         }
     }
 
-    auto now = std::chrono::system_clock::now();
-
-    // Convert to time_t for extraction
-    std::time_t now_time = std::chrono::system_clock::to_time_t(now);
-    std::tm* local_time = std::localtime(&now_time);
-    // Format and print the date and time
-    std::cout<<std::put_time(local_time, "%Y-%m-%d") << ", ";
-	std::cout<<std::put_time(local_time, "%H:%M:%S") <<", ";
-	std::cout<<DS_name << ", ";
-	std::cout<<num_DS << ", ";
-	std::cout<<num_threads << ", ";
-	std::cout<<thread_config << ", ";
-	std::cout<<DS_config << ", ";
-	std::cout<<duration << ", ";
-	std::cout<<keyspace<<", ";
+	print_function(0, 0 ,0, 0);
+    
 	// std::cout<<endl;
 	numa_thread0.resize(num_threads);
 	numa_thread1.resize(num_threads);
 	regular_thread0.resize(num_threads);
 	regular_thread1.resize(num_threads);
-	global_init(num_threads);
+	global_init(num_threads, duration, interval);
 	
 	// // #ifdef UMF
 	// // 	warmUpPool();
@@ -392,6 +406,12 @@ int main(int argc, char *argv[])
 			}
 		}
 
+		for(int i :globalOps0){
+			std::cout << i << ", ";
+		}
+		for(int i :globalOps1){
+			std::cout << i << ", ";
+		}
 		std::cout << ops0 << ", ";
 		std::cout << ops1 << ", ";
 		std::cout << ops0 + ops1 << "\n";
@@ -560,9 +580,9 @@ int main(int argc, char *argv[])
 		for(int i=0; i < run_freq; i++){
 			main_BST_test(duration, num_DS, num_threads, crossover, keyspace);
 		}
-		int sum0 = 0;
-		int sum1 = 0;
-		int total_sum = 0;
+		int64_t sum0 = 0;
+		int64_t sum1 = 0;
+		int64_t total_sum = 0;
 		//get the average of the numbers in the array
 		for(int i = 0; i < num_ops0.size(); i++){
 			sum0 += num_ops0[i];	
@@ -574,9 +594,30 @@ int main(int argc, char *argv[])
 			total_sum += total_ops[i];
 		}
 
-		std::cout << sum0/num_ops0.size() << ", ";
-		std::cout << sum1/num_ops1.size() <<", ";
-		std::cout << total_sum/total_ops.size() << "";
+
+
+		int newDuration = interval;
+		// //std::cout<< "Ops0 per 20 seconds: ";
+		// for(int i :globalOps0){
+		// 	print_function(newDuration, i, 0, 0);
+		// }
+		// std::cout<<std::endl;
+		// //std::cout<< "Ops1 per 20 seconds: ";
+		// for(int i :globalOps1){
+		// 	print_function(newDuration, 0, i, 0);
+		
+		// }
+
+		for(int i = 0; i< globalOps0.size(); i++){
+			print_function(newDuration, globalOps0[i], globalOps1[i], globalOps0[i] + globalOps1[i]);
+			newDuration += interval;
+		}
+		// std::cout<<std::endl;
+		// std::cout<<"Total Ops seconds: ";
+		// std::cout << ops0 << ", ";
+		// std::cout << ops1 << ", ";
+		// std::cout << ops0+ops1<< "";
+	
 	}
 
 
@@ -664,5 +705,5 @@ int main(int argc, char *argv[])
 		cout<<"Invalid Data Structure"<<endl;
 	}
 	global_cleanup();
-	cout<<endl;
+	// cout<<endl;
 }

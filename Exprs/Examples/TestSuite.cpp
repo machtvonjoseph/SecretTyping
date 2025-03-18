@@ -23,14 +23,20 @@
 #include <cstdlib>
 #include <pthread.h>
 #include <map>
+#include <atomic>
 #include "umf_numa_allocator.hpp"
 
 #define MEGABYTE 1048576
 
+
+using namespace std::chrono;
 std::vector<Stack*> Stacks0;
 std::vector<Stack*> Stacks1;
+// int64_t ops0=0;
+// int64_t ops1=0;
 int64_t ops0=0;
 int64_t ops1=0;
+
 
 char* Arrays0;
 char* Arrays1;
@@ -44,6 +50,9 @@ std::mutex* printLK;
 std::mutex* globalLK;
 
 
+
+std::vector<int64_t> globalOps0;
+std::vector<int64_t> globalOps1;
 
 std::vector<Queue*> Queues0;
 std::vector<Queue*> Queues1;
@@ -76,12 +85,13 @@ struct prefill_percentage{
 // chrono::high_resolution_clock::time_point startTimer;
 // chrono::high_resolution_clock::time_point endTimer;
 
-void global_init(int num_threads){
+void global_init(int num_threads, int duration, int interval){
 	pthread_barrier_init(&bar, NULL, num_threads);
 	pthread_barrier_init(&init_bar, NULL, 2);
+	globalOps0.resize(duration/interval);
+	globalOps1.resize(duration/interval);
 	ops0 = 0;
 	ops1 = 0;
-
 	printLK = new std::mutex();
 	globalLK = new std::mutex();
 	Array_Lk0 = new mutex();
@@ -379,7 +389,7 @@ void numa_BST_init(std::string DS_config, int num_DS, int keyspace, int node, in
 	pthread_barrier_wait(&init_bar);
 	std::mt19937 gen(123);
 	std::uniform_int_distribution<> xDist(1, 100);
-	std::uniform_int_distribution<> dist(0, keyspace/2);
+	std::uniform_int_distribution<> dist(0, keyspace);
 	
 	if(node == 0){
 		for(int i = 0; i < num_DS; i++)
@@ -415,7 +425,7 @@ void numa_BST_init(std::string DS_config, int num_DS, int keyspace, int node, in
 			}
 		}
 
-		for(int i = 0; i < num_DS/2 ; i++)
+		for(int i = 0; i < num_DS ; i++)
 		{	
 			int x = xDist(gen);
 			if(x <= crossover){
@@ -464,7 +474,7 @@ void numa_BST_init(std::string DS_config, int num_DS, int keyspace, int node, in
 			}
 		}	
 		
-		for(int i = 0; i < num_DS/2 ; i++)
+		for(int i = 0; i < num_DS ; i++)
 		{
 			int x = xDist(gen);
 			if(x <= crossover){
@@ -571,7 +581,7 @@ void StackTest(int tid,  int duration, int node, int64_t num_DS, int num_threads
 	std::uniform_int_distribution<> xDist(1, 100);
 	
 	//std::cout << "Thread " << tid << " about to start working on node id"<<node << std::endl;
-	int ops = 0;
+	int64_t ops = 0;
 	auto startTimer = std::chrono::steady_clock::now();
 	auto endTimer = startTimer + std::chrono::seconds(duration);
 	while (std::chrono::steady_clock::now() < endTimer) {
@@ -839,7 +849,7 @@ void LinkedListTest(int tid, int duration, int node, int64_t num_DS, int num_thr
 	pthread_barrier_wait(&bar);
 }
 
-void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_threads, int crossover, int keyspace)
+void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_threads, int crossover, int keyspace, int interval)
 {	
 	#ifdef DEBUG
 	if(tid == 1 && node==0)
@@ -850,56 +860,72 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 
 	pthread_barrier_wait(&bar);
 	//std::cout<<"crossover value from test is "<<crossover<<std::endl;
-	std::mt19937 gen(123);
+	std::mt19937 gen(tid);
 	std::uniform_int_distribution<> dist(0, BSTs0.size()-1);
 	std::uniform_int_distribution<> opDist(1, 100);
 	std::uniform_int_distribution<> xDist(1, 100);
 	std::uniform_int_distribution<> keyDist(0,keyspace);
 	//std::cout << "Thread " << tid << " about to start working on node id"<<node << std::endl;
-	int ops = 0;
+
+	int64_t ops;
+	thread_local vector<int64_t> localOps;
+	localOps.resize(duration/interval);
 	int x = xDist(gen);
 	auto startTimer = std::chrono::steady_clock::now();
 	auto endTimer = startTimer + std::chrono::seconds(duration);
-	while (std::chrono::steady_clock::now() < endTimer) {
+    auto nextLogTime = startTimer + std::chrono::seconds(interval);
+	int intervalIdx = 0;
+	while (duration_cast<seconds>(steady_clock::now() - startTimer).count() < duration) {
 		int ds = dist(gen);
+
+
 		int key = keyDist(gen);
 		if(node==0){
-			if(opDist(gen)<=80)
+			if(opDist(gen)<=98)
 			{
-				BST_reader_lk0[ds]->lock();
+				BST_lk0[ds]->lock();
 				BSTs0[ds]->lookup(key);
-				BST_reader_lk0[ds]->unlock();
+				BST_lk0[ds]->unlock();
 			
 			}
 			else {
-				if(ds%4==0){
-					BST_lk0[ds]->lock();
-					BST_lk1[ds]->lock();
-					BSTs0[ds]->remove(key);
-					BSTs1[ds]->insert(key);
-					BST_lk0[ds]->unlock();
-					BST_lk1[ds]->unlock();
-				}else if(ds%4==1){
-					BST_lk0[ds]->lock();
-					BST_lk1[ds]->lock();
-					BSTs1[ds]->remove(key);
-					BSTs0[ds]->insert(key);
-					BST_lk0[ds]->unlock();
-					BST_lk1[ds]->unlock();
-				}else if(ds%4==2){
-					BST_lk0[ds]->lock();
-					// BST_lk1[ds]->lock();
-					BSTs0[ds]->remove(key);
-					BSTs0[ds]->insert(key);
-					BST_lk0[ds]->unlock();
-					// BST_lk1[ds]->unlock();
+				int ds_a= dist(gen);
+				int ds_b = dist(gen);
+				int txn = opDist(gen);
+				if(txn%4==0){
+					BST_lk0[ds_a]->lock();
+					BST_lk1[ds_b]->lock();
+					BSTs0[ds_a]->remove(key);
+					BSTs1[ds_b]->insert(key);
+					BST_lk0[ds_a]->unlock();
+					BST_lk1[ds_b]->unlock();
+				}else if(txn%4==1){
+					BST_lk0[ds_a]->lock();
+					BST_lk1[ds_b]->lock();
+					BSTs1[ds_b]->remove(key);
+					BSTs0[ds_a]->insert(key);
+					BST_lk0[ds_a]->unlock();
+					BST_lk1[ds_b]->unlock();
+				}else if(txn%4==2){
+					int lk1 = (ds_a<ds_b)?ds_a:ds_b;
+					int lk2 = (ds_a<ds_b)?ds_b:ds_a;
+					if(ds_a==ds_b){continue;}
+					BST_lk0[lk1]->lock();
+					BST_lk0[lk2]->lock();
+					BSTs0[ds_a]->remove(key);
+					BSTs0[ds_b]->insert(key);
+					BST_lk0[lk1]->unlock();
+					BST_lk0[lk2]->unlock();
 				}else{
-					// BST_lk0[ds]->lock();
-					BST_lk1[ds]->lock();
-					BSTs1[ds]->remove(key);
-					BSTs1[ds]->insert(key);
-					// BST_lk0[ds]->unlock();
-					BST_lk1[ds]->unlock();
+					int lk1 = (ds_a<ds_b)?ds_a:ds_b;
+					int lk2 = (ds_a<ds_b)?ds_b:ds_a;
+					if(ds_a==ds_b){continue;}
+					BST_lk1[lk1]->lock();
+					BST_lk1[lk2]->lock();
+					BSTs1[ds_a]->remove(key);
+					BSTs1[ds_b]->insert(key);
+					BST_lk1[lk1]->unlock();
+					BST_lk1[lk2]->unlock();
 				}
 				// if(x <= crossover){
 				// 	BST_lk1[ds]->lock();
@@ -913,7 +939,7 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 			}
 		}
 		else{
-			if(opDist(gen)<=80)
+			if(opDist(gen)<=98)
 			{
 				BST_lk1[ds]->lock();
 				BSTs1[ds]->lookup(key);
@@ -921,110 +947,73 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 	
 			}
 			else {
-				if(ds%4==0){
-					BST_lk0[ds]->lock();
-					BST_lk1[ds]->lock();
-					BSTs1[ds]->remove(key);
-					BSTs0[ds]->insert(key);
-					BST_lk0[ds]->unlock();
-					BST_lk1[ds]->unlock();
-
-				}else if(ds%4==1){
-					BST_lk0[ds]->lock();
-					BST_lk1[ds]->lock();
-					BSTs0[ds]->remove(key);
-					BSTs1[ds]->insert(key);
-					BST_lk0[ds]->unlock();
-					BST_lk1[ds]->unlock();
-				}else if(ds%4==2){
-					BST_lk0[ds]->lock();
-					// BST_lk1[ds]->lock();
-					BSTs0[ds]->remove(key);
-					BSTs0[ds]->insert(key);
-					BST_lk0[ds]->unlock();
-					// BST_lk1[ds]->unlock();
+				int ds_a= dist(gen);
+				int ds_b = dist(gen);
+				int txn = opDist(gen);
+				if(txn%4==0){
+					BST_lk0[ds_a]->lock();
+					BST_lk1[ds_b]->lock();
+					BSTs0[ds_a]->remove(key);
+					BSTs1[ds_b]->insert(key);
+					BST_lk0[ds_a]->unlock();
+					BST_lk1[ds_b]->unlock();
+				}else if(txn%4==1){
+					BST_lk0[ds_a]->lock();
+					BST_lk1[ds_b]->lock();
+					BSTs1[ds_b]->remove(key);
+					BSTs0[ds_a]->insert(key);
+					BST_lk0[ds_a]->unlock();
+					BST_lk1[ds_b]->unlock();
+				}else if(txn%4==2){
+					int lk1 = ds_a<ds_b?ds_a:ds_b;
+					int lk2 = ds_a<ds_b?ds_b:ds_a;
+					if(ds_a==ds_b){continue;}
+					BST_lk0[lk1]->lock();
+					BST_lk0[lk2]->lock();
+					BSTs0[ds_a]->remove(key);
+					BSTs0[ds_b]->insert(key);
+					BST_lk0[lk1]->unlock();
+					BST_lk0[lk2]->unlock();
 				}else{
-					// BST_lk0[ds]->lock();
-					BST_lk1[ds]->lock();
-					BSTs1[ds]->remove(key);
-					BSTs1[ds]->insert(key);
-					// BST_lk0[ds]->unlock();
-					BST_lk1[ds]->unlock();
+					int lk1 = ds_a<ds_b?ds_a:ds_b;
+					int lk2 = ds_a<ds_b?ds_b:ds_a;
+					if(ds_a==ds_b){continue;}
+					BST_lk1[lk1]->lock();
+					BST_lk1[lk2]->lock();
+					BSTs1[ds_a]->remove(key);
+					BSTs1[ds_b]->insert(key);
+					BST_lk1[lk1]->unlock();
+					BST_lk1[lk2]->unlock();
 				}
-
-				// if(x <= crossover){
-				// 	BST_lk0[ds]->lock();
-				// 	BSTs0[ds]->insert(key);
-				// 	BST_lk0[ds]->unlock();
-				// }else{
-				// 	BST_lk1[ds]->lock();
-				// 	BSTs1[ds]->insert(key);
-				// 	BST_lk1[ds]->unlock();
-				// }
 			}
 		}
 		ops++;
+		if(std::chrono::steady_clock::now() >= nextLogTime){
+			localOps[intervalIdx] = ops;
+			intervalIdx++;
+			nextLogTime += std::chrono::seconds(interval);
+		}
 	}
+
 
 	globalLK->lock();
 	if(node==0)
 	{
-		ops0 += ops;
+		for(int i=0; i<localOps.size(); i++){
+			globalOps0[i] += localOps[i];
+		}
+		ops0 = globalOps0[globalOps0.size()-1];
 	}
 	else
 	{
-		ops1 += ops;
+		for(int i=0; i<localOps.size(); i++){
+			globalOps1[i] += localOps[i];
+		}
+		ops1 = globalOps1[globalOps1.size()-1];
 	}
 	globalLK->unlock();
 
 	pthread_barrier_wait(&bar);
-
-
-	if(node == 0){
-		// std::cout<<"about to clean up"<<std::endl;
-		// //clean up initialize data structures again
-		// for(int i = 0; i < BSTs0.size(); i++)
-		// {
-		// 	if(BSTs0[i] != nullptr)
-		// 	{
-		// 		delete BSTs0[i];
-		// 		BSTs0[i] = nullptr;
-		// 	}
-		// 	delete BSTs0[i];
-		// }
-		// BSTs0.clear();
-		// for(int i = 0; i < BST_lk0.size(); i++)
-		// {
-		// 	if(BST_lk0[i] != nullptr)
-		// 	{
-		// 		delete BST_lk0[i];
-		// 		BST_lk0[i] = nullptr;
-		// 	}
-		// }
-		// BST_lk0.clear();
-
-		// for(int i = 0; i < BSTs1.size(); i++)
-		// {
-		// 	if(BSTs1[i] != nullptr)
-		// 	{
-		// 		delete BSTs1[i];
-		// 		BSTs1[i] = nullptr;
-		// 	}
-		// }
-		// BSTs1.clear();
-		// for(int i = 0; i < BST_lk1.size(); i++)
-		// {
-		// 	if(BST_lk1[i] != nullptr)
-		// 	{
-		// 		delete BST_lk1[i];
-		// 		BST_lk1[i] = nullptr;
-		// 	}
-		// }
-		// BST_lk1.clear();
-		// std::cout<<"just cleaned up"<<std::endl;
-	}
-	pthread_barrier_wait(&bar);
-	
 }
 
 
