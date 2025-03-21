@@ -50,12 +50,14 @@ public:
 	 * \param[in] data Data to be inserted.
 	 *
 	 */
-	BinaryNode* deleteHelper(BinaryNode *node, int data);
+	BinaryNode* deleteHelper(BinaryNode* parent, BinaryNode *node, int data);
 
 	BinaryNode* findMin(BinaryNode *node);
 
-	void insert(int data);
+	int insert(int data);
 
+	int getDepth();
+	int getDepthHelper(BinaryNode *node);
 	/*!
 	 * \brief Look up data in the binary search tree
 	 * 
@@ -66,7 +68,7 @@ public:
 	 *
 	 */ 
 
-	bool lookup(int data);
+	int lookup(int data);
 
 	/*!
 	 * 
@@ -155,7 +157,22 @@ void BinarySearchTree::update(int data)
 
 void BinarySearchTree::remove(int data)
 {
-	root = deleteHelper(root, data);
+	if(root==NULL){return;}
+	if(root->getData() == data)
+	{
+		delete root;
+		root = NULL;
+		return;
+	}
+	else if (root->getData() < data) {
+        root->setLeftChild(deleteHelper(root, root->getLeftChild(), data));
+    } 
+	else if (data > root->getData()) {
+        root->setRightChild( deleteHelper(root, root->getRightChild(), data));
+    }
+
+
+	//root = deleteHelper(root, data);
 	// if(root == NULL)
 	// {
 	// 	return;
@@ -201,64 +218,96 @@ void BinarySearchTree::remove(int data)
 	// }
 }
 
-void BinarySearchTree::insert(int data)
+int BinarySearchTree::insert(int data)
 {
 	BinaryNode *leaf = new BinaryNode(data);
 	if(root == NULL)
 	{
 		root = leaf;
-		return;
+		return 0;
 	}
 	BinaryNode *current = root;
-	BinaryNode *parent;
+	BinaryNode *parent= nullptr;
+	int level = 0;
 	while(current != NULL)
 	{
 		parent = current;
-		if(data <= current->getData())
+		if(data < current->getData())
 		{
 			current = current->getLeftChild();
+			level++;
 			
-		}else
+		}else if(data > current->getData())
 		{
 			current = current->getRightChild();
+			level++;
 			
+		}
+		else{
+			//std::cout << data << " already exists at level " << level << std::endl;
+			delete leaf;
+			return level;
 		}
 	}
 
 	//current = leaf;
-	if(leaf->getData() < parent->getData())
+	if(data < parent->getData()){
 		parent->setLeftChild(leaf);
-	else if(leaf->getData() > parent->getData())
+	}
+	else {
 		parent->setRightChild(leaf);
-	else
-		delete leaf;
+	}
+	//std::cout << "Inserted " << data << " at level " << level << std::endl;
+	return level;
 }
 
 
-bool BinarySearchTree::lookup(int data)
+int BinarySearchTree::getDepth()
+{
+	return getDepthHelper(root);
+	
+}
+
+int BinarySearchTree::getDepthHelper(BinaryNode *node)
+{
+	if(node == NULL)
+		return 0;
+	
+	int leftDepth = getDepthHelper(node->getLeftChild());
+	int rightDepth = getDepthHelper(node->getRightChild());
+	return std::max(leftDepth, rightDepth) + 1;
+	
+}
+
+int BinarySearchTree::lookup(int data)
 {
 	if (root == NULL)
 	{
-		return false;
+		return 0;
 	}
 	BinaryNode *current = root;
 	BinaryNode *parent;
+	int level = 0;
 	while (current != NULL)
 	{
 		if (current->getData() == data)
 		{
-			return true;
+			//std::cout << "Found " << data << " at level " << level << std::endl;
+			return level;
 		}
 
 		if(data < current->getData())
 		{
 			current = current->getLeftChild();
+			level++;
 		}else{
 			current = current->getRightChild();
+			level++;
 		}
 	}
+	//std::cout << data << " not found. Searched up to depth " << level << std::endl;
 
-	return false;
+	return level;
 }
 
 void BinarySearchTree::postOrderPrint()
@@ -336,14 +385,14 @@ BinaryNode* BinarySearchTree::findMin(BinaryNode *node){
 }
 
 
-BinaryNode* BinarySearchTree::deleteHelper(BinaryNode *node, int key){
+BinaryNode* BinarySearchTree::deleteHelper(BinaryNode* parent, BinaryNode *node, int key){
 	if (!node) return nullptr; // Key not found
 
     if (key < node->getData()) {
-        node->setLeftChild(deleteHelper(node->getLeftChild(), key));
+        node->setLeftChild(deleteHelper(node, node->getLeftChild(), key));
     } 
 	else if (key > node->getData()) {
-        node->setRightChild( deleteHelper(node->getLeftChild(), key));
+        node->setRightChild( deleteHelper(node, node->getRightChild(), key));
     } else {
          // Node found, handle deletion cases
         if (!node->getLeftChild()) {
@@ -359,8 +408,20 @@ BinaryNode* BinarySearchTree::deleteHelper(BinaryNode *node, int key){
 
             // Two children: Replace with inorder successor
             BinaryNode* temp = findMin(node->getRightChild());
-			node->setData(temp->getData());
-			node->setRightChild(deleteHelper(node->getRightChild(), temp->getData()));
+			BinaryNode* temp2 = new BinaryNode(temp->getData());
+			temp2->setLeftChild(node->getLeftChild());
+			temp2->setRightChild(node->getRightChild());
+			delete node;
+			//node->setData(temp->getData());
+			if(parent->getData() > temp2->getData())
+			{
+				parent->setLeftChild(temp2);
+			}
+			else
+			{
+				parent->setRightChild(temp2);
+			}
+			node->setRightChild(deleteHelper(temp2, temp2->getRightChild(), temp2->getData()));
         }
         return node;
 }

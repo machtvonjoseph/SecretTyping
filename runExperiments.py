@@ -99,7 +99,7 @@ if __name__ == "__main__":
         run_command("echo Stack Results (UMF) >> ./Result/stack.csv")
         run_command("echo Queue Results (UMF) >> ./Result/queue.csv")
         run_command("echo LL Results (UMF)>> ./Result/ll.csv")
-        run_command("echo BST Results (UMF)>> ./Result/bst.csv")
+        run_command("echo BST Results (UMF)>> ./Result/BST_Transactions.csv")
 
         command = f"cd ./Output/{args.exprName}/ && make UMF=1"
     else:
@@ -109,7 +109,7 @@ if __name__ == "__main__":
     if(args.verbose):
         run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration,keyspace, interval, Op0, Op1, TotalOps ")
     else:
-        run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, keyspace, interval, Op0, Op1, TotalOps >> ./Result/bst.csv")
+        run_command("echo Date, Time, DS_name, num_DS, num_threads, thread_config, DS_config, duration, keyspace, interval, Op0, Op1, TotalOps >> ./Result/BST_Transactions.csv")
         
     
     if (args.DS == "stack"):
@@ -129,9 +129,9 @@ if __name__ == "__main__":
             command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:ll --meta th_config:numa:regular:split --meta DS_config:numa:regular --meta x:0:10 >> ../../Result/ll.csv"
     elif (args.DS == "bst"):
         if (args.verbose):
-            command =f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:10000 --meta t:20:40 --meta D:600 --meta DS_name:bst --meta th_config:numa:regular:reverse --meta DS_config:numa:regular --meta k:160000 --meta f:1 --meta i:10"
+            command =f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:10000 --meta t:20:40 --meta D:800 --meta DS_name:bst --meta th_config:numa:regular:reverse --meta DS_config:numa:regular --meta k:160000  --meta i:10"
         else:
-            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:10000 --meta t:20:40 --meta D:600 --meta DS_name:bst --meta th_config:numa:regular:reverse --meta DS_config:numa:regular --meta k:160000 --meta f:1 --meta i:10>> ../../Result/bst.csv"
+            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:10000 --meta t:20:40 --meta D:800 --meta DS_name:bst --meta th_config:numa:regular:reverse --meta DS_config:numa:regular --meta k:160000  --meta i:10>> ../../Result/BST_Transactions.csv"
           
     print("command is ", command)
     run_command(command)

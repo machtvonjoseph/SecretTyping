@@ -111,5 +111,5 @@
         "utils_examples.h": "c",
         "mempolicy.h": "c"
     },
-    "cmake.sourceDirectory": "/home/kidus/NUMATyping/unified-memory-framework/examples/basic"
+    "cmake.sourceDirectory": "/users/kiwo9430/NUMATyping/numa-clang-tool"
 }

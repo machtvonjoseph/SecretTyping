@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" width="1200" height="566" onload="init(evt)" viewBox="0 0 1200 566" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg version="1.1" width="1200" height="518" onload="init(evt)" viewBox="0 0 1200 518" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <!-- Flame graph stack visualization. See https://github.com/brendangregg/FlameGraph for latest version, and http://www.brendangregg.com/flamegraphs.html for examples. -->
 <!-- NOTES:  -->
 <defs>
@@ -422,1181 +422,1109 @@
 	}
 ]]>
 </script>
-<rect x="0.0" y="0" width="1200.0" height="566.0" fill="url(#background)"  />
+<rect x="0.0" y="0" width="1200.0" height="518.0" fill="url(#background)"  />
 <text id="title" x="600.00" y="24" >Flame Graph</text>
-<text id="details" x="10.00" y="549" > </text>
+<text id="details" x="10.00" y="501" > </text>
 <text id="unzoom" x="10.00" y="24" class="hide">Reset Zoom</text>
 <text id="search" x="1090.00" y="24" >Search</text>
 <text id="ignorecase" x="1174.00" y="24" >ic</text>
-<text id="matched" x="1090.00" y="549" > </text>
+<text id="matched" x="1090.00" y="501" > </text>
 <g id="frames">
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::lookup (7,775,167,964 samples, 0.10%)</title><rect x="946.3" y="453" width="1.2" height="15.0" fill="rgb(241,168,40)" rx="2" ry="2" />
-<text  x="949.33" y="463.5" ></text>
+<title>__GI___lll_lock_wait (3,168,871,005 samples, 0.28%)</title><rect x="755.8" y="405" width="3.3" height="15.0" fill="rgb(226,96,23)" rx="2" ry="2" />
+<text  x="758.84" y="415.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (1,485,449,727 samples, 0.02%)</title><rect x="473.8" y="85" width="0.3" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
-<text  x="476.84" y="95.5" ></text>
+<title>tick_sched_handle (119,873,314 samples, 0.01%)</title><rect x="382.8" y="277" width="0.1" height="15.0" fill="rgb(219,68,16)" rx="2" ry="2" />
+<text  x="385.76" y="287.5" ></text>
 </g>
 <g >
-<title>[unknown] (2,360,930,636 samples, 0.03%)</title><rect x="782.9" y="325" width="0.4" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="785.95" y="335.5" ></text>
+<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::remove (8,772,789,703 samples, 0.77%)</title><rect x="624.9" y="389" width="9.1" height="15.0" fill="rgb(212,35,8)" rx="2" ry="2" />
+<text  x="627.89" y="399.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (97,607,598,577 samples, 1.27%)</title><rect x="459.0" y="421" width="15.1" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
-<text  x="462.04" y="431.5" ></text>
+<title>do_syscall_64 (2,041,000,795 samples, 0.18%)</title><rect x="759.2" y="373" width="2.1" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
+<text  x="762.22" y="383.5" ></text>
 </g>
 <g >
-<title>[unknown] (2,574,534,211 samples, 0.03%)</title><rect x="486.4" y="357" width="0.4" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="489.40" y="367.5" ></text>
+<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::getLeftChild (19,408,707,673 samples, 1.70%)</title><rect x="124.5" y="389" width="20.0" height="15.0" fill="rgb(219,67,16)" rx="2" ry="2" />
+<text  x="127.48" y="399.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::getData (148,471,898,111 samples, 1.94%)</title><rect x="50.3" y="437" width="22.8" height="15.0" fill="rgb(212,34,8)" rx="2" ry="2" />
-<text  x="53.27" y="447.5" >n..</text>
+<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (528,734,304 samples, 0.05%)</title><rect x="633.4" y="133" width="0.6" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
+<text  x="636.41" y="143.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::setLeftChild (1,395,121,900 samples, 0.02%)</title><rect x="797.7" y="405" width="0.2" height="15.0" fill="rgb(242,170,40)" rx="2" ry="2" />
-<text  x="800.68" y="415.5" ></text>
+<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (2,646,889,345 samples, 0.23%)</title><rect x="631.2" y="229" width="2.8" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
+<text  x="634.22" y="239.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (3,715,333,483 samples, 0.05%)</title><rect x="473.5" y="149" width="0.6" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
-<text  x="476.50" y="159.5" ></text>
+<title>get_mem_cgroup_from_mm (100,836,381 samples, 0.01%)</title><rect x="991.8" y="245" width="0.1" height="15.0" fill="rgb(218,61,14)" rx="2" ry="2" />
+<text  x="994.80" y="255.5" ></text>
 </g>
 <g >
-<title>[unknown] (9,983,309,416 samples, 0.13%)</title><rect x="879.7" y="261" width="1.5" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="882.66" y="271.5" ></text>
+<title>[libjemalloc.so.2] (1,433,713,338 samples, 0.13%)</title><rect x="1170.9" y="421" width="1.5" height="15.0" fill="rgb(218,63,15)" rx="2" ry="2" />
+<text  x="1173.94" y="431.5" ></text>
 </g>
 <g >
-<title>[unknown] (1,574,609,696 samples, 0.02%)</title><rect x="144.9" y="309" width="0.3" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="147.93" y="319.5" ></text>
+<title>std::uniform_int_distribution&lt;int&gt;::operator (56,328,400,179 samples, 4.93%)</title><rect x="691.7" y="389" width="58.2" height="15.0" fill="rgb(239,157,37)" rx="2" ry="2" />
+<text  x="694.72" y="399.5" >std::u..</text>
 </g>
 <g >
-<title>mallocx (47,894,585,226 samples, 0.63%)</title><rect x="1180.2" y="469" width="7.3" height="15.0" fill="rgb(205,3,0)" rx="2" ry="2" />
-<text  x="1183.16" y="479.5" ></text>
+<title>do_user_addr_fault (145,701,854 samples, 0.01%)</title><rect x="158.2" y="341" width="0.1" height="15.0" fill="rgb(228,108,25)" rx="2" ry="2" />
+<text  x="161.18" y="351.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::getLeftChild (40,659,969,432 samples, 0.53%)</title><rect x="976.8" y="437" width="6.3" height="15.0" fill="rgb(219,67,16)" rx="2" ry="2" />
-<text  x="979.82" y="447.5" ></text>
+<title>wp_page_copy (133,279,758 samples, 0.01%)</title><rect x="11.8" y="309" width="0.2" height="15.0" fill="rgb(214,42,10)" rx="2" ry="2" />
+<text  x="14.83" y="319.5" ></text>
 </g>
 <g >
-<title>pthread_mutex_lock@@GLIBC_2.2.5 (520,411,230,408 samples, 6.79%)</title><rect x="1060.3" y="453" width="80.1" height="15.0" fill="rgb(244,179,42)" rx="2" ry="2" />
-<text  x="1063.27" y="463.5" >pthread_m..</text>
+<title>fpregs_assert_state_consistent (104,211,721 samples, 0.01%)</title><rect x="759.7" y="325" width="0.1" height="15.0" fill="rgb(228,109,26)" rx="2" ry="2" />
+<text  x="762.71" y="335.5" ></text>
 </g>
 <g >
-<title>[unknown] (5,575,556,492 samples, 0.07%)</title><rect x="1178.2" y="181" width="0.8" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1181.15" y="191.5" ></text>
+<title>dequeue_task (794,683,240 samples, 0.07%)</title><rect x="756.8" y="245" width="0.8" height="15.0" fill="rgb(244,183,43)" rx="2" ry="2" />
+<text  x="759.76" y="255.5" ></text>
 </g>
 <g >
-<title>[unknown] (3,085,215,852 samples, 0.04%)</title><rect x="782.8" y="389" width="0.5" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="785.84" y="399.5" ></text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (6,595,216,410 samples, 0.58%)</title><rect x="388.0" y="325" width="6.8" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
+<text  x="390.99" y="335.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::remove (695,267,300 samples, 0.01%)</title><rect x="947.5" y="453" width="0.1" height="15.0" fill="rgb(219,65,15)" rx="2" ry="2" />
-<text  x="950.53" y="463.5" ></text>
+<title>__mem_cgroup_charge (171,631,246 samples, 0.02%)</title><rect x="1061.5" y="261" width="0.2" height="15.0" fill="rgb(218,60,14)" rx="2" ry="2" />
+<text  x="1064.51" y="271.5" ></text>
 </g>
 <g >
-<title>[unknown] (3,277,670,211 samples, 0.04%)</title><rect x="486.3" y="405" width="0.5" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="489.29" y="415.5" ></text>
+<title>__hrtimer_run_queues (127,451,209 samples, 0.01%)</title><rect x="382.8" y="309" width="0.1" height="15.0" fill="rgb(237,150,35)" rx="2" ry="2" />
+<text  x="385.75" y="319.5" ></text>
 </g>
 <g >
-<title>[unknown] (762,534,621 samples, 0.01%)</title><rect x="1179.2" y="341" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1182.24" y="351.5" ></text>
+<title>handle_pte_fault (116,239,987 samples, 0.01%)</title><rect x="158.2" y="293" width="0.1" height="15.0" fill="rgb(217,57,13)" rx="2" ry="2" />
+<text  x="161.21" y="303.5" ></text>
 </g>
 <g >
-<title>[unknown] (4,120,892,672 samples, 0.05%)</title><rect x="1178.4" y="149" width="0.6" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1181.38" y="159.5" ></text>
+<title>syscall_return_via_sysret (716,806,488 samples, 0.06%)</title><rect x="761.4" y="389" width="0.7" height="15.0" fill="rgb(229,113,27)" rx="2" ry="2" />
+<text  x="764.39" y="399.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (8,265,119,327 samples, 0.11%)</title><rect x="472.8" y="197" width="1.3" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
-<text  x="475.79" y="207.5" ></text>
+<title>syscall_exit_to_user_mode (429,015,785 samples, 0.04%)</title><rect x="755.9" y="357" width="0.5" height="15.0" fill="rgb(251,211,50)" rx="2" ry="2" />
+<text  x="758.92" y="367.5" ></text>
 </g>
 <g >
-<title>[unknown] (6,744,545,607 samples, 0.09%)</title><rect x="1178.0" y="213" width="1.0" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1180.97" y="223.5" ></text>
+<title>exit_to_user_mode_prepare (365,596,680 samples, 0.03%)</title><rect x="755.9" y="341" width="0.4" height="15.0" fill="rgb(228,108,25)" rx="2" ry="2" />
+<text  x="758.95" y="351.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (2,303,566,874 samples, 0.03%)</title><rect x="811.1" y="117" width="0.4" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
-<text  x="814.15" y="127.5" ></text>
+<title>tick_sched_timer (112,232,801 samples, 0.01%)</title><rect x="621.9" y="293" width="0.1" height="15.0" fill="rgb(254,227,54)" rx="2" ry="2" />
+<text  x="624.88" y="303.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (6,278,585,748 samples, 0.08%)</title><rect x="473.1" y="181" width="1.0" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
-<text  x="476.10" y="191.5" ></text>
+<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::setRightChild (123,273,433 samples, 0.01%)</title><rect x="390.6" y="261" width="0.2" height="15.0" fill="rgb(205,3,0)" rx="2" ry="2" />
+<text  x="393.63" y="271.5" ></text>
 </g>
 <g >
-<title>[unknown] (2,478,340,746 samples, 0.03%)</title><rect x="444.1" y="325" width="0.4" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="447.10" y="335.5" ></text>
+<title>std::mersenne_twister_engine&lt;unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul&gt;::operator (55,890,001,551 samples, 4.90%)</title><rect x="634.0" y="389" width="57.7" height="15.0" fill="rgb(235,139,33)" rx="2" ry="2" />
+<text  x="636.96" y="399.5" >std::m..</text>
 </g>
 <g >
-<title>[unknown] (3,190,646,026 samples, 0.04%)</title><rect x="486.3" y="389" width="0.5" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="489.30" y="399.5" ></text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (4,588,950,062 samples, 0.40%)</title><rect x="390.1" y="277" width="4.7" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
+<text  x="393.07" y="287.5" ></text>
 </g>
 <g >
-<title>[unknown] (669,419,958 samples, 0.01%)</title><rect x="1140.3" y="389" width="0.1" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1143.31" y="399.5" ></text>
+<title>unmap_page_range (1,876,425,773 samples, 0.16%)</title><rect x="1186.2" y="277" width="2.0" height="15.0" fill="rgb(206,5,1)" rx="2" ry="2" />
+<text  x="1189.21" y="287.5" ></text>
 </g>
 <g >
-<title>pthread_mutex_unlock@@GLIBC_2.2.5 (116,823,353,349 samples, 1.52%)</title><rect x="1140.5" y="453" width="18.0" height="15.0" fill="rgb(227,104,24)" rx="2" ry="2" />
-<text  x="1143.48" y="463.5" ></text>
+<title>__irqentry_text_end (148,526,863 samples, 0.01%)</title><rect x="990.7" y="373" width="0.2" height="15.0" fill="rgb(248,199,47)" rx="2" ry="2" />
+<text  x="993.72" y="383.5" ></text>
 </g>
 <g >
-<title>[unknown] (1,458,447,073 samples, 0.02%)</title><rect x="144.9" y="293" width="0.3" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="147.95" y="303.5" ></text>
+<title>mmput (1,881,531,957 samples, 0.16%)</title><rect x="1186.2" y="341" width="2.0" height="15.0" fill="rgb(226,99,23)" rx="2" ry="2" />
+<text  x="1189.21" y="351.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::getLeftChild (39,719,386,960 samples, 0.52%)</title><rect x="956.6" y="437" width="6.1" height="15.0" fill="rgb(226,97,23)" rx="2" ry="2" />
-<text  x="959.63" y="447.5" ></text>
+<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::getRightChild (976,976,262 samples, 0.09%)</title><rect x="384.6" y="373" width="1.1" height="15.0" fill="rgb(233,129,31)" rx="2" ry="2" />
+<text  x="387.64" y="383.5" ></text>
 </g>
 <g >
-<title>[unknown] (2,109,859,220 samples, 0.03%)</title><rect x="486.5" y="341" width="0.3" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="489.47" y="351.5" ></text>
+<title>__irqentry_text_end (111,132,120 samples, 0.01%)</title><rect x="1060.5" y="373" width="0.1" height="15.0" fill="rgb(248,199,47)" rx="2" ry="2" />
+<text  x="1063.53" y="383.5" ></text>
 </g>
 <g >
-<title>[unknown] (1,592,086,660 samples, 0.02%)</title><rect x="12.8" y="357" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="15.80" y="367.5" ></text>
+<title>exc_page_fault (214,543,247 samples, 0.02%)</title><rect x="11.8" y="405" width="0.2" height="15.0" fill="rgb(212,35,8)" rx="2" ry="2" />
+<text  x="14.79" y="415.5" ></text>
 </g>
 <g >
-<title>[unknown] (6,744,545,607 samples, 0.09%)</title><rect x="1178.0" y="341" width="1.0" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1180.97" y="351.5" ></text>
+<title>umf_alloc (1,757,136,350 samples, 0.15%)</title><rect x="1076.9" y="373" width="1.8" height="15.0" fill="rgb(252,218,52)" rx="2" ry="2" />
+<text  x="1079.88" y="383.5" ></text>
 </g>
 <g >
-<title>umf_alloc (6,932,162,027 samples, 0.09%)</title><rect x="488.4" y="421" width="1.1" height="15.0" fill="rgb(252,218,52)" rx="2" ry="2" />
-<text  x="491.45" y="431.5" ></text>
+<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::~numa (331,735,731 samples, 0.03%)</title><rect x="835.5" y="405" width="0.3" height="15.0" fill="rgb(210,25,6)" rx="2" ry="2" />
+<text  x="838.48" y="415.5" ></text>
 </g>
 <g >
-<title>mallocx (5,555,721,808 samples, 0.07%)</title><rect x="1020.5" y="421" width="0.8" height="15.0" fill="rgb(205,3,0)" rx="2" ry="2" />
-<text  x="1023.46" y="431.5" ></text>
+<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::insert (68,656,481,977 samples, 6.01%)</title><rect x="1007.7" y="389" width="71.0" height="15.0" fill="rgb(217,57,13)" rx="2" ry="2" />
+<text  x="1010.73" y="399.5" >numa&lt;Bin..</text>
 </g>
 <g >
-<title>[unknown] (29,821,908,579 samples, 0.39%)</title><rect x="876.6" y="357" width="4.6" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="879.61" y="367.5" ></text>
+<title>fpregs_assert_state_consistent (191,970,880 samples, 0.02%)</title><rect x="756.1" y="325" width="0.2" height="15.0" fill="rgb(228,109,26)" rx="2" ry="2" />
+<text  x="759.11" y="335.5" ></text>
 </g>
 <g >
-<title>[unknown] (11,792,282,933 samples, 0.15%)</title><rect x="1049.8" y="357" width="1.9" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1052.84" y="367.5" ></text>
+<title>__memset_avx2_unaligned_erms (215,077,275 samples, 0.02%)</title><rect x="1172.5" y="421" width="0.2" height="15.0" fill="rgb(223,84,20)" rx="2" ry="2" />
+<text  x="1175.46" y="431.5" ></text>
 </g>
 <g >
-<title>[unknown] (1,398,187,910 samples, 0.02%)</title><rect x="783.1" y="293" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="786.10" y="303.5" ></text>
+<title>__handle_mm_fault (130,826,147 samples, 0.01%)</title><rect x="158.2" y="309" width="0.1" height="15.0" fill="rgb(207,9,2)" rx="2" ry="2" />
+<text  x="161.19" y="319.5" ></text>
 </g>
 <g >
-<title>[libjemalloc.so.2] (19,472,535,509 samples, 0.25%)</title><rect x="10.0" y="485" width="3.0" height="15.0" fill="rgb(218,63,15)" rx="2" ry="2" />
-<text  x="13.05" y="495.5" ></text>
+<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::getLeftChild (9,108,592,014 samples, 0.80%)</title><rect x="919.0" y="389" width="9.4" height="15.0" fill="rgb(219,67,16)" rx="2" ry="2" />
+<text  x="921.95" y="399.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (4,389,165,382 samples, 0.06%)</title><rect x="473.4" y="165" width="0.7" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
-<text  x="476.39" y="175.5" ></text>
+<title>do_user_addr_fault (2,323,217,563 samples, 0.20%)</title><rect x="1060.7" y="341" width="2.4" height="15.0" fill="rgb(228,108,25)" rx="2" ry="2" />
+<text  x="1063.69" y="351.5" ></text>
 </g>
 <g >
-<title>std::chrono::_V2::steady_clock::now@plt (18,328,569,011 samples, 0.24%)</title><rect x="1170.7" y="453" width="2.8" height="15.0" fill="rgb(215,47,11)" rx="2" ry="2" />
-<text  x="1173.66" y="463.5" ></text>
+<title>exit_mmap (1,881,531,957 samples, 0.16%)</title><rect x="1186.2" y="325" width="2.0" height="15.0" fill="rgb(236,143,34)" rx="2" ry="2" />
+<text  x="1189.21" y="335.5" ></text>
 </g>
 <g >
-<title>mallocx (7,423,527,348 samples, 0.10%)</title><rect x="1188.6" y="485" width="1.2" height="15.0" fill="rgb(205,3,0)" rx="2" ry="2" />
-<text  x="1191.64" y="495.5" ></text>
+<title>__mod_lruvec_page_state (108,790,843 samples, 0.01%)</title><rect x="1186.7" y="213" width="0.1" height="15.0" fill="rgb(245,185,44)" rx="2" ry="2" />
+<text  x="1189.73" y="223.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::getLeftChild (44,333,494,908 samples, 0.58%)</title><rect x="73.1" y="437" width="6.9" height="15.0" fill="rgb(226,97,23)" rx="2" ry="2" />
-<text  x="76.14" y="447.5" ></text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::lookup (219,805,950,727 samples, 19.25%)</title><rect x="158.5" y="389" width="227.2" height="15.0" fill="rgb(241,168,40)" rx="2" ry="2" />
+<text  x="161.48" y="399.5" >numa&lt;BinarySearchTree, 0, Numa..</text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::~numa (1,096,109,631 samples, 0.01%)</title><rect x="945.8" y="453" width="0.2" height="15.0" fill="rgb(253,225,53)" rx="2" ry="2" />
-<text  x="948.83" y="463.5" ></text>
+<title>handle_mm_fault (2,027,469,194 samples, 0.18%)</title><rect x="1061.0" y="325" width="2.1" height="15.0" fill="rgb(234,135,32)" rx="2" ry="2" />
+<text  x="1063.98" y="335.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (29,768,379,562 samples, 0.39%)</title><rect x="469.5" y="277" width="4.6" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
-<text  x="472.48" y="287.5" ></text>
+<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (132,186,119 samples, 0.01%)</title><rect x="633.8" y="53" width="0.2" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
+<text  x="636.82" y="63.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (59,175,605,947 samples, 0.77%)</title><rect x="802.4" y="341" width="9.1" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
-<text  x="805.39" y="351.5" ></text>
+<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::~numa (394,813,857 samples, 0.03%)</title><rect x="835.9" y="405" width="0.4" height="15.0" fill="rgb(253,225,53)" rx="2" ry="2" />
+<text  x="838.94" y="415.5" ></text>
 </g>
 <g >
-<title>std::mersenne_twister_engine&lt;unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul&gt;::operator (44,047,357,249 samples, 0.57%)</title><rect x="861.2" y="421" width="6.8" height="15.0" fill="rgb(235,139,33)" rx="2" ry="2" />
-<text  x="864.23" y="431.5" ></text>
+<title>[libstdc++.so.6.0.30] (3,098,393,222 samples, 0.27%)</title><rect x="752.6" y="405" width="3.2" height="15.0" fill="rgb(235,140,33)" rx="2" ry="2" />
+<text  x="755.63" y="415.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::getRightChild (1,320,680,417 samples, 0.02%)</title><rect x="1022.6" y="421" width="0.2" height="15.0" fill="rgb(233,129,31)" rx="2" ry="2" />
-<text  x="1025.62" y="431.5" ></text>
+<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::getRightChild (1,025,827,863 samples, 0.09%)</title><rect x="623.8" y="373" width="1.1" height="15.0" fill="rgb(226,100,23)" rx="2" ry="2" />
+<text  x="626.83" y="383.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::lookup (2,008,605,611,926 samples, 26.22%)</title><rect x="148.3" y="437" width="309.3" height="15.0" fill="rgb(241,168,40)" rx="2" ry="2" />
-<text  x="151.25" y="447.5" >numa&lt;BinarySearchTree, 0, NumaAllocator, ..</text>
+<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::getData (5,781,176,552 samples, 0.51%)</title><rect x="997.5" y="373" width="6.0" height="15.0" fill="rgb(212,34,8)" rx="2" ry="2" />
+<text  x="1000.52" y="383.5" ></text>
 </g>
 <g >
-<title>dallocx (1,391,503,418 samples, 0.02%)</title><rect x="944.8" y="453" width="0.2" height="15.0" fill="rgb(213,40,9)" rx="2" ry="2" />
-<text  x="947.81" y="463.5" ></text>
+<title>pick_next_task (129,364,033 samples, 0.01%)</title><rect x="757.7" y="245" width="0.1" height="15.0" fill="rgb(206,4,1)" rx="2" ry="2" />
+<text  x="760.71" y="255.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::getData (787,784,012 samples, 0.01%)</title><rect x="795.6" y="421" width="0.1" height="15.0" fill="rgb(206,4,1)" rx="2" ry="2" />
-<text  x="798.58" y="431.5" ></text>
+<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::getRightChild (8,895,100,741 samples, 0.78%)</title><rect x="880.2" y="389" width="9.2" height="15.0" fill="rgb(233,129,31)" rx="2" ry="2" />
+<text  x="883.23" y="399.5" ></text>
 </g>
 <g >
-<title>[unknown] (1,370,266,886 samples, 0.02%)</title><rect x="444.3" y="293" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="447.28" y="303.5" ></text>
+<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (3,207,556,121 samples, 0.28%)</title><rect x="630.6" y="245" width="3.4" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
+<text  x="633.64" y="255.5" ></text>
 </g>
 <g >
-<title>[unknown] (20,067,273,232 samples, 0.26%)</title><rect x="1017.4" y="421" width="3.1" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1020.37" y="431.5" ></text>
+<title>umf_alloc (1,071,717,958 samples, 0.09%)</title><rect x="1006.6" y="373" width="1.1" height="15.0" fill="rgb(252,218,52)" rx="2" ry="2" />
+<text  x="1009.63" y="383.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::getData (803,890,308 samples, 0.01%)</title><rect x="146.9" y="421" width="0.1" height="15.0" fill="rgb(212,34,8)" rx="2" ry="2" />
-<text  x="149.90" y="431.5" ></text>
+<title>futex_wait (2,249,254,124 samples, 0.20%)</title><rect x="756.4" y="309" width="2.3" height="15.0" fill="rgb(235,138,33)" rx="2" ry="2" />
+<text  x="759.42" y="319.5" ></text>
 </g>
 <g >
-<title>[unknown] (3,673,423,044 samples, 0.05%)</title><rect x="443.9" y="421" width="0.6" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="446.92" y="431.5" ></text>
+<title>clear_page_erms (122,372,587 samples, 0.01%)</title><rect x="1061.9" y="213" width="0.1" height="15.0" fill="rgb(229,113,27)" rx="2" ry="2" />
+<text  x="1064.86" y="223.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (4,696,777,215 samples, 0.06%)</title><rect x="810.8" y="165" width="0.7" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
-<text  x="813.78" y="175.5" ></text>
+<title>mallocx (1,288,214,633 samples, 0.11%)</title><rect x="1188.2" y="437" width="1.3" height="15.0" fill="rgb(205,3,0)" rx="2" ry="2" />
+<text  x="1191.15" y="447.5" ></text>
 </g>
 <g >
-<title>[unknown] (48,629,108,680 samples, 0.63%)</title><rect x="873.7" y="437" width="7.5" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="876.71" y="447.5" ></text>
+<title>zap_pte_range (1,857,873,434 samples, 0.16%)</title><rect x="1186.2" y="245" width="2.0" height="15.0" fill="rgb(231,120,28)" rx="2" ry="2" />
+<text  x="1189.23" y="255.5" ></text>
 </g>
 <g >
-<title>BinarySearchTest (5,551,615,281,515 samples, 72.46%)</title><rect x="13.0" y="453" width="855.0" height="15.0" fill="rgb(253,222,53)" rx="2" ry="2" />
-<text  x="16.05" y="463.5" >BinarySearchTest</text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (2,627,267,802 samples, 0.23%)</title><rect x="392.1" y="229" width="2.7" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
+<text  x="395.10" y="239.5" ></text>
 </g>
 <g >
-<title>[unknown] (22,253,583,714 samples, 0.29%)</title><rect x="887.4" y="373" width="3.5" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="890.45" y="383.5" ></text>
+<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::insert (167,090,284 samples, 0.01%)</title><rect x="837.0" y="405" width="0.2" height="15.0" fill="rgb(217,57,13)" rx="2" ry="2" />
+<text  x="840.03" y="415.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (58,715,337,016 samples, 0.77%)</title><rect x="465.0" y="341" width="9.1" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
-<text  x="468.02" y="351.5" ></text>
+<title>__vdso_clock_gettime (3,379,483,895 samples, 0.30%)</title><rect x="762.1" y="405" width="3.5" height="15.0" fill="rgb(254,226,54)" rx="2" ry="2" />
+<text  x="765.13" y="415.5" ></text>
 </g>
 <g >
-<title>__GI___lll_lock_wake (62,824,506,238 samples, 0.82%)</title><rect x="881.2" y="453" width="9.7" height="15.0" fill="rgb(210,23,5)" rx="2" ry="2" />
-<text  x="884.20" y="463.5" ></text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (119,478,932 samples, 0.01%)</title><rect x="394.7" y="37" width="0.1" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
+<text  x="397.69" y="47.5" ></text>
 </g>
 <g >
-<title>[unknown] (1,136,087,791 samples, 0.01%)</title><rect x="890.7" y="277" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="893.70" y="287.5" ></text>
+<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::lookup (444,435,836 samples, 0.04%)</title><rect x="837.2" y="405" width="0.5" height="15.0" fill="rgb(235,138,33)" rx="2" ry="2" />
+<text  x="840.21" y="415.5" ></text>
 </g>
 <g >
-<title>[unknown] (795,759,912 samples, 0.01%)</title><rect x="1179.2" y="373" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1182.24" y="383.5" ></text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::lookup (464,329,820 samples, 0.04%)</title><rect x="836.5" y="405" width="0.5" height="15.0" fill="rgb(241,168,40)" rx="2" ry="2" />
+<text  x="839.51" y="415.5" ></text>
 </g>
 <g >
-<title>[unknown] (6,744,545,607 samples, 0.09%)</title><rect x="1178.0" y="373" width="1.0" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1180.97" y="383.5" ></text>
+<title>pthread_mutex_trylock@@GLIBC_2.34 (712,109,541 samples, 0.06%)</title><rect x="1184.7" y="421" width="0.7" height="15.0" fill="rgb(223,86,20)" rx="2" ry="2" />
+<text  x="1187.70" y="431.5" ></text>
 </g>
 <g >
-<title>[unknown] (3,143,246,062 samples, 0.04%)</title><rect x="782.8" y="405" width="0.5" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="785.83" y="415.5" ></text>
+<title>__x64_sys_futex (1,436,001,287 samples, 0.13%)</title><rect x="759.8" y="341" width="1.5" height="15.0" fill="rgb(239,159,38)" rx="2" ry="2" />
+<text  x="762.84" y="351.5" ></text>
 </g>
 <g >
-<title>[unknown] (3,349,262,975 samples, 0.04%)</title><rect x="782.8" y="421" width="0.5" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="785.80" y="431.5" ></text>
+<title>__schedule (1,782,022,712 samples, 0.16%)</title><rect x="756.6" y="261" width="1.9" height="15.0" fill="rgb(227,103,24)" rx="2" ry="2" />
+<text  x="759.62" y="271.5" ></text>
 </g>
 <g >
-<title>[unknown] (762,534,621 samples, 0.01%)</title><rect x="1179.2" y="357" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1182.24" y="367.5" ></text>
+<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::getRightChild (8,351,025,445 samples, 0.73%)</title><rect x="144.5" y="389" width="8.7" height="15.0" fill="rgb(226,100,23)" rx="2" ry="2" />
+<text  x="147.54" y="399.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::insert (99,734,461,820 samples, 1.30%)</title><rect x="474.2" y="437" width="15.3" height="15.0" fill="rgb(217,57,13)" rx="2" ry="2" />
-<text  x="477.16" y="447.5" ></text>
+<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::getLeftChild (19,016,374,045 samples, 1.67%)</title><rect x="89.1" y="389" width="19.7" height="15.0" fill="rgb(226,97,23)" rx="2" ry="2" />
+<text  x="92.11" y="399.5" ></text>
 </g>
 <g >
-<title>std::mersenne_twister_engine&lt;unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul&gt;::operator (15,049,952,787 samples, 0.20%)</title><rect x="1055.2" y="437" width="2.3" height="15.0" fill="rgb(235,139,33)" rx="2" ry="2" />
-<text  x="1058.15" y="447.5" ></text>
+<title>rmqueue_bulk (109,981,629 samples, 0.01%)</title><rect x="1062.1" y="197" width="0.1" height="15.0" fill="rgb(235,138,33)" rx="2" ry="2" />
+<text  x="1065.06" y="207.5" ></text>
 </g>
 <g >
-<title>[unknown] (13,154,524,339 samples, 0.17%)</title><rect x="1049.6" y="373" width="2.1" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1052.63" y="383.5" ></text>
+<title>x64_sys_call (2,304,875,853 samples, 0.20%)</title><rect x="756.4" y="357" width="2.3" height="15.0" fill="rgb(247,194,46)" rx="2" ry="2" />
+<text  x="759.37" y="367.5" ></text>
 </g>
 <g >
-<title>[unknown] (1,758,835,567 samples, 0.02%)</title><rect x="486.5" y="309" width="0.3" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="489.52" y="319.5" ></text>
+<title>__free_one_page (189,962,582 samples, 0.02%)</title><rect x="1187.8" y="133" width="0.2" height="15.0" fill="rgb(210,25,6)" rx="2" ry="2" />
+<text  x="1190.79" y="143.5" ></text>
 </g>
 <g >
-<title>[unknown] (1,656,600,597 samples, 0.02%)</title><rect x="12.8" y="421" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="15.79" y="431.5" ></text>
+<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::getData (28,555,077,755 samples, 2.50%)</title><rect x="889.4" y="389" width="29.6" height="15.0" fill="rgb(206,4,1)" rx="2" ry="2" />
+<text  x="892.44" y="399.5" >nu..</text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (87,774,664,476 samples, 1.15%)</title><rect x="460.5" y="405" width="13.6" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
-<text  x="463.55" y="415.5" ></text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (3,284,825,861 samples, 0.29%)</title><rect x="391.4" y="245" width="3.4" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
+<text  x="394.42" y="255.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (81,223,285,966 samples, 1.06%)</title><rect x="461.6" y="389" width="12.5" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
-<text  x="464.56" y="399.5" ></text>
+<title>exc_page_fault (169,763,775 samples, 0.01%)</title><rect x="399.5" y="357" width="0.2" height="15.0" fill="rgb(212,35,8)" rx="2" ry="2" />
+<text  x="402.54" y="367.5" ></text>
 </g>
 <g >
-<title>std::chrono::_V2::steady_clock::now (78,443,561,982 samples, 1.02%)</title><rect x="1158.6" y="453" width="12.1" height="15.0" fill="rgb(249,203,48)" rx="2" ry="2" />
-<text  x="1161.57" y="463.5" ></text>
+<title>handle_mm_fault (142,077,621 samples, 0.01%)</title><rect x="158.2" y="325" width="0.1" height="15.0" fill="rgb(234,135,32)" rx="2" ry="2" />
+<text  x="161.18" y="335.5" ></text>
 </g>
 <g >
-<title>[unknown] (10,928,492,504 samples, 0.14%)</title><rect x="1050.0" y="341" width="1.7" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1052.98" y="351.5" ></text>
+<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::getData (6,946,796,962 samples, 0.61%)</title><rect x="81.9" y="389" width="7.2" height="15.0" fill="rgb(212,34,8)" rx="2" ry="2" />
+<text  x="84.93" y="399.5" ></text>
 </g>
 <g >
-<title>[unknown] (1,459,238,114 samples, 0.02%)</title><rect x="12.8" y="309" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="15.82" y="319.5" ></text>
+<title>release_pages (1,081,372,491 samples, 0.09%)</title><rect x="1186.9" y="197" width="1.1" height="15.0" fill="rgb(228,106,25)" rx="2" ry="2" />
+<text  x="1189.92" y="207.5" ></text>
 </g>
 <g >
-<title>umf_alloc (1,626,041,712 samples, 0.02%)</title><rect x="1060.0" y="437" width="0.3" height="15.0" fill="rgb(252,218,52)" rx="2" ry="2" />
-<text  x="1063.02" y="447.5" ></text>
+<title>do_user_addr_fault (155,253,568 samples, 0.01%)</title><rect x="399.5" y="341" width="0.2" height="15.0" fill="rgb(228,108,25)" rx="2" ry="2" />
+<text  x="402.55" y="351.5" ></text>
 </g>
 <g >
-<title>[unknown] (2,303,497,946 samples, 0.03%)</title><rect x="144.8" y="357" width="0.4" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="147.82" y="367.5" ></text>
+<title>do_user_addr_fault (1,677,681,124 samples, 0.15%)</title><rect x="991.1" y="341" width="1.7" height="15.0" fill="rgb(228,108,25)" rx="2" ry="2" />
+<text  x="994.06" y="351.5" ></text>
 </g>
 <g >
-<title>[unknown] (7,533,108,099 samples, 0.10%)</title><rect x="880.0" y="245" width="1.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="883.04" y="255.5" ></text>
+<title>lru_cache_add (553,977,943 samples, 0.05%)</title><rect x="1062.3" y="245" width="0.5" height="15.0" fill="rgb(247,196,47)" rx="2" ry="2" />
+<text  x="1065.25" y="255.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::insert (2,119,517,255 samples, 0.03%)</title><rect x="946.0" y="453" width="0.3" height="15.0" fill="rgb(223,87,20)" rx="2" ry="2" />
-<text  x="949.00" y="463.5" ></text>
+<title>wake_up_q (766,724,942 samples, 0.07%)</title><rect x="760.2" y="293" width="0.8" height="15.0" fill="rgb(237,151,36)" rx="2" ry="2" />
+<text  x="763.19" y="303.5" ></text>
 </g>
 <g >
-<title>[libstdc++.so.6.0.30] (17,349,570,590 samples, 0.23%)</title><rect x="870.6" y="453" width="2.6" height="15.0" fill="rgb(235,140,33)" rx="2" ry="2" />
-<text  x="873.56" y="463.5" ></text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (8,510,100,514 samples, 0.75%)</title><rect x="386.0" y="373" width="8.8" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
+<text  x="389.02" y="383.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (1,839,341,067 samples, 0.02%)</title><rect x="811.2" y="101" width="0.3" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
-<text  x="814.22" y="111.5" ></text>
+<title>__x64_sys_exit (1,881,531,957 samples, 0.16%)</title><rect x="1186.2" y="389" width="2.0" height="15.0" fill="rgb(226,97,23)" rx="2" ry="2" />
+<text  x="1189.21" y="399.5" ></text>
 </g>
 <g >
-<title>[unknown] (696,151,205 samples, 0.01%)</title><rect x="1177.9" y="453" width="0.1" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1180.86" y="463.5" ></text>
+<title>do_anonymous_page (1,598,437,477 samples, 0.14%)</title><rect x="1061.3" y="277" width="1.7" height="15.0" fill="rgb(238,155,37)" rx="2" ry="2" />
+<text  x="1064.33" y="287.5" ></text>
 </g>
 <g >
-<title>[unknown] (10,529,801,207 samples, 0.14%)</title><rect x="1050.0" y="325" width="1.7" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1053.04" y="335.5" ></text>
+<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::getLeftChild (9,552,557,577 samples, 0.84%)</title><rect x="870.4" y="389" width="9.8" height="15.0" fill="rgb(226,97,23)" rx="2" ry="2" />
+<text  x="873.36" y="399.5" ></text>
 </g>
 <g >
-<title>umf_alloc (5,382,358,289 samples, 0.07%)</title><rect x="1054.3" y="421" width="0.9" height="15.0" fill="rgb(252,218,52)" rx="2" ry="2" />
-<text  x="1057.32" y="431.5" ></text>
+<title>clock_gettime@@GLIBC_2.17 (67,151,512,375 samples, 5.88%)</title><rect x="765.6" y="405" width="69.4" height="15.0" fill="rgb(250,209,50)" rx="2" ry="2" />
+<text  x="768.62" y="415.5" >clock_g..</text>
 </g>
 <g >
-<title>[unknown] (1,369,220,709 samples, 0.02%)</title><rect x="783.1" y="277" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="786.10" y="287.5" ></text>
+<title>update_load_avg (308,400,790 samples, 0.03%)</title><rect x="757.2" y="197" width="0.3" height="15.0" fill="rgb(240,165,39)" rx="2" ry="2" />
+<text  x="760.18" y="207.5" ></text>
 </g>
 <g >
-<title>[unknown] (13,885,439,053 samples, 0.18%)</title><rect x="1049.5" y="405" width="2.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1052.52" y="415.5" ></text>
+<title>x64_sys_call (1,453,358,578 samples, 0.13%)</title><rect x="759.8" y="357" width="1.5" height="15.0" fill="rgb(247,194,46)" rx="2" ry="2" />
+<text  x="762.83" y="367.5" ></text>
 </g>
 <g >
-<title>pthread_mutex_unlock@plt (695,976,436 samples, 0.01%)</title><rect x="1158.5" y="453" width="0.1" height="15.0" fill="rgb(247,194,46)" rx="2" ry="2" />
-<text  x="1161.47" y="463.5" ></text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (424,859,180 samples, 0.04%)</title><rect x="394.4" y="117" width="0.4" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
+<text  x="397.37" y="127.5" ></text>
 </g>
 <g >
-<title>mallocx (11,209,515,461 samples, 0.15%)</title><rect x="145.2" y="421" width="1.7" height="15.0" fill="rgb(205,3,0)" rx="2" ry="2" />
-<text  x="148.17" y="431.5" ></text>
+<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (379,063,547 samples, 0.03%)</title><rect x="633.6" y="117" width="0.4" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
+<text  x="636.56" y="127.5" ></text>
 </g>
 <g >
-<title>all (7,661,947,633,582 samples, 100%)</title><rect x="10.0" y="517" width="1180.0" height="15.0" fill="rgb(213,39,9)" rx="2" ry="2" />
-<text  x="13.00" y="527.5" ></text>
+<title>mallocx (4,250,729,061 samples, 0.37%)</title><rect x="1063.3" y="373" width="4.4" height="15.0" fill="rgb(205,3,0)" rx="2" ry="2" />
+<text  x="1066.28" y="383.5" ></text>
 </g>
 <g >
-<title>[unknown] (5,674,872,678 samples, 0.07%)</title><rect x="1178.1" y="197" width="0.9" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1181.14" y="207.5" ></text>
+<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::getRightChild (9,762,404,012 samples, 0.86%)</title><rect x="928.4" y="389" width="10.1" height="15.0" fill="rgb(226,100,23)" rx="2" ry="2" />
+<text  x="931.37" y="399.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (992,970,986 samples, 0.01%)</title><rect x="811.4" y="69" width="0.1" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
-<text  x="814.35" y="79.5" ></text>
+<title>schedule (1,845,409,132 samples, 0.16%)</title><rect x="756.6" y="277" width="1.9" height="15.0" fill="rgb(254,229,54)" rx="2" ry="2" />
+<text  x="759.58" y="287.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (36,609,675,575 samples, 0.48%)</title><rect x="468.4" y="293" width="5.7" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
-<text  x="471.43" y="303.5" ></text>
+<title>futex_wait_queue_me (1,913,380,960 samples, 0.17%)</title><rect x="756.5" y="293" width="2.0" height="15.0" fill="rgb(254,228,54)" rx="2" ry="2" />
+<text  x="759.51" y="303.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::insert (102,968,716,678 samples, 1.34%)</title><rect x="132.4" y="437" width="15.9" height="15.0" fill="rgb(223,87,20)" rx="2" ry="2" />
-<text  x="135.39" y="447.5" ></text>
+<title>do_user_addr_fault (177,238,315 samples, 0.02%)</title><rect x="1172.5" y="373" width="0.2" height="15.0" fill="rgb(228,108,25)" rx="2" ry="2" />
+<text  x="1175.48" y="383.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::getRightChild (71,955,804,100 samples, 0.94%)</title><rect x="80.0" y="437" width="11.0" height="15.0" fill="rgb(233,129,31)" rx="2" ry="2" />
-<text  x="82.96" y="447.5" ></text>
+<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (226,046,936 samples, 0.02%)</title><rect x="633.7" y="85" width="0.3" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
+<text  x="636.72" y="95.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::getLeftChild (1,492,253,555 samples, 0.02%)</title><rect x="1022.4" y="421" width="0.2" height="15.0" fill="rgb(226,97,23)" rx="2" ry="2" />
-<text  x="1025.39" y="431.5" ></text>
+<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::getRightChild (1,471,074,275 samples, 0.13%)</title><rect x="1005.1" y="373" width="1.5" height="15.0" fill="rgb(233,129,31)" rx="2" ry="2" />
+<text  x="1008.09" y="383.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::insert (205,162,228,750 samples, 2.68%)</title><rect x="1023.6" y="437" width="31.6" height="15.0" fill="rgb(217,57,13)" rx="2" ry="2" />
-<text  x="1026.56" y="447.5" >nu..</text>
+<title>hash_futex (145,747,085 samples, 0.01%)</title><rect x="758.6" y="293" width="0.1" height="15.0" fill="rgb(245,184,44)" rx="2" ry="2" />
+<text  x="761.59" y="303.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::getData (48,235,879,705 samples, 0.63%)</title><rect x="969.4" y="437" width="7.4" height="15.0" fill="rgb(206,4,1)" rx="2" ry="2" />
-<text  x="972.39" y="447.5" ></text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (5,268,912,009 samples, 0.46%)</title><rect x="389.4" y="293" width="5.4" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
+<text  x="392.37" y="303.5" ></text>
 </g>
 <g >
-<title>[unknown] (3,828,943,877 samples, 0.05%)</title><rect x="890.3" y="309" width="0.6" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="893.29" y="319.5" ></text>
+<title>sysvec_apic_timer_interrupt (217,742,583 samples, 0.02%)</title><rect x="382.8" y="357" width="0.2" height="15.0" fill="rgb(220,69,16)" rx="2" ry="2" />
+<text  x="385.75" y="367.5" ></text>
 </g>
 <g >
-<title>[unknown] (1,954,950,925 samples, 0.03%)</title><rect x="144.9" y="341" width="0.3" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="147.87" y="351.5" ></text>
+<title>try_to_wake_up (674,627,779 samples, 0.06%)</title><rect x="760.3" y="277" width="0.7" height="15.0" fill="rgb(220,70,16)" rx="2" ry="2" />
+<text  x="763.28" y="287.5" ></text>
 </g>
 <g >
-<title>[unknown] (61,281,300,274 samples, 0.80%)</title><rect x="881.4" y="437" width="9.5" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="884.44" y="447.5" ></text>
+<title>[libjemalloc.so.2] (1,947,515,992 samples, 0.17%)</title><rect x="10.0" y="437" width="2.0" height="15.0" fill="rgb(218,63,15)" rx="2" ry="2" />
+<text  x="13.00" y="447.5" ></text>
 </g>
 <g >
-<title>[unknown] (1,877,800,580 samples, 0.02%)</title><rect x="486.5" y="325" width="0.3" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="489.50" y="335.5" ></text>
+<title>exc_page_fault (2,494,874,440 samples, 0.22%)</title><rect x="1060.7" y="357" width="2.5" height="15.0" fill="rgb(212,35,8)" rx="2" ry="2" />
+<text  x="1063.65" y="367.5" ></text>
 </g>
 <g >
-<title>[unknown] (2,939,921,896 samples, 0.04%)</title><rect x="782.9" y="373" width="0.4" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="785.86" y="383.5" ></text>
+<title>do_anonymous_page (118,431,183 samples, 0.01%)</title><rect x="1172.5" y="309" width="0.2" height="15.0" fill="rgb(238,155,37)" rx="2" ry="2" />
+<text  x="1175.54" y="319.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::getRightChild (42,301,812,284 samples, 0.55%)</title><rect x="962.7" y="437" width="6.6" height="15.0" fill="rgb(233,129,31)" rx="2" ry="2" />
-<text  x="965.74" y="447.5" ></text>
+<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::getRightChild (7,963,074,637 samples, 0.70%)</title><rect x="108.8" y="389" width="8.2" height="15.0" fill="rgb(233,129,31)" rx="2" ry="2" />
+<text  x="111.77" y="399.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (51,681,538,159 samples, 0.67%)</title><rect x="466.1" y="325" width="8.0" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
-<text  x="469.11" y="335.5" ></text>
+<title>hash_futex (317,772,778 samples, 0.03%)</title><rect x="761.0" y="309" width="0.3" height="15.0" fill="rgb(245,184,44)" rx="2" ry="2" />
+<text  x="763.99" y="319.5" ></text>
 </g>
 <g >
-<title>[unknown] (2,045,032,188 samples, 0.03%)</title><rect x="890.6" y="293" width="0.3" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="893.56" y="303.5" ></text>
+<title>__hrtimer_run_queues (123,576,283 samples, 0.01%)</title><rect x="621.9" y="309" width="0.1" height="15.0" fill="rgb(237,150,35)" rx="2" ry="2" />
+<text  x="624.87" y="319.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::getData (44,231,598,113 samples, 0.58%)</title><rect x="949.8" y="437" width="6.8" height="15.0" fill="rgb(212,34,8)" rx="2" ry="2" />
-<text  x="952.81" y="447.5" ></text>
+<title>asm_exc_page_fault (2,093,142,439 samples, 0.18%)</title><rect x="990.9" y="373" width="2.1" height="15.0" fill="rgb(225,93,22)" rx="2" ry="2" />
+<text  x="993.87" y="383.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::setLeftChild (2,386,096,183 samples, 0.03%)</title><rect x="458.6" y="421" width="0.4" height="15.0" fill="rgb(248,200,47)" rx="2" ry="2" />
-<text  x="461.59" y="431.5" ></text>
+<title>asm_exc_page_fault (2,507,297,698 samples, 0.22%)</title><rect x="1060.6" y="373" width="2.6" height="15.0" fill="rgb(225,93,22)" rx="2" ry="2" />
+<text  x="1063.64" y="383.5" ></text>
 </g>
 <g >
-<title>pthread_mutex_trylock@@GLIBC_2.34 (4,902,722,917 samples, 0.06%)</title><rect x="1187.5" y="469" width="0.8" height="15.0" fill="rgb(223,86,20)" rx="2" ry="2" />
-<text  x="1190.55" y="479.5" ></text>
+<title>psi_group_change (261,559,750 samples, 0.02%)</title><rect x="758.1" y="229" width="0.2" height="15.0" fill="rgb(226,101,24)" rx="2" ry="2" />
+<text  x="761.06" y="239.5" ></text>
 </g>
 <g >
-<title>[unknown] (12,489,765,474 samples, 0.16%)</title><rect x="889.0" y="325" width="1.9" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="891.95" y="335.5" ></text>
+<title>__x64_sys_futex (2,290,152,520 samples, 0.20%)</title><rect x="756.4" y="341" width="2.3" height="15.0" fill="rgb(239,159,38)" rx="2" ry="2" />
+<text  x="759.38" y="351.5" ></text>
 </g>
 <g >
-<title>mallocx (9,925,005,404 samples, 0.13%)</title><rect x="486.8" y="421" width="1.5" height="15.0" fill="rgb(205,3,0)" rx="2" ry="2" />
-<text  x="489.79" y="431.5" ></text>
+<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::setLeftChild (97,383,699 samples, 0.01%)</title><rect x="835.8" y="405" width="0.1" height="15.0" fill="rgb(242,170,40)" rx="2" ry="2" />
+<text  x="838.82" y="415.5" ></text>
 </g>
 <g >
-<title>[unknown] (883,259,019 samples, 0.01%)</title><rect x="486.7" y="261" width="0.1" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="489.66" y="271.5" ></text>
+<title>std::uniform_int_distribution&lt;int&gt;::operator (4,158,841,892 samples, 0.36%)</title><rect x="1166.6" y="405" width="4.3" height="15.0" fill="rgb(239,157,37)" rx="2" ry="2" />
+<text  x="1169.64" y="415.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (23,673,752,991 samples, 0.31%)</title><rect x="470.4" y="261" width="3.7" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
-<text  x="473.42" y="271.5" ></text>
+<title>exit_mm (1,881,531,957 samples, 0.16%)</title><rect x="1186.2" y="357" width="2.0" height="15.0" fill="rgb(236,144,34)" rx="2" ry="2" />
+<text  x="1189.21" y="367.5" ></text>
 </g>
 <g >
-<title>[unknown] (1,497,364,122 samples, 0.02%)</title><rect x="486.6" y="293" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="489.56" y="303.5" ></text>
+<title>mallocx@plt (110,327,055 samples, 0.01%)</title><rect x="1067.7" y="373" width="0.1" height="15.0" fill="rgb(221,77,18)" rx="2" ry="2" />
+<text  x="1070.68" y="383.5" ></text>
 </g>
 <g >
-<title>[unknown] (1,486,116,866 samples, 0.02%)</title><rect x="444.3" y="309" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="447.26" y="319.5" ></text>
+<title>update_process_times (104,843,388 samples, 0.01%)</title><rect x="621.9" y="261" width="0.1" height="15.0" fill="rgb(250,209,50)" rx="2" ry="2" />
+<text  x="624.89" y="271.5" ></text>
 </g>
 <g >
-<title>umf_alloc (7,520,242,846 samples, 0.10%)</title><rect x="147.1" y="421" width="1.2" height="15.0" fill="rgb(252,218,52)" rx="2" ry="2" />
-<text  x="150.09" y="431.5" ></text>
+<title>find_vma (246,412,918 samples, 0.02%)</title><rect x="1060.7" y="325" width="0.3" height="15.0" fill="rgb(213,37,8)" rx="2" ry="2" />
+<text  x="1063.73" y="335.5" ></text>
 </g>
 <g >
-<title>[unknown] (874,645,151 samples, 0.01%)</title><rect x="145.0" y="261" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="148.04" y="271.5" ></text>
+<title>up_read (193,284,053 samples, 0.02%)</title><rect x="992.8" y="341" width="0.2" height="15.0" fill="rgb(209,18,4)" rx="2" ry="2" />
+<text  x="995.84" y="351.5" ></text>
 </g>
 <g >
-<title>[unknown] (14,536,426,010 samples, 0.19%)</title><rect x="1018.2" y="389" width="2.3" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1021.22" y="399.5" ></text>
+<title>__mod_lruvec_state (156,046,292 samples, 0.01%)</title><rect x="1187.2" y="181" width="0.2" height="15.0" fill="rgb(226,100,24)" rx="2" ry="2" />
+<text  x="1190.20" y="191.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::getRightChild (32,952,431,184 samples, 0.43%)</title><rect x="789.7" y="421" width="5.1" height="15.0" fill="rgb(226,100,23)" rx="2" ry="2" />
-<text  x="792.73" y="431.5" ></text>
+<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (316,110,130 samples, 0.03%)</title><rect x="633.6" y="101" width="0.4" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
+<text  x="636.63" y="111.5" ></text>
 </g>
 <g >
-<title>[unknown] (26,289,133,544 samples, 0.34%)</title><rect x="886.8" y="421" width="4.1" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="889.83" y="431.5" ></text>
+<title>__mem_cgroup_charge (260,753,077 samples, 0.02%)</title><rect x="991.6" y="261" width="0.3" height="15.0" fill="rgb(218,60,14)" rx="2" ry="2" />
+<text  x="994.64" y="271.5" ></text>
 </g>
 <g >
-<title>[unknown] (10,856,952,212 samples, 0.14%)</title><rect x="1018.8" y="309" width="1.7" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1021.79" y="319.5" ></text>
+<title>unmap_single_vma (1,876,425,773 samples, 0.16%)</title><rect x="1186.2" y="293" width="2.0" height="15.0" fill="rgb(225,93,22)" rx="2" ry="2" />
+<text  x="1189.21" y="303.5" ></text>
 </g>
 <g >
-<title>[unknown] (961,274,858 samples, 0.01%)</title><rect x="1179.2" y="437" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1182.21" y="447.5" ></text>
+<title>__mod_lruvec_state (98,350,060 samples, 0.01%)</title><rect x="1062.6" y="197" width="0.1" height="15.0" fill="rgb(226,100,24)" rx="2" ry="2" />
+<text  x="1065.56" y="207.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::getLeftChild (1,396,598,148 samples, 0.02%)</title><rect x="451.2" y="421" width="0.3" height="15.0" fill="rgb(226,97,23)" rx="2" ry="2" />
-<text  x="454.24" y="431.5" ></text>
+<title>dallocx (233,308,365 samples, 0.02%)</title><rect x="1186.0" y="437" width="0.2" height="15.0" fill="rgb(213,40,9)" rx="2" ry="2" />
+<text  x="1188.97" y="447.5" ></text>
 </g>
 <g >
-<title>[unknown] (3,384,871,933 samples, 0.04%)</title><rect x="144.6" y="421" width="0.6" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="147.65" y="431.5" ></text>
+<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::getData (1,576,030,150 samples, 0.14%)</title><rect x="622.1" y="373" width="1.6" height="15.0" fill="rgb(206,4,1)" rx="2" ry="2" />
+<text  x="625.11" y="383.5" ></text>
 </g>
 <g >
-<title>[unknown] (1,940,584,278 samples, 0.03%)</title><rect x="1178.7" y="101" width="0.3" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1181.71" y="111.5" ></text>
+<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (1,217,091,499 samples, 0.11%)</title><rect x="632.7" y="181" width="1.3" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
+<text  x="635.70" y="191.5" ></text>
 </g>
 <g >
-<title>[unknown] (1,127,419,998 samples, 0.01%)</title><rect x="12.9" y="277" width="0.1" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="15.87" y="287.5" ></text>
+<title>finish_task_switch.isra.0 (111,070,069 samples, 0.01%)</title><rect x="757.6" y="245" width="0.1" height="15.0" fill="rgb(246,189,45)" rx="2" ry="2" />
+<text  x="760.58" y="255.5" ></text>
 </g>
 <g >
-<title>[unknown] (16,674,838,646 samples, 0.22%)</title><rect x="878.6" y="293" width="2.6" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="881.63" y="303.5" ></text>
+<title>[libstdc++.so.6.0.30] (1,121,322,682,279 samples, 98.21%)</title><rect x="12.0" y="437" width="1158.9" height="15.0" fill="rgb(235,140,33)" rx="2" ry="2" />
+<text  x="15.01" y="447.5" >[libstdc++.so.6.0.30]</text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::insert (222,343,260,135 samples, 2.90%)</title><rect x="989.3" y="437" width="34.3" height="15.0" fill="rgb(223,87,20)" rx="2" ry="2" />
-<text  x="992.31" y="447.5" >nu..</text>
+<title>numa_BST_init (243,225,621,153 samples, 21.30%)</title><rect x="837.7" y="405" width="251.4" height="15.0" fill="rgb(217,56,13)" rx="2" ry="2" />
+<text  x="840.68" y="415.5" >numa_BST_init</text>
 </g>
 <g >
-<title>[unknown] (2,897,729,766 samples, 0.04%)</title><rect x="1178.6" y="133" width="0.4" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1181.57" y="143.5" ></text>
+<title>std::chrono::_V2::steady_clock::now (26,304,435,740 samples, 2.30%)</title><rect x="1135.8" y="405" width="27.2" height="15.0" fill="rgb(249,203,48)" rx="2" ry="2" />
+<text  x="1138.84" y="415.5" >s..</text>
 </g>
 <g >
-<title>[unknown] (6,744,545,607 samples, 0.09%)</title><rect x="1178.0" y="325" width="1.0" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1180.97" y="335.5" ></text>
+<title>tick_sched_handle (104,843,388 samples, 0.01%)</title><rect x="621.9" y="277" width="0.1" height="15.0" fill="rgb(219,68,16)" rx="2" ry="2" />
+<text  x="624.89" y="287.5" ></text>
 </g>
 <g >
-<title>[unknown] (2,856,640,381 samples, 0.04%)</title><rect x="144.7" y="389" width="0.5" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="147.73" y="399.5" ></text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (267,568,331 samples, 0.02%)</title><rect x="394.5" y="85" width="0.3" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
+<text  x="397.53" y="95.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::setRightChild (840,778,841 samples, 0.01%)</title><rect x="460.4" y="405" width="0.1" height="15.0" fill="rgb(205,3,0)" rx="2" ry="2" />
-<text  x="463.42" y="415.5" ></text>
+<title>sysvec_apic_timer_interrupt (228,758,518 samples, 0.02%)</title><rect x="621.9" y="357" width="0.2" height="15.0" fill="rgb(220,69,16)" rx="2" ry="2" />
+<text  x="624.87" y="367.5" ></text>
 </g>
 <g >
-<title>[unknown] (669,419,958 samples, 0.01%)</title><rect x="1140.3" y="405" width="0.1" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1143.31" y="415.5" ></text>
+<title>entry_SYSCALL_64_after_hwframe (1,881,531,957 samples, 0.16%)</title><rect x="1186.2" y="437" width="2.0" height="15.0" fill="rgb(218,63,15)" rx="2" ry="2" />
+<text  x="1189.21" y="447.5" ></text>
 </g>
 <g >
-<title>[unknown] (6,744,545,607 samples, 0.09%)</title><rect x="1178.0" y="421" width="1.0" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1180.97" y="431.5" ></text>
+<title>pthread_mutex_lock@@GLIBC_2.2.5 (16,078,584,467 samples, 1.41%)</title><rect x="1089.1" y="405" width="16.6" height="15.0" fill="rgb(244,179,42)" rx="2" ry="2" />
+<text  x="1092.06" y="415.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::getData (150,945,503,528 samples, 1.97%)</title><rect x="91.1" y="437" width="23.2" height="15.0" fill="rgb(206,4,1)" rx="2" ry="2" />
-<text  x="94.05" y="447.5" >n..</text>
+<title>lru_cache_add_inactive_or_unevictable (406,438,290 samples, 0.04%)</title><rect x="992.1" y="261" width="0.5" height="15.0" fill="rgb(247,196,47)" rx="2" ry="2" />
+<text  x="995.14" y="271.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::getRightChild (39,830,364,097 samples, 0.52%)</title><rect x="451.5" y="421" width="6.1" height="15.0" fill="rgb(233,129,31)" rx="2" ry="2" />
-<text  x="454.46" y="431.5" ></text>
+<title>__handle_mm_fault (1,880,172,115 samples, 0.16%)</title><rect x="1061.1" y="309" width="1.9" height="15.0" fill="rgb(207,9,2)" rx="2" ry="2" />
+<text  x="1064.09" y="319.5" ></text>
 </g>
 <g >
-<title>[unknown] (696,384,783 samples, 0.01%)</title><rect x="1179.3" y="325" width="0.1" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1182.25" y="335.5" ></text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::insert (152,249,609 samples, 0.01%)</title><rect x="836.3" y="405" width="0.2" height="15.0" fill="rgb(223,87,20)" rx="2" ry="2" />
+<text  x="839.35" y="415.5" ></text>
 </g>
 <g >
-<title>[unknown] (33,315,550,539 samples, 0.43%)</title><rect x="876.1" y="405" width="5.1" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="879.07" y="415.5" ></text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (912,929,187 samples, 0.08%)</title><rect x="393.9" y="165" width="0.9" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
+<text  x="396.87" y="175.5" ></text>
 </g>
 <g >
-<title>[[vdso]] (278,581,684,120 samples, 3.64%)</title><rect x="901.9" y="437" width="42.9" height="15.0" fill="rgb(218,60,14)" rx="2" ry="2" />
-<text  x="904.90" y="447.5" >[[vd..</text>
+<title>entry_SYSCALL_64_after_hwframe (2,141,615,105 samples, 0.19%)</title><rect x="759.2" y="389" width="2.2" height="15.0" fill="rgb(218,63,15)" rx="2" ry="2" />
+<text  x="762.17" y="399.5" ></text>
 </g>
 <g >
-<title>[unknown] (30,639,339,015 samples, 0.40%)</title><rect x="876.5" y="373" width="4.7" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="879.48" y="383.5" ></text>
+<title>do_anonymous_page (1,073,718,700 samples, 0.09%)</title><rect x="991.6" y="277" width="1.1" height="15.0" fill="rgb(238,155,37)" rx="2" ry="2" />
+<text  x="994.57" y="287.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (18,831,409,922 samples, 0.25%)</title><rect x="471.2" y="245" width="2.9" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
-<text  x="474.17" y="255.5" ></text>
+<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (6,078,100,456 samples, 0.53%)</title><rect x="627.7" y="309" width="6.3" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
+<text  x="630.67" y="319.5" ></text>
 </g>
 <g >
-<title>std::uniform_int_distribution&lt;int&gt;::operator (16,549,099,982 samples, 0.22%)</title><rect x="1057.5" y="437" width="2.5" height="15.0" fill="rgb(239,157,37)" rx="2" ry="2" />
-<text  x="1060.47" y="447.5" ></text>
+<title>__mod_zone_page_state (98,325,261 samples, 0.01%)</title><rect x="1062.7" y="197" width="0.1" height="15.0" fill="rgb(221,74,17)" rx="2" ry="2" />
+<text  x="1065.67" y="207.5" ></text>
 </g>
 <g >
-<title>pthread_mutex_unlock@@GLIBC_2.2.5 (1,186,124,312 samples, 0.02%)</title><rect x="1189.8" y="485" width="0.2" height="15.0" fill="rgb(227,104,24)" rx="2" ry="2" />
-<text  x="1192.81" y="495.5" ></text>
+<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::insert (4,913,198,058 samples, 0.43%)</title><rect x="394.8" y="389" width="5.1" height="15.0" fill="rgb(217,57,13)" rx="2" ry="2" />
+<text  x="397.85" y="399.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::getData (40,025,664,502 samples, 0.52%)</title><rect x="783.3" y="421" width="6.2" height="15.0" fill="rgb(206,4,1)" rx="2" ry="2" />
-<text  x="786.31" y="431.5" ></text>
+<title>do_user_addr_fault (189,381,459 samples, 0.02%)</title><rect x="11.8" y="389" width="0.2" height="15.0" fill="rgb(228,108,25)" rx="2" ry="2" />
+<text  x="14.79" y="399.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (697,336,902 samples, 0.01%)</title><rect x="474.0" y="37" width="0.1" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
-<text  x="476.96" y="47.5" ></text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (211,410,095 samples, 0.02%)</title><rect x="394.6" y="69" width="0.2" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
+<text  x="397.59" y="79.5" ></text>
 </g>
 <g >
-<title>[unknown] (1,558,919,836 samples, 0.02%)</title><rect x="12.8" y="341" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="15.81" y="351.5" ></text>
+<title>__alloc_pages (172,057,240 samples, 0.02%)</title><rect x="991.9" y="245" width="0.2" height="15.0" fill="rgb(233,129,30)" rx="2" ry="2" />
+<text  x="994.92" y="255.5" ></text>
 </g>
 <g >
-<title>std::uniform_int_distribution&lt;int&gt;::operator (208,413,148,577 samples, 2.72%)</title><rect x="835.9" y="437" width="32.1" height="15.0" fill="rgb(239,157,37)" rx="2" ry="2" />
-<text  x="838.92" y="447.5" >st..</text>
+<title>__alloc_pages (452,914,264 samples, 0.04%)</title><rect x="1061.7" y="245" width="0.5" height="15.0" fill="rgb(233,129,30)" rx="2" ry="2" />
+<text  x="1064.72" y="255.5" ></text>
 </g>
 <g >
-<title>[unknown] (6,744,545,607 samples, 0.09%)</title><rect x="1178.0" y="389" width="1.0" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1180.97" y="399.5" ></text>
+<title>[[vdso]] (2,609,919,251 samples, 0.23%)</title><rect x="749.9" y="405" width="2.7" height="15.0" fill="rgb(218,60,14)" rx="2" ry="2" />
+<text  x="752.94" y="415.5" ></text>
 </g>
 <g >
-<title>[unknown] (9,998,270,576 samples, 0.13%)</title><rect x="1050.1" y="309" width="1.6" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1053.12" y="319.5" ></text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (544,268,309 samples, 0.05%)</title><rect x="394.2" y="133" width="0.6" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
+<text  x="397.25" y="143.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (44,259,517,750 samples, 0.58%)</title><rect x="804.7" y="309" width="6.8" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
-<text  x="807.69" y="319.5" ></text>
+<title>update_process_times (112,358,022 samples, 0.01%)</title><rect x="382.8" y="261" width="0.1" height="15.0" fill="rgb(250,209,50)" rx="2" ry="2" />
+<text  x="385.77" y="271.5" ></text>
 </g>
 <g >
-<title>std::thread::_State_impl&lt;std::thread::_Invoker&lt;std::tuple&lt;void  (7,553,391,883,903 samples, 98.58%)</title><rect x="13.0" y="469" width="1163.3" height="15.0" fill="rgb(234,137,32)" rx="2" ry="2" />
-<text  x="16.05" y="479.5" >std::thread::_State_impl&lt;std::thread::_Invoker&lt;std::tuple&lt;void </text>
+<title>handle_pte_fault (1,147,822,870 samples, 0.10%)</title><rect x="991.5" y="293" width="1.2" height="15.0" fill="rgb(217,57,13)" rx="2" ry="2" />
+<text  x="994.51" y="303.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (2,358,036,254 samples, 0.03%)</title><rect x="473.7" y="117" width="0.4" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
-<text  x="476.70" y="127.5" ></text>
+<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (708,130,364 samples, 0.06%)</title><rect x="633.2" y="149" width="0.8" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
+<text  x="636.22" y="159.5" ></text>
 </g>
 <g >
-<title>[unknown] (12,646,405,398 samples, 0.17%)</title><rect x="1018.5" y="357" width="2.0" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1021.51" y="367.5" ></text>
+<title>pthread_mutex_unlock@@GLIBC_2.2.5 (29,159,714,985 samples, 2.55%)</title><rect x="1105.7" y="405" width="30.1" height="15.0" fill="rgb(227,104,24)" rx="2" ry="2" />
+<text  x="1108.68" y="415.5" >pt..</text>
 </g>
 <g >
-<title>[unknown] (1,623,530,111 samples, 0.02%)</title><rect x="12.8" y="405" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="15.80" y="415.5" ></text>
+<title>syscall_exit_to_user_mode (481,880,504 samples, 0.04%)</title><rect x="759.3" y="357" width="0.5" height="15.0" fill="rgb(251,211,50)" rx="2" ry="2" />
+<text  x="762.33" y="367.5" ></text>
 </g>
 <g >
-<title>[unknown] (669,419,958 samples, 0.01%)</title><rect x="1140.3" y="357" width="0.1" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1143.31" y="367.5" ></text>
+<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::setRightChild (131,472,351 samples, 0.01%)</title><rect x="387.1" y="341" width="0.1" height="15.0" fill="rgb(205,3,0)" rx="2" ry="2" />
+<text  x="390.11" y="351.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (30,531,303,325 samples, 0.40%)</title><rect x="806.8" y="277" width="4.7" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
-<text  x="809.80" y="287.5" ></text>
+<title>handle_pte_fault (136,860,041 samples, 0.01%)</title><rect x="1172.5" y="325" width="0.2" height="15.0" fill="rgb(217,57,13)" rx="2" ry="2" />
+<text  x="1175.52" y="335.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (81,233,582,441 samples, 1.06%)</title><rect x="799.0" y="389" width="12.5" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
-<text  x="801.99" y="399.5" ></text>
+<title>rmqueue (183,912,308 samples, 0.02%)</title><rect x="1062.0" y="213" width="0.2" height="15.0" fill="rgb(226,98,23)" rx="2" ry="2" />
+<text  x="1064.99" y="223.5" ></text>
 </g>
 <g >
-<title>[unknown] (7,008,517,225 samples, 0.09%)</title><rect x="1050.6" y="277" width="1.1" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1053.58" y="287.5" ></text>
+<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::getData (7,239,048,961 samples, 0.63%)</title><rect x="117.0" y="389" width="7.5" height="15.0" fill="rgb(206,4,1)" rx="2" ry="2" />
+<text  x="120.00" y="399.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::lookup (1,982,296,918,217 samples, 25.87%)</title><rect x="489.5" y="437" width="305.3" height="15.0" fill="rgb(235,138,33)" rx="2" ry="2" />
-<text  x="492.52" y="447.5" >numa&lt;BinarySearchTree, 1, NumaAllocator, ..</text>
+<title>do_syscall_64 (2,752,242,313 samples, 0.24%)</title><rect x="755.9" y="373" width="2.8" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
+<text  x="758.90" y="383.5" ></text>
 </g>
 <g >
-<title>[unknown] (756,342,349 samples, 0.01%)</title><rect x="1140.3" y="421" width="0.1" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1143.30" y="431.5" ></text>
+<title>asm_exc_page_fault (226,536,652 samples, 0.02%)</title><rect x="11.8" y="421" width="0.2" height="15.0" fill="rgb(225,93,22)" rx="2" ry="2" />
+<text  x="14.78" y="431.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::getLeftChild (1,660,522,811 samples, 0.02%)</title><rect x="789.5" y="421" width="0.2" height="15.0" fill="rgb(219,67,16)" rx="2" ry="2" />
-<text  x="792.48" y="431.5" ></text>
+<title>do_syscall_64 (1,881,531,957 samples, 0.16%)</title><rect x="1186.2" y="421" width="2.0" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
+<text  x="1189.21" y="431.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::getData (7,673,145,823 samples, 0.10%)</title><rect x="1052.6" y="421" width="1.2" height="15.0" fill="rgb(206,4,1)" rx="2" ry="2" />
-<text  x="1055.61" y="431.5" ></text>
+<title>exit_to_user_mode_prepare (422,776,873 samples, 0.04%)</title><rect x="759.4" y="341" width="0.4" height="15.0" fill="rgb(228,108,25)" rx="2" ry="2" />
+<text  x="762.38" y="351.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::getData (6,656,022,600 samples, 0.09%)</title><rect x="1021.4" y="421" width="1.0" height="15.0" fill="rgb(212,34,8)" rx="2" ry="2" />
-<text  x="1024.36" y="431.5" ></text>
+<title>hrtimer_interrupt (142,072,968 samples, 0.01%)</title><rect x="621.9" y="325" width="0.1" height="15.0" fill="rgb(228,109,26)" rx="2" ry="2" />
+<text  x="624.87" y="335.5" ></text>
 </g>
 <g >
-<title>[unknown] (1,600,404,306 samples, 0.02%)</title><rect x="783.1" y="309" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="786.06" y="319.5" ></text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (331,083,209 samples, 0.03%)</title><rect x="394.5" y="101" width="0.3" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
+<text  x="397.47" y="111.5" ></text>
 </g>
 <g >
-<title>[unknown] (17,931,675,964 samples, 0.23%)</title><rect x="878.4" y="309" width="2.8" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="881.44" y="319.5" ></text>
+<title>page_add_new_anon_rmap (99,848,702 samples, 0.01%)</title><rect x="1062.8" y="261" width="0.1" height="15.0" fill="rgb(235,138,33)" rx="2" ry="2" />
+<text  x="1065.83" y="271.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (2,709,694,405 samples, 0.04%)</title><rect x="811.1" y="133" width="0.4" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
-<text  x="814.09" y="143.5" ></text>
+<title>do_anonymous_page (102,876,951 samples, 0.01%)</title><rect x="399.6" y="277" width="0.1" height="15.0" fill="rgb(238,155,37)" rx="2" ry="2" />
+<text  x="402.60" y="287.5" ></text>
 </g>
 <g >
-<title>[unknown] (1,558,919,836 samples, 0.02%)</title><rect x="12.8" y="325" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="15.81" y="335.5" ></text>
+<title>dequeue_entity (574,360,728 samples, 0.05%)</title><rect x="756.9" y="213" width="0.6" height="15.0" fill="rgb(233,130,31)" rx="2" ry="2" />
+<text  x="759.93" y="223.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::getLeftChild (41,287,427,154 samples, 0.54%)</title><rect x="114.3" y="437" width="6.4" height="15.0" fill="rgb(219,67,16)" rx="2" ry="2" />
-<text  x="117.30" y="447.5" ></text>
+<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::getLeftChild (1,550,952,148 samples, 0.14%)</title><rect x="1003.5" y="373" width="1.6" height="15.0" fill="rgb(226,97,23)" rx="2" ry="2" />
+<text  x="1006.49" y="383.5" ></text>
 </g>
 <g >
-<title>[unknown] (6,744,545,607 samples, 0.09%)</title><rect x="1178.0" y="453" width="1.0" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1180.97" y="463.5" ></text>
+<title>dequeue_task_fair (772,455,607 samples, 0.07%)</title><rect x="756.8" y="229" width="0.8" height="15.0" fill="rgb(230,119,28)" rx="2" ry="2" />
+<text  x="759.77" y="239.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (3,556,454,287 samples, 0.05%)</title><rect x="811.0" y="149" width="0.5" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
-<text  x="813.96" y="159.5" ></text>
+<title>handle_mm_fault (1,431,100,740 samples, 0.13%)</title><rect x="991.3" y="325" width="1.5" height="15.0" fill="rgb(234,135,32)" rx="2" ry="2" />
+<text  x="994.31" y="335.5" ></text>
 </g>
 <g >
-<title>[unknown] (961,724,535 samples, 0.01%)</title><rect x="145.0" y="277" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="148.02" y="287.5" ></text>
+<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (917,430,729 samples, 0.08%)</title><rect x="633.0" y="165" width="1.0" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
+<text  x="636.01" y="175.5" ></text>
 </g>
 <g >
-<title>[unknown] (1,889,097,066 samples, 0.02%)</title><rect x="12.8" y="469" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="15.76" y="479.5" ></text>
+<title>std::mersenne_twister_engine&lt;unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul&gt;::operator (8,303,262,719 samples, 0.73%)</title><rect x="741.4" y="373" width="8.5" height="15.0" fill="rgb(235,139,33)" rx="2" ry="2" />
+<text  x="744.36" y="383.5" ></text>
 </g>
 <g >
-<title>[libstdc++.so.6.0.30] (7,553,391,883,903 samples, 98.58%)</title><rect x="13.0" y="485" width="1163.3" height="15.0" fill="rgb(235,140,33)" rx="2" ry="2" />
-<text  x="16.05" y="495.5" >[libstdc++.so.6.0.30]</text>
+<title>asm_sysvec_apic_timer_interrupt (228,758,518 samples, 0.02%)</title><rect x="621.9" y="373" width="0.2" height="15.0" fill="rgb(232,127,30)" rx="2" ry="2" />
+<text  x="624.87" y="383.5" ></text>
 </g>
 <g >
-<title>[unknown] (6,744,545,607 samples, 0.09%)</title><rect x="1178.0" y="293" width="1.0" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1180.97" y="303.5" ></text>
+<title>alloc_pages_vma (209,003,180 samples, 0.02%)</title><rect x="991.9" y="261" width="0.2" height="15.0" fill="rgb(253,224,53)" rx="2" ry="2" />
+<text  x="994.91" y="271.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::setRightChild (844,129,649 samples, 0.01%)</title><rect x="461.4" y="389" width="0.2" height="15.0" fill="rgb(205,3,0)" rx="2" ry="2" />
-<text  x="464.43" y="399.5" ></text>
+<title>asm_sysvec_apic_timer_interrupt (225,206,873 samples, 0.02%)</title><rect x="382.7" y="373" width="0.3" height="15.0" fill="rgb(232,127,30)" rx="2" ry="2" />
+<text  x="385.74" y="383.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (869,812,201 samples, 0.01%)</title><rect x="473.9" y="53" width="0.2" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
-<text  x="476.93" y="63.5" ></text>
+<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::getData (5,724,284,809 samples, 0.50%)</title><rect x="1067.8" y="373" width="5.9" height="15.0" fill="rgb(206,4,1)" rx="2" ry="2" />
+<text  x="1070.79" y="383.5" ></text>
 </g>
 <g >
-<title>[unknown] (11,354,211,068 samples, 0.15%)</title><rect x="1018.7" y="325" width="1.8" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1021.71" y="335.5" ></text>
+<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (7,837,188,193 samples, 0.69%)</title><rect x="625.9" y="357" width="8.1" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
+<text  x="628.86" y="367.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (99,803,592,473 samples, 1.30%)</title><rect x="796.1" y="421" width="15.4" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
-<text  x="799.13" y="431.5" ></text>
+<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::getLeftChild (1,682,637,708 samples, 0.15%)</title><rect x="1073.7" y="373" width="1.7" height="15.0" fill="rgb(219,67,16)" rx="2" ry="2" />
+<text  x="1076.71" y="383.5" ></text>
 </g>
 <g >
-<title>[unknown] (3,058,768,824 samples, 0.04%)</title><rect x="444.0" y="373" width="0.5" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="447.02" y="383.5" ></text>
+<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::getData (30,335,248,808 samples, 2.66%)</title><rect x="839.0" y="389" width="31.4" height="15.0" fill="rgb(212,34,8)" rx="2" ry="2" />
+<text  x="842.01" y="399.5" >nu..</text>
 </g>
 <g >
-<title>[unknown] (2,917,832,995 samples, 0.04%)</title><rect x="144.7" y="405" width="0.5" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="147.72" y="415.5" ></text>
+<title>handle_mm_fault (155,308,820 samples, 0.01%)</title><rect x="1172.5" y="357" width="0.2" height="15.0" fill="rgb(234,135,32)" rx="2" ry="2" />
+<text  x="1175.51" y="367.5" ></text>
 </g>
 <g >
-<title>[unknown] (6,744,545,607 samples, 0.09%)</title><rect x="1178.0" y="245" width="1.0" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1180.97" y="255.5" ></text>
+<title>exc_page_fault (1,957,998,028 samples, 0.17%)</title><rect x="991.0" y="357" width="2.0" height="15.0" fill="rgb(212,35,8)" rx="2" ry="2" />
+<text  x="994.01" y="367.5" ></text>
 </g>
 <g >
-<title>[unknown] (3,568,508,207 samples, 0.05%)</title><rect x="486.2" y="421" width="0.6" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="489.24" y="431.5" ></text>
+<title>free_unref_page_list (532,869,719 samples, 0.05%)</title><rect x="1187.5" y="181" width="0.5" height="15.0" fill="rgb(221,77,18)" rx="2" ry="2" />
+<text  x="1190.46" y="191.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::getLeftChild (1,926,641,661 samples, 0.03%)</title><rect x="1053.8" y="421" width="0.3" height="15.0" fill="rgb(219,67,16)" rx="2" ry="2" />
-<text  x="1056.80" y="431.5" ></text>
+<title>__mod_lruvec_state (97,594,528 samples, 0.01%)</title><rect x="1186.7" y="197" width="0.1" height="15.0" fill="rgb(226,100,24)" rx="2" ry="2" />
+<text  x="1189.74" y="207.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::getRightChild (75,685,311,241 samples, 0.99%)</title><rect x="120.7" y="437" width="11.6" height="15.0" fill="rgb(226,100,23)" rx="2" ry="2" />
-<text  x="123.66" y="447.5" ></text>
+<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::lookup (217,665,074,373 samples, 19.06%)</title><rect x="399.9" y="389" width="225.0" height="15.0" fill="rgb(235,138,33)" rx="2" ry="2" />
+<text  x="402.92" y="399.5" >numa&lt;BinarySearchTree, 1, Num..</text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (74,356,906,168 samples, 0.97%)</title><rect x="800.1" y="373" width="11.4" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
-<text  x="803.05" y="383.5" ></text>
+<title>umf_alloc (848,012,825 samples, 0.07%)</title><rect x="1088.2" y="389" width="0.9" height="15.0" fill="rgb(252,218,52)" rx="2" ry="2" />
+<text  x="1091.19" y="399.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (44,194,478,279 samples, 0.58%)</title><rect x="467.3" y="309" width="6.8" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
-<text  x="470.26" y="319.5" ></text>
+<title>__pagevec_lru_add (331,715,512 samples, 0.03%)</title><rect x="992.2" y="229" width="0.4" height="15.0" fill="rgb(228,106,25)" rx="2" ry="2" />
+<text  x="995.21" y="239.5" ></text>
 </g>
 <g >
-<title>[unknown] (2,881,935,399 samples, 0.04%)</title><rect x="782.9" y="357" width="0.4" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="785.87" y="367.5" ></text>
+<title>lru_cache_add (394,112,803 samples, 0.03%)</title><rect x="992.1" y="245" width="0.5" height="15.0" fill="rgb(247,196,47)" rx="2" ry="2" />
+<text  x="995.15" y="255.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::setLeftChild (1,651,999,032 samples, 0.02%)</title><rect x="945.0" y="453" width="0.3" height="15.0" fill="rgb(248,200,47)" rx="2" ry="2" />
-<text  x="948.02" y="463.5" ></text>
+<title>DSExample (1,141,711,462,432 samples, 100.00%)</title><rect x="10.0" y="453" width="1180.0" height="15.0" fill="rgb(212,35,8)" rx="2" ry="2" />
+<text  x="13.00" y="463.5" >DSExample</text>
 </g>
 <g >
-<title>[unknown] (1,656,600,597 samples, 0.02%)</title><rect x="12.8" y="453" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="15.79" y="463.5" ></text>
+<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (165,562,670 samples, 0.01%)</title><rect x="633.8" y="69" width="0.2" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
+<text  x="636.78" y="79.5" ></text>
 </g>
 <g >
-<title>[unknown] (1,690,658,348 samples, 0.02%)</title><rect x="144.9" y="325" width="0.3" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="147.91" y="335.5" ></text>
+<title>dallocx (2,695,718,948 samples, 0.24%)</title><rect x="1172.7" y="421" width="2.8" height="15.0" fill="rgb(213,40,9)" rx="2" ry="2" />
+<text  x="1175.70" y="431.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (67,112,095,936 samples, 0.88%)</title><rect x="801.2" y="357" width="10.3" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
-<text  x="804.17" y="367.5" ></text>
+<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (6,734,922,389 samples, 0.59%)</title><rect x="627.0" y="325" width="7.0" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
+<text  x="629.99" y="335.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::lookup (5,352,952,451 samples, 0.07%)</title><rect x="948.0" y="453" width="0.8" height="15.0" fill="rgb(235,138,33)" rx="2" ry="2" />
-<text  x="950.98" y="463.5" ></text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (160,027,833 samples, 0.01%)</title><rect x="394.6" y="53" width="0.2" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
+<text  x="397.65" y="63.5" ></text>
 </g>
 <g >
-<title>[unknown] (6,810,809,799 samples, 0.09%)</title><rect x="1178.0" y="469" width="1.0" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1180.96" y="479.5" ></text>
+<title>handle_pte_fault (121,434,517 samples, 0.01%)</title><rect x="399.6" y="293" width="0.1" height="15.0" fill="rgb(217,57,13)" rx="2" ry="2" />
+<text  x="402.58" y="303.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (1,312,132,794 samples, 0.02%)</title><rect x="811.3" y="85" width="0.2" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
-<text  x="814.30" y="95.5" ></text>
+<title>__sysvec_apic_timer_interrupt (142,072,968 samples, 0.01%)</title><rect x="621.9" y="341" width="0.1" height="15.0" fill="rgb(242,173,41)" rx="2" ry="2" />
+<text  x="624.87" y="351.5" ></text>
 </g>
 <g >
-<title>[unknown] (6,744,545,607 samples, 0.09%)</title><rect x="1178.0" y="309" width="1.0" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1180.97" y="319.5" ></text>
+<title>hrtimer_interrupt (142,454,732 samples, 0.01%)</title><rect x="382.8" y="325" width="0.1" height="15.0" fill="rgb(228,109,26)" rx="2" ry="2" />
+<text  x="385.75" y="335.5" ></text>
 </g>
 <g >
-<title>[unknown] (1,058,343,161 samples, 0.01%)</title><rect x="486.6" y="277" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="489.63" y="287.5" ></text>
+<title>tick_sched_timer (123,651,656 samples, 0.01%)</title><rect x="382.8" y="293" width="0.1" height="15.0" fill="rgb(254,227,54)" rx="2" ry="2" />
+<text  x="385.76" y="303.5" ></text>
 </g>
 <g >
-<title>[unknown] (19,535,568,372 samples, 0.25%)</title><rect x="878.2" y="325" width="3.0" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="881.19" y="335.5" ></text>
+<title>asm_exc_page_fault (199,739,215 samples, 0.02%)</title><rect x="1172.5" y="405" width="0.2" height="15.0" fill="rgb(225,93,22)" rx="2" ry="2" />
+<text  x="1175.48" y="415.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::setLeftChild (1,047,804,275 samples, 0.01%)</title><rect x="460.3" y="405" width="0.1" height="15.0" fill="rgb(248,200,47)" rx="2" ry="2" />
-<text  x="463.26" y="415.5" ></text>
+<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (2,124,370,557 samples, 0.19%)</title><rect x="631.8" y="213" width="2.2" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
+<text  x="634.76" y="223.5" ></text>
 </g>
 <g >
-<title>[unknown] (6,178,291,552 samples, 0.08%)</title><rect x="1050.7" y="261" width="1.0" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1053.71" y="271.5" ></text>
+<title>__pagevec_lru_add_fn (394,850,918 samples, 0.03%)</title><rect x="1062.4" y="213" width="0.4" height="15.0" fill="rgb(244,183,43)" rx="2" ry="2" />
+<text  x="1065.37" y="223.5" ></text>
 </g>
 <g >
-<title>[unknown] (1,592,086,660 samples, 0.02%)</title><rect x="12.8" y="389" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="15.80" y="399.5" ></text>
+<title>pthread_mutex_unlock@@GLIBC_2.2.5 (499,115,599 samples, 0.04%)</title><rect x="1185.4" y="421" width="0.6" height="15.0" fill="rgb(227,104,24)" rx="2" ry="2" />
+<text  x="1188.44" y="431.5" ></text>
 </g>
 <g >
-<title>[unknown] (6,744,545,607 samples, 0.09%)</title><rect x="1178.0" y="357" width="1.0" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1180.97" y="367.5" ></text>
+<title>BinarySearchTest (713,980,472,975 samples, 62.54%)</title><rect x="12.0" y="405" width="737.9" height="15.0" fill="rgb(253,222,53)" rx="2" ry="2" />
+<text  x="15.01" y="415.5" >BinarySearchTest</text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::~numa (761,744,654 samples, 0.01%)</title><rect x="945.4" y="453" width="0.1" height="15.0" fill="rgb(210,25,6)" rx="2" ry="2" />
-<text  x="948.43" y="463.5" ></text>
+<title>do_futex (2,278,953,902 samples, 0.20%)</title><rect x="756.4" y="325" width="2.3" height="15.0" fill="rgb(245,184,44)" rx="2" ry="2" />
+<text  x="759.39" y="335.5" ></text>
 </g>
 <g >
-<title>[[vdso]] (16,377,267,442 samples, 0.21%)</title><rect x="868.0" y="453" width="2.6" height="15.0" fill="rgb(218,60,14)" rx="2" ry="2" />
-<text  x="871.04" y="463.5" ></text>
+<title>futex_wake (1,024,569,211 samples, 0.09%)</title><rect x="759.9" y="309" width="1.1" height="15.0" fill="rgb(219,65,15)" rx="2" ry="2" />
+<text  x="762.92" y="319.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (14,173,540,902 samples, 0.18%)</title><rect x="471.9" y="229" width="2.2" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
-<text  x="474.88" y="239.5" ></text>
+<title>asm_exc_page_fault (149,683,877 samples, 0.01%)</title><rect x="158.2" y="373" width="0.1" height="15.0" fill="rgb(225,93,22)" rx="2" ry="2" />
+<text  x="161.17" y="383.5" ></text>
 </g>
 <g >
-<title>[unknown] (5,180,712,788 samples, 0.07%)</title><rect x="1178.2" y="165" width="0.8" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1181.21" y="175.5" ></text>
+<title>dallocx (271,772,754 samples, 0.02%)</title><rect x="835.0" y="405" width="0.3" height="15.0" fill="rgb(213,40,9)" rx="2" ry="2" />
+<text  x="838.03" y="415.5" ></text>
 </g>
 <g >
-<title>[unknown] (1,656,600,597 samples, 0.02%)</title><rect x="12.8" y="437" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="15.79" y="447.5" ></text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (1,207,863,688 samples, 0.11%)</title><rect x="393.6" y="181" width="1.2" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
+<text  x="396.56" y="191.5" ></text>
 </g>
 <g >
-<title>[unknown] (6,744,545,607 samples, 0.09%)</title><rect x="1178.0" y="437" width="1.0" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1180.97" y="447.5" ></text>
+<title>update_curr (146,619,866 samples, 0.01%)</title><rect x="757.0" y="197" width="0.2" height="15.0" fill="rgb(227,105,25)" rx="2" ry="2" />
+<text  x="760.03" y="207.5" ></text>
 </g>
 <g >
-<title>[unknown] (6,744,545,607 samples, 0.09%)</title><rect x="1178.0" y="261" width="1.0" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1180.97" y="271.5" ></text>
+<title>exc_page_fault (149,683,877 samples, 0.01%)</title><rect x="158.2" y="357" width="0.1" height="15.0" fill="rgb(212,35,8)" rx="2" ry="2" />
+<text  x="161.17" y="367.5" ></text>
 </g>
 <g >
-<title>[unknown] (31,505,186,552 samples, 0.41%)</title><rect x="876.3" y="389" width="4.9" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="879.35" y="399.5" ></text>
+<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (8,422,996,743 samples, 0.74%)</title><rect x="625.2" y="373" width="8.8" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
+<text  x="628.25" y="383.5" ></text>
 </g>
 <g >
-<title>[unknown] (10,161,543,053 samples, 0.13%)</title><rect x="1018.9" y="293" width="1.6" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1021.90" y="303.5" ></text>
+<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::getLeftChild (140,123,550 samples, 0.01%)</title><rect x="384.5" y="373" width="0.1" height="15.0" fill="rgb(226,97,23)" rx="2" ry="2" />
+<text  x="387.50" y="383.5" ></text>
 </g>
 <g >
-<title>[unknown] (2,369,048,731 samples, 0.03%)</title><rect x="1178.6" y="117" width="0.4" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1181.65" y="127.5" ></text>
+<title>syscall_return_via_sysret (337,860,333 samples, 0.03%)</title><rect x="758.8" y="389" width="0.3" height="15.0" fill="rgb(229,113,27)" rx="2" ry="2" />
+<text  x="761.76" y="399.5" ></text>
 </g>
 <g >
-<title>[unknown] (21,439,439,241 samples, 0.28%)</title><rect x="887.6" y="357" width="3.3" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="890.57" y="367.5" ></text>
+<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (3,960,237,060 samples, 0.35%)</title><rect x="629.9" y="261" width="4.1" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
+<text  x="632.86" y="271.5" ></text>
 </g>
 <g >
-<title>[unknown] (2,827,631,350 samples, 0.04%)</title><rect x="144.7" y="373" width="0.5" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="147.73" y="383.5" ></text>
+<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (7,324,726,371 samples, 0.64%)</title><rect x="626.4" y="341" width="7.6" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
+<text  x="629.39" y="351.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (51,687,901,909 samples, 0.67%)</title><rect x="803.5" y="325" width="8.0" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
-<text  x="806.54" y="335.5" ></text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::remove (8,860,800,509 samples, 0.78%)</title><rect x="385.7" y="389" width="9.1" height="15.0" fill="rgb(219,65,15)" rx="2" ry="2" />
+<text  x="388.65" y="399.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (73,236,148,239 samples, 0.96%)</title><rect x="462.8" y="373" width="11.3" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
-<text  x="465.79" y="383.5" ></text>
+<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::setRightChild (105,809,108 samples, 0.01%)</title><rect x="629.0" y="277" width="0.1" height="15.0" fill="rgb(249,203,48)" rx="2" ry="2" />
+<text  x="631.98" y="287.5" ></text>
 </g>
 <g >
-<title>[unknown] (1,223,549,671 samples, 0.02%)</title><rect x="444.3" y="277" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="447.30" y="287.5" ></text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (5,915,514,729 samples, 0.52%)</title><rect x="388.7" y="309" width="6.1" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
+<text  x="391.70" y="319.5" ></text>
 </g>
 <g >
-<title>[unknown] (3,146,845,583 samples, 0.04%)</title><rect x="444.0" y="389" width="0.5" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="447.00" y="399.5" ></text>
+<title>all (1,141,711,462,433 samples, 100%)</title><rect x="10.0" y="469" width="1180.0" height="15.0" fill="rgb(213,39,9)" rx="2" ry="2" />
+<text  x="13.00" y="479.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (1,862,463,692 samples, 0.02%)</title><rect x="473.8" y="101" width="0.3" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
-<text  x="476.78" y="111.5" ></text>
+<title>exc_page_fault (199,739,215 samples, 0.02%)</title><rect x="1172.5" y="389" width="0.2" height="15.0" fill="rgb(212,35,8)" rx="2" ry="2" />
+<text  x="1175.48" y="399.5" ></text>
 </g>
 <g >
-<title>[unknown] (3,040,508,626 samples, 0.04%)</title><rect x="486.3" y="373" width="0.5" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="489.33" y="383.5" ></text>
+<title>do_wp_page (133,279,758 samples, 0.01%)</title><rect x="11.8" y="325" width="0.2" height="15.0" fill="rgb(212,36,8)" rx="2" ry="2" />
+<text  x="14.83" y="335.5" ></text>
 </g>
 <g >
-<title>[unknown] (1,079,893,872 samples, 0.01%)</title><rect x="783.1" y="261" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="786.15" y="271.5" ></text>
+<title>up_read (110,310,305 samples, 0.01%)</title><rect x="1063.1" y="341" width="0.1" height="15.0" fill="rgb(209,18,4)" rx="2" ry="2" />
+<text  x="1066.12" y="351.5" ></text>
 </g>
 <g >
-<title>numa_BST_init (723,077,808,521 samples, 9.44%)</title><rect x="948.9" y="453" width="111.4" height="15.0" fill="rgb(217,56,13)" rx="2" ry="2" />
-<text  x="951.91" y="463.5" >numa_BST_init</text>
+<title>x64_sys_call (1,881,531,957 samples, 0.16%)</title><rect x="1186.2" y="405" width="2.0" height="15.0" fill="rgb(247,194,46)" rx="2" ry="2" />
+<text  x="1189.21" y="415.5" ></text>
 </g>
 <g >
-<title>pthread_mutex_unlock@@GLIBC_2.2.5 (1,456,336,712 samples, 0.02%)</title><rect x="1188.3" y="469" width="0.2" height="15.0" fill="rgb(227,104,24)" rx="2" ry="2" />
-<text  x="1191.30" y="479.5" ></text>
+<title>__GI___lll_lock_wake (2,921,661,305 samples, 0.26%)</title><rect x="759.1" y="405" width="3.0" height="15.0" fill="rgb(210,23,5)" rx="2" ry="2" />
+<text  x="762.11" y="415.5" ></text>
 </g>
 <g >
-<title>[unknown] (25,243,843,817 samples, 0.33%)</title><rect x="887.0" y="405" width="3.9" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="889.99" y="415.5" ></text>
+<title>std::mersenne_twister_engine&lt;unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul&gt;::operator (4,257,615,935 samples, 0.37%)</title><rect x="1078.7" y="389" width="4.4" height="15.0" fill="rgb(235,139,33)" rx="2" ry="2" />
+<text  x="1081.69" y="399.5" ></text>
 </g>
 <g >
-<title>[unknown] (79,490,558,454 samples, 1.04%)</title><rect x="1176.3" y="485" width="12.3" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1179.33" y="495.5" ></text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (2,037,169,033 samples, 0.18%)</title><rect x="392.7" y="213" width="2.1" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
+<text  x="395.71" y="223.5" ></text>
 </g>
 <g >
-<title>[unknown] (2,884,743,180 samples, 0.04%)</title><rect x="444.0" y="357" width="0.5" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="447.04" y="367.5" ></text>
+<title>page_remove_rmap (195,075,592 samples, 0.02%)</title><rect x="1186.7" y="229" width="0.2" height="15.0" fill="rgb(252,219,52)" rx="2" ry="2" />
+<text  x="1189.67" y="239.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::setRightChild (755,977,673 samples, 0.01%)</title><rect x="462.7" y="373" width="0.1" height="15.0" fill="rgb(205,3,0)" rx="2" ry="2" />
-<text  x="465.67" y="383.5" ></text>
+<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (4,705,731,318 samples, 0.41%)</title><rect x="629.1" y="277" width="4.9" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
+<text  x="632.09" y="287.5" ></text>
 </g>
 <g >
-<title>[unknown] (6,744,545,607 samples, 0.09%)</title><rect x="1178.0" y="277" width="1.0" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1180.97" y="287.5" ></text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::insert (5,082,677,988 samples, 0.45%)</title><rect x="153.2" y="389" width="5.3" height="15.0" fill="rgb(223,87,20)" rx="2" ry="2" />
+<text  x="156.22" y="399.5" ></text>
 </g>
 <g >
-<title>[unknown] (1,392,809,898 samples, 0.02%)</title><rect x="12.8" y="293" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="15.83" y="303.5" ></text>
+<title>handle_mm_fault (188,565,977 samples, 0.02%)</title><rect x="11.8" y="373" width="0.2" height="15.0" fill="rgb(234,135,32)" rx="2" ry="2" />
+<text  x="14.79" y="383.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (11,276,558,601 samples, 0.15%)</title><rect x="809.8" y="213" width="1.7" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
-<text  x="812.77" y="223.5" ></text>
+<title>entry_SYSCALL_64_after_hwframe (2,797,359,231 samples, 0.25%)</title><rect x="755.9" y="389" width="2.9" height="15.0" fill="rgb(218,63,15)" rx="2" ry="2" />
+<text  x="758.86" y="399.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (19,008,432,938 samples, 0.25%)</title><rect x="808.6" y="245" width="2.9" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
-<text  x="811.58" y="255.5" ></text>
+<title>alloc_pages_vma (514,758,598 samples, 0.05%)</title><rect x="1061.7" y="261" width="0.5" height="15.0" fill="rgb(253,224,53)" rx="2" ry="2" />
+<text  x="1064.70" y="271.5" ></text>
 </g>
 <g >
-<title>[unknown] (33,956,487,447 samples, 0.44%)</title><rect x="876.0" y="421" width="5.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="878.97" y="431.5" ></text>
+<title>__pagevec_lru_add_fn (269,967,924 samples, 0.02%)</title><rect x="992.3" y="213" width="0.2" height="15.0" fill="rgb(244,183,43)" rx="2" ry="2" />
+<text  x="995.25" y="223.5" ></text>
 </g>
 <g >
-<title>__vdso_clock_gettime (13,794,910,813 samples, 0.18%)</title><rect x="890.9" y="453" width="2.1" height="15.0" fill="rgb(254,226,54)" rx="2" ry="2" />
-<text  x="893.88" y="463.5" ></text>
+<title>handle_pte_fault (1,744,245,515 samples, 0.15%)</title><rect x="1061.2" y="293" width="1.8" height="15.0" fill="rgb(217,57,13)" rx="2" ry="2" />
+<text  x="1064.23" y="303.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (14,691,327,506 samples, 0.19%)</title><rect x="809.2" y="229" width="2.3" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
-<text  x="812.24" y="239.5" ></text>
+<title>pthread_mutex_unlock@@GLIBC_2.2.5 (485,638,161 samples, 0.04%)</title><rect x="1189.5" y="437" width="0.5" height="15.0" fill="rgb(227,104,24)" rx="2" ry="2" />
+<text  x="1192.50" y="447.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::remove (108,416,938,989 samples, 1.42%)</title><rect x="794.8" y="437" width="16.7" height="15.0" fill="rgb(212,35,8)" rx="2" ry="2" />
-<text  x="797.81" y="447.5" ></text>
+<title>get_page_from_freelist (343,565,293 samples, 0.03%)</title><rect x="1061.8" y="229" width="0.4" height="15.0" fill="rgb(252,218,52)" rx="2" ry="2" />
+<text  x="1064.82" y="239.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (8,370,663,083 samples, 0.11%)</title><rect x="810.2" y="197" width="1.3" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
-<text  x="813.21" y="207.5" ></text>
+<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::getRightChild (1,385,134,497 samples, 0.12%)</title><rect x="1075.4" y="373" width="1.5" height="15.0" fill="rgb(226,100,23)" rx="2" ry="2" />
+<text  x="1078.45" y="383.5" ></text>
 </g>
 <g >
-<title>[unknown] (785,329,555 samples, 0.01%)</title><rect x="1140.3" y="437" width="0.1" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1143.30" y="447.5" ></text>
+<title>[unknown] (14,538,944,976 samples, 1.27%)</title><rect x="1170.9" y="437" width="15.1" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
+<text  x="1173.94" y="447.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::setRightChild (703,326,289 samples, 0.01%)</title><rect x="798.9" y="389" width="0.1" height="15.0" fill="rgb(249,203,48)" rx="2" ry="2" />
-<text  x="801.88" y="399.5" ></text>
+<title>[[vdso]] (56,773,166,871 samples, 4.97%)</title><rect x="776.3" y="389" width="58.7" height="15.0" fill="rgb(218,60,14)" rx="2" ry="2" />
+<text  x="779.34" y="399.5" >[[vdso]]</text>
 </g>
 <g >
-<title>[unknown] (13,619,665,335 samples, 0.18%)</title><rect x="1049.6" y="389" width="2.1" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1052.56" y="399.5" ></text>
+<title>__handle_mm_fault (136,660,216 samples, 0.01%)</title><rect x="399.6" y="309" width="0.1" height="15.0" fill="rgb(207,9,2)" rx="2" ry="2" />
+<text  x="402.57" y="319.5" ></text>
 </g>
 <g >
-<title>[unknown] (14,270,721,328 samples, 0.19%)</title><rect x="1018.3" y="373" width="2.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1021.26" y="383.5" ></text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (7,323,791,271 samples, 0.64%)</title><rect x="387.2" y="341" width="7.6" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
+<text  x="390.24" y="351.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::getData (43,867,429,314 samples, 0.57%)</title><rect x="444.5" y="421" width="6.7" height="15.0" fill="rgb(212,34,8)" rx="2" ry="2" />
-<text  x="447.49" y="431.5" ></text>
+<title>unmap_vmas (1,876,425,773 samples, 0.16%)</title><rect x="1186.2" y="309" width="2.0" height="15.0" fill="rgb(243,176,42)" rx="2" ry="2" />
+<text  x="1189.21" y="319.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (24,033,986,385 samples, 0.31%)</title><rect x="807.8" y="261" width="3.7" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
-<text  x="810.80" y="271.5" ></text>
+<title>asm_exc_page_fault (169,763,775 samples, 0.01%)</title><rect x="399.5" y="373" width="0.2" height="15.0" fill="rgb(225,93,22)" rx="2" ry="2" />
+<text  x="402.54" y="383.5" ></text>
 </g>
 <g >
-<title>[unknown] (7,948,473,948 samples, 0.10%)</title><rect x="1019.2" y="277" width="1.3" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1022.24" y="287.5" ></text>
+<title>charge_memcg (147,601,193 samples, 0.01%)</title><rect x="991.7" y="245" width="0.1" height="15.0" fill="rgb(242,170,40)" rx="2" ry="2" />
+<text  x="994.65" y="255.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (37,137,483,464 samples, 0.48%)</title><rect x="805.8" y="293" width="5.7" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
-<text  x="808.78" y="303.5" ></text>
+<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::setRightChild (110,711,372 samples, 0.01%)</title><rect x="390.0" y="277" width="0.1" height="15.0" fill="rgb(205,3,0)" rx="2" ry="2" />
+<text  x="392.95" y="287.5" ></text>
 </g>
 <g >
-<title>std::uniform_int_distribution&lt;int&gt;::operator (18,520,052,610 samples, 0.24%)</title><rect x="1173.5" y="453" width="2.8" height="15.0" fill="rgb(239,157,37)" rx="2" ry="2" />
-<text  x="1176.48" y="463.5" ></text>
+<title>__sysvec_apic_timer_interrupt (146,400,122 samples, 0.01%)</title><rect x="382.8" y="341" width="0.1" height="15.0" fill="rgb(242,173,41)" rx="2" ry="2" />
+<text  x="385.75" y="351.5" ></text>
 </g>
 <g >
-<title>[libjemalloc.so.2] (10,599,198,451 samples, 0.14%)</title><rect x="1176.3" y="469" width="1.7" height="15.0" fill="rgb(218,63,15)" rx="2" ry="2" />
-<text  x="1179.33" y="479.5" ></text>
+<title>do_futex (1,391,074,025 samples, 0.12%)</title><rect x="759.9" y="325" width="1.4" height="15.0" fill="rgb(245,184,44)" rx="2" ry="2" />
+<text  x="762.88" y="335.5" ></text>
 </g>
 <g >
-<title>__memset_avx2_unaligned_erms (2,179,752,024 samples, 0.03%)</title><rect x="1179.0" y="469" width="0.4" height="15.0" fill="rgb(223,84,20)" rx="2" ry="2" />
-<text  x="1182.03" y="479.5" ></text>
+<title>__handle_mm_fault (147,629,703 samples, 0.01%)</title><rect x="11.8" y="357" width="0.2" height="15.0" fill="rgb(207,9,2)" rx="2" ry="2" />
+<text  x="14.82" y="367.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (6,160,529,769 samples, 0.08%)</title><rect x="810.6" y="181" width="0.9" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
-<text  x="813.55" y="191.5" ></text>
+<title>free_unref_page_commit.constprop.0 (394,872,128 samples, 0.03%)</title><rect x="1187.6" y="165" width="0.4" height="15.0" fill="rgb(233,130,31)" rx="2" ry="2" />
+<text  x="1190.60" y="175.5" ></text>
 </g>
 <g >
-<title>dallocx (4,776,461,932 samples, 0.06%)</title><rect x="1179.4" y="469" width="0.8" height="15.0" fill="rgb(213,40,9)" rx="2" ry="2" />
-<text  x="1182.42" y="479.5" ></text>
+<title>lru_cache_add_inactive_or_unevictable (566,218,031 samples, 0.05%)</title><rect x="1062.2" y="261" width="0.6" height="15.0" fill="rgb(247,196,47)" rx="2" ry="2" />
+<text  x="1065.24" y="271.5" ></text>
 </g>
 <g >
-<title>[unknown] (14,966,865,084 samples, 0.20%)</title><rect x="1018.2" y="405" width="2.3" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1021.16" y="415.5" ></text>
+<title>mallocx (8,897,853,094 samples, 0.78%)</title><rect x="1175.5" y="421" width="9.2" height="15.0" fill="rgb(205,3,0)" rx="2" ry="2" />
+<text  x="1178.49" y="431.5" ></text>
 </g>
 <g >
-<title>[unknown] (11,652,911,044 samples, 0.15%)</title><rect x="1018.7" y="341" width="1.8" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1021.67" y="351.5" ></text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (1,573,858,034 samples, 0.14%)</title><rect x="393.2" y="197" width="1.6" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
+<text  x="396.18" y="207.5" ></text>
 </g>
 <g >
-<title>umf_alloc (4,766,852,245 samples, 0.06%)</title><rect x="1022.8" y="421" width="0.8" height="15.0" fill="rgb(252,218,52)" rx="2" ry="2" />
-<text  x="1025.82" y="431.5" ></text>
+<title>handle_mm_fault (140,289,553 samples, 0.01%)</title><rect x="399.6" y="325" width="0.1" height="15.0" fill="rgb(234,135,32)" rx="2" ry="2" />
+<text  x="402.56" y="335.5" ></text>
 </g>
 <g >
-<title>[unknown] (2,739,435,566 samples, 0.04%)</title><rect x="444.1" y="341" width="0.4" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="447.06" y="351.5" ></text>
+<title>std::uniform_int_distribution&lt;int&gt;::operator (4,927,138,373 samples, 0.43%)</title><rect x="1083.1" y="389" width="5.1" height="15.0" fill="rgb(239,157,37)" rx="2" ry="2" />
+<text  x="1086.09" y="399.5" ></text>
 </g>
 <g >
-<title>[unknown] (2,709,168,814 samples, 0.04%)</title><rect x="782.9" y="341" width="0.4" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="785.89" y="351.5" ></text>
+<title>psi_task_switch (403,609,608 samples, 0.04%)</title><rect x="757.9" y="245" width="0.4" height="15.0" fill="rgb(230,118,28)" rx="2" ry="2" />
+<text  x="760.93" y="255.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::remove (665,602,168 samples, 0.01%)</title><rect x="948.8" y="453" width="0.1" height="15.0" fill="rgb(212,35,8)" rx="2" ry="2" />
-<text  x="951.81" y="463.5" ></text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (705,514,705 samples, 0.06%)</title><rect x="394.1" y="149" width="0.7" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
+<text  x="397.08" y="159.5" ></text>
 </g>
 <g >
-<title>std::mersenne_twister_engine&lt;unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul&gt;::operator (1,758,622,966 samples, 0.02%)</title><rect x="1059.7" y="421" width="0.3" height="15.0" fill="rgb(235,139,33)" rx="2" ry="2" />
-<text  x="1062.75" y="431.5" ></text>
+<title>std::mersenne_twister_engine&lt;unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul&gt;::operator (797,169,523 samples, 0.07%)</title><rect x="1087.4" y="373" width="0.8" height="15.0" fill="rgb(235,139,33)" rx="2" ry="2" />
+<text  x="1090.36" y="383.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::setLeftChild (1,977,191,339 samples, 0.03%)</title><rect x="795.7" y="421" width="0.4" height="15.0" fill="rgb(242,170,40)" rx="2" ry="2" />
-<text  x="798.75" y="431.5" ></text>
+<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (5,431,273,819 samples, 0.48%)</title><rect x="628.3" y="293" width="5.7" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
+<text  x="631.34" y="303.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::setRightChild (986,711,175 samples, 0.01%)</title><rect x="945.3" y="453" width="0.1" height="15.0" fill="rgb(205,3,0)" rx="2" ry="2" />
-<text  x="948.28" y="463.5" ></text>
+<title>__handle_mm_fault (144,264,101 samples, 0.01%)</title><rect x="1172.5" y="341" width="0.2" height="15.0" fill="rgb(207,9,2)" rx="2" ry="2" />
+<text  x="1175.52" y="351.5" ></text>
 </g>
 <g >
-<title>[unknown] (793,606,444 samples, 0.01%)</title><rect x="1020.3" y="245" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1023.34" y="255.5" ></text>
+<title>find_vma (172,753,656 samples, 0.02%)</title><rect x="991.1" y="325" width="0.2" height="15.0" fill="rgb(213,37,8)" rx="2" ry="2" />
+<text  x="994.13" y="335.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (1,190,374,964 samples, 0.02%)</title><rect x="473.9" y="69" width="0.2" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
-<text  x="476.88" y="79.5" ></text>
+<title>std::thread::_State_impl&lt;std::thread::_Invoker&lt;std::tuple&lt;void  (1,121,322,682,279 samples, 98.21%)</title><rect x="12.0" y="421" width="1158.9" height="15.0" fill="rgb(234,137,32)" rx="2" ry="2" />
+<text  x="15.01" y="431.5" >std::thread::_State_impl&lt;std::thread::_Invoker&lt;std::tuple&lt;void </text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::setRightChild (728,558,133 samples, 0.01%)</title><rect x="969.3" y="437" width="0.1" height="15.0" fill="rgb(205,3,0)" rx="2" ry="2" />
-<text  x="972.28" y="447.5" ></text>
+<title>__pagevec_lru_add (481,131,140 samples, 0.04%)</title><rect x="1062.3" y="229" width="0.5" height="15.0" fill="rgb(228,106,25)" rx="2" ry="2" />
+<text  x="1065.33" y="239.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::setLeftChild (1,818,561,086 samples, 0.02%)</title><rect x="945.5" y="453" width="0.3" height="15.0" fill="rgb(242,170,40)" rx="2" ry="2" />
-<text  x="948.55" y="463.5" ></text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (7,964,717,820 samples, 0.70%)</title><rect x="386.6" y="357" width="8.2" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
+<text  x="389.58" y="367.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::getRightChild (1,494,996,006 samples, 0.02%)</title><rect x="1054.1" y="421" width="0.2" height="15.0" fill="rgb(226,100,23)" rx="2" ry="2" />
-<text  x="1057.09" y="431.5" ></text>
+<title>free_pages_and_swap_cache (1,136,582,429 samples, 0.10%)</title><rect x="1186.9" y="213" width="1.1" height="15.0" fill="rgb(222,82,19)" rx="2" ry="2" />
+<text  x="1189.87" y="223.5" ></text>
 </g>
 <g >
-<title>[unknown] (6,744,545,607 samples, 0.09%)</title><rect x="1178.0" y="405" width="1.0" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1180.97" y="415.5" ></text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (3,923,205,748 samples, 0.34%)</title><rect x="390.8" y="261" width="4.0" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
+<text  x="393.76" y="271.5" ></text>
 </g>
 <g >
-<title>clock_gettime@@GLIBC_2.17 (336,403,207,825 samples, 4.39%)</title><rect x="893.0" y="453" width="51.8" height="15.0" fill="rgb(250,209,50)" rx="2" ry="2" />
-<text  x="896.00" y="463.5" >clock..</text>
+<title>zap_pmd_range.isra.0 (1,876,425,773 samples, 0.16%)</title><rect x="1186.2" y="261" width="2.0" height="15.0" fill="rgb(244,180,43)" rx="2" ry="2" />
+<text  x="1189.21" y="271.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (2,983,399,532 samples, 0.04%)</title><rect x="473.6" y="133" width="0.5" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
-<text  x="476.61" y="143.5" ></text>
+<title>mallocx (4,259,192,376 samples, 0.37%)</title><rect x="993.1" y="373" width="4.4" height="15.0" fill="rgb(205,3,0)" rx="2" ry="2" />
+<text  x="996.09" y="383.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (87,755,176,079 samples, 1.15%)</title><rect x="798.0" y="405" width="13.5" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
-<text  x="800.99" y="415.5" ></text>
+<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::insert (67,004,398,392 samples, 5.87%)</title><rect x="938.5" y="389" width="69.2" height="15.0" fill="rgb(223,87,20)" rx="2" ry="2" />
+<text  x="941.48" y="399.5" >numa&lt;Bi..</text>
 </g>
 <g >
-<title>[unknown] (1,856,623,820 samples, 0.02%)</title><rect x="1179.1" y="453" width="0.3" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1182.07" y="463.5" ></text>
+<title>std::chrono::_V2::steady_clock::now@plt (3,493,465,839 samples, 0.31%)</title><rect x="1163.0" y="405" width="3.6" height="15.0" fill="rgb(215,47,11)" rx="2" ry="2" />
+<text  x="1166.03" y="415.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::insert (2,274,671,824 samples, 0.03%)</title><rect x="947.6" y="453" width="0.4" height="15.0" fill="rgb(217,57,13)" rx="2" ry="2" />
-<text  x="950.63" y="463.5" ></text>
+<title>numa&lt;BinaryNode, 0, NumaAllocator, void&gt;::getData (1,458,272,606 samples, 0.13%)</title><rect x="383.0" y="373" width="1.5" height="15.0" fill="rgb(212,34,8)" rx="2" ry="2" />
+<text  x="385.99" y="383.5" ></text>
 </g>
 <g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (66,298,572,775 samples, 0.87%)</title><rect x="463.9" y="357" width="10.2" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
-<text  x="466.86" y="367.5" ></text>
+<title>do_exit (1,881,531,957 samples, 0.16%)</title><rect x="1186.2" y="373" width="2.0" height="15.0" fill="rgb(231,122,29)" rx="2" ry="2" />
+<text  x="1189.21" y="383.5" ></text>
 </g>
 <g >
-<title>[unknown] (795,759,912 samples, 0.01%)</title><rect x="1179.2" y="389" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1182.24" y="399.5" ></text>
+<title>handle_pte_fault (147,627,112 samples, 0.01%)</title><rect x="11.8" y="341" width="0.2" height="15.0" fill="rgb(217,57,13)" rx="2" ry="2" />
+<text  x="14.82" y="351.5" ></text>
 </g>
 <g >
-<title>__GI___lll_lock_wait (51,723,347,194 samples, 0.68%)</title><rect x="873.2" y="453" width="8.0" height="15.0" fill="rgb(226,96,23)" rx="2" ry="2" />
-<text  x="876.23" y="463.5" ></text>
+<title>__handle_mm_fault (1,308,243,000 samples, 0.11%)</title><rect x="991.4" y="309" width="1.3" height="15.0" fill="rgb(207,9,2)" rx="2" ry="2" />
+<text  x="994.37" y="319.5" ></text>
 </g>
 <g >
-<title>[unknown] (6,744,545,607 samples, 0.09%)</title><rect x="1178.0" y="229" width="1.0" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1180.97" y="239.5" ></text>
+<title>tlb_flush_mmu (1,196,784,474 samples, 0.10%)</title><rect x="1186.9" y="229" width="1.2" height="15.0" fill="rgb(214,45,10)" rx="2" ry="2" />
+<text  x="1189.87" y="239.5" ></text>
 </g>
 <g >
-<title>[unknown] (3,175,754,256 samples, 0.04%)</title><rect x="444.0" y="405" width="0.5" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="447.00" y="415.5" ></text>
+<title>free_pcppages_bulk (302,362,919 samples, 0.03%)</title><rect x="1187.7" y="149" width="0.3" height="15.0" fill="rgb(210,26,6)" rx="2" ry="2" />
+<text  x="1190.70" y="159.5" ></text>
 </g>
 <g >
-<title>[unknown] (894,823,709 samples, 0.01%)</title><rect x="1179.2" y="405" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1182.22" y="415.5" ></text>
-</g>
-<g >
-<title>[unknown] (23,367,585,190 samples, 0.30%)</title><rect x="887.3" y="389" width="3.6" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="890.28" y="399.5" ></text>
-</g>
-<g >
-<title>[unknown] (9,068,232,654 samples, 0.12%)</title><rect x="1050.3" y="293" width="1.4" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1053.26" y="303.5" ></text>
-</g>
-<g >
-<title>mallocx (5,673,738,759 samples, 0.07%)</title><rect x="1051.7" y="421" width="0.8" height="15.0" fill="rgb(205,3,0)" rx="2" ry="2" />
-<text  x="1054.66" y="431.5" ></text>
-</g>
-<g >
-<title>[unknown] (4,185,113,631 samples, 0.05%)</title><rect x="880.6" y="229" width="0.6" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="883.56" y="239.5" ></text>
-</g>
-<g >
-<title>[unknown] (961,274,858 samples, 0.01%)</title><rect x="1179.2" y="421" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1182.21" y="431.5" ></text>
-</g>
-<g >
-<title>[unknown] (14,214,979,300 samples, 0.19%)</title><rect x="888.7" y="341" width="2.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="891.69" y="351.5" ></text>
-</g>
-<g >
-<title>[unknown] (6,855,397,838 samples, 0.09%)</title><rect x="1019.4" y="261" width="1.1" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1022.41" y="271.5" ></text>
-</g>
-<g >
-<title>[unknown] (18,534,927,274 samples, 0.24%)</title><rect x="1048.8" y="421" width="2.9" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1051.80" y="431.5" ></text>
-</g>
-<g >
-<title>[unknown] (904,616,658 samples, 0.01%)</title><rect x="444.3" y="261" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="447.35" y="271.5" ></text>
-</g>
-<g >
-<title>[unknown] (27,748,257,222 samples, 0.36%)</title><rect x="876.9" y="341" width="4.3" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="879.93" y="351.5" ></text>
-</g>
-<g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::remove (106,981,537,357 samples, 1.40%)</title><rect x="457.6" y="437" width="16.5" height="15.0" fill="rgb(219,65,15)" rx="2" ry="2" />
-<text  x="460.59" y="447.5" ></text>
-</g>
-<g >
-<title>[unknown] (669,419,958 samples, 0.01%)</title><rect x="1140.3" y="373" width="0.1" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="1143.31" y="383.5" ></text>
-</g>
-<g >
-<title>DSExample (7,661,945,674,717 samples, 100.00%)</title><rect x="10.0" y="501" width="1180.0" height="15.0" fill="rgb(212,35,8)" rx="2" ry="2" />
-<text  x="13.00" y="511.5" >DSExample</text>
-</g>
-<g >
-<title>numa&lt;BinarySearchTree, 0, NumaAllocator, void&gt;::deleteHelper (10,578,114,991 samples, 0.14%)</title><rect x="472.4" y="213" width="1.7" height="15.0" fill="rgb(215,50,12)" rx="2" ry="2" />
-<text  x="475.44" y="223.5" ></text>
-</g>
-<g >
-<title>numa&lt;BinaryNode, 1, NumaAllocator, void&gt;::getRightChild (39,795,550,387 samples, 0.52%)</title><rect x="983.1" y="437" width="6.1" height="15.0" fill="rgb(226,100,23)" rx="2" ry="2" />
-<text  x="986.08" y="447.5" ></text>
-</g>
-<g >
-<title>[unknown] (1,592,086,660 samples, 0.02%)</title><rect x="12.8" y="373" width="0.2" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="15.80" y="383.5" ></text>
-</g>
-<g >
-<title>std::mersenne_twister_engine&lt;unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul&gt;::operator (158,513,346,334 samples, 2.07%)</title><rect x="811.5" y="437" width="24.4" height="15.0" fill="rgb(235,139,33)" rx="2" ry="2" />
-<text  x="814.50" y="447.5" >s..</text>
-</g>
-<g >
-<title>[unknown] (14,746,593,018 samples, 0.19%)</title><rect x="878.9" y="277" width="2.3" height="15.0" fill="rgb(210,24,5)" rx="2" ry="2" />
-<text  x="881.93" y="287.5" ></text>
+<title>numa&lt;BinarySearchTree, 1, NumaAllocator, void&gt;::deleteHelper (1,647,586,105 samples, 0.14%)</title><rect x="632.3" y="197" width="1.7" height="15.0" fill="rgb(209,20,4)" rx="2" ry="2" />
+<text  x="635.25" y="207.5" ></text>
 </g>
 </g>
 </svg>

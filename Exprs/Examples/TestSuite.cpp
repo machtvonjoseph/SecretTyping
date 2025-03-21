@@ -37,7 +37,7 @@ std::vector<Stack*> Stacks1;
 int64_t ops0=0;
 int64_t ops1=0;
 
-
+int sharedCounter = 0;
 char* Arrays0;
 char* Arrays1;
 
@@ -84,6 +84,21 @@ struct prefill_percentage{
 
 // chrono::high_resolution_clock::time_point startTimer;
 // chrono::high_resolution_clock::time_point endTimer;
+
+
+int checkNUMANode(void* ptr) {
+    int node;
+    unsigned long nodemask;
+
+    if (get_mempolicy(&node, &nodemask, sizeof(nodemask) * 8, ptr, MPOL_F_NODE) == 0) {
+        // std::cout << "Pointer at " << ptr << " is allocated on NUMA Node " << node << std::endl;
+		return node;
+    } else {
+        std::cerr << "Failed to get NUMA node for pointer at " << ptr << std::endl;
+    }
+}
+
+
 
 void global_init(int num_threads, int duration, int interval){
 	pthread_barrier_init(&bar, NULL, num_threads);
@@ -425,18 +440,16 @@ void numa_BST_init(std::string DS_config, int num_DS, int keyspace, int node, in
 			}
 		}
 
-		for(int i = 0; i < num_DS ; i++)
+		for(int i = 0; i < keyspace/2 ; i++)
 		{	
 			int x = xDist(gen);
 			if(x <= crossover){
-				for(int j=0; j < keyspace/2; j++)
-				{
-					BSTs1[i]->insert(dist(gen));
+				for(int j=0; j < num_DS; j++){
+					BSTs1[j]->insert(dist(gen));
 				}
 			}else{
-				for(int j=0; j < keyspace/2; j++)
-				{
-					BSTs0[i]->insert(dist(gen));
+				for(int j=0; j < num_DS; j++){
+					BSTs0[j]->insert(dist(gen));
 				}
 			}
 		}
@@ -474,25 +487,24 @@ void numa_BST_init(std::string DS_config, int num_DS, int keyspace, int node, in
 			}
 		}	
 		
-		for(int i = 0; i < num_DS ; i++)
+		for(int i = 0; i < keyspace/2 ; i++)
 		{
 			int x = xDist(gen);
 			if(x <= crossover){
-				for(int j=0; j < keyspace/2; j++)
-				{
-					BSTs0[i]->insert(dist(gen));
+				for(int j=0; j < num_DS; j++){
+					BSTs0[j]->insert(dist(gen));
 				}
 			}else{
-				for(int j=0; j < keyspace/2; j++)
-				{
-					BSTs1[i]->insert(dist(gen));
+				for(int j=0; j < num_DS; j++){
+					BSTs1[j]->insert(dist(gen));
 				}
 			}
-
 		}
 	}
 
 	pthread_barrier_wait(&init_bar);
+	
+	std::cout<<"BSTs initialized"<<std::endl<<std::endl<<std::endl<<std::endl;
 
 }
 
@@ -865,7 +877,6 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 	std::uniform_int_distribution<> opDist(1, 100);
 	std::uniform_int_distribution<> xDist(1, 100);
 	std::uniform_int_distribution<> keyDist(0,keyspace);
-	//std::cout << "Thread " << tid << " about to start working on node id"<<node << std::endl;
 
 	int64_t ops;
 	thread_local vector<int64_t> localOps;
@@ -875,16 +886,21 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 	auto endTimer = startTimer + std::chrono::seconds(duration);
     auto nextLogTime = startTimer + std::chrono::seconds(interval);
 	int intervalIdx = 0;
+
 	while (duration_cast<seconds>(steady_clock::now() - startTimer).count() < duration) {
 		int ds = dist(gen);
 
 
 		int key = keyDist(gen);
 		if(node==0){
-			if(opDist(gen)<=98)
+			if(opDist(gen)<=80)
 			{
+
 				BST_lk0[ds]->lock();
-				BSTs0[ds]->lookup(key);
+				int level = BSTs0[ds]->lookup(key);
+				// globalLK->lock();
+				// std::cout<<"Look up traversed "<<level<<" levels"<<std::endl;
+				// globalLK->unlock();
 				BST_lk0[ds]->unlock();
 			
 			}
@@ -896,14 +912,22 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 					BST_lk0[ds_a]->lock();
 					BST_lk1[ds_b]->lock();
 					BSTs0[ds_a]->remove(key);
-					BSTs1[ds_b]->insert(key);
+					int level = BSTs1[ds_b]->insert(key);
+					// globalLK->lock();
+					// std::cout<<"Insert traversed "<<level<<" levels"<<std::endl;
+					// globalLK->unlock();
+
 					BST_lk0[ds_a]->unlock();
 					BST_lk1[ds_b]->unlock();
 				}else if(txn%4==1){
 					BST_lk0[ds_a]->lock();
 					BST_lk1[ds_b]->lock();
 					BSTs1[ds_b]->remove(key);
-					BSTs0[ds_a]->insert(key);
+					int level = BSTs0[ds_a]->insert(key);
+					// globalLK->lock();
+					// std::cout<<"Insert traversed "<<level<<" levels"<<std::endl;
+					// globalLK->unlock();
+
 					BST_lk0[ds_a]->unlock();
 					BST_lk1[ds_b]->unlock();
 				}else if(txn%4==2){
@@ -913,7 +937,11 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 					BST_lk0[lk1]->lock();
 					BST_lk0[lk2]->lock();
 					BSTs0[ds_a]->remove(key);
-					BSTs0[ds_b]->insert(key);
+					int level = BSTs0[ds_b]->insert(key);
+					// globalLK->lock();
+					// std::cout<<"Insert traversed "<<level<<" levels"<<std::endl;
+					// globalLK->unlock();
+
 					BST_lk0[lk1]->unlock();
 					BST_lk0[lk2]->unlock();
 				}else{
@@ -923,28 +951,25 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 					BST_lk1[lk1]->lock();
 					BST_lk1[lk2]->lock();
 					BSTs1[ds_a]->remove(key);
-					BSTs1[ds_b]->insert(key);
+					int level = BSTs1[ds_b]->insert(key);
+					// globalLK->lock();
+					// std::cout<<"Insert traversed "<<level<<" levels"<<std::endl;
+					// globalLK->unlock();
+
 					BST_lk1[lk1]->unlock();
 					BST_lk1[lk2]->unlock();
 				}
-				// if(x <= crossover){
-				// 	BST_lk1[ds]->lock();
-				// 	BSTs1[ds]->insert(key);
-				// 	BST_lk1[ds]->unlock();
-				// }else{
-				// 	BST_lk0[ds]->lock();
-				// 	BSTs0[ds]->insert(key);
-				// 	BST_lk0[ds]->unlock();
-				// }
 			}
 		}
 		else{
-			if(opDist(gen)<=98)
+			if(opDist(gen)<=80)
 			{
 				BST_lk1[ds]->lock();
-				BSTs1[ds]->lookup(key);
+				int level = BSTs1[ds]->lookup(key);
+				// globalLK->lock();
+				// std::cout<<"Look up traversed "<<level<<" levels"<<std::endl;
+				// globalLK->unlock();
 				BST_lk1[ds]->unlock();
-	
 			}
 			else {
 				int ds_a= dist(gen);
@@ -954,14 +979,21 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 					BST_lk0[ds_a]->lock();
 					BST_lk1[ds_b]->lock();
 					BSTs0[ds_a]->remove(key);
-					BSTs1[ds_b]->insert(key);
+					int level = BSTs1[ds_b]->insert(key);
+					// globalLK->lock();
+					// std::cout<<"Insert traversed "<<level<<" levels"<<std::endl;
+					// globalLK->unlock();
+
 					BST_lk0[ds_a]->unlock();
 					BST_lk1[ds_b]->unlock();
 				}else if(txn%4==1){
 					BST_lk0[ds_a]->lock();
 					BST_lk1[ds_b]->lock();
 					BSTs1[ds_b]->remove(key);
-					BSTs0[ds_a]->insert(key);
+					int level= BSTs0[ds_a]->insert(key);
+					// globalLK->lock();
+					// std::cout<<"Insert traversed "<<level<<" levels"<<std::endl;
+					// globalLK->unlock();
 					BST_lk0[ds_a]->unlock();
 					BST_lk1[ds_b]->unlock();
 				}else if(txn%4==2){
@@ -971,7 +1003,10 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 					BST_lk0[lk1]->lock();
 					BST_lk0[lk2]->lock();
 					BSTs0[ds_a]->remove(key);
-					BSTs0[ds_b]->insert(key);
+					int level = BSTs0[ds_b]->insert(key);
+					// globalLK->lock();
+					// std::cout<<"Insert traversed "<<level<<" levels"<<std::endl;
+					// globalLK->unlock();
 					BST_lk0[lk1]->unlock();
 					BST_lk0[lk2]->unlock();
 				}else{
@@ -981,7 +1016,10 @@ void BinarySearchTest(int tid, int duration, int node, int64_t num_DS, int num_t
 					BST_lk1[lk1]->lock();
 					BST_lk1[lk2]->lock();
 					BSTs1[ds_a]->remove(key);
-					BSTs1[ds_b]->insert(key);
+					int level = BSTs1[ds_b]->insert(key);
+					// globalLK->lock();
+					// std::cout<<"Insert traversed "<<level<<" levels"<<std::endl;
+					// globalLK->unlock();
 					BST_lk1[lk1]->unlock();
 					BST_lk1[lk2]->unlock();
 				}

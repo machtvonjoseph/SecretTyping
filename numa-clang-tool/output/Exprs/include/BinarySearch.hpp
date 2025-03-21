@@ -62,12 +62,14 @@ public:
 	 * \param[in] data Data to be inserted.
 	 *
 	 */
-	virtual BinaryNode* deleteHelper(BinaryNode *node, int data);
+	virtual BinaryNode* deleteHelper(BinaryNode* parent, BinaryNode *node, int data);
 
 	virtual BinaryNode* findMin(BinaryNode *node);
 
-	virtual void insert(int data);
+	virtual int insert(int data);
 
+	virtual int getDepth();
+	virtual int getDepthHelper(BinaryNode *node);
 	/*!
 	 * \brief Look up data in the binary search tree
 	 * 
@@ -78,7 +80,7 @@ public:
 	 *
 	 */ 
 
-	virtual bool lookup(int data);
+	virtual int lookup(int data);
 
 	/*!
 	 * 
@@ -188,13 +190,13 @@ virtual ~numa()
 {
 	root = NULL;
 }
-virtual BinaryNode * deleteHelper(BinaryNode * node, int key){
+virtual BinaryNode * deleteHelper(BinaryNode * parent, BinaryNode * node, int key){
     if (!node)
         return nullptr;
     if (key < node->getData()) {
-        node->setLeftChild(this->deleteHelper(node->getLeftChild(), key));
+        node->setLeftChild(this->deleteHelper(node, node->getLeftChild(), key));
     } else if (key > node->getData()) {
-        node->setRightChild(this->deleteHelper(node->getLeftChild(), key));
+        node->setRightChild(this->deleteHelper(node, node->getRightChild(), key));
     } else {
         if (!node->getLeftChild()) {
             BinaryNode *temp = node->getRightChild();
@@ -206,8 +208,16 @@ virtual BinaryNode * deleteHelper(BinaryNode * node, int key){
             return temp;
         }
         BinaryNode *temp = this->findMin(node->getRightChild());
-        node->setData(temp->getData());
-        node->setRightChild(this->deleteHelper(node->getRightChild(), temp->getData()));
+        BinaryNode *temp2 = new BinaryNode(temp->getData());
+        temp2->setLeftChild(node->getLeftChild());
+        temp2->setRightChild(node->getRightChild());
+        delete node;
+        if (parent->getData() > temp2->getData()) {
+            parent->setLeftChild(temp2);
+        } else {
+            parent->setRightChild(temp2);
+        }
+        node->setRightChild(this->deleteHelper(temp2, temp2->getRightChild(), temp2->getData()));
     }
     return node;
 }
@@ -216,48 +226,67 @@ virtual BinaryNode * findMin(BinaryNode * node){
         node = node->getLeftChild();
     return node;
 }
-virtual void insert(int data){
+virtual int insert(int data){
     BinaryNode *leaf = new BinaryNode(data);
     if (this->root == __null) {
         this->root = leaf;
-        return;
+        return 0;
     }
     BinaryNode *current = this->root;
-    BinaryNode *parent;
+    BinaryNode *parent = nullptr;
+    int level = 0;
     while (current != __null)
         {
             parent = current;
-            if (data <= current->getData()) {
+            if (data < current->getData()) {
                 current = current->getLeftChild();
-            } else {
+                level++;
+            } else if (data > current->getData()) {
                 current = current->getRightChild();
+                level++;
+            } else {
+                delete leaf;
+                return level;
             }
         }
-    if (leaf->getData() < parent->getData())
+    if (data < parent->getData()) {
         parent->setLeftChild(leaf);
-    else if (leaf->getData() > parent->getData())
+    } else {
         parent->setRightChild(leaf);
-    else
-        delete leaf;
+    }
+    return level;
 }
-virtual bool lookup(int data){
+virtual int getDepth(){
+    return this->getDepthHelper(this->root);
+}
+virtual int getDepthHelper(BinaryNode * node){
+    if (node == __null)
+        return 0;
+    int leftDepth = this->getDepthHelper(node->getLeftChild());
+    int rightDepth = this->getDepthHelper(node->getRightChild());
+    return std::max(leftDepth, rightDepth) + 1;
+}
+virtual int lookup(int data){
     if (this->root == __null) {
-        return false;
+        return 0;
     }
     BinaryNode *current = this->root;
     BinaryNode *parent;
+    int level = 0;
     while (current != __null)
         {
             if (current->getData() == data) {
-                return true;
+                return level;
             }
             if (data < current->getData()) {
                 current = current->getLeftChild();
+                level++;
             } else {
                 current = current->getRightChild();
+                level++;
             }
         }
-    return false;
+    return level;
 }
 virtual void postOrderPrint(){
     std::cout << "Post Order Print" << std::endl;
@@ -320,7 +349,18 @@ virtual void update(int data){
         }
 }
 virtual void remove(int data){
-    this->root = this->deleteHelper(this->root, data);
+    if (this->root == __null) {
+        return;
+    }
+    if (this->root->getData() == data) {
+        delete this->root;
+        this->root = __null;
+        return;
+    } else if (this->root->getData() < data) {
+        this->root->setLeftChild(this->deleteHelper(this->root, this->root->getLeftChild(), data));
+    } else if (data > this->root->getData()) {
+        this->root->setRightChild(this->deleteHelper(this->root, this->root->getRightChild(), data));
+    }
 }
 private:
 numa<BinaryNode*,0> root;
@@ -383,13 +423,13 @@ virtual ~numa()
 {
 	root = NULL;
 }
-virtual BinaryNode * deleteHelper(BinaryNode * node, int key){
+virtual BinaryNode * deleteHelper(BinaryNode * parent, BinaryNode * node, int key){
     if (!node)
         return nullptr;
     if (key < node->getData()) {
-        node->setLeftChild(this->deleteHelper(node->getLeftChild(), key));
+        node->setLeftChild(this->deleteHelper(node, node->getLeftChild(), key));
     } else if (key > node->getData()) {
-        node->setRightChild(this->deleteHelper(node->getLeftChild(), key));
+        node->setRightChild(this->deleteHelper(node, node->getRightChild(), key));
     } else {
         if (!node->getLeftChild()) {
             BinaryNode *temp = node->getRightChild();
@@ -401,8 +441,16 @@ virtual BinaryNode * deleteHelper(BinaryNode * node, int key){
             return temp;
         }
         BinaryNode *temp = this->findMin(node->getRightChild());
-        node->setData(temp->getData());
-        node->setRightChild(this->deleteHelper(node->getRightChild(), temp->getData()));
+        BinaryNode *temp2 = new BinaryNode(temp->getData());
+        temp2->setLeftChild(node->getLeftChild());
+        temp2->setRightChild(node->getRightChild());
+        delete node;
+        if (parent->getData() > temp2->getData()) {
+            parent->setLeftChild(temp2);
+        } else {
+            parent->setRightChild(temp2);
+        }
+        node->setRightChild(this->deleteHelper(temp2, temp2->getRightChild(), temp2->getData()));
     }
     return node;
 }
@@ -411,48 +459,67 @@ virtual BinaryNode * findMin(BinaryNode * node){
         node = node->getLeftChild();
     return node;
 }
-virtual void insert(int data){
+virtual int insert(int data){
     BinaryNode *leaf = new BinaryNode(data);
     if (this->root == __null) {
         this->root = leaf;
-        return;
+        return 0;
     }
     BinaryNode *current = this->root;
-    BinaryNode *parent;
+    BinaryNode *parent = nullptr;
+    int level = 0;
     while (current != __null)
         {
             parent = current;
-            if (data <= current->getData()) {
+            if (data < current->getData()) {
                 current = current->getLeftChild();
-            } else {
+                level++;
+            } else if (data > current->getData()) {
                 current = current->getRightChild();
+                level++;
+            } else {
+                delete leaf;
+                return level;
             }
         }
-    if (leaf->getData() < parent->getData())
+    if (data < parent->getData()) {
         parent->setLeftChild(leaf);
-    else if (leaf->getData() > parent->getData())
+    } else {
         parent->setRightChild(leaf);
-    else
-        delete leaf;
+    }
+    return level;
 }
-virtual bool lookup(int data){
+virtual int getDepth(){
+    return this->getDepthHelper(this->root);
+}
+virtual int getDepthHelper(BinaryNode * node){
+    if (node == __null)
+        return 0;
+    int leftDepth = this->getDepthHelper(node->getLeftChild());
+    int rightDepth = this->getDepthHelper(node->getRightChild());
+    return std::max(leftDepth, rightDepth) + 1;
+}
+virtual int lookup(int data){
     if (this->root == __null) {
-        return false;
+        return 0;
     }
     BinaryNode *current = this->root;
     BinaryNode *parent;
+    int level = 0;
     while (current != __null)
         {
             if (current->getData() == data) {
-                return true;
+                return level;
             }
             if (data < current->getData()) {
                 current = current->getLeftChild();
+                level++;
             } else {
                 current = current->getRightChild();
+                level++;
             }
         }
-    return false;
+    return level;
 }
 virtual void postOrderPrint(){
     std::cout << "Post Order Print" << std::endl;
@@ -515,7 +582,18 @@ virtual void update(int data){
         }
 }
 virtual void remove(int data){
-    this->root = this->deleteHelper(this->root, data);
+    if (this->root == __null) {
+        return;
+    }
+    if (this->root->getData() == data) {
+        delete this->root;
+        this->root = __null;
+        return;
+    } else if (this->root->getData() < data) {
+        this->root->setLeftChild(this->deleteHelper(this->root, this->root->getLeftChild(), data));
+    } else if (data > this->root->getData()) {
+        this->root->setRightChild(this->deleteHelper(this->root, this->root->getRightChild(), data));
+    }
 }
 private:
 numa<BinaryNode*,1> root;
@@ -557,7 +635,22 @@ void BinarySearchTree::update(int data)
 
 void BinarySearchTree::remove(int data)
 {
-	root = deleteHelper(root, data);
+	if(root==NULL){return;}
+	if(root->getData() == data)
+	{
+		delete root;
+		root = NULL;
+		return;
+	}
+	else if (root->getData() < data) {
+        root->setLeftChild(deleteHelper(root, root->getLeftChild(), data));
+    } 
+	else if (data > root->getData()) {
+        root->setRightChild( deleteHelper(root, root->getRightChild(), data));
+    }
+
+
+	//root = deleteHelper(root, data);
 	// if(root == NULL)
 	// {
 	// 	return;
@@ -603,64 +696,96 @@ void BinarySearchTree::remove(int data)
 	// }
 }
 
-void BinarySearchTree::insert(int data)
+int BinarySearchTree::insert(int data)
 {
 	BinaryNode *leaf = new BinaryNode(data);
 	if(root == NULL)
 	{
 		root = leaf;
-		return;
+		return 0;
 	}
 	BinaryNode *current = root;
-	BinaryNode *parent;
+	BinaryNode *parent= nullptr;
+	int level = 0;
 	while(current != NULL)
 	{
 		parent = current;
-		if(data <= current->getData())
+		if(data < current->getData())
 		{
 			current = current->getLeftChild();
+			level++;
 			
-		}else
+		}else if(data > current->getData())
 		{
 			current = current->getRightChild();
+			level++;
 			
+		}
+		else{
+			//std::cout << data << " already exists at level " << level << std::endl;
+			delete leaf;
+			return level;
 		}
 	}
 
 	//current = leaf;
-	if(leaf->getData() < parent->getData())
+	if(data < parent->getData()){
 		parent->setLeftChild(leaf);
-	else if(leaf->getData() > parent->getData())
+	}
+	else {
 		parent->setRightChild(leaf);
-	else
-		delete leaf;
+	}
+	//std::cout << "Inserted " << data << " at level " << level << std::endl;
+	return level;
 }
 
 
-bool BinarySearchTree::lookup(int data)
+int BinarySearchTree::getDepth()
+{
+	return getDepthHelper(root);
+	
+}
+
+int BinarySearchTree::getDepthHelper(BinaryNode *node)
+{
+	if(node == NULL)
+		return 0;
+	
+	int leftDepth = getDepthHelper(node->getLeftChild());
+	int rightDepth = getDepthHelper(node->getRightChild());
+	return std::max(leftDepth, rightDepth) + 1;
+	
+}
+
+int BinarySearchTree::lookup(int data)
 {
 	if (root == NULL)
 	{
-		return false;
+		return 0;
 	}
 	BinaryNode *current = root;
 	BinaryNode *parent;
+	int level = 0;
 	while (current != NULL)
 	{
 		if (current->getData() == data)
 		{
-			return true;
+			//std::cout << "Found " << data << " at level " << level << std::endl;
+			return level;
 		}
 
 		if(data < current->getData())
 		{
 			current = current->getLeftChild();
+			level++;
 		}else{
 			current = current->getRightChild();
+			level++;
 		}
 	}
+	//std::cout << data << " not found. Searched up to depth " << level << std::endl;
 
-	return false;
+	return level;
 }
 
 void BinarySearchTree::postOrderPrint()
@@ -738,14 +863,14 @@ BinaryNode* BinarySearchTree::findMin(BinaryNode *node){
 }
 
 
-BinaryNode* BinarySearchTree::deleteHelper(BinaryNode *node, int key){
+BinaryNode* BinarySearchTree::deleteHelper(BinaryNode* parent, BinaryNode *node, int key){
 	if (!node) return nullptr; // Key not found
 
     if (key < node->getData()) {
-        node->setLeftChild(deleteHelper(node->getLeftChild(), key));
+        node->setLeftChild(deleteHelper(node, node->getLeftChild(), key));
     } 
 	else if (key > node->getData()) {
-        node->setRightChild( deleteHelper(node->getLeftChild(), key));
+        node->setRightChild( deleteHelper(node, node->getRightChild(), key));
     } else {
          // Node found, handle deletion cases
         if (!node->getLeftChild()) {
@@ -761,8 +886,20 @@ BinaryNode* BinarySearchTree::deleteHelper(BinaryNode *node, int key){
 
             // Two children: Replace with inorder successor
             BinaryNode* temp = findMin(node->getRightChild());
-			node->setData(temp->getData());
-			node->setRightChild(deleteHelper(node->getRightChild(), temp->getData()));
+			BinaryNode* temp2 = new BinaryNode(temp->getData());
+			temp2->setLeftChild(node->getLeftChild());
+			temp2->setRightChild(node->getRightChild());
+			delete node;
+			//node->setData(temp->getData());
+			if(parent->getData() > temp2->getData())
+			{
+				parent->setLeftChild(temp2);
+			}
+			else
+			{
+				parent->setRightChild(temp2);
+			}
+			node->setRightChild(deleteHelper(temp2, temp2->getRightChild(), temp2->getData()));
         }
         return node;
 }
