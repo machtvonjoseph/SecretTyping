@@ -1,9 +1,0 @@
-# started on Thu Mar 20 13:52:14 2025
-
-#           time             counts unit events
-     0.000056921      <not counted>      offcore_response.all_data_rd.llc_miss.remote_dram                                   
-     0.000056921      <not counted>      offcore_response.all_data_rd.llc_miss.local_dram                                   
-# started on Thu Mar 20 13:52:14 2025
-
-     0.000967018      <not counted>      offcore_response.all_data_rd.llc_miss.remote_dram                                   
-     0.000967018      <not counted>      offcore_response.all_data_rd.llc_miss.local_dram                                   

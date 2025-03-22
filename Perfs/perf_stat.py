@@ -17,25 +17,26 @@ def clear_output_file(output_file):
 
 def run_perf(th_config,ds_config,binary_path):
     """Runs perf stat for a specific DS and thread configuration."""
-    output_file = f"local_remote_{th_config}_{ds_config}.txt"
+    output_file = f"./LocalRemoteStat/local_remote_{th_config}_{ds_config}.txt"
 
     # Clear output file before running perf
     clear_output_file(output_file)
 
     perf_command = [
-        "sudo", "perf", "stat", "-g",
-        "-e", "offcore_response.all_data_rd.llc_miss.remote_dram",
-        "-e", "offcore_response.all_data_rd.llc_miss.local_dram",
+        #"sudo", "numactl", "--cpunodebind=0,1", "--membind=0,1",
+        "perf", "stat",
+        "-e", "ocr.demand_data_rd.remote_dram",
+        "-e", "ocr.demand_data_rd.local_dram",
         "-I", "2000",
         "-o", output_file,
         "--", binary_path,
-        "-n", "10000",
-        "-t", "40",
+        "-n", "1000000",
+        "-t", "80",
         "-D", "800",
         "--DS_name=bst",
         f"--th_config={th_config}",
         f"--DS_config={ds_config}",
-        "-k", "160000"
+        "-k", "160"
     ]
 
     print(f"\nRunning command for Thread Config={th_config}, DS={ds_config}...\n")
@@ -58,7 +59,7 @@ def convert_perf_to_csv(input_file):
         lines = f.readlines()
 
     data = []
-    pattern = re.compile(r"^\s*([\d.]+)\s+([\d,]+)\s+offcore_response.all_data_rd.llc_miss.(remote_dram|local_dram)")
+    pattern = re.compile(r"^\s*(\d+\.\d+)\s+([\d,]+)\s+ocr\.demand_data_rd\.(remote_dram|local_dram)")
 
     time_to_values = {}
 
@@ -87,54 +88,8 @@ def convert_perf_to_csv(input_file):
     print(f"Converted {input_file} to {output_csv}")
     return output_csv  # Return the CSV file path
 
-def merge_csv(files, output_csv):
-    """Merges multiple CSVs into one with DS and Thread configurations as separate columns."""
-    merged_data = {}
-
-    # Read all CSVs
-    for file in files:
-        ds_config, th_config = re.findall(r"local_remote_(\w+)_(\w+).csv", file)[0]
-
-        with open(file, "r") as f:
-            reader = csv.reader(f)
-            headers = next(reader)  # Skip the header row
-
-            for row in reader:
-                time = float(row[0])
-                remote_accesses = int(row[1])
-                local_accesses = int(row[2])
-
-                if time not in merged_data:
-                    merged_data[time] = {}
-
-                merged_data[time][f"{th_config}_{ds_config}_remote"] = remote_accesses
-                merged_data[time][f"{th_config}_{ds_config}_local"] = local_accesses
-
-    # Write merged CSV
-    with open(output_csv, "w", newline="") as f:
-        writer = csv.writer(f)
-
-        # Create header dynamically
-        all_keys = sorted(merged_data.keys())
-        column_names = ["Time"]
-        for ds in DS_CONFIGS:
-            for th in TH_CONFIGS:
-                column_names.append(f"{th}_{ds}_remote")
-                column_names.append(f"{th}_{ds}_local")
-
-        writer.writerow(column_names)  # Write header
-
-        for time in all_keys:
-            row = [time]
-            for ds in DS_CONFIGS:
-                for th in TH_CONFIGS:
-                    row.append(merged_data[time].get(f"{th}_{ds}_remote", 0))
-                    row.append(merged_data[time].get(f"{th}_{ds}_local", 0))
-            writer.writerow(row)
-
-    print(f"Final merged CSV saved as: {output_csv}")
-
 if __name__ == "__main__":
+    print("This program can also run perf on any two numa node machine: ")
     parser = argparse.ArgumentParser(
         description="Run perf stat with customizable arguments and process output.",
         epilog="Example:\n"
@@ -157,12 +112,13 @@ if __name__ == "__main__":
         # Run all DS and Thread Configurations
         for th in TH_CONFIGS:
             for ds in DS_CONFIGS:
-                output_file = run_perf(th,ds, args.binary_path)
-                csv_file = convert_perf_to_csv(output_file)
-                generated_files.append(csv_file)
+                #output_file = run_perf(th,ds, args.binary_path)
+                output_file = f"./LocalRemoteStat/local_remote_{th}_{ds}.txt"
+                convert_perf_to_csv(output_file)
+                #generated_files.append(csv_file)
 
         # Merge into final CSV
-        merge_csv(generated_files, "final_perf_results.csv")
+        #merge_csv(generated_files, "final_perf_results.csv")
 
     else:
         # Use default values if not provided
@@ -170,5 +126,6 @@ if __name__ == "__main__":
         th_config = args.th_config if args.th_config else "numa"
 
         # Run single configuration
-        output_file = run_perf(th_config, ds_config,args.binary_path)
+        #output_file = run_perf(th_config, ds_config,args.binary_path)
+        output_file = f"./LocalRemoteStat/local_remote_{th_config}_{ds_config}.txt"
         convert_perf_to_csv(output_file)

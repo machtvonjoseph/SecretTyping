@@ -1,6 +1,6 @@
 CC=clang++
 DIRS=Node Stack Queue BinarySearch
-HOME_DIR :=$(HOME)
+HOME_DIR :=/home/kiwo9430
 LINK_DIRS=-L../Stack/bin -L../Queue/bin -L../BinarySearch/bin -L../LinkdedList/bin 
 
 LINK_FLAGS=-lnuma -std=c++20 -pthread 

@@ -504,7 +504,7 @@ void numa_BST_init(std::string DS_config, int num_DS, int keyspace, int node, in
 
 	pthread_barrier_wait(&init_bar);
 	
-	std::cout<<"BSTs initialized"<<std::endl<<std::endl<<std::endl<<std::endl;
+	//std::cout<<"BSTs initialized"<<std::endl<<std::endl<<std::endl<<std::endl;
 
 }
 

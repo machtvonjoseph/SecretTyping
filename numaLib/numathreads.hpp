@@ -10,7 +10,7 @@
 #include <thread>
 #include <map>
 
-#define MAX_CPUS 40
+#define MAX_CPUS 80
 
 template <int NodeID>
 class thread_numa : public std::thread {

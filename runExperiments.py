@@ -129,9 +129,9 @@ if __name__ == "__main__":
             command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:128:1024 --meta t:4:8:12:16:20:24:28:32:36:40 --meta D:5 --meta DS_name:ll --meta th_config:numa:regular:split --meta DS_config:numa:regular --meta x:0:10 >> ../../Result/ll.csv"
     elif (args.DS == "bst"):
         if (args.verbose):
-            command =f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:10000 --meta t:20:40 --meta D:800 --meta DS_name:bst --meta th_config:numa:regular:reverse --meta DS_config:numa:regular --meta k:160000  --meta i:10"
+            command =f"cd ./Output/{args.exprName}/ &&  python3 meta.py numactl --cpunodebind=0,1 --membind=0,1 ./Examples/bin/DSExample --meta n:1000000 --meta t:40:80 --meta D:800 --meta DS_name:bst --meta th_config:numa:regular:reverse --meta DS_config:numa:regular --meta k:160  --meta i:10"
         else:
-            command = f"cd ./Output/{args.exprName}/ && python3 meta.py ./Examples/bin/DSExample --meta n:10000 --meta t:20:40 --meta D:800 --meta DS_name:bst --meta th_config:numa:regular:reverse --meta DS_config:numa:regular --meta k:160000  --meta i:10>> ../../Result/BST_Transactions.csv"
+            command = f"cd ./Output/{args.exprName}/ &&  numactl --cpunodebind=0,1 --membind=0,1 python3 meta.py ./Examples/bin/DSExample --meta n:1000000 --meta t:40:80 --meta D:800 --meta DS_name:bst --meta th_config:numa:regular:reverse --meta DS_config:numa:regular --meta k:160  --meta i:10>> ../../Result/BST_Transactions.csv"
           
     print("command is ", command)
     run_command(command)

@@ -111,5 +111,5 @@
         "utils_examples.h": "c",
         "mempolicy.h": "c"
     },
-    "cmake.sourceDirectory": "/users/kiwo9430/NUMATyping/numa-clang-tool"
+    "cmake.sourceDirectory": "/home/kiwo9430/NUMATyping/numa-clang-tool"
 }

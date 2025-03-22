@@ -35,10 +35,10 @@ case "$1" in
     # Place the actual command for 'command2' here
     # For example: df -h
 
-    ./build/bin/clang-tool  --numa input/Exprs/Examples/main.cpp input/Exprs/Examples/TestSuite.cpp -- -I input/Exprs/include/ -I../numaLib/ -I/usr/local/lib/clang/20/include/ -lnuma
+    ./build/bin/clang-tool  --numa input/Exprs/Examples/main.cpp input/Exprs/Examples/TestSuite.cpp -- -I input/Exprs/include/ -I../numaLib/ -I/usr/local/lib/clang/21/include/ -lnuma
 
 
-    ./build/bin/clang-tool  --cast output/Exprs/Examples/main.cpp output/Exprs/Examples/TestSuite.cpp -- -I output/Exprs/include/ -I../numaLib/ -I/usr/local/lib/clang/20/include/ -lnuma
+    ./build/bin/clang-tool  --cast output/Exprs/Examples/main.cpp output/Exprs/Examples/TestSuite.cpp -- -I output/Exprs/include/ -I../numaLib/ -I/usr/local/lib/clang/21/include/ -lnuma
     ;;
 
   STExprs)
@@ -47,9 +47,9 @@ case "$1" in
     # Place the actual command for 'command2' here
     # For example: df -h
 
-    ./build/bin/clang-tool  --numa input/STExprs/Examples/main.cpp input/STExprs/Examples/TestSuite.cpp -- -I input/STExprs/include/ -I../numaLib/ -I/usr/local/lib/clang/20/include/ -lnuma
+    ./build/bin/clang-tool  --numa input/STExprs/Examples/main.cpp input/STExprs/Examples/TestSuite.cpp -- -I input/STExprs/include/ -I../numaLib/ -I/usr/local/lib/clang/21/include/ -lnuma
 
-    ./build/bin/clang-tool  --cast output/STExprs/Examples/main.cpp output/STExprs/Examples/TestSuite.cpp -- -I output/STExprs/include/ -I../numaLib/ -I/usr/local/lib/clang/20/include/ -lnuma
+    ./build/bin/clang-tool  --cast output/STExprs/Examples/main.cpp output/STExprs/Examples/TestSuite.cpp -- -I output/STExprs/include/ -I../numaLib/ -I/usr/local/lib/clang/21/include/ -lnuma
     ;;
   *)
     echo "Invalid argument. Usage: $0 <DS|dummy|Exprs|STExprs>"
