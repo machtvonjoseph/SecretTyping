@@ -86,16 +86,16 @@ public:
 
 };
 
-template<>
-class secret<Stack>
-{
-};
+// template<>
+// class secret<Stack>
+// {
+// };
 
-template<>
-class secret<Node>
-{
+// template<>
+// class secret<Node>
+// {
 	
-};
+// };
 
 Stack::Stack()
 {

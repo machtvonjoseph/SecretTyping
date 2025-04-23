@@ -16,7 +16,7 @@
 
 
 template <typename T>
-class secret{
+class secret:public T{
     public:
         secret() {
 

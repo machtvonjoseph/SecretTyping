@@ -1,4 +1,13 @@
-/*! \file Stack.hpp
+#ifdef UMF 
+	                #include "numatype.hpp"
+	                #include <umf/mempolicy.h>
+	                #include <umf/memspace.h>
+                    #include "utils_examples.h"
+                    #include <stdio.h>
+                    #include <string.h>
+                #endif
+                #include "secrettype.hpp"
+                /*! \file Stack.hpp
  * \brief Interface for a simple Stack class
  * \author Nii Mante
  * \date 10/28/2012
@@ -49,7 +58,7 @@ public:
 	 *
 	 * \sa Stack::pop()
 	 */
-	~Stack();
+	virtual ~Stack();
 
 	/*!
 	 * \brief Function for removing a single stack node
@@ -60,7 +69,7 @@ public:
 	 *
 	 * \return The data from the removed node.
 	 */
-	int pop();
+	virtual int pop();
 
 	/*!
 	 * \brief Push function for adding stack variables
@@ -72,7 +81,7 @@ public:
 	 * \note To avoid Memory Allocation issues, if allocation fails (i.e. overflow)
 	 	Stack::push() is returned from immediately.
 	 */
-	void push(int);
+	virtual void push(int);
 
 
 	/*!
@@ -81,21 +90,83 @@ public:
 	 * This function iterates over and prints each node in the stack.
 	 * The first node printed is the top Node.
 	 */
-	void display();
+	virtual void display();
 
 
 };
 
 template<>
-class secret<Stack>
-{
-};
-
-template<>
-class secret<Node>
+class secret<Stack>{
+//add your secure memory allocator code herepublic:
+secret (){
+    this->top = __null;
+}
+virtual ~secret()
 {
 	
+	if(top == NULL)
+	{
+		return;
+	}
+	Node *temp;
+	while(top != NULL)
+	{
+		temp = top;
+		top = top->getLink();
+		delete temp;
+	}
+
+}
+virtual int pop(){
+    if (this->top == __null) {
+        return -1;
+    }
+    Node *retN = this->top;
+    this->top = this->top->getLink();
+    int data = retN->getData();
+    delete retN;
+    retN = __null;
+    return data;
+}
+virtual void push(int data){
+    Node *newN = new Node(data);
+    if (newN == __null) {
+        std::cerr << "Stack full" << std::endl;
+        return;
+    }
+    newN->setLink(this->top);
+    this->top = newN;
+}
+virtual void display(){
+    if (this->top == __null) {
+        std::cout << "Stack Empty!!" << std::endl;
+        return;
+    }
+    int i = 0;
+    Node *temp = this->top;
+    while (temp != __null)
+        {
+            if (i == 0)
+                std::cout << "TOP ";
+            std::cout << temp->getData() << std::endl;
+            temp = temp->getLink();
+            i++;
+        }
+}
+private:
+secret<Node*> top;
 };
+
+// template<>
+// class secret<Stack>
+// {
+// };
+
+// template<>
+// class secret<Node>
+// {
+	
+// };
 
 Stack::Stack()
 {

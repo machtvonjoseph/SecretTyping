@@ -756,14 +756,48 @@ void RecursiveSecretTyper::run(const clang::ast_matchers::MatchFinder::MatchResu
         llvm::outs() << "Variable type: " << varDecl->getType().getAsString() << "\n";
         addAllSpecializations(result.Context);
         CXXRecordDecl* secretClass = varDecl->getType()->getAsCXXRecordDecl();
-        secretClass->dump();
-        llvm::outs() << "Going to look for " << secretClass->getNameAsString() << " in the specializedClasses list\n";
+        // secretClass->dump();
+        // llvm::outs() << "Going to look for " << secretClass->getNameAsString() << " in the specializedClasses list\n";
         //if secret class is not in specializedSecretClasses, add it
-        if(std::find(specializedSecretClasses.begin(), specializedSecretClasses.end(), secretClass) == specializedSecretClasses.end()){
-            //start specializing it
-            llvm::outs() <<secretClass->getNameAsString() << " is not in specializedSecretClasses\n"; 
-            specializeClass(result.Context, secretClass);
+        QualType QT = varDecl->getType().getCanonicalType();  // Get the canonical type (e.g., remove typedefs)
+
+        // Step 1: Remove pointer indirection (e.g., secret<T>* => secret<T>)
+        while (QT->isPointerType()) {
+            QT = QT->getPointeeType();
         }
+    
+        // Step 2: Check if it’s a RecordType (class/struct template)
+        const Type *T = QT.getTypePtr();
+        if (const auto *RT = T->getAs<RecordType>()) {
+            if (const auto *CTSD = dyn_cast<ClassTemplateSpecializationDecl>(RT->getDecl())) {
+                llvm::outs() << "Template name: " << CTSD->getNameAsString() << "\n";
+    
+                const TemplateArgumentList &Args = CTSD->getTemplateArgs();
+                for (unsigned i = 0; i < Args.size(); ++i) {
+                    const TemplateArgument &Arg = Args[i];
+                    if (Arg.getKind() == TemplateArgument::Type) {
+                        QualType argType = Arg.getAsType();
+                        CXXRecordDecl* secretClass = argType->getAsCXXRecordDecl();
+                        llvm::outs() << "Gonna check if  " << secretClass->getNameAsString() << " is in specialized classes\n";
+                        if(std::find(specializedSecretClasses.begin(), specializedSecretClasses.end(), secretClass) == specializedSecretClasses.end()){
+                            //start specializing it
+                            llvm::outs() <<secretClass->getNameAsString() << " is not in specializedSecretClasses\n"; 
+                            specializeClass(result.Context, secretClass);
+                        }
+                        //llvm::outs() << "  Template Arg[" << i << "]: " << argType.getAsString() << "\n";
+                    }
+                }
+            }
+        }
+        
+        
+        
+        
+        // if(std::find(specializedSecretClasses.begin(), specializedSecretClasses.end(), secretClass) == specializedSecretClasses.end()){
+        //     //start specializing it
+        //     llvm::outs() <<secretClass->getNameAsString() << " is not in specializedSecretClasses\n"; 
+        //     specializeClass(result.Context, secretClass);
+        // }
     }
 
 

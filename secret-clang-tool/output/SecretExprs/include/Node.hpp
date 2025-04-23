@@ -1,4 +1,13 @@
-
+#ifdef UMF 
+	                #include "numatype.hpp"
+	                #include <umf/mempolicy.h>
+	                #include <umf/memspace.h>
+                    #include "utils_examples.h"
+                    #include <stdio.h>
+                    #include <string.h>
+                #endif
+                #include "secrettype.hpp"
+                
 #ifndef _NODE_HPP_
 #define _NODE_HPP_
 
@@ -13,13 +22,46 @@ public:
 	{}
 	Node(int initData);
 	Node(int, Node*);
-	Node *getLink();
-	void setLink(Node *n);
+	virtual Node *getLink();
+	virtual void setLink(Node *n);
 
-	int getData();
-	void setData(int n);
+	virtual int getData();
+	virtual void setData(int n);
 
-	~Node();
+	virtual ~Node();
+};
+
+template<>
+class secret<Node>{
+//add your secure memory allocator code herepublic:
+secret (): data(0){
+}
+secret (int initData){
+    this->data = initData;
+}
+secret (int initData, Node * node){
+    this->data = initData;
+    this->link = node;
+}
+virtual Node * getLink(){
+    return this->link;
+}
+virtual void setLink(Node * n){
+    this->link = n;
+}
+virtual int getData(){
+    return this->data;
+}
+virtual void setData(int n){
+    this->data = n;
+}
+virtual ~secret()
+{
+	link = nullptr;
+}
+private:
+numa<int> data;
+secret<Node*> link;
 };
 
 

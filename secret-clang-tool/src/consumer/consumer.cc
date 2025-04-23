@@ -67,7 +67,7 @@ void RecursiveSecretConsumer::includeSecretHeader(clang::ASTContext &context){
                     #include <stdio.h>
                     #include <string.h>
                 #endif
-                #include "numatype.hpp"
+                #include "secrettype.hpp"
                 )";
 
             // Skip invalid or built-in files
